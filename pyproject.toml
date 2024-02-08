@@ -1,0 +1,68 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "web"
+version = "0.1.0"
+description = ""
+authors = ["Pavel Dedik <dedikx@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+uvicorn = "^0.27.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.9.0"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",    # flake8 rules
+    "F",    # flake8 rules
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "I",    # isort
+    "D2",   # pydocstyle
+    "C901", # maccabe complexity
+    "S",    # flake8-bandit
+    "UP",   # pyupgrade
+    "T10",  # flake8-debugger
+]
+ignore = ["B904", "S101", "D203", "D211", "D213", "UP040"]
+fixable = ["ALL"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["web"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+disallow_subclassing_any = false
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+norecursedirs = ".git docs .pytest_cache .mypy_cache .ruff_cache"
+filterwarnings = [
+    "ignore:The \\'app\\' shortcut is now deprecated. Use the explicit style \\'transport=WSGITransport\\(app=\\.\\.\\.\\)\\' instead\\.",
+]
+
+[tool.coverage.run]
+omit = ["tests/**"]
+
+[tool.coverage.paths]
+source = ["ludic", "examples"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "pass",
+]
