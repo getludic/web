@@ -125,7 +125,7 @@ def components(request: Request) -> PageWithMenu:
         Paragraph(
             "Strict components offer more precise control over the types and "
             "structures of their children compared to regular components. Let's "
-            "illustrate this with a Table component example:"
+            f"illustrate this with a simplified {Code("Table")} component:"
         ),
         CodeBlock(
             """
@@ -153,7 +153,7 @@ def components(request: Request) -> PageWithMenu:
             """,
             language="python",
         ),
-        H3("Explanation"),
+        b("Explanation"),
         List(
             Item(
                 f"{i("Strictness")}: The {Code("ComponentStrict")} class allows you to "
@@ -181,7 +181,7 @@ def components(request: Request) -> PageWithMenu:
                 f"that {Code("TableBody")} accepts zero or more tr elements."
             ),
         ),
-        H3("Valid Usage (Passes Type Checking)"),
+        b("Valid Usage (Passes Type Checking)"),
         CodeBlock(
             """
             Table(
@@ -191,7 +191,7 @@ def components(request: Request) -> PageWithMenu:
             """,
             language="python",
         ),
-        H3("Key Benefits"),
+        b("Key Benefits"),
         List(
             Item(
                 f"{i("Enforce Structure")}: Prevent incorrect usage that could break "
