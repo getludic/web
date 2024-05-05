@@ -197,7 +197,7 @@ def htmx(request: Request) -> PageWithMenu:
                 return div(
                     h2("Data"),
                     table(...),
-                    button("Click Here", onclick=JavaScript("alert('test')")),
+                    button("Click Here", on_click=JavaScript("alert('test')")),
                 )
             """,
             language="python",

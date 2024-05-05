@@ -17,7 +17,7 @@ async def index(request: Request) -> LazyLoader:
 async def load_content(seconds: int) -> Box:
     await asyncio.sleep(seconds)
     return Box(
-        H3("Content loaded!", classes=["text-align-center"]),
+        H3("Content loaded!", anchor=False, classes=["text-align-center"]),
         classes=["invert"],
         style={"padding-top": "10rem", "padding-bottom": "10rem"},
     )

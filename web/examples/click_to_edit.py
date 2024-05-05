@@ -5,13 +5,12 @@ from ludic.catalog.forms import FieldMeta, Form, create_fields
 from ludic.catalog.items import Pairs
 from ludic.catalog.layouts import Box, Cluster, Stack
 from ludic.types import Attrs
-from ludic.web import Endpoint, LudicApp
+from ludic.web import Endpoint, LudicApp, Request
 from ludic.web.exceptions import NotFoundError
 from ludic.web.parsers import Parser, ValidationError
 
-from web.database import init_db
+from web.database import DB
 
-db = init_db()
 app = LudicApp()
 
 
@@ -31,23 +30,26 @@ class ContactAttrs(Attrs):
 
 
 @app.get("/")
-async def index() -> Box:
-    return Box(*(Contact(**contact.dict()) for contact in db.contacts.values()))
+async def index(request: Request) -> Box:
+    db: DB = request.scope["db"]
+    return Box(*(Contact(**contact.to_dict()) for contact in db.contacts.values()))
 
 
 @app.endpoint("/contacts/{id}")
 class Contact(Endpoint[ContactAttrs]):
     @classmethod
-    async def get(cls, id: str) -> Self:
+    async def get(cls, request: Request, id: str) -> Self:
+        db: DB = request.scope["db"]
         contact = db.contacts.get(id)
 
         if contact is None:
             raise NotFoundError("Contact not found")
 
-        return cls(**contact.dict())
+        return cls(**contact.to_dict())
 
     @classmethod
-    async def put(cls, id: str, attrs: Parser[ContactAttrs]) -> Self:
+    async def put(cls, request: Request, id: str, attrs: Parser[ContactAttrs]) -> Self:
+        db: DB = request.scope["db"]
         contact = db.contacts.get(id)
 
         if contact is None:
@@ -56,7 +58,7 @@ class Contact(Endpoint[ContactAttrs]):
         for key, value in attrs.validate().items():
             setattr(contact, key, value)
 
-        return cls(**contact.dict())
+        return cls(**contact.to_dict())
 
     @override
     def render(self) -> Stack:
@@ -75,13 +77,14 @@ class Contact(Endpoint[ContactAttrs]):
 @app.endpoint("/contacts/{id}/form")
 class ContactForm(Endpoint[ContactAttrs]):
     @classmethod
-    async def get(cls, id: str) -> Self:
+    async def get(cls, request: Request, id: str) -> Self:
+        db: DB = request.scope["db"]
         contact = db.contacts.get(id)
 
         if contact is None:
             raise NotFoundError("Contact not found")
 
-        return cls(**contact.dict())
+        return cls(**contact.to_dict())
 
     @override
     def render(self) -> Form:

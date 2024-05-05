@@ -10,14 +10,13 @@ from ludic.catalog.forms import InputField
 from ludic.catalog.layouts import Cluster
 from ludic.catalog.tables import ColumnMeta, Table, TableHead, TableRow
 from ludic.types import JavaScript
-from ludic.web import Endpoint, LudicApp
+from ludic.web import Endpoint, LudicApp, Request
 from ludic.web.exceptions import NotFoundError
 from ludic.web.parsers import Parser
 
-from web.database import init_db
+from web.database import DB
 
 app = LudicApp()
-db = init_db()
 
 
 class PersonAttrs(Attrs):
@@ -31,8 +30,8 @@ class PeopleAttrs(Attrs):
 
 
 @app.get("/")
-async def index() -> "PeopleTable":
-    return await PeopleTable.get()
+async def index(request: Request) -> "PeopleTable":
+    return await PeopleTable.get(request)
 
 
 @app.endpoint("/people/{id}")
@@ -50,7 +49,8 @@ class PersonRow(Endpoint[PersonAttrs]):
     )
 
     @classmethod
-    async def put(cls, id: str, data: Parser[PersonAttrs]) -> Self:
+    async def put(cls, request: Request, id: str, data: Parser[PersonAttrs]) -> Self:
+        db: DB = request.scope["db"]
         person = db.people.get(id)
 
         if person is None:
@@ -59,16 +59,17 @@ class PersonRow(Endpoint[PersonAttrs]):
         for attr, value in data.validate().items():
             setattr(person, attr, value)
 
-        return cls(**person.dict())
+        return cls(**person.to_dict())
 
     @classmethod
-    async def get(cls, id: str) -> Self:
+    async def get(cls, request: Request, id: str) -> Self:
+        db: DB = request.scope["db"]
         person = db.people.get(id)
 
         if person is None:
             raise NotFoundError("Person not found")
 
-        return cls(**person.dict())
+        return cls(**person.to_dict())
 
     @override
     def render(self) -> TableRow:
@@ -88,13 +89,14 @@ class PersonRow(Endpoint[PersonAttrs]):
 @app.endpoint("/people/{id}/form")
 class PersonForm(Endpoint[PersonAttrs]):
     @classmethod
-    async def get(cls, id: str) -> Self:
+    async def get(cls, request: Request, id: str) -> Self:
+        db: DB = request.scope["db"]
         person = db.people.get(id)
 
         if person is None:
             raise NotFoundError("Person not found")
 
-        return cls(**person.dict())
+        return cls(**person.to_dict())
 
     @override
     def render(self) -> TableRow:
@@ -122,8 +124,9 @@ class PersonForm(Endpoint[PersonAttrs]):
 @app.endpoint("/people/")
 class PeopleTable(Endpoint[PeopleAttrs]):
     @classmethod
-    async def get(cls) -> Self:
-        return cls(people=[person.dict() for person in db.people.values()])
+    async def get(cls, request: Request) -> Self:
+        db: DB = request.scope["db"]
+        return cls(people=[person.to_dict() for person in db.people.values()])
 
     @override
     def render(self) -> Table[TableHead, PersonRow]:

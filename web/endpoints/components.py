@@ -308,8 +308,8 @@ def components(request: Request) -> PageWithMenu:
                 ),
             ),
             Item(
-                f"{Code("EventAttrs")} - Event HTML attributes like {Code("onclick")}, "
-                f"{Code("onkey")}, and so on."
+                f"{Code("EventAttrs")} - Event HTML attributes like "
+                f"{Code("on_click")}, {Code("on_key")}, and so on."
             ),
             Item(
                 f"{Code("HtmxAttrs")} - All {Link(

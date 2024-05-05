@@ -11,27 +11,13 @@ from ludic.catalog.layouts import (
 from ludic.catalog.lists import Item, List
 from ludic.catalog.messages import Message, Title
 from ludic.catalog.typography import Code, Link, Paragraph
-from ludic.html import div, style
+from ludic.html import div
 from ludic.web import LudicApp, Request
 
+from web.components import Div
 from web.pages import PageWithMenu
 
 app = LudicApp()
-
-
-class Div(div):
-    classes = ["showcase"]
-    styles = style.use(
-        lambda theme: {
-            ".showcase": {
-                "color": theme.colors.light.darken(2),
-                "background-color": theme.colors.light.darken(2),
-            },
-            ".box.showcase": {
-                "color": theme.colors.dark.lighten(6),
-            },
-        }
-    )
 
 
 @app.get("/layouts/")

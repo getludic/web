@@ -3,13 +3,12 @@ from typing import Self, override
 from ludic.attrs import Attrs, HtmxAttrs
 from ludic.catalog.buttons import ButtonDanger
 from ludic.catalog.tables import Table, TableHead, TableRow
-from ludic.web import Endpoint, LudicApp
+from ludic.web import Endpoint, LudicApp, Request
 from ludic.web.exceptions import NotFoundError
 
-from web.database import init_db
+from web.database import DB
 
 app = LudicApp()
-db = init_db()
 
 
 class PersonAttrs(Attrs):
@@ -24,14 +23,15 @@ class PeopleAttrs(Attrs):
 
 
 @app.get("/")
-def index() -> "PeopleTable":
-    return PeopleTable.get()
+def index(request: Request) -> "PeopleTable":
+    return PeopleTable.get(request)
 
 
 @app.endpoint("/people/{id}")
 class PersonRow(Endpoint[PersonAttrs]):
     @classmethod
-    def delete(cls, id: str) -> None:
+    def delete(cls, request: Request, id: str) -> None:
+        db: DB = request.scope["db"]
         try:
             db.people.pop(id)
         except KeyError:
@@ -59,8 +59,9 @@ class PeopleTable(Endpoint[PeopleAttrs]):
     }
 
     @classmethod
-    def get(cls) -> Self:
-        return cls(people=[person.dict() for person in db.people.values()])
+    def get(cls, request: Request) -> Self:
+        db: DB = request.scope["db"]
+        return cls(people=[person.to_dict() for person in db.people.values()])
 
     @override
     def render(self) -> Table[TableHead, PersonRow]:

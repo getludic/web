@@ -8,6 +8,7 @@ from ludic.styles.themes import Fonts, Header, Headers, LightTheme, set_default_
 from ludic.styles.types import Size
 from ludic.web import LudicApp
 from ludic.web.routing import Mount
+from starlette.middleware import Middleware
 from starlette.staticfiles import StaticFiles
 
 from .endpoints import (
@@ -23,6 +24,7 @@ from .endpoints import (
     tables,
     web_framework,
 )
+from .middlewares import CookieStorageMiddleware
 from .pages import Page
 
 theme = LightTheme(
@@ -61,6 +63,7 @@ app = LudicApp(
             Mount("/static", StaticFiles(directory="static"), name="static"),
         ]
     ),
+    middleware=[Middleware(CookieStorageMiddleware)],
 )
 
 

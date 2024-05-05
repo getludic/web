@@ -6,12 +6,11 @@ from ludic.catalog.layouts import Cluster
 from ludic.catalog.tables import ColumnMeta, Table, create_rows
 from ludic.html import span, style
 from ludic.types import Attrs
-from ludic.web import Endpoint, LudicApp
+from ludic.web import Endpoint, LudicApp, Request
 from ludic.web.parsers import ListParser
 
-from web.database import init_db
+from web.database import DB
 
-db = init_db()
 app = LudicApp()
 
 
@@ -36,7 +35,7 @@ class Toast(span):
         lambda theme: {
             Toast.target: {
                 "background": theme.colors.success,
-                "padding": f"{theme.sizes.xxxxs} {theme.sizes.xxs}",
+                "padding": f"{theme.sizes.xxxxs * 0.5} {theme.sizes.xxs}",
                 "font-size": theme.fonts.size * 0.8,
                 "border-radius": "3px",
                 "opacity": "0",
@@ -54,14 +53,16 @@ class Toast(span):
 
 
 @app.get("/")
-async def index() -> "PeopleTable":
-    return await PeopleTable.get()
+async def index(request: Request) -> "PeopleTable":
+    return await PeopleTable.get(request)
 
 
 @app.endpoint("/people/")
 class PeopleTable(Endpoint[PeopleAttrs]):
     @classmethod
-    async def post(cls, data: ListParser[PersonAttrs]) -> Toast:
+    async def post(cls, request: Request, data: ListParser[PersonAttrs]) -> Toast:
+        db: DB = request.scope["db"]
+
         items = {row["id"]: row for row in data.validate()}
         activations = {True: 0, False: 0}
 
@@ -74,8 +75,9 @@ class PeopleTable(Endpoint[PeopleAttrs]):
         return Toast(f"Activated {activations[True]}, deactivated {activations[False]}")
 
     @classmethod
-    async def get(cls) -> Self:
-        return cls(people=[person.dict() for person in db.people.values()])
+    async def get(cls, request: Request) -> Self:
+        db: DB = request.scope["db"]
+        return cls(people=(person.to_dict() for person in db.people.values()))
 
     @override
     def render(self) -> Form:
