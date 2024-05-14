@@ -34,9 +34,6 @@ class Div(div):
                 "color": theme.colors.light.darken(2),
                 "background-color": theme.colors.light.darken(2),
             },
-            ".box.showcase": {
-                "color": theme.colors.dark.lighten(6),
-            },
         }
     )
 
@@ -106,6 +103,11 @@ class Menu(Component[NoChildren, MenuAttrs]):
                         "Messages",
                         to=request.url_for("messages"),
                         active=self.attrs["active_item"] == "messages",
+                    ),
+                    NavItem(
+                        "Loaders",
+                        to=request.url_for("loaders"),
+                        active=self.attrs["active_item"] == "loaders",
                     ),
                     NavItem(
                         "Tables",

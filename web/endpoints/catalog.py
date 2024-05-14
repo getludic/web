@@ -9,8 +9,10 @@ from ludic.catalog.buttons import (
     ButtonWarning,
 )
 from ludic.catalog.headers import H1, H2, H3, H4, Anchor
+from ludic.catalog.items import Key, Pairs, Value
 from ludic.catalog.layouts import Box, Cluster
-from ludic.catalog.lists import Item, List
+from ludic.catalog.lists import Item, List, NumberedList
+from ludic.catalog.loaders import Loading
 from ludic.catalog.messages import (
     Message,
     MessageDanger,
@@ -222,7 +224,7 @@ def typography(request: Request) -> PageWithMenu:
             from ludic.catalog.typography import Link
 
             Link("link", to="https://getludic.dev")  # appends target="_blank"
-            Link("link", to="/")                    # does not append target="_blank"
+            Link("link", to="/")                     # does not append target="_blank"
             """,
             language="python",
         ),
@@ -273,6 +275,62 @@ def typography(request: Request) -> PageWithMenu:
             )
             """,
             language="python",
+        ),
+        H4("Pairs"),
+        CodeBlock(
+            """
+            from ludic.catalog.items import Pair, Key, Value
+
+            Pairs(
+                Key("First Name:"),
+                Value("John"),
+                Key("Last Name:"),
+                Value("Doe"),
+            )
+            """,
+            language="python",
+        ),
+        Pairs(
+            Key("First Name:"),
+            Value("John"),
+            Key("Last Name:"),
+            Value("Doe"),
+        ),
+        H4("List"),
+        CodeBlock(
+            """
+            from ludic.catalog.lists import List, Item
+
+            List(
+                Item("A"),
+                Item("B"),
+                Item("C"),
+            )
+            """,
+            language="Python",
+        ),
+        List(
+            Item("A"),
+            Item("B"),
+            Item("C"),
+        ),
+        H4("Numbered List"),
+        CodeBlock(
+            """
+            from ludic.catalog.lists import NumberedList, Item
+
+            NumberedList(
+                Item("One"),
+                Item("Two"),
+                Item("Three"),
+            )
+            """,
+            language="Python",
+        ),
+        NumberedList(
+            Item("One"),
+            Item("Two"),
+            Item("Three"),
         ),
         H2("Headers"),
         Paragraph(
@@ -454,4 +512,43 @@ def messages(request: Request) -> PageWithMenu:
         ),
         request=request,
         active_item="messages",
+    )
+
+
+@app.get("/loaders/")
+def loaders(request: Request) -> PageWithMenu:
+    return PageWithMenu(
+        H1("Loaders"),
+        Paragraph(
+            "Loaders help load content asynchronously when the HTML page is rendered. "
+            "The module currently contains only one loader requiring HTMX enabled."
+        ),
+        H4("Lazy Loader"),
+        CodeBlock(
+            """
+            from ludic.catalog.loaders import LazyLoader
+
+            LazyLoader(load_url="https://example.com/huge-image.png")
+            """,
+            language="python",
+        ),
+        Paragraph(
+            "The default placeholder displayed before the content is loaded looks like "
+            "this:"
+        ),
+        Loading(),
+        Paragraph("However, you can use your own placeholder:"),
+        CodeBlock(
+            """
+            from ludic.catalog.loaders import LazyLoader, Loading
+
+            LazyLoader(
+                load_url="https://example.com/huge-image.png",
+                placeholder=Loading(),  # replace with your own placeholder
+            )
+            """,
+            language="python",
+        ),
+        request=request,
+        active_item="loaders",
     )
