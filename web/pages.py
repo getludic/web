@@ -10,7 +10,7 @@ from ludic.web import Request
 from .components import Footer, Menu
 
 
-class Page(Component[AnyChildren, GlobalAttrs]):
+class BasePage(Component[AnyChildren, GlobalAttrs]):
     @override
     def render(self) -> HtmlPage:
         self.attrs.setdefault("id", "content")
@@ -21,32 +21,39 @@ class Page(Component[AnyChildren, GlobalAttrs]):
                 title="The Ludic Framework",
             ),
             Body(
-                Stack(
-                    Box(
-                        Center(Stack(a("The Ludic Framework", href="/"))),
-                        classes=["no-border", "no-inline-padding", "invert"],
-                    ),
-                    Box(
-                        Center(Stack(*self.children, **self.attrs_for(Stack))),
-                        classes=["no-inline-padding", "transparent"],
-                    ),
-                ),
+                *self.children,
                 htmx_version="1.9.10",
             ),
         )
 
 
-class PageWithMenuAttrs(GlobalAttrs):
+class PageAttrs(GlobalAttrs):
     request: Request
     active_item: str
 
 
-class PageWithMenu(Component[AnyChildren, PageWithMenuAttrs]):
+class Page(Component[AnyChildren, PageAttrs]):
     @override
-    def render(self) -> Page:
-        return Page(
-            WithSidebar(
-                Sidebar(Menu(**self.attrs_for(Menu))),
-                Stack(*self.children, Footer(), **self.attrs_for(Stack)),
+    def render(self) -> BasePage:
+        return BasePage(
+            Stack(
+                Box(
+                    Center(Stack(a("The Ludic Framework", href="/"))),
+                    classes=["no-border", "no-inline-padding", "invert"],
+                ),
+                Box(
+                    Center(
+                        Stack(
+                            WithSidebar(
+                                Sidebar(Menu(**self.attrs_for(Menu))),
+                                Stack(
+                                    *self.children, Footer(), **self.attrs_for(Stack)
+                                ),
+                            ),
+                            **self.attrs_for(Stack),
+                        )
+                    ),
+                    classes=["no-inline-padding", "transparent"],
+                ),
             ),
         )

@@ -1,6 +1,6 @@
 from typing import Annotated, NotRequired, Self, override
 
-from ludic.catalog.buttons import Button, ButtonDanger, ButtonPrimary
+from ludic.catalog.buttons import ButtonDanger, ButtonPrimary, ButtonSecondary
 from ludic.catalog.forms import FieldMeta, Form, create_fields
 from ludic.catalog.items import Pairs
 from ludic.catalog.layouts import Box, Cluster, Stack
@@ -65,7 +65,7 @@ class Contact(Endpoint[ContactAttrs]):
         return Stack(
             Pairs(items=self.attrs.items()),
             Cluster(
-                Button(
+                ButtonSecondary(
                     "Click To Edit",
                     hx_get=self.url_for(ContactForm),
                 ),

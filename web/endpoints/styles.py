@@ -5,14 +5,14 @@ from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
 from ludic.web import LudicApp, Request
 
-from web.pages import PageWithMenu
+from web.pages import Page
 
 app = LudicApp()
 
 
 @app.get("/styles/")
-def styles(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def styles(request: Request) -> Page:
+    return Page(
         H1("Styles and Themes"),
         Paragraph(
             "There are two main ways of how to change the look and feel of your "

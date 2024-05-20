@@ -5,14 +5,14 @@ from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
 from ludic.web import LudicApp, Request
 
-from web.pages import PageWithMenu
+from web.pages import Page
 
 app = LudicApp()
 
 
 @app.get("/web-framework/")
-def web_framework(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def web_framework(request: Request) -> Page:
+    return Page(
         H1("Web Framework"),
         Paragraph(
             f"The Ludic library provides wrappers around {Link(

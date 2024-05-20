@@ -11,14 +11,14 @@ from ludic.html import b
 from ludic.web import Endpoint, LudicApp, Request
 
 from web.components import Header
-from web.pages import PageWithMenu
+from web.pages import Page
 
 app = LudicApp()
 
 
 @app.get("/")
-def index(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def index(request: Request) -> Page:
+    return Page(
         Header(logo_url=request.url_for("static", path="ludic.png")),
         H1("Introduction"),
         Paragraph(

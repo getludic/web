@@ -7,14 +7,14 @@ from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
 from ludic.web import LudicApp, Request
 
-from web.pages import PageWithMenu
+from web.pages import Page
 
 app = LudicApp()
 
 
 @app.get(path="/htmx/")
-def htmx(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def htmx(request: Request) -> Page:
+    return Page(
         H1("Using HTMX with Ludic"),
         Paragraph(
             f"{Link('HTMX', to='https://htmx.org')} is a powerful library that "

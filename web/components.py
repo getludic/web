@@ -33,6 +33,7 @@ class Div(div):
             ".showcase": {
                 "color": theme.colors.light.darken(2),
                 "background-color": theme.colors.light.darken(2),
+                "padding-block": theme.sizes.xs,
             },
         }
     )
@@ -90,6 +91,11 @@ class Menu(Component[NoChildren, MenuAttrs]):
                         active=self.attrs["active_item"] == "catalog",
                     ),
                     NavItem(
+                        "Layouts",
+                        to=request.url_for("layouts"),
+                        active=self.attrs["active_item"] == "layouts",
+                    ),
+                    NavItem(
                         "Typography",
                         to=request.url_for("typography"),
                         active=self.attrs["active_item"] == "typography",
@@ -118,11 +124,6 @@ class Menu(Component[NoChildren, MenuAttrs]):
                         "Forms",
                         to=request.url_for("forms"),
                         active=self.attrs["active_item"] == "forms",
-                    ),
-                    NavItem(
-                        "Layouts",
-                        to=request.url_for("layouts"),
-                        active=self.attrs["active_item"] == "layouts",
                     ),
                 ),
                 NavSection(

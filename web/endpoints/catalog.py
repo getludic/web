@@ -25,14 +25,14 @@ from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
 from ludic.web import LudicApp, Request
 
-from web.pages import PageWithMenu
+from web.pages import Page
 
 app = LudicApp()
 
 
 @app.get("/catalog/")
-def catalog(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def catalog(request: Request) -> Page:
+    return Page(
         H1("Catalog"),
         Paragraph(
             f"The {Code("ludic.catalog")} module is a collection of components that "
@@ -208,8 +208,8 @@ def catalog(request: Request) -> PageWithMenu:
 
 
 @app.get("/typography/")
-def typography(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def typography(request: Request) -> Page:
+    return Page(
         H1("Typography"),
         Paragraph(
             f"The module {Code("ludic.catalog.typography")} contains the following "
@@ -384,8 +384,8 @@ def typography(request: Request) -> PageWithMenu:
 
 
 @app.get("/buttons/")
-def buttons(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def buttons(request: Request) -> Page:
+    return Page(
         H1("Buttons"),
         Paragraph(
             f"The module {Code("ludic.catalog.buttons")} contains the following "
@@ -400,7 +400,7 @@ def buttons(request: Request) -> PageWithMenu:
                 ButtonInfo("ButtonInfo"),
                 ButtonWarning("ButtonWarning"),
                 ButtonDanger("ButtonDanger"),
-                ButtonLink("ButtonLink"),
+                ButtonLink("ButtonLink", to="#"),
                 classes=["centered"],
             ),
         ),
@@ -451,8 +451,8 @@ def buttons(request: Request) -> PageWithMenu:
 
 
 @app.get("/messages/")
-def messages(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def messages(request: Request) -> Page:
+    return Page(
         H1("Messages"),
         Paragraph(
             f"The module {Code("ludic.catalog.messages")} contains the following "
@@ -516,8 +516,8 @@ def messages(request: Request) -> PageWithMenu:
 
 
 @app.get("/loaders/")
-def loaders(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def loaders(request: Request) -> Page:
+    return Page(
         H1("Loaders"),
         Paragraph(
             "Loaders help load content asynchronously when the HTML page is rendered. "

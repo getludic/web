@@ -5,14 +5,14 @@ from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
 from ludic.web import LudicApp, Request
 
-from web.pages import PageWithMenu
+from web.pages import Page
 
 app = LudicApp()
 
 
 @app.get("/components/")
-def components(request: Request) -> PageWithMenu:
-    return PageWithMenu(
+def components(request: Request) -> Page:
+    return Page(
         H1("Components"),
         Paragraph(
             "In Ludic, you can create components similar to React components. "
