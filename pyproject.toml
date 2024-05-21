@@ -12,6 +12,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 uvicorn = "^0.27.0"
+pystemmer = "^2.2.0.1"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.9.0"

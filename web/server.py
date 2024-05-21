@@ -1,5 +1,6 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from typing import TypedDict
 
 from ludic.catalog.headers import H1
 from ludic.catalog.typography import Paragraph
@@ -29,12 +30,14 @@ from .endpoints import (
     htmx,
     index,
     layouts,
+    search,
     styles,
     tables,
     web_framework,
 )
 from .middlewares import CookieStorageMiddleware
 from .pages import BasePage
+from .search import Index, build_index
 
 theme = LightTheme(
     fonts=Fonts(size=Size(1.01, "em")),
@@ -51,10 +54,14 @@ theme = LightTheme(
 set_default_theme(theme)
 
 
+class State(TypedDict):
+    index: Index
+
+
 @asynccontextmanager
-async def lifespan(_: LudicApp) -> AsyncIterator[None]:
+async def lifespan(app: LudicApp) -> AsyncIterator[State]:
     style.load(cache=True)
-    yield
+    yield {"index": build_index(app)}
 
 
 app = LudicApp(
@@ -63,6 +70,7 @@ app = LudicApp(
     routes=(
         examples.app.routes
         + index.app.routes
+        + search.app.routes
         + catalog.app.routes
         + components.app.routes
         + forms.app.routes

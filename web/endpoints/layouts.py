@@ -452,6 +452,7 @@ def layouts(request: Request) -> Page:
             ButtonLink(
                 "Open Layout In New Tab",
                 to=request.url_for("layout_example"),
+                external=True,
                 classes=["large", "secondary"],
             ),
             classes=["centered"],

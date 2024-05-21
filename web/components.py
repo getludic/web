@@ -1,7 +1,10 @@
 from typing import override
 
-from ludic.attrs import Attrs, NoAttrs
-from ludic.catalog.layouts import Box
+from ludic.attrs import Attrs, GlobalAttrs, NoAttrs
+from ludic.base import AnyChildren
+from ludic.catalog.buttons import ButtonLink
+from ludic.catalog.forms import InputField
+from ludic.catalog.layouts import Box, Cluster, Stack
 from ludic.catalog.navigation import NavHeader, Navigation, NavItem, NavSection
 from ludic.catalog.typography import Link
 from ludic.html import div, img, style
@@ -186,4 +189,80 @@ class Footer(Component[NoChildren, NoAttrs]):
                 "margin-block-start": self.theme.sizes.xxxxl,
                 "margin-block-end": self.theme.sizes.l,
             },
+        )
+
+
+class SearchBar(Component[NoChildren, GlobalAttrs]):
+    classes = ["search-bar"]
+    styles = style.use(
+        lambda theme: {
+            ".search-bar": {
+                'input[type="search"]': {
+                    "background-color": theme.colors.dark.lighten(1),
+                    "border": f"1px solid {theme.colors.dark.lighten(5)}",
+                    "border-radius": theme.rounding.less,
+                    "font-size": theme.fonts.size * 0.9,
+                    "color": "#fff",
+                    "transition": "all 0.3s ease-in-out",
+                },
+                'input[type="search"]::placeholder': {
+                    "color": theme.colors.light.darken(8),
+                },
+                'input[type="search"]:focus': {
+                    "border-color": theme.colors.light.darken(5),
+                    "outline": "none",
+                },
+                'input[type="search"]::-webkit-search-cancel-button': {
+                    "-webkit-appearance": "none",  # type: ignore
+                },
+            },
+        }
+    )
+
+    @override
+    def render(self) -> InputField:
+        return InputField(
+            type="search",
+            name="search",
+            label=None,
+            placeholder="Search in the docs ...",
+            **self.attrs,
+        )
+
+
+class SearchResultAttrs(Attrs):
+    title: AnyChildren
+    content: AnyChildren
+    url: str
+
+
+class SearchResult(Component[NoChildren, SearchResultAttrs]):
+    classes = ["search-result"]
+    styles = {
+        ".search-result": {
+            "font-style": "italic",
+        },
+        ".search-result a.btn": {
+            "font-style": "normal",
+        },
+        ".search-result .anchor": {
+            "display": "none",
+        },
+    }
+
+    @override
+    def render(self) -> Box:
+        return Box(
+            Stack(
+                self.attrs["title"],
+                self.attrs["content"],
+                Cluster(
+                    ButtonLink(
+                        "Read More",
+                        to=self.attrs["url"],
+                        classes=["large", "secondary"],
+                    ),
+                    classes=["centered"],
+                ),
+            ),
         )

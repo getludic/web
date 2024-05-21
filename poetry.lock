@@ -96,6 +96,16 @@ files = [
 ]
 
 [[package]]
+name = "pystemmer"
+version = "2.2.0.1"
+description = "Snowball stemming algorithms, for information retrieval"
+optional = false
+python-versions = "*"
+files = [
+    {file = "PyStemmer-2.2.0.1.tar.gz", hash = "sha256:9f3b366f1ed06b49dc1868bf0aefd884423db80f3431be442d0f993e448cc67b"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.11.0"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -127,4 +137,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "37abeb2c0850a78db7b33b95526859b677e443a363ed33bcdcae1289da044508"
+content-hash = "866bcc5d594f8bac92647401a9ebce8945f0bf0086831f7cb3a242c38fcd42aa"
