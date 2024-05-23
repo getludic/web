@@ -9,18 +9,7 @@ from ludic.components import Blank
 from ludic.web import LudicApp, Request
 from ludic.web.datastructures import URLPath
 
-from web.endpoints import (
-    catalog,
-    components,
-    forms,
-    getting_started,
-    htmx,
-    index,
-    layouts,
-    styles,
-    tables,
-    web_framework,
-)
+from web.endpoints import catalog, docs
 from web.pages import Page
 
 from .analysis import analyze
@@ -134,25 +123,26 @@ class _FakeRequest:
 
 def build_index(app: LudicApp) -> Index:
     endpoints = [
-        catalog.catalog,
-        catalog.typography,
-        catalog.buttons,
-        catalog.messages,
-        catalog.loaders,
-        components.components,
-        forms.forms,
-        getting_started.getting_started,
-        index.index,
-        htmx.htmx,
-        layouts.layouts,
-        styles.styles,
-        tables.tables,
-        web_framework.web_framework,
+        catalog.index.index,
+        catalog.typography.typography,
+        catalog.buttons.buttons,
+        catalog.messages.messages,
+        catalog.layouts.layouts,
+        catalog.loaders.loaders,
+        catalog.forms.forms,
+        catalog.tables.tables,
+        docs.index.index,
+        docs.components.components,
+        docs.getting_started.getting_started,
+        docs.htmx.htmx,
+        docs.styles.styles,
+        docs.web_framework.web_framework,
     ]
     indexer = Index()
 
     data: list[tuple[str, BaseElement, list[BaseElement]]] = []
     for endpoint in endpoints:
+        _, _, mount_name, route_name = endpoint.__module__.split(".")
         response = endpoint(_FakeRequest(app))  # type: ignore
 
         if not isinstance(response, Page):
@@ -162,7 +152,7 @@ def build_index(app: LudicApp) -> Index:
             if isinstance(child, H1 | H2):
                 data.append(
                     (
-                        f"{app.url_path_for(endpoint.__name__)}#{text_to_kebab(child.text)}",
+                        f"{app.url_path_for(f"{mount_name}:{route_name}")}#{text_to_kebab(child.text)}",
                         H3(child.text, anchor=False),
                         [],
                     )

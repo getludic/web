@@ -45,7 +45,6 @@ class LoadMoreButton(ComponentStrict[LoadMoreAttrs]):
             "Load More Agents...",
             hx_get=self.attrs["url"],
             hx_target=f"#{self.target}",
-            hx_swap="outerHTML",
         )
 
 

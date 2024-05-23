@@ -23,15 +23,12 @@ from ludic.catalog.lists import Item, List
 from ludic.catalog.messages import Message, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, div, h1
-from ludic.web import LudicApp, Request
+from ludic.web import Request
 
 from web.components import Div
 from web.pages import BasePage, Page
 
-app = LudicApp()
 
-
-@app.get("/layouts/")
 def layouts(request: Request) -> Page:
     return Page(
         H1("Layouts"),
@@ -360,7 +357,7 @@ def layouts(request: Request) -> Page:
         H4("Example", anchor=False),
         Cover(
             Div("Header"),
-            h1("Title", classes=["text-align-center"]),
+            div(h1("Title", classes=["text-align-center"]), classes=["cover-main"]),
             Div("Footer"),
             style={"min-block-size": "40vh"},
         ),
@@ -451,41 +448,46 @@ def layouts(request: Request) -> Page:
         Cluster(
             ButtonLink(
                 "Open Layout In New Tab",
-                to=request.url_for("layout_example"),
+                to=request.url_for("catalog:layout_example"),
                 external=True,
                 classes=["large", "secondary"],
             ),
             classes=["centered"],
         ),
-        Paragraph("The code of the layout is shown below."),
+        Paragraph("Slightly modified code of the layout is shown below."),
         CodeBlock(
             """
             Center(
                 Stack(
                     Box(
                         Cluster(
-                            b("Box Header"),
+                            b("Inverse Boxed Cluster Menu"),
                             Cluster(
                                 Button("Item 1"),
-                                ...,
+                                ...
                             ),
+                            classes=["justify-space-between"],
                         ),
                         classes=["invert"],
                     ),
                     WithSidebar(
                         Stack(
+                            H2("Stack", anchor=False),
+                            Paragraph(...),
+                            H3("Switcher", anchor=False),
                             Switcher(
                                 Box("Switcher Item 1"),
                                 ...
                             ),
-                            Paragraph(...),
-                            Paragraph(...),
+                            H3("Cluster In a Box", anchor=False),
                             Box(
                                 Cluster(
                                     ButtonPrimary("Cluster Button 1"),
-                                    ...
+                                    ...,
                                 ),
                             ),
+                            H3("Grid Advertisement", anchor=False),
+                            Grid(Box(...), ...),
                         ),
                         Sidebar(
                             Box(
@@ -499,7 +501,7 @@ def layouts(request: Request) -> Page:
                     ),
                     classes=["large"],
                 ),
-                style={"margin-block-start": "2rem"},
+                style={"margin-block": "2rem"},
             )
             """,
             language="python",
@@ -509,7 +511,6 @@ def layouts(request: Request) -> Page:
     )
 
 
-@app.get("/examples/layout/")
 async def layout_example() -> BasePage:
     return BasePage(
         Center(
@@ -523,6 +524,7 @@ async def layout_example() -> BasePage:
                             Button("Item 3"),
                             Button("Item 4"),
                         ),
+                        classes=["justify-space-between"],
                     ),
                     classes=["invert"],
                 ),

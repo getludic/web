@@ -3,14 +3,11 @@ from ludic.catalog.lists import Item, List
 from ludic.catalog.messages import MessageWarning, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
-from ludic.web import LudicApp, Request
+from ludic.web import Request
 
 from web.pages import Page
 
-app = LudicApp()
 
-
-@app.get("/web-framework/")
 def web_framework(request: Request) -> Page:
     return Page(
         H1("Web Framework"),

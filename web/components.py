@@ -4,19 +4,19 @@ from ludic.attrs import Attrs, GlobalAttrs, NoAttrs
 from ludic.base import AnyChildren
 from ludic.catalog.buttons import ButtonLink
 from ludic.catalog.forms import InputField
-from ludic.catalog.layouts import Box, Cluster, Stack
-from ludic.catalog.navigation import NavHeader, Navigation, NavItem, NavSection
+from ludic.catalog.layouts import Box, Cluster, Stack, Switcher
+from ludic.catalog.navigation import Navigation, NavItem
 from ludic.catalog.typography import Link
-from ludic.html import div, img, style
+from ludic.html import div, iframe, img, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
 
 
-class HeaderAttrs(Attrs):
+class LogoBigAttrs(Attrs):
     logo_url: str
 
 
-class Header(Component[NoChildren, HeaderAttrs]):
+class LogoBig(Component[NoChildren, LogoBigAttrs]):
     @override
     def render(self) -> div:
         return div(
@@ -26,6 +26,84 @@ class Header(Component[NoChildren, HeaderAttrs]):
                 style={"max-width": "60ch"},
             ),
             classes=["text-align-center"],
+        )
+
+
+class MainHeaderAttrs(Attrs):
+    home_url: str
+    search_url: str
+
+
+class MainHeader(Component[AnyChildren, MainHeaderAttrs]):
+    classes = ["main-header"]
+    styles = {
+        ".main-header .switcher > :nth-child(2)": {
+            "flex-grow": "2",
+        },
+    }
+
+    @override
+    def render(self) -> Box:
+        return Box(
+            Switcher(
+                Cluster(ButtonLink("Ludic Framework", to=self.attrs["home_url"])),
+                Stack(
+                    SearchBar(
+                        hx_post=self.attrs["search_url"],
+                        hx_trigger="input changed delay:500ms, search",
+                        hx_target="#main-content",
+                        hx_select="#main-content",
+                    )
+                ),
+                Cluster(
+                    iframe(
+                        src=(
+                            "https://ghbtns.com/github-btn.html"
+                            "?user=paveldedik"
+                            "&repo=ludic"
+                            "&type=star"
+                            "&count=true"
+                            "&size=large"
+                        ),
+                        frameborder="0",
+                        scrolling="0",
+                        width=140,
+                        height=30,
+                        title="GitHub",
+                    ),
+                    classes=["flex-end"],
+                ),
+            ),
+        )
+
+
+class HomeHeaderAttrs(Attrs):
+    home_url: str
+    docs_url: str
+    catalog_url: str
+    examples_url: str
+
+
+class HomeHeader(Component[AnyChildren, HomeHeaderAttrs]):
+    classes = ["cover-header"]
+
+    @override
+    def render(self) -> Box:
+        return Box(
+            Cluster(
+                ButtonLink("Ludic Framework", to=self.attrs["home_url"]),
+                Cluster(
+                    ButtonLink("Documentation", to=self.attrs["docs_url"]),
+                    ButtonLink("Catalog", to=self.attrs["catalog_url"]),
+                    ButtonLink("Examples", to=self.attrs["examples_url"]),
+                    ButtonLink(
+                        "Star on GitHub",
+                        to="https://github.com/paveldedik/ludic",
+                        classes=["secondary"],
+                    ),
+                ),
+                classes=["justify-space-between"],
+            )
         )
 
 
@@ -48,147 +126,89 @@ class MenuAttrs(Attrs):
 
 
 class Menu(Component[NoChildren, MenuAttrs]):
+    SECTIONS = {
+        "docs": "Documentation",
+        "catalog": "Catalog",
+        "examples": "Examples",
+    }
+    SUBSECTIONS = {
+        "docs": {
+            "index": "Introduction",
+            "getting_started": "Getting Started",
+            "components": "Components",
+            "styles": "Styles and Themes",
+            "htmx": "HTMX Support",
+            "web_framework": "Web Framework",
+        },
+        "catalog": {
+            "index": "Basics",
+            "layouts": "Layouts",
+            "typography": "Typography",
+            "buttons": "Buttons",
+            "messages": "Messages",
+            "loaders": "Loaders",
+            "tables": "Tables",
+            "forms": "Forms",
+        },
+        "examples": {
+            "index": "Components",
+            "bulk_update": "Bulk Update",
+            "click_to_edit": "Click to Edit",
+            "click_to_load": "Click to Load",
+            "delete_row": "Delete Row",
+            "edit_row": "Edit Row",
+            "infinite_scroll": "Infinite Scroll",
+            "lazy_loading": "Lazy Loading",
+        },
+    }
+
     @override
     def render(self) -> Box:
         request = self.attrs["request"]
-        return Box(
-            Navigation(
+        parts = self.attrs["active_item"].split(":", 1)
+
+        if len(parts) == 2:
+            active_section, active_subsection = parts
+        else:
+            active_section, active_subsection = None, parts[0]
+
+        items = []
+
+        for section, subsections in self.SUBSECTIONS.items():
+            in_subsection = (
+                active_section is None or active_section == section
+            ) and active_subsection in subsections
+
+            items.append(
                 NavItem(
-                    "Introduction",
-                    to=request.url_for("index"),
-                    active=self.attrs["active_item"] == "index",
-                ),
-                NavSection(
-                    NavHeader("Framework"),
-                    NavItem(
-                        "Getting Started",
-                        to=request.url_for("getting_started"),
-                        active=self.attrs["active_item"] == "getting_started",
-                    ),
-                    NavItem(
-                        "Components",
-                        to=request.url_for("components"),
-                        active=self.attrs["active_item"] == "components",
-                    ),
-                    NavItem(
-                        "Styles and Themes",
-                        to=request.url_for("styles"),
-                        active=self.attrs["active_item"] == "styles",
-                    ),
-                    NavItem(
-                        "HTMX Support",
-                        to=request.url_for("htmx"),
-                        active=self.attrs["active_item"] == "htmx",
-                    ),
-                    NavItem(
-                        "Web Framework",
-                        to=request.url_for("web_framework"),
-                        active=self.attrs["active_item"] == "web_framework",
-                    ),
-                ),
-                NavSection(
-                    NavHeader("Catalog"),
-                    NavItem(
-                        "Basics",
-                        to=request.url_for("catalog"),
-                        active=self.attrs["active_item"] == "catalog",
-                    ),
-                    NavItem(
-                        "Layouts",
-                        to=request.url_for("layouts"),
-                        active=self.attrs["active_item"] == "layouts",
-                    ),
-                    NavItem(
-                        "Typography",
-                        to=request.url_for("typography"),
-                        active=self.attrs["active_item"] == "typography",
-                    ),
-                    NavItem(
-                        "Buttons",
-                        to=request.url_for("buttons"),
-                        active=self.attrs["active_item"] == "buttons",
-                    ),
-                    NavItem(
-                        "Messages",
-                        to=request.url_for("messages"),
-                        active=self.attrs["active_item"] == "messages",
-                    ),
-                    NavItem(
-                        "Loaders",
-                        to=request.url_for("loaders"),
-                        active=self.attrs["active_item"] == "loaders",
-                    ),
-                    NavItem(
-                        "Tables",
-                        to=request.url_for("tables"),
-                        active=self.attrs["active_item"] == "tables",
-                    ),
-                    NavItem(
-                        "Forms",
-                        to=request.url_for("forms"),
-                        active=self.attrs["active_item"] == "forms",
-                    ),
-                ),
-                NavSection(
-                    NavHeader("Examples"),
-                    NavItem(
-                        "Bulk Update",
-                        to=request.url_for("bulk_update"),
-                        active=self.attrs["active_item"] == "bulk-update",
-                    ),
-                    NavItem(
-                        "Click To Edit",
-                        to=request.url_for("click_to_edit"),
-                        active=self.attrs["active_item"] == "click-to-edit",
-                    ),
-                    NavItem(
-                        "Click To Load",
-                        to=request.url_for("click_to_load"),
-                        active=self.attrs["active_item"] == "click-to-load",
-                    ),
-                    NavItem(
-                        "Delete Row",
-                        to=request.url_for("delete_row"),
-                        active=self.attrs["active_item"] == "delete-row",
-                    ),
-                    NavItem(
-                        "Edit Row",
-                        to=request.url_for("edit_row"),
-                        active=self.attrs["active_item"] == "edit-row",
-                    ),
-                    NavItem(
-                        "Infinite Scroll",
-                        to=request.url_for("infinite_scroll"),
-                        active=self.attrs["active_item"] == "infinite-scroll",
-                    ),
-                    NavItem(
-                        "Lazy Loading",
-                        to=request.url_for("lazy_loading"),
-                        active=self.attrs["active_item"] == "lazy-loading",
-                    ),
-                ),
-                hx_boost=True,
-            ),
-        )
+                    self.SECTIONS[section],
+                    to=request.url_for(f"{section}:index").path,
+                    active_subsection=in_subsection,
+                    classes=["section"],
+                )
+            )
+            if in_subsection:
+                for item in subsections:
+                    items.append(
+                        NavItem(
+                            subsections[item],
+                            to=request.url_for(f"{section}:{item}").path,
+                            active=active_subsection == item,
+                            classes=["subsection"],
+                        )
+                    )
+
+        return Box(Navigation(*items, hx_boost=True))
 
 
 class Footer(Component[NoChildren, NoAttrs]):
+    classes = ["text-align-center"]
+
     @override
     def render(self) -> Box:
         return Box(
-            (
-                f"Made with {Link("Ludic", to="https://github.com/paveldedik/ludic")} "
-                f"and {Link("HTMX", to="https://htmx.org")}"
-            ),
-            classes=[
-                "no-inline-padding",
-                "transparent",
-                "text-align-center",
-            ],
-            style={
-                "margin-block-start": self.theme.sizes.xxxxl,
-                "margin-block-end": self.theme.sizes.l,
-            },
+            f"Made with {Link("Ludic", to="https://github.com/paveldedik/ludic")} "
+            f"and {Link("HTMX", to="https://htmx.org")}"
         )
 
 
@@ -198,18 +218,18 @@ class SearchBar(Component[NoChildren, GlobalAttrs]):
         lambda theme: {
             ".search-bar": {
                 'input[type="search"]': {
-                    "background-color": theme.colors.dark.lighten(1),
-                    "border": f"1px solid {theme.colors.dark.lighten(5)}",
+                    "background-color": theme.colors.light.darken(1),
+                    "border": f"1px solid {theme.colors.light.darken(5)}",
                     "border-radius": theme.rounding.less,
                     "font-size": theme.fonts.size * 0.9,
-                    "color": "#fff",
+                    "color": theme.colors.dark,
                     "transition": "all 0.3s ease-in-out",
                 },
                 'input[type="search"]::placeholder': {
-                    "color": theme.colors.light.darken(8),
+                    "color": theme.colors.dark.lighten(7),
                 },
                 'input[type="search"]:focus': {
-                    "border-color": theme.colors.light.darken(5),
+                    "border-color": theme.colors.dark.lighten(5),
                     "outline": "none",
                 },
                 'input[type="search"]::-webkit-search-cancel-button': {

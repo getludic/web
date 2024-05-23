@@ -9,7 +9,7 @@ from starlette.responses import RedirectResponse
 
 from web.components import SearchResult
 
-app = LudicApp()
+app = LudicApp(debug=True)
 
 
 @app.post("/search/")
@@ -42,8 +42,4 @@ def search_docs(
             {"HX-Replace-Url": str(current_url.replace_query_params(search=query))},
         )
     else:
-        return RedirectResponse(
-            url=current_url,
-            status_code=303,
-            headers={"HX-Replace-Url": str(current_url)},
-        )
+        return RedirectResponse(url=current_url, status_code=303)

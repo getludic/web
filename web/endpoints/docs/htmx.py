@@ -5,14 +5,11 @@ from ludic.catalog.lists import Item, List, NumberedList
 from ludic.catalog.messages import Message, MessageWarning, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
-from ludic.web import LudicApp, Request
+from ludic.web import Request
 
 from web.pages import Page
 
-app = LudicApp()
 
-
-@app.get(path="/htmx/")
 def htmx(request: Request) -> Page:
     return Page(
         H1("Using HTMX with Ludic"),
@@ -153,7 +150,7 @@ def htmx(request: Request) -> Page:
                 f"{b("Web Framework")}: Ludic acts as a web framework (built on "
                 f"{Link("Starlette", to="https://www.starlette.io/")}), empowering you "
                 f"to define endpoints and handle requests. Explore the {Link(
-                    "Web Framework", to=request.url_for("web_framework").path)} "
+                    "Web Framework", to=request.url_for("docs:web_framework").path)} "
                 "section of the documentation for in-depth information."
             ),
         ),
@@ -207,7 +204,6 @@ def htmx(request: Request) -> Page:
     )
 
 
-@app.get("/htmx/example/")
 def htmx_example(request: Request) -> Stack:
     return Stack(
         Paragraph(
@@ -215,12 +211,11 @@ def htmx_example(request: Request) -> Stack:
             f"{Code("hx-swap")} operation."
         ),
         Cluster(
-            Button("Show Hidden Content", hx_get=request.url_for(htmx_content)),
+            Button("Show Hidden Content", hx_get=request.url_for("docs:htmx_content")),
             classes=["centered"],
         ),
     )
 
 
-@app.get("/htmx/content/")
 def htmx_content() -> Paragraph:
     return Paragraph(b("This is the hidden content."))

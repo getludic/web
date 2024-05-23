@@ -3,14 +3,11 @@ from ludic.catalog.lists import Item, List, NumberedList
 from ludic.catalog.messages import Message, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
-from ludic.web import LudicApp, Request
+from ludic.web import Request
 
 from web.pages import Page
 
-app = LudicApp()
 
-
-@app.get("/styles/")
 def styles(request: Request) -> Page:
     return Page(
         H1("Styles and Themes"),
@@ -229,8 +226,8 @@ def styles(request: Request) -> Page:
         Paragraph(
             f"The first method is described in the {Link(
                 "getting started section",
-                to=request.url_for("getting_started").path)} of the documentation. "
-            "Here is the second method: "
+                to=request.url_for("docs:getting_started").path)} of the "
+            "documentation. Here is the second method: "
         ),
         CodeBlock(
             """

@@ -44,6 +44,7 @@ known-first-party = ["web"]
 python_version = "3.12"
 strict = true
 disallow_subclassing_any = false
+warn_unused_ignores = false
 
 [tool.pytest.ini_options]
 testpaths = "tests"

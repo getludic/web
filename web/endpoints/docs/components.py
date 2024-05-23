@@ -3,14 +3,11 @@ from ludic.catalog.lists import Item, List, NumberedList
 from ludic.catalog.messages import Message, MessageWarning, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
-from ludic.web import LudicApp, Request
+from ludic.web import Request
 
 from web.pages import Page
 
-app = LudicApp()
 
-
-@app.get("/components/")
 def components(request: Request) -> Page:
     return Page(
         H1("Components"),

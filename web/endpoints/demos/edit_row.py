@@ -133,6 +133,6 @@ class PeopleTable(Endpoint[PeopleAttrs]):
         return Table[TableHead, PersonRow](
             TableHead("Name", "Email", "Action"),
             *(PersonRow(**person) for person in self.attrs["people"]),
-            body_attrs=HtmxAttrs(hx_target="closest tr", hx_swap="outerHTML"),
+            body_attrs=HtmxAttrs(hx_target="closest tr"),
             classes=["text-align-center"],
         )

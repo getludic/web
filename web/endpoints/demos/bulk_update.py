@@ -11,7 +11,7 @@ from ludic.web.parsers import ListParser
 
 from web.database import DB
 
-app = LudicApp()
+app = LudicApp(debug=True)
 
 
 class PersonAttrs(Attrs, total=False):
