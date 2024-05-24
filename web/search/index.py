@@ -8,8 +8,9 @@ from ludic.catalog.utils import text_to_kebab
 from ludic.components import Blank
 from ludic.web import LudicApp, Request
 from ludic.web.datastructures import URLPath
+from starlette._utils import is_async_callable
 
-from web.endpoints import catalog, docs
+from web.endpoints import catalog, docs, examples
 from web.pages import Page
 
 from .analysis import analyze
@@ -121,7 +122,7 @@ class _FakeRequest:
         )
 
 
-def build_index(app: LudicApp) -> Index:
+async def build_index(app: LudicApp) -> Index:
     endpoints = [
         catalog.index.index,
         catalog.typography.typography,
@@ -137,13 +138,24 @@ def build_index(app: LudicApp) -> Index:
         docs.htmx.htmx,
         docs.styles.styles,
         docs.web_framework.web_framework,
+        examples.index.index,
+        examples.bulk_update.bulk_update,
+        examples.click_to_load.click_to_load,
+        examples.delete_row.delete_row,
+        examples.edit_row.edit_row,
+        examples.infinite_scroll.infinite_scroll,
+        examples.lazy_loading.lazy_loading,
     ]
     indexer = Index()
 
     data: list[tuple[str, BaseElement, list[BaseElement]]] = []
     for endpoint in endpoints:
         _, _, mount_name, route_name = endpoint.__module__.split(".")
-        response = endpoint(_FakeRequest(app))  # type: ignore
+
+        if is_async_callable(endpoint):
+            response = await endpoint(_FakeRequest(app))  # type: ignore
+        else:
+            response = endpoint(_FakeRequest(app))  # type: ignore
 
         if not isinstance(response, Page):
             continue

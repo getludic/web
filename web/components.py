@@ -7,7 +7,7 @@ from ludic.catalog.forms import InputField
 from ludic.catalog.layouts import Box, Cluster, Stack, Switcher
 from ludic.catalog.navigation import Navigation, NavItem
 from ludic.catalog.typography import Link
-from ludic.html import div, iframe, img, style
+from ludic.html import b, div, iframe, img, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
 
@@ -38,7 +38,7 @@ class MainHeader(Component[AnyChildren, MainHeaderAttrs]):
     classes = ["main-header"]
     styles = {
         ".main-header .switcher > :nth-child(2)": {
-            "flex-grow": "2",
+            "flex-grow": "3",
         },
     }
 
@@ -53,7 +53,7 @@ class MainHeader(Component[AnyChildren, MainHeaderAttrs]):
                         hx_trigger="input changed delay:500ms, search",
                         hx_target="#main-content",
                         hx_select="#main-content",
-                    )
+                    ),
                 ),
                 Cluster(
                     iframe(
@@ -146,9 +146,9 @@ class Menu(Component[NoChildren, MenuAttrs]):
             "typography": "Typography",
             "buttons": "Buttons",
             "messages": "Messages",
-            "loaders": "Loaders",
-            "tables": "Tables",
             "forms": "Forms",
+            "tables": "Tables",
+            "loaders": "Loaders",
         },
         "examples": {
             "index": "Components",
@@ -165,7 +165,11 @@ class Menu(Component[NoChildren, MenuAttrs]):
     @override
     def render(self) -> Box:
         request = self.attrs["request"]
-        parts = self.attrs["active_item"].split(":", 1)
+
+        if active_item := self.attrs.get("active_item"):
+            parts = active_item.split(":", 1)
+        else:
+            parts = [""]
 
         if len(parts) == 2:
             active_section, active_subsection = parts
@@ -207,8 +211,8 @@ class Footer(Component[NoChildren, NoAttrs]):
     @override
     def render(self) -> Box:
         return Box(
-            f"Made with {Link("Ludic", to="https://github.com/paveldedik/ludic")} "
-            f"and {Link("HTMX", to="https://htmx.org")}"
+            f"Made with {b(Link("Ludic", to="https://github.com/paveldedik/ludic"))} "
+            f"and {b(Link("HTMX", to="https://htmx.org"))}"
         )
 
 
@@ -218,7 +222,7 @@ class SearchBar(Component[NoChildren, GlobalAttrs]):
         lambda theme: {
             ".search-bar": {
                 'input[type="search"]': {
-                    "background-color": theme.colors.light.darken(1),
+                    "background-color": theme.colors.light,
                     "border": f"1px solid {theme.colors.light.darken(5)}",
                     "border-radius": theme.rounding.less,
                     "font-size": theme.fonts.size * 0.9,
@@ -244,7 +248,6 @@ class SearchBar(Component[NoChildren, GlobalAttrs]):
         return InputField(
             type="search",
             name="search",
-            label=None,
             placeholder="Search in the docs ...",
             **self.attrs,
         )

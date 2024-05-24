@@ -411,12 +411,11 @@ def web_framework(request: Request) -> Page:
             """
             from ludic.web.parsers import Parser
 
-
             @app.put("/people/{id}")
             async def update_person(cls, id: str, data: Parser[PersonAttrs]) -> div:
                 person = db.people.get(id)
                 person.update(data.validate())
-                return div(...)  # return updated user
+                return div(...)  # return updated person
             """,
             language="python",
         ),
@@ -426,6 +425,48 @@ def web_framework(request: Request) -> Page:
             "form data. If the validation fails, the method raises "
             f"{Code("ludic.parsers.ValidationError")} if the request's form data are "
             f"not valid. If unhandled, this results in {Code("403")} status code."
+        ),
+        H3("Parsing Collections"),
+        Paragraph(
+            f"You can also use the {Code("ListParser")} class to parse a list of data. "
+            f"It parses form data in a way similar to the {Code("Parser")} class, "
+            "however, it expects the form data to have the identifier column as key. "
+            "For example, we want to parse a first and last name columns from a list "
+            f"of people, here are the example form data the {Code("ListParser")} is "
+            "able to handle:"
+        ),
+        CodeBlock(
+            """
+            first_name:id:1=Joe&
+            first_name:id:2=Jane&
+            last_name:id:1=Smith&
+            last_name:id:2=Doe
+            """
+        ),
+        Paragraph("This would be transformed in the following structure:"),
+        CodeBlock(
+            """
+            [
+                {"id": 1, "first_name": "Joe", "last_name": "Smith"},
+                {"id": 2, "first_name": "Jane", "last_name": "Doe"},
+            ]
+            """,
+            language="python",
+        ),
+        Paragraph(
+            f"This is how you could use the {Code("ListParser")} to parse a list of "
+            "this kind of data from your view:"
+        ),
+        CodeBlock(
+            """
+            from ludic.web.parsers import ListParser
+
+            @app.put("/people/")
+            async def update_people(cls, id: str, data: ListParser[PersonAttrs]) -> div:
+                people.update(data.validate())
+                return div(...)  # return updated people
+            """,
+            language="python",
         ),
         H2("Error Handlers"),
         Paragraph(
