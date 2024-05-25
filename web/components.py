@@ -7,7 +7,7 @@ from ludic.catalog.forms import InputField
 from ludic.catalog.layouts import Box, Cluster, Stack, Switcher
 from ludic.catalog.navigation import Navigation, NavItem
 from ludic.catalog.typography import Link
-from ludic.html import b, div, iframe, img, style
+from ludic.html import a, b, div, iframe, img, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
 
@@ -31,7 +31,43 @@ class LogoBig(Component[NoChildren, LogoBigAttrs]):
 
 class MainHeaderAttrs(Attrs):
     home_url: str
+    logo_url: str
     search_url: str
+
+
+class LogoAttrs(Attrs):
+    home_url: str
+    logo_url: str
+
+
+class Logo(Component[NoChildren, LogoAttrs]):
+    @override
+    def render(self) -> a:
+        return a(
+            img(src=self.attrs["logo_url"], alt="Ludic Logo", style={"width": "7rem"}),
+            href=self.attrs["home_url"],
+            style={"line-height": "0"},
+        )
+
+
+class GitHubButton(Component[NoChildren, NoAttrs]):
+    @override
+    def render(self) -> iframe:
+        return iframe(
+            src=(
+                "https://ghbtns.com/github-btn.html"
+                "?user=paveldedik"
+                "&repo=ludic"
+                "&type=star"
+                "&count=true"
+                "&size=large"
+            ),
+            frameborder="0",
+            scrolling="0",
+            width=140,
+            height=30,
+            title="GitHub",
+        )
 
 
 class MainHeader(Component[AnyChildren, MainHeaderAttrs]):
@@ -46,31 +82,20 @@ class MainHeader(Component[AnyChildren, MainHeaderAttrs]):
     def render(self) -> Box:
         return Box(
             Switcher(
-                Cluster(ButtonLink("Ludic Framework", to=self.attrs["home_url"])),
-                Stack(
-                    SearchBar(
-                        hx_post=self.attrs["search_url"],
-                        hx_trigger="input changed delay:500ms, search",
-                        hx_target="#main-content",
-                        hx_select="#main-content",
-                    ),
+                Cluster(
+                    Logo(
+                        home_url=self.attrs["home_url"],
+                        logo_url=self.attrs["logo_url"],
+                    )
+                ),
+                SearchBar(
+                    hx_post=self.attrs["search_url"],
+                    hx_trigger="input changed delay:500ms, search",
+                    hx_target="#main-content",
+                    hx_select="#main-content",
                 ),
                 Cluster(
-                    iframe(
-                        src=(
-                            "https://ghbtns.com/github-btn.html"
-                            "?user=paveldedik"
-                            "&repo=ludic"
-                            "&type=star"
-                            "&count=true"
-                            "&size=large"
-                        ),
-                        frameborder="0",
-                        scrolling="0",
-                        width=140,
-                        height=30,
-                        title="GitHub",
-                    ),
+                    GitHubButton(),
                     classes=["flex-end"],
                 ),
             ),
@@ -79,6 +104,7 @@ class MainHeader(Component[AnyChildren, MainHeaderAttrs]):
 
 class HomeHeaderAttrs(Attrs):
     home_url: str
+    logo_url: str
     docs_url: str
     catalog_url: str
     examples_url: str
@@ -91,16 +117,15 @@ class HomeHeader(Component[AnyChildren, HomeHeaderAttrs]):
     def render(self) -> Box:
         return Box(
             Cluster(
-                ButtonLink("Ludic Framework", to=self.attrs["home_url"]),
+                Logo(
+                    home_url=self.attrs["home_url"],
+                    logo_url=self.attrs["logo_url"],
+                ),
                 Cluster(
                     ButtonLink("Documentation", to=self.attrs["docs_url"]),
                     ButtonLink("Catalog", to=self.attrs["catalog_url"]),
                     ButtonLink("Examples", to=self.attrs["examples_url"]),
-                    ButtonLink(
-                        "Star on GitHub",
-                        to="https://github.com/paveldedik/ludic",
-                        classes=["secondary"],
-                    ),
+                    GitHubButton(),
                 ),
                 classes=["justify-space-between"],
             )

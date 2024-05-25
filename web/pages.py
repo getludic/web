@@ -47,6 +47,9 @@ class Page(Component[AnyChildren, PageAttrs]):
                 Center(
                     Stack(
                         MainHeader(
+                            logo_url=self.attrs["request"]
+                            .url_for("static", path="logo.png")
+                            .path,
                             home_url=self.attrs["request"].url_for("index").path,
                             search_url=self.attrs["request"]
                             .url_for("search_docs")
@@ -83,6 +86,9 @@ class HomePage(Component[AnyChildren, HomePageAttrs]):
                 Cover(
                     HomeHeader(
                         home_url=self.attrs["request"].url_for("index").path,
+                        logo_url=self.attrs["request"]
+                        .url_for("static", path="logo.png")
+                        .path,
                         docs_url=self.attrs["request"].url_for("docs:index").path,
                         catalog_url=self.attrs["request"].url_for("catalog:index").path,
                         examples_url=self.attrs["request"]
