@@ -41,4 +41,5 @@ def loaders(request: Request) -> Page:
         ),
         request=request,
         active_item="loaders",
+        title="Ludic - Loaders",
     )

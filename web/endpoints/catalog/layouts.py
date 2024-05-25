@@ -508,6 +508,7 @@ def layouts(request: Request) -> Page:
         ),
         request=request,
         active_item="layouts",
+        title="Ludic - Layouts",
     )
 
 

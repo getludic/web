@@ -585,4 +585,5 @@ def web_framework(request: Request) -> Page:
         ),
         request=request,
         active_item="web_framework",
+        title="Ludic - Web Framework",
     )

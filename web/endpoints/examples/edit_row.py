@@ -263,4 +263,5 @@ async def edit_row(request: Request) -> Page:
         ),
         request=request,
         active_item="edit_row",
+        title="Ludic - Edit Row",
     )

@@ -131,6 +131,7 @@ def index(request: Request) -> Page:
         ),
         request=request,
         active_item="docs:index",
+        title="Ludic - Documentation",
     )
 
 

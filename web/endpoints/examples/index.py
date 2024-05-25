@@ -192,4 +192,5 @@ async def index(request: Request) -> Page:
         ),
         request=request,
         active_item="examples:index",
+        title="Ludic - Examples",
     )

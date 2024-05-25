@@ -156,4 +156,5 @@ def delete_row(request: Request) -> Page:
         ),
         request=request,
         active_item="delete_row",
+        title="Ludic - Delete Row",
     )

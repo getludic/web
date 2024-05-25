@@ -56,4 +56,5 @@ async def infinite_scroll(request: Request) -> Page:
         LazyLoader(load_url=request.url_for("infinite_scroll:index")),
         request=request,
         active_item="infinite_scroll",
+        title="Ludic - Infinite Scroll",
     )

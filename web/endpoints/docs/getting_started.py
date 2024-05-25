@@ -9,4 +9,5 @@ def getting_started(request: Request) -> Page:
         H1("Getting Started"),
         request=request,
         active_item="getting_started",
+        title="Ludic - Getting Started",
     )

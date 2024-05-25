@@ -79,4 +79,5 @@ def messages(request: Request) -> Page:
         ),
         request=request,
         active_item="messages",
+        title="Ludic - Messages",
     )

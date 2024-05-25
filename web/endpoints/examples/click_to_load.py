@@ -171,4 +171,5 @@ async def click_to_load(request: Request) -> Page:
         ),
         request=request,
         active_item="click_to_load",
+        title="Ludic - Click To Load",
     )

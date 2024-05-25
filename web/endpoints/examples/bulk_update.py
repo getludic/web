@@ -179,4 +179,5 @@ async def bulk_update(request: Request) -> Page:
         ),
         request=request,
         active_item="bulk_update",
+        title="Ludic - Bulk Update",
     )

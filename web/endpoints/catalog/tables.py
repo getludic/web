@@ -168,4 +168,5 @@ def tables(request: Request) -> Page:
         ),
         request=request,
         active_item="tables",
+        title="Ludic - Tables",
     )

@@ -1,6 +1,6 @@
-from typing import override
+from typing import NotRequired, override
 
-from ludic.attrs import GlobalAttrs, NoAttrs
+from ludic.attrs import Attrs, GlobalAttrs
 from ludic.catalog.layouts import (
     Box,
     Center,
@@ -17,7 +17,11 @@ from ludic.web import Request
 from .components import Footer, HomeHeader, MainHeader, Menu
 
 
-class BasePage(Component[AnyChildren, NoAttrs]):
+class BasePageAttrs(Attrs):
+    title: NotRequired[str]
+
+
+class BasePage(Component[AnyChildren, BasePageAttrs]):
     @override
     def render(self) -> HtmlPage:
         return HtmlPage(
@@ -25,7 +29,7 @@ class BasePage(Component[AnyChildren, NoAttrs]):
                 meta(charset="utf-8"),
                 meta(name="viewport", content="width=device-width, initial-scale=1.0"),
                 link(rel="icon", href="/static/favicon.png"),
-                title="The Ludic Framework",
+                title=self.attrs.get("title", "The Ludic Framework"),
             ),
             Body(
                 *self.children,
@@ -34,9 +38,10 @@ class BasePage(Component[AnyChildren, NoAttrs]):
         )
 
 
-class PageAttrs(GlobalAttrs):
+class PageAttrs(Attrs):
     request: Request
     active_item: str
+    title: NotRequired[str]
 
 
 class Page(Component[AnyChildren, PageAttrs]):
@@ -71,6 +76,7 @@ class Page(Component[AnyChildren, PageAttrs]):
                 ),
                 classes=["no-inline-padding", "transparent", "large"],
             ),
+            title=self.attrs.get("title", "The Ludic Framework"),
         )
 
 

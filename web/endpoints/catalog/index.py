@@ -185,4 +185,5 @@ def index(request: Request) -> Page:
         ),
         request=request,
         active_item="catalog:index",
+        title="Ludic - The Catalog",
     )

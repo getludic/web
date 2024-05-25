@@ -180,4 +180,5 @@ def typography(request: Request) -> Page:
         ),
         request=request,
         active_item="typography",
+        title="Ludic - Typography",
     )

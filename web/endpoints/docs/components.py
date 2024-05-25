@@ -494,4 +494,5 @@ def components(request: Request) -> Page:
         ),
         request=request,
         active_item="components",
+        title="Ludic - Components",
     )

@@ -187,4 +187,5 @@ async def click_to_edit(request: Request) -> Page:
         ),
         request=request,
         active_item="click_to_edit",
+        title="Ludic - Click To Edit",
     )

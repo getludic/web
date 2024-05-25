@@ -201,6 +201,7 @@ def htmx(request: Request) -> Page:
         ),
         request=request,
         active_item="htmx",
+        title="Ludic - HTMX Support",
     )
 
 

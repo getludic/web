@@ -504,4 +504,5 @@ def styles(request: Request) -> Page:
         ),
         request=request,
         active_item="styles",
+        title="Ludic - Styles and Themes",
     )

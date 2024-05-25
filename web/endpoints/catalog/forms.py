@@ -277,4 +277,5 @@ def forms(request: Request) -> Page:
         ),
         request=request,
         active_item="forms",
+        title="Ludic - Forms",
     )

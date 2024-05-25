@@ -46,4 +46,5 @@ async def lazy_loading(request: Request) -> Page:
         ),
         request=request,
         active_item="lazy_loading",
+        title="Ludic - Lazy Loading",
     )

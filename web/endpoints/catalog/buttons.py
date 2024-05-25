@@ -97,4 +97,5 @@ def buttons(request: Request) -> Page:
         ),
         request=request,
         active_item="buttons",
+        title="Ludic - Buttons",
     )
