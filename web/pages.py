@@ -10,7 +10,7 @@ from ludic.catalog.layouts import (
     WithSidebar,
 )
 from ludic.catalog.pages import Body, Head, HtmlPage
-from ludic.html import meta
+from ludic.html import link, meta
 from ludic.types import AnyChildren, Component
 from ludic.web import Request
 
@@ -24,6 +24,7 @@ class BasePage(Component[AnyChildren, NoAttrs]):
             Head(
                 meta(charset="utf-8"),
                 meta(name="viewport", content="width=device-width, initial-scale=1.0"),
+                link(rel="icon", href="/static/favicon.png"),
                 title="The Ludic Framework",
             ),
             Body(
