@@ -6,8 +6,10 @@ from ludic.catalog.headers import H1, H2
 from ludic.catalog.layouts import Box, Cluster
 from ludic.catalog.lists import Item, List
 from ludic.catalog.messages import MessageWarning, Title
+from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
+from ludic.types import Blank
 from ludic.web import Endpoint, Request
 
 from web.components import LogoBig
@@ -52,6 +54,61 @@ def index(request: Request) -> Page:
                 "Create simple, responsive layouts adopted from the "
                 f"{b("Every Layout Book")}"
             ),
+        ),
+        H2("Comparison"),
+        Paragraph("Here is a table comparing Ludic to other similar tools:"),
+        Table(
+            TableHead(
+                "Feature",
+                "Ludic",
+                "FastUI",
+                "Reflex",
+            ),
+            TableRow(
+                "HTML rendering",
+                "Server Side",
+                "Client Side",
+                "Client Side",
+            ),
+            TableRow(
+                "Uses a template engine",
+                "No",
+                "No",
+                "No",
+            ),
+            TableRow(
+                "UI interactivity",
+                Blank(Link("</> htmx", to="https://htmx.org"), "*"),
+                Link("React", to="https://react.dev"),
+                Link("React", to="https://react.dev"),
+            ),
+            TableRow(
+                "Backend framework",
+                Blank(Link("Starlette", to="https://www.starlette.io/"), "*"),
+                Link("FastAPI", to="https://fastapi.tiangolo.com/"),
+                Link("FastAPI", to="https://fastapi.tiangolo.com/"),
+            ),
+            TableRow(
+                "Client-Server Communication",
+                Link(
+                    "HTML + REST",
+                    to="https://htmx.org/essays/how-did-rest-come-to-mean-the-opposite-of-rest/",
+                ),
+                Link(
+                    "JSON + REST",
+                    to="https://github.com/pydantic/FastUI?tab=readme-ov-file#the-principle-long-version",
+                ),
+                Link(
+                    "WebSockets",
+                    to="https://reflex.dev/blog/2024-03-21-reflex-architecture/",
+                ),
+            ),
+        ),
+        Paragraph(
+            "(*) HTMX as well as Starlette are optional dependencies for Ludic, it "
+            "does not enforce any frontend or backend frameworks. At it's core, Ludic "
+            "only generates HTML and allows registering CSS.",
+            style={"font-size": "0.8em"},
         ),
         H2("Quick Example"),
         Paragraph(
@@ -118,6 +175,12 @@ def index(request: Request) -> Page:
             f"{Link("ASGI", to="https://asgi.readthedocs.io/en/latest/")} server:"
         ),
         CodeBlock("pip install uvicorn"),
+        Paragraph(
+            f"You can also use the {Link(
+                "cookiecutter", to="https://github.com/cookiecutter/cookiecutter")} "
+            "template to quickly create a new project:"
+        ),
+        CodeBlock("cookiecutter gh:paveldedik/ludic-template"),
         H2("Contributing"),
         Paragraph(
             "Any contributions to the framework are warmly welcome! Your help will "

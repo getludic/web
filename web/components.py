@@ -44,7 +44,7 @@ class Logo(Component[NoChildren, LogoAttrs]):
     @override
     def render(self) -> a:
         return a(
-            img(src=self.attrs["logo_url"], alt="Ludic Logo", style={"width": "7rem"}),
+            img(src=self.attrs["logo_url"], alt="Ludic Logo", style={"width": "8rem"}),
             href=self.attrs["home_url"],
             style={"line-height": "0"},
         )
@@ -64,8 +64,8 @@ class GitHubButton(Component[NoChildren, NoAttrs]):
             ),
             frameborder="0",
             scrolling="0",
-            width=140,
-            height=30,
+            width="140px",
+            height="30px",
             title="GitHub",
         )
 
@@ -122,7 +122,11 @@ class HomeHeader(Component[AnyChildren, HomeHeaderAttrs]):
                     logo_url=self.attrs["logo_url"],
                 ),
                 Cluster(
-                    ButtonLink("Documentation", to=self.attrs["docs_url"]),
+                    ButtonLink(
+                        "Documentation",
+                        to=self.attrs["docs_url"],
+                        classes=["secondary"],
+                    ),
                     ButtonLink("Catalog", to=self.attrs["catalog_url"]),
                     ButtonLink("Examples", to=self.attrs["examples_url"]),
                     GitHubButton(),

@@ -28,6 +28,49 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
             Head(
                 meta(charset="utf-8"),
                 meta(name="viewport", content="width=device-width, initial-scale=1.0"),
+                meta(
+                    name="description",
+                    content=(
+                        "Lightweight framework for building dynamic HTML pages in "
+                        "pure Python in minutes with a component approach similar to "
+                        "React and without template engines."
+                    ),
+                ),
+                meta(
+                    name="keywords",
+                    content=(
+                        "ludic, framework, python, web development, htmx, html, "
+                        "css, javascript, components"
+                    ),
+                ),
+                meta(name="author", content="Pavel Dedik"),
+                meta(name="robots", content="index, follow"),
+                meta(
+                    name="og:title",
+                    content=self.attrs.get("title", "The Ludic Framework"),
+                ),
+                meta(
+                    name="og:description",
+                    content=(
+                        "Lightweight framework for building dynamic HTML pages in "
+                        "pure Python in minutes."
+                    ),
+                ),
+                meta(name="og:url", content="https://getludic.dev"),
+                meta(name="og:image", content="/static/logo.png"),
+                meta(name="twitter:card", content="summary_large_image"),
+                meta(
+                    name="twitter:title",
+                    content=self.attrs.get("title", "The Ludic Framework"),
+                ),
+                meta(
+                    name="twitter:description",
+                    content=(
+                        "Lightweight framework for building dynamic HTML pages in "
+                        "pure Python in minutes."
+                    ),
+                ),
+                meta(name="twitter:image", content="/static/logo.png"),
                 link(rel="icon", href="/static/favicon.png"),
                 title=self.attrs.get("title", "The Ludic Framework"),
             ),

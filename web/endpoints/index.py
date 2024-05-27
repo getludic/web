@@ -5,6 +5,7 @@ from ludic.catalog.typography import CodeBlock, Paragraph
 from ludic.html import b, style
 from ludic.types import Component, NoAttrs
 from ludic.web import LudicApp, Request
+from starlette.responses import FileResponse
 
 from web.pages import HomePage
 
@@ -52,3 +53,8 @@ def index(request: Request) -> HomePage:
         ),
         request=request,
     )
+
+
+@app.get("/favicon.ico")
+def favicon() -> FileResponse:
+    return FileResponse("static/favicon.ico")
