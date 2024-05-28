@@ -6,9 +6,8 @@ services:
       context: .
       cache_from:
         - ludic-web:build
-        - ludic-web:latest
-    image: ludic-web:latest
-    network_mode: "host"
+        - ludic-web:${TAG:-latest}
+    image: ludic-web:${TAG:-latest}
     restart: unless-stopped
     ports:
       - 8000:8000
