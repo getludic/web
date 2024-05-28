@@ -7,9 +7,10 @@ from ludic.web.datastructures import FormData, Headers
 from starlette.datastructures import URL
 from starlette.responses import RedirectResponse
 
+from web import config
 from web.components import SearchResult
 
-app = LudicApp(debug=True)
+app = LudicApp(debug=config.DEBUG)
 
 
 @app.post("/search/")

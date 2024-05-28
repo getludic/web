@@ -11,6 +11,7 @@ from ludic.web.routing import Mount
 from starlette.middleware import Middleware
 from starlette.staticfiles import StaticFiles
 
+from . import config
 from .endpoints import (
     catalog,
     demos,
@@ -18,6 +19,7 @@ from .endpoints import (
     examples,
     index,
     search,
+    status,
 )
 from .middlewares import CookieStorageMiddleware
 from .pages import Page
@@ -38,7 +40,7 @@ async def lifespan(app: LudicApp) -> AsyncIterator[State]:
 
 
 app = LudicApp(
-    debug=True,
+    debug=config.DEBUG,
     lifespan=lifespan,
     routes=index.app.routes
     + search.app.routes
@@ -47,6 +49,7 @@ app = LudicApp(
         Mount("/docs", docs.router, name="docs"),
         Mount("/catalog", catalog.router, name="catalog"),
         Mount("/examples", examples.router, name="examples"),
+        Mount("/status", status.app, name="status"),
         Mount("/static", StaticFiles(directory="static"), name="static"),
     ],
     middleware=[Middleware(CookieStorageMiddleware)],

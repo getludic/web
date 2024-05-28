@@ -14,6 +14,7 @@ from ludic.html import link, meta
 from ludic.types import AnyChildren, Component
 from ludic.web import Request
 
+from . import config
 from .components import Footer, HomeHeader, MainHeader, Menu
 
 
@@ -46,22 +47,22 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 meta(name="author", content="Pavel Dedik"),
                 meta(name="robots", content="index, follow"),
                 meta(
-                    name="og:title",
-                    content=self.attrs.get("title", "The Ludic Framework"),
+                    property="og:title",
+                    content=self.attrs.get("title", config.TITLE),
                 ),
                 meta(
-                    name="og:description",
+                    property="og:description",
                     content=(
                         "Lightweight framework for building dynamic HTML pages in "
                         "pure Python in minutes."
                     ),
                 ),
-                meta(name="og:url", content="https://getludic.dev"),
-                meta(name="og:image", content="/static/logo.png"),
+                meta(property="og:url", content=config.HOME_URL),
+                meta(property="og:image", content="/static/logo.png"),
                 meta(name="twitter:card", content="summary_large_image"),
                 meta(
                     name="twitter:title",
-                    content=self.attrs.get("title", "The Ludic Framework"),
+                    content=self.attrs.get("title", config.TITLE),
                 ),
                 meta(
                     name="twitter:description",
@@ -72,11 +73,11 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 ),
                 meta(name="twitter:image", content="/static/logo.png"),
                 link(rel="icon", href="/static/favicon.png"),
-                title=self.attrs.get("title", "The Ludic Framework"),
+                title=self.attrs.get("title", config.TITLE),
             ),
             Body(
                 *self.children,
-                htmx_version="1.9.12",
+                htmx_version=config.HTMX_VERSION,
             ),
         )
 
@@ -119,7 +120,7 @@ class Page(Component[AnyChildren, PageAttrs]):
                 ),
                 classes=["no-inline-padding", "transparent", "large"],
             ),
-            title=self.attrs.get("title", "The Ludic Framework"),
+            title=self.attrs.get("title", config.TITLE),
         )
 
 

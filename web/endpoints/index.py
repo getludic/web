@@ -7,9 +7,10 @@ from ludic.types import Component, NoAttrs
 from ludic.web import LudicApp, Request
 from starlette.responses import FileResponse
 
+from web import config
 from web.pages import HomePage
 
-app = LudicApp(debug=True)
+app = LudicApp(debug=config.DEBUG)
 
 
 class CodeSample(Component[str, NoAttrs]):

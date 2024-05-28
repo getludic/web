@@ -11,6 +11,8 @@ from ludic.html import a, b, div, iframe, img, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
 
+from . import config
+
 
 class LogoBigAttrs(Attrs):
     logo_url: str
@@ -240,7 +242,7 @@ class Footer(Component[NoChildren, NoAttrs]):
     @override
     def render(self) -> Box:
         return Box(
-            f"Made with {b(Link("Ludic", to="https://github.com/paveldedik/ludic"))} "
+            f"Made with {b(Link("Ludic", to=config.GITHUB_REPO_URL))} "
             f"and {b(Link("HTMX", to="https://htmx.org"))}"
         )
 
