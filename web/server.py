@@ -31,12 +31,16 @@ themes.set_default_theme(theme)
 
 class State(TypedDict):
     index: Index
+    theme: themes.Theme
 
 
 @asynccontextmanager
 async def lifespan(app: LudicApp) -> AsyncIterator[State]:
     style.load(cache=True)
-    yield {"index": await build_index(app)}
+    yield {
+        "index": await build_index(app),
+        "theme": themes.get_default_theme(),
+    }
 
 
 middlewares = [Middleware(CookieStorageMiddleware)]

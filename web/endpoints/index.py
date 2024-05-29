@@ -3,6 +3,7 @@ from typing import override
 from ludic.catalog.headers import H1
 from ludic.catalog.typography import CodeBlock, Paragraph
 from ludic.html import b, style
+from ludic.styles.types import SizeClamp
 from ludic.types import Component, NoAttrs
 from ludic.web import LudicApp, Request
 from starlette.responses import FileResponse
@@ -20,8 +21,8 @@ class CodeSample(Component[str, NoAttrs]):
             ".code-sample": {
                 "text-align": "left",
                 "margin-inline": "auto",
-                "width": "auto",
-                "padding": theme.sizes.xxl,
+                "max-width": "33rem",
+                "padding": theme.sizes.xl,
                 "border-radius": theme.rounding.more,
                 "border": f"1px solid {theme.colors.light.darken(2)}",
             }
@@ -36,10 +37,13 @@ class CodeSample(Component[str, NoAttrs]):
 @app.get("/")
 def index(request: Request) -> HomePage:
     return HomePage(
-        H1("Ludic Framework", style={"font-size": "5rem"}),
+        H1(
+            "Ludic Framework",
+            style={"font-size": SizeClamp(1.5, 4, 5)},
+        ),
         Paragraph(
-            f"Build Dynamic {b("Web Apps in Pure Python")} in Minutes",
-            style={"font-size": "1.5rem"},
+            f"Build Interactive {b("Web Apps in Pure Python")} in Minutes",
+            style={"font-size": request.state.theme.headers.h4.size},
         ),
         CodeSample(
             """

@@ -124,11 +124,7 @@ class HomeHeader(Component[AnyChildren, HomeHeaderAttrs]):
                     logo_url=self.attrs["logo_url"],
                 ),
                 Cluster(
-                    ButtonLink(
-                        "Documentation",
-                        to=self.attrs["docs_url"],
-                        classes=["secondary"],
-                    ),
+                    ButtonLink("Documentation", to=self.attrs["docs_url"]),
                     ButtonLink("Catalog", to=self.attrs["catalog_url"]),
                     ButtonLink("Examples", to=self.attrs["examples_url"]),
                     GitHubButton(),
@@ -257,6 +253,7 @@ class SearchBar(Component[NoChildren, GlobalAttrs]):
                     "border": f"1px solid {theme.colors.light.darken(5)}",
                     "border-radius": theme.rounding.less,
                     "font-size": theme.fonts.size * 0.9,
+                    "height": "auto",
                     "color": theme.colors.dark,
                     "transition": "all 0.3s ease-in-out",
                 },

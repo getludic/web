@@ -1,5 +1,5 @@
 from ludic.styles import themes
-from ludic.styles.types import Size
+from ludic.styles.types import Size, SizeClamp
 from pygments.style import Style
 from pygments.token import (
     Comment,
@@ -74,9 +74,9 @@ theme = themes.LightTheme(
     measure=Size(120, "ch"),
     fonts=themes.Fonts(size=Size(1.01, "em")),
     headers=themes.Headers(
-        h2=themes.Header(size=Size(2.5, "em"), anchor=True),
-        h3=themes.Header(size=Size(2, "em"), anchor=True),
-        h4=themes.Header(size=Size(1.5, "em"), anchor=True),
+        h2=themes.Header(size=SizeClamp(1.5, 1.3, 2.8), anchor=True),
+        h3=themes.Header(size=SizeClamp(1, 1, 2.3), anchor=True),
+        h4=themes.Header(size=SizeClamp(0.8, 0.8, 1.8), anchor=True),
     ),
     layouts=themes.Layouts(
         grid=themes.Grid(cell_size=Size(200, "px")),
