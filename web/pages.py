@@ -20,6 +20,7 @@ from .components import Footer, HomeHeader, MainHeader, Menu
 
 class BasePageAttrs(Attrs):
     title: NotRequired[str]
+    request: Request
 
 
 class BasePage(Component[AnyChildren, BasePageAttrs]):
@@ -58,7 +59,10 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                     ),
                 ),
                 meta(property="og:url", content=config.HOME_URL),
-                meta(property="og:image", content="/static/logo.png"),
+                meta(
+                    property="og:image",
+                    content=self.attrs["request"].url_for("static", path="ludic.png"),
+                ),
                 meta(name="twitter:card", content="summary_large_image"),
                 meta(
                     name="twitter:title",
@@ -71,8 +75,16 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                         "pure Python in minutes."
                     ),
                 ),
-                meta(name="twitter:image", content="/static/logo.png"),
-                link(rel="icon", href="/static/favicon.png"),
+                meta(
+                    name="twitter:image",
+                    content=self.attrs["request"].url_for("static", path="ludic.png"),
+                ),
+                link(
+                    rel="icon",
+                    href=self.attrs["request"]
+                    .url_for("static", path="favicon.ico")
+                    .path,
+                ),
                 title=self.attrs.get("title", config.TITLE),
             ),
             Body(
@@ -121,6 +133,7 @@ class Page(Component[AnyChildren, PageAttrs]):
                 classes=["no-inline-padding", "transparent", "large"],
             ),
             title=self.attrs.get("title", config.TITLE),
+            request=self.attrs["request"],
         )
 
 
@@ -153,4 +166,5 @@ class HomePage(Component[AnyChildren, HomePageAttrs]):
                     classes=["no-inline-padding"],
                 ),
             ),
+            request=self.attrs["request"],
         )

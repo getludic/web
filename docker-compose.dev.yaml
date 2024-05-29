@@ -1,0 +1,16 @@
+services:
+  web:
+    build:
+      context: .
+      cache_from:
+        - ludic-web:build
+        - ludic-web:${TAG:-latest}
+    image: ludic-web:${TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status/live"]
+      interval: 5s
+      timeout: 30s
+      retries: 3

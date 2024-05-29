@@ -1,18 +1,22 @@
-version: "3.9"
-
 services:
   web:
-    build:
-      context: .
-      cache_from:
-        - ludic-web:build
-        - ludic-web:${TAG:-latest}
-    image: ludic-web:${TAG:-latest}
+    image: paveldedik/ludic-web:${TAG:-latest}
+    command:
+        - "uvicorn"
+        - "web.server:app"
+        - "--host"
+        - "0.0.0.0"
+        - "--port"
+        - "8000"
+        - "--workers"
+        - "5"
+        - "--proxy-headers"
+        - "--forwarded-allow-ips=*"
     restart: unless-stopped
     ports:
       - 8000:8000
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/status/live"]
-      interval: 5s
+      interval: 10s
       timeout: 30s
       retries: 3
