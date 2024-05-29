@@ -1,6 +1,9 @@
-from pyinstrument import Profiler
-from pyinstrument.renderers.html import HTMLRenderer
-from pyinstrument.renderers.speedscope import SpeedscopeRenderer
+try:
+    from pyinstrument import Profiler
+    from pyinstrument.renderers.html import HTMLRenderer
+    from pyinstrument.renderers.speedscope import SpeedscopeRenderer
+except ImportError:
+    pass
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
