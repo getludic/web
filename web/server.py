@@ -21,7 +21,7 @@ from .endpoints import (
     search,
     status,
 )
-from .middlewares import CookieStorageMiddleware
+from .middlewares import CookieStorageMiddleware, ProfileMiddleware
 from .pages import Page
 from .search import Index, build_index
 from .themes import theme
@@ -39,6 +39,11 @@ async def lifespan(app: LudicApp) -> AsyncIterator[State]:
     yield {"index": await build_index(app)}
 
 
+middlewares = [Middleware(CookieStorageMiddleware)]
+if config.ENABLE_PROFILING:
+    middlewares.append(Middleware(ProfileMiddleware))
+
+
 app = LudicApp(
     debug=config.DEBUG,
     lifespan=lifespan,
@@ -52,7 +57,7 @@ app = LudicApp(
         Mount("/status", status.app, name="status"),
         Mount("/static", StaticFiles(directory="static"), name="static"),
     ],
-    middleware=[Middleware(CookieStorageMiddleware)],
+    middleware=middlewares,
 )
 
 

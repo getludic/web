@@ -10,3 +10,4 @@ GITHUB_REPO_URL = os.getenv(
 )
 
 HTMX_VERSION = os.getenv("LUDIC_HTMX_VERSION", "1.9.12")
+ENABLE_PROFILING = os.getenv("LUDIC_ENABLE_PROFILING", "0") == "1"
