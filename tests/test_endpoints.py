@@ -8,6 +8,7 @@ routes: list[str] = [
     "/catalog/buttons/",
     "/catalog/forms/",
     "/catalog/layouts/",
+    "/catalog/layouts/example",
     "/catalog/loaders/",
     "/catalog/messages/",
     "/catalog/tables/",

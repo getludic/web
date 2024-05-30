@@ -512,7 +512,7 @@ def layouts(request: Request) -> Page:
     )
 
 
-async def layout_example() -> BasePage:
+async def layout_example(request: Request) -> BasePage:
     return BasePage(
         Center(
             Stack(
@@ -598,5 +598,6 @@ async def layout_example() -> BasePage:
                 classes=["large"],
             ),
             style={"margin-block": "2rem"},
-        )
+        ),
+        request=request,
     )
