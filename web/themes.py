@@ -80,7 +80,7 @@ theme = themes.LightTheme(
     ),
     layouts=themes.Layouts(
         grid=themes.Grid(cell_size=Size(200, "px")),
-        sidebar=themes.Sidebar(side_width=Size(14, "rem")),
+        sidebar=themes.Sidebar(side_width=Size(15, "rem")),
         cover=themes.Cover(element="div.cover-main"),
     ),
     code=themes.CodeBlock(style=LudicStyle),
