@@ -74,9 +74,10 @@ theme = themes.LightTheme(
     measure=Size(120, "ch"),
     fonts=themes.Fonts(size=Size(1.01, "em")),
     headers=themes.Headers(
-        h2=themes.Header(size=SizeClamp(1.5, 1.3, 2.8), anchor=True),
-        h3=themes.Header(size=SizeClamp(1, 1, 2.3), anchor=True),
-        h4=themes.Header(size=SizeClamp(0.8, 0.8, 1.8), anchor=True),
+        h1=themes.Header(size=SizeClamp(2.2, 2, 3.6), anchor=False),
+        h2=themes.Header(size=SizeClamp(1.8, 1.7, 3), anchor=True),
+        h3=themes.Header(size=SizeClamp(1.5, 1.4, 2.5), anchor=True),
+        h4=themes.Header(size=SizeClamp(1.3, 1.2, 2), anchor=True),
     ),
     layouts=themes.Layouts(
         grid=themes.Grid(cell_size=Size(200, "px")),
