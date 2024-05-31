@@ -366,6 +366,6 @@ class EditOnGithub(Component[NoChildren, EditOnGithubAttrs]):
         )
         url = f"{config.GITHUB_REPO_WEB_URL}/blob/main/web/endpoints{file_path}"
         return div(
-            ButtonLink("Edit Page", to=url, classes=["small"]),
+            ButtonLink("Edit", to=url, classes=["small"]),
             style={"position": "relative"},
         )

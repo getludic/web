@@ -10,7 +10,7 @@ from ludic.catalog.layouts import (
     WithSidebar,
 )
 from ludic.catalog.pages import Body, Head, HtmlPage
-from ludic.html import link, meta
+from ludic.html import div, link, meta, style
 from ludic.types import AnyChildren, Component
 from ludic.web import Request
 
@@ -24,6 +24,29 @@ class BasePageAttrs(Attrs):
 
 
 class BasePage(Component[AnyChildren, BasePageAttrs]):
+    styles = style.use(
+        lambda theme: {
+            (
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "h5",
+                "h6",
+                ".with-anchor > h1 + a",
+                ".with-anchor > h2 + a",
+                ".with-anchor > h3 + a",
+                ".with-anchor > h4 + a",
+            ): {
+                "font-family": "NTR, Arial, sans-serif",
+                "font-weight": "400",
+                "font-style": "normal",
+                "position": "relative",
+                "top": theme.sizes.xxxxs,
+            },
+        }
+    )
+
     @override
     def render(self) -> HtmlPage:
         return HtmlPage(
@@ -85,6 +108,14 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                     .url_for("static", path="favicon.ico")
                     .path,
                 ),
+                link(rel="preconnect", href="https://fonts.googleapis.com"),
+                link(
+                    rel="preconnect", href="https://fonts.gstatic.com", crossorigin=True
+                ),
+                link(
+                    href="https://fonts.googleapis.com/css2?family=NTR&display=swap",
+                    rel="stylesheet",
+                ),
                 title=self.attrs.get("title", config.TITLE),
             ),
             Body(
@@ -115,11 +146,13 @@ class Page(Component[AnyChildren, PageAttrs]):
                         ),
                         WithSidebar(
                             Sidebar(Menu(**self.attrs_for(Menu))),
-                            Stack(
+                            div(
                                 EditOnGithub(base_url=request.url.path),
-                                *self.children,
+                                Stack(
+                                    *self.children,
+                                    **self.attrs_for(Stack),
+                                ),
                                 id="main-content",
-                                **self.attrs_for(Stack),
                             ),
                         ),
                         Footer(),
