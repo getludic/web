@@ -39,11 +39,11 @@ def index(request: Request) -> HomePage:
     return HomePage(
         H1(
             "Ludic Framework",
-            style={"font-size": SizeClamp(2, 5, 6)},
+            style={"font-size": SizeClamp(2.5, 3, 8)},
         ),
         Paragraph(
             f"Build Interactive {b("Web Apps in Pure Python")} in Minutes",
-            style={"font-size": request.state.theme.headers.h4.size},
+            style={"font-size": request.state.theme.headers.h4.size * 0.8},
         ),
         CodeSample(
             """
