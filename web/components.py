@@ -10,6 +10,7 @@ from ludic.catalog.typography import Link
 from ludic.html import a, b, div, iframe, img, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
+from ludic.web.datastructures import URLPath
 
 from . import config
 
@@ -316,4 +317,39 @@ class SearchResult(Component[NoChildren, SearchResultAttrs]):
                     classes=["centered"],
                 ),
             ),
+        )
+
+
+class EditOnGithubAttrs(Attrs):
+    base_url: URLPath
+
+
+class EditOnGithub(Component[NoChildren, EditOnGithubAttrs]):
+    classes = ["edit-on-github"]
+    styles = style.use(
+        lambda theme: {
+            ".edit-on-github": {
+                "position": "relative",
+            },
+            ".edit-on-github a": {
+                "float": "right",
+                "position": "absolute",
+                "z-index": "10",
+                "right": "0",
+                "color": theme.colors.dark,
+            },
+        }
+    )
+
+    @override
+    def render(self) -> div:
+        file_path = (
+            f"{self.attrs["base_url"].replace("-", "_")}index.py"
+            if self.attrs["base_url"].endswith("/")
+            else f"{self.attrs["base_url"].replace("-", "_")}.py"
+        )
+        url = f"{config.GITHUB_REPO_WEB_URL}/blob/main/web/endpoints{file_path}"
+        return div(
+            ButtonLink("Edit Page", to=url, classes=["small"]),
+            style={"position": "relative"},
         )

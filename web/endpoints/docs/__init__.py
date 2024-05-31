@@ -5,7 +5,7 @@ from . import components, getting_started, htmx, index, styles, web_framework
 router = Router()
 
 router.add_route("/", index.index)
-router.add_route("/counter/{value}", index.Counter, name="Counter")
+router.add_route("/counter/{value}", index.Counter)
 router.add_route("/components", components.components)
 router.add_route("/getting-started", getting_started.getting_started)
 router.add_route("/htmx", htmx.htmx)

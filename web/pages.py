@@ -15,7 +15,7 @@ from ludic.types import AnyChildren, Component
 from ludic.web import Request
 
 from . import config
-from .components import Footer, HomeHeader, MainHeader, Menu
+from .components import EditOnGithub, Footer, HomeHeader, MainHeader, Menu
 
 
 class BasePageAttrs(Attrs):
@@ -103,27 +103,23 @@ class PageAttrs(Attrs):
 class Page(Component[AnyChildren, PageAttrs]):
     @override
     def render(self) -> BasePage:
+        request = self.attrs["request"]
         return BasePage(
             Box(
                 Center(
                     Stack(
                         MainHeader(
-                            logo_url=self.attrs["request"]
-                            .url_for("static", path="logo.png")
-                            .path,
-                            home_url=self.attrs["request"].url_for("index").path,
-                            search_url=self.attrs["request"]
-                            .url_for("search_docs")
-                            .path,
+                            logo_url=request.url_for("static", path="logo.png").path,
+                            home_url=request.url_for("index").path,
+                            search_url=request.url_for("search_docs").path,
                         ),
                         WithSidebar(
                             Sidebar(Menu(**self.attrs_for(Menu))),
                             Stack(
-                                Stack(
-                                    *self.children,
-                                    id="main-content",
-                                    **self.attrs_for(Stack),
-                                ),
+                                EditOnGithub(base_url=request.url.path),
+                                *self.children,
+                                id="main-content",
+                                **self.attrs_for(Stack),
                             ),
                         ),
                         Footer(),

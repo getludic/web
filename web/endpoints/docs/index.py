@@ -124,10 +124,10 @@ def index(request: Request) -> Page:
             """
             from typing import override
 
-            from ludic.html import b, div
+            from ludic.html import b
             from ludic.web import Endpoint, LudicApp, Request
             from ludic.catalog.buttons import ButtonDanger, ButtonSuccess
-            from ludic.catalog.layouts import Box
+            from ludic.catalog.layouts import Box, Cluster
 
             app = LudicApp()
 
@@ -148,8 +148,8 @@ def index(request: Request) -> Page:
         CodeBlock(
             """
             @app.get("/counter/{value}")
-            def Counter(value: str) -> div:
-                return div(
+            def Counter(value: str) -> Cluster:
+                return Cluster(
                     ButtonDanger(
                         "Decrement",
                         hx_get=app.url_path_for("Counter", value=int(value) - 1),
