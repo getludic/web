@@ -12,13 +12,41 @@ from ludic.html import b
 from ludic.types import Blank
 from ludic.web import Endpoint, Request
 
-from web.components import LogoBig
+from web.components import Badge, LogoBig
 from web.pages import Page
 
 
 def index(request: Request) -> Page:
     return Page(
         LogoBig(logo_url=request.url_for("static", path="ludic.png")),
+        Cluster(
+            Badge(
+                url="https://github.com/paveldedik/ludic/actions",
+                img_url="https://github.com/paveldedik/ludic/actions/workflows/test.yaml/badge.svg",
+                title="Tests Status",
+            ),
+            Badge(
+                url="https://codecov.io/gh/paveldedik/ludic",
+                img_url="https://codecov.io/gh/paveldedik/ludic/graph/badge.svg?token=BBDNJWHMGX",
+                title="Code Coverage",
+            ),
+            Badge(
+                url="https://www.python.org/downloads/release/python-312/",
+                img_url="https://img.shields.io/badge/python-3.12-blue.svg",
+                title="Python 3.12",
+            ),
+            Badge(
+                url="http://mypy-lang.org/",
+                img_url="http://www.mypy-lang.org/static/mypy_badge.svg",
+                title="Checked with mypy",
+            ),
+            Badge(
+                url="https://discord.gg/4Y5fSQUS",
+                img_url="https://img.shields.io/badge/discord-ludic-black",
+                title="Discord Server",
+            ),
+            classes=["small"],
+        ),
         H1("Introduction"),
         Paragraph(
             "Ludic is a lightweight framework for building HTML pages with a component "

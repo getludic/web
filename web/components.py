@@ -15,6 +15,22 @@ from ludic.web.datastructures import URLPath
 from . import config
 
 
+class BadgeAttrs(Attrs):
+    url: str
+    img_url: str
+    title: str
+
+
+class Badge(Component[NoChildren, BadgeAttrs]):
+    @override
+    def render(self) -> a:
+        return a(
+            img(src=self.attrs["img_url"], alt=self.attrs["title"]),
+            href=self.attrs["url"],
+            title=self.attrs["title"],
+        )
+
+
 class LogoBigAttrs(Attrs):
     logo_url: str
 
