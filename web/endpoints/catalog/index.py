@@ -15,19 +15,16 @@ def index(request: Request) -> Page:
     return Page(
         H1("Catalog"),
         Paragraph(
-            f"The {Code("ludic.catalog")} module is a collection of components that "
-            "might be useful for building applications with the Ludic framework."
-        ),
-        List(
-            Item("Any contributor is welcome to add new components or helpers."),
-            Item("It also serves as a showcase of possible implementations."),
+            f"The {Code("ludic.catalog")} module is a collection of components "
+            "designed to help build applications using the Ludic framework. It "
+            "serves as both a resource for building new web applications and also "
+            "as a showcase of ways to implement components."
         ),
         Paragraph(
-            "Every item featured in the catalog is a reusable component that "
-            "generates HTML code and registers its own CSS styles. The registered "
-            f"CSS are loaded with the {Code("style.load()")} method as described "
-            f"in the {Link(
-                "Styles and Themes", to=request.url_path_for("docs:styles"))} "
+            "Each item in the catalog is a reusable component that generates HTML "
+            "code and registers its own CSS styles.. The registered CSS are loaded "
+            f"using the {Code("style.load()")} method, as detailed in the "
+            f"{Link("Styles and Themes", to=request.url_path_for("docs:styles"))} "
             "section of the documentation."
         ),
         Paragraph(
@@ -56,11 +53,10 @@ def index(request: Request) -> Page:
         List(
             Item(
                 "It renders as a valid HTML document with (optionally) HTMX script "
-                "loaded."
+                "loaded;"
             ),
             Item(
-                "It renders collected CSS styles loaded from the components in the "
-                "catalog."
+                "It renders collected CSS styles loaded from components in the catalog."
             ),
         ),
         Message(
@@ -87,7 +83,7 @@ def index(request: Request) -> Page:
             f"After you are done with setting up your {Code("Page")} component, you "
             "can use it along with all the other components in the catalog."
         ),
-        H3(f"{Code("HtmlPage")} Component"),
+        H3("HtmlPage Component"),
         Paragraph(
             "This component has already been mentioned throughout the documentation "
             f"and can be used to create your {Code("Page")} component. The "

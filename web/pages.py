@@ -44,6 +44,9 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 "position": "relative",
                 "top": theme.sizes.xxxxs,
             },
+            ("h1 > .code", "h2 > .code", "h3 > .code", "h4 > .code"): {
+                "font-size": "0.75em",
+            },
         }
     )
 

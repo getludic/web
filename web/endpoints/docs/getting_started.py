@@ -81,8 +81,8 @@ def getting_started(request: Request) -> Page:
         ),
         H2("Structure"),
         Paragraph(
-            "The cookiecutter template creates a somewhat opinionated project "
-            "structure, feel free to adjust or suggest a different one on GitHub. "
+            "The cookiecutter template generates a somewhat opinionated project "
+            "structure. Feel free to adjust it or suggest a different one on GitHub. "
             "Here is the structure:"
         ),
         CodeBlock(
@@ -107,41 +107,41 @@ def getting_started(request: Request) -> Page:
             language="bash",
         ),
         Paragraph(
-            "For bigger applications, this structure can look completely different. "
-            "There is also a lot of modules missing - models, database connection, "
-            "and so on. If you are just getting started, this is still a good starting "
-            "point."
+            "For larger applications, the structure can vary significantly. "
+            "Additionally, many modules are missing, such as models and database "
+            "connections. However, if you're just beginning, this still serves as "
+            "a good starting point."
         ),
         h4(Code("pages.py")),
         Paragraph(
-            "The idea is to write a couple of pages (regular components) rendering as "
-            f"a valid HTML document - using the {Code("<html>")} root tag."
+            "The idea is to create a few pages (regular components) that render as "
+            f"valid HTML documents using the {Code("<html>")} root tag."
         ),
         h4(Code("endpoints")),
         Paragraph(
-            "The endpoints module contains all the endpoints for the application. "
-            "The index module contains endpoints rendering when user opens the site. "
-            "It is the root of your web application. The errors module contains error "
-            "handlers (displaying the 404 page, and so on)."
+            "The endpoints module contains all the application's endpoints. The index "
+            "module includes endpoints that render when users open the site, serving "
+            "as the root of your web application. The errors module contains error "
+            "handlers, such as displaying the 404 page."
         ),
         h4(Code("components.py")),
         Paragraph(
-            "Any component that you want to use in your application should be "
-            f"registered here. For example, a {Code("Navigation")} component together "
-            f"with its attributes could be registered in the {Code("components.py")} "
-            "file."
+            "Any component you want to use in your application should be registered "
+            f"here. For example, a registered here. For example, a {Code("Navigation")}"
+            " component and its attributes could be registered in the "
+            f"{Code("components.py")} file."
         ),
         h4(Code("main.py")),
         Paragraph(
             f"The module instantiates the {Code("LudicApp")} class and registers "
-            "routes (by importing the endpoints module)."
+            f"routes by importing the {Code("endpoints")} module."
         ),
         H2("What's Next?"),
         Paragraph(
-            "In the next sections of this documentation, you will learn more about "
-            "how to write components, endpoints, and what kinds of other tools there "
-            "are. You will also learn about the Catalog which can be used to very "
-            "quickly create basic layout of your web application."
+            "In the following sections of this documentation, you will learn more "
+            "about writing components and endpoints, as well as the various other "
+            "tools available. You will also learn about the Catalog, which can be "
+            "used to quickly create the basic layout of your web application."
         ),
         request=request,
         active_item="getting_started",

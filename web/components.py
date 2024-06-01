@@ -83,8 +83,8 @@ class GitHubButton(Component[NoChildren, NoAttrs]):
             ),
             frameborder="0",
             scrolling="0",
-            width="140px",
-            height="30px",
+            width="140",
+            height="30",
             title="GitHub",
         )
 
@@ -256,7 +256,9 @@ class Footer(Component[NoChildren, NoAttrs]):
     def render(self) -> Box:
         return Box(
             f"Made with {b(Link("Ludic", to=config.GITHUB_REPO_URL))} "
-            f"and {b(Link("HTMX", to="https://htmx.org"))}"
+            f"and {b(Link("HTMX", to="https://htmx.org"))} "
+            f"• {b(Link("Discord", to="https://discord.gg/4Y5fSQUS"))} ",
+            f"• {b(Link("GitHub", to="https://github.com/paveldedik/ludic"))}",
         )
 
 
@@ -364,7 +366,4 @@ class EditOnGithub(Component[NoChildren, EditOnGithubAttrs]):
             else f"{self.attrs["base_url"].replace("-", "_")}.py"
         )
         url = f"{config.GITHUB_REPO_WEB_URL}/blob/main/web/endpoints{file_path}"
-        return div(
-            ButtonLink("Edit", to=url, classes=["small"]),
-            style={"position": "relative"},
-        )
+        return div(ButtonLink("Edit", to=url, classes=["small"]))
