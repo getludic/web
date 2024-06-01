@@ -349,9 +349,6 @@ class EditOnGithub(Component[NoChildren, EditOnGithubAttrs]):
             },
             ".edit-on-github a": {
                 "float": "right",
-                "position": "absolute",
-                "z-index": "10",
-                "right": "0",
                 "color": theme.colors.dark,
             },
         }

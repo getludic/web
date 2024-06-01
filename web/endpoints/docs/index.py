@@ -36,8 +36,8 @@ def index(request: Request) -> Page:
                 title="Python 3.12",
             ),
             Badge(
-                url="http://mypy-lang.org/",
-                img_url="http://www.mypy-lang.org/static/mypy_badge.svg",
+                url="https://mypy-lang.org/",
+                img_url="https://www.mypy-lang.org/static/mypy_badge.svg",
                 title="Checked with mypy",
             ),
             Badge(
