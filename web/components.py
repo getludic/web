@@ -342,17 +342,14 @@ class EditOnGithubAttrs(Attrs):
     base_url: URLPath
 
 
-class EditOnGithub(Component[NoChildren, EditOnGithubAttrs]):
+class EditOnGithub(Component[AnyChildren, EditOnGithubAttrs]):
     classes = ["edit-on-github"]
     styles = style.use(
         lambda theme: {
-            ".edit-on-github": {
+            ".edit-on-github > a": {
                 "position": "relative",
-            },
-            ".edit-on-github a": {
-                "position": "absolute",
-                "z-index": "10",
-                "right": "0",
+                "z-index": "99",
+                "float": "right",
                 "color": theme.colors.dark,
             },
         }
@@ -366,4 +363,7 @@ class EditOnGithub(Component[NoChildren, EditOnGithubAttrs]):
             else f"{self.attrs["base_url"].replace("-", "_")}.py"
         )
         url = f"{config.GITHUB_REPO_WEB_URL}/blob/main/web/endpoints{file_path}"
-        return div(ButtonLink("Edit", to=url, classes=["small"]))
+        return div(
+            ButtonLink("Edit", to=url, classes=["small"]),
+            self.children[0],
+        )

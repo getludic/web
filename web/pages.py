@@ -10,7 +10,7 @@ from ludic.catalog.layouts import (
     WithSidebar,
 )
 from ludic.catalog.pages import Body, Head, HtmlPage
-from ludic.html import div, link, meta, style
+from ludic.html import link, meta, style
 from ludic.types import AnyChildren, Component
 from ludic.web import Request
 
@@ -138,6 +138,7 @@ class Page(Component[AnyChildren, PageAttrs]):
     @override
     def render(self) -> BasePage:
         request = self.attrs["request"]
+        first_child, *rest_of_children = self.children
         return BasePage(
             Box(
                 Center(
@@ -149,13 +150,11 @@ class Page(Component[AnyChildren, PageAttrs]):
                         ),
                         WithSidebar(
                             Sidebar(Menu(**self.attrs_for(Menu))),
-                            div(
-                                EditOnGithub(base_url=request.url.path),
-                                Stack(
-                                    *self.children,
-                                    **self.attrs_for(Stack),
-                                ),
+                            Stack(
+                                EditOnGithub(first_child, base_url=request.url.path),
+                                *rest_of_children,
                                 id="main-content",
+                                **self.attrs_for(Stack),
                             ),
                         ),
                         Footer(),
