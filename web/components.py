@@ -347,6 +347,7 @@ class EditOnGithub(Component[AnyChildren, EditOnGithubAttrs]):
     styles = style.use(
         lambda theme: {
             ".edit-on-github > a": {
+                "margin-inline-start": theme.sizes.xs,
                 "position": "relative",
                 "z-index": "99",
                 "float": "right",
