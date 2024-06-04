@@ -1,8 +1,10 @@
 from ludic.catalog.headers import H1, H2
+from ludic.catalog.lists import Item, List
 from ludic.catalog.loaders import LazyLoader
-from ludic.catalog.typography import Code, CodeBlock, Paragraph
+from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -12,6 +14,15 @@ async def lazy_loading(request: Request) -> Page:
         Paragraph(
             "This example shows how to lazily load an element on a page. This "
             "lazy loading can be used for loading large images."
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/lazy_loading.py",
+                )
+            ),
+            Item(Link("Source at htmx.org", to="https://htmx.org/examples/lazy-load/")),
         ),
         H2("Demo"),
         LazyLoader(load_url=request.url_for("lazy_loading:index")),

@@ -1,9 +1,10 @@
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.lists import Item, List
 from ludic.catalog.loaders import LazyLoader
-from ludic.catalog.typography import Code, CodeBlock, Paragraph
+from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -15,6 +16,17 @@ def delete_row(request: Request) -> Page:
             "a table row upon completion. For this example, we use have a sample "
             "database of people which we display in a table. Each row in the table "
             "can be deleted by clicking a button and a confirmation prompt."
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/delete_row.py",
+                )
+            ),
+            Item(
+                Link("Source at htmx.org", to="https://htmx.org/examples/delete-row/")
+            ),
         ),
         H2("Demo"),
         LazyLoader(load_url=request.url_for("delete_row:index")),

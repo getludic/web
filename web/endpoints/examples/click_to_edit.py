@@ -1,9 +1,10 @@
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.lists import Item, List
 from ludic.catalog.loaders import LazyLoader
-from ludic.catalog.typography import Code, CodeBlock, Paragraph
+from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -14,6 +15,19 @@ async def click_to_edit(request: Request) -> Page:
             "The click to edit pattern provides a way to offer inline editing "
             "of all or part of a record without a page refresh. In this example, "
             "we create a customer which we'll be able to edit."
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/click_to_edit.py",
+                )
+            ),
+            Item(
+                Link(
+                    "Source at htmx.org", to="https://htmx.org/examples/click-to-edit/"
+                )
+            ),
         ),
         H2("Demo"),
         LazyLoader(load_url=request.url_for("click_to_edit:index")),

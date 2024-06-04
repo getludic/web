@@ -1,9 +1,10 @@
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.lists import Item, List, NumberedList
 from ludic.catalog.loaders import LazyLoader
-from ludic.catalog.typography import Code, CodeBlock, Paragraph
+from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -14,6 +15,15 @@ async def edit_row(request: Request) -> Page:
             "This example shows how to implement editable rows. In this example, we "
             "create a table with a row for each person in the database. Each row "
             "contains an edit button which allows inline editing of user's data."
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/edit_row.py",
+                )
+            ),
+            Item(Link("Source at htmx.org", to="https://htmx.org/examples/edit-row/")),
         ),
         H2("Demo"),
         LazyLoader(load_url=request.url_for("edit_row:index")),

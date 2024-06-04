@@ -1,9 +1,10 @@
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.lists import Item, List
 from ludic.catalog.loaders import LazyLoader
-from ludic.catalog.typography import Code, CodeBlock, Paragraph
+from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -14,6 +15,19 @@ async def click_to_load(request: Request) -> Page:
             "This example shows how to implement click-to-load the next page in "
             "a table of data. We create a table containing a list of contacts "
             "which we lazy load whenever user clicks on a button."
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/click_to_load.py",
+                )
+            ),
+            Item(
+                Link(
+                    "Source at htmx.org", to="https://htmx.org/examples/click-to-load/"
+                )
+            ),
         ),
         H2("Demo"),
         LazyLoader(load_url=request.url_for("click_to_load:index")),

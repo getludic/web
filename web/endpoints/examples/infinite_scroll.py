@@ -1,8 +1,10 @@
 from ludic.catalog.headers import H1, H2
+from ludic.catalog.lists import Item, List
 from ludic.catalog.loaders import LazyLoader
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -14,6 +16,20 @@ async def infinite_scroll(request: Request) -> Page:
             "on user scrolling action. This example is almost identical the the "
             f"{Link(
                 "Click To Load", to=request.url_for("examples:click_to_load").path)}. "
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/infinite_scroll.py",
+                )
+            ),
+            Item(
+                Link(
+                    "Source at htmx.org",
+                    to="https://htmx.org/examples/infinite-scroll/",
+                )
+            ),
         ),
         H2("Implementation"),
         Paragraph(

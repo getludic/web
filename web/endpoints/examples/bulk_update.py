@@ -1,9 +1,10 @@
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.lists import Item, List
 from ludic.catalog.loaders import LazyLoader
-from ludic.catalog.typography import Code, CodeBlock, Paragraph
+from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -15,6 +16,17 @@ async def bulk_update(request: Request) -> Page:
             "selected and then bulk updated. For the purpose of this example, "
             "we create a table containing people. We also create a column "
             "where we can mark the individual person as active or inactive."
+        ),
+        List(
+            Item(
+                Link(
+                    "Full Code at GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/bulk_update.py",
+                )
+            ),
+            Item(
+                Link("Source at htmx.org", to="https://htmx.org/examples/bulk-update/")
+            ),
         ),
         H2("Demo"),
         LazyLoader(load_url=request.url_for("bulk_update:index")),
