@@ -138,23 +138,23 @@ async def edit_row(request: Request) -> Page:
         List(
             Item(
                 Code("on_click_script"),
-                " - this script is executed when the edit button is clicked. We "
+                " – this script is executed when the edit button is clicked. We "
                 "don't want to allow the user to edit multiple rows at once so we "
                 "check if the user is already editing a row.",
             ),
             Item(
                 Code("put"),
-                " - handles the PUT request which updates a person in the "
+                " – handles the PUT request which updates a person in the "
                 "database. We return the updated person data as a row in the response.",
             ),
             Item(
                 Code("get"),
-                " - handles the GET request which returns an instance of the "
+                " – handles the GET request which returns an instance of the "
                 f"{Code("PeopleRow")} of the requested person.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the row. Apart from the textual columns, "
+                " – handles rendering of the row. Apart from the textual columns, "
                 "we also render an action button to edit a row.",
             ),
         ),
@@ -213,11 +213,11 @@ async def edit_row(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " - handles the GET request which renders the requested person's row.",
+                " – handles the GET request which renders the requested person's row.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the person's edit row. Apart from the name "
+                " – handles rendering of the person's edit row. Apart from the name "
                 "and email columns, we are also rendering two action buttons, one "
                 "canceling the action and one saving the changes.",
             ),
@@ -260,13 +260,13 @@ async def edit_row(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " - handles the GET request which returns an instance of the "
+                " – handles the GET request which returns an instance of the "
                 f"{Code("PeopleTable")} filled with a list of people fetched "
                 "from database.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the table of people. We use a special "
+                " – handles rendering of the table of people. We use a special "
                 f"{Code("body_attrs")} attribute to configure HTMX operations on "
                 f"the {Code("tbody")} element.",
             ),

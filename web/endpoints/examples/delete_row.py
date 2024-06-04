@@ -95,12 +95,12 @@ def delete_row(request: Request) -> Page:
         List(
             Item(
                 Code("delete"),
-                " - handles the DELETE request which removes a person from the "
+                " – handles the DELETE request which removes a person from the "
                 "database. We don't need to return anything in this case.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the table. Apart from the textual columns, "
+                " – handles rendering of the table. Apart from the textual columns, "
                 "we also render an action button to delete a row which is hooked to "
                 f"the {Code("PersonRow.delete()")} method.",
             ),
@@ -155,13 +155,13 @@ def delete_row(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " - handles the GET request which returns an instance of the "
+                " – handles the GET request which returns an instance of the "
                 f"{Code("PeopleTable")} filled with a list of people fetched "
                 "from database.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the table of people. We use a special "
+                " – handles rendering of the table of people. We use a special "
                 f"{Code("body_attrs")} attribute to configure HTMX operations on "
                 f"the {Code("tbody")} element.",
             ),

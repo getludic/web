@@ -131,12 +131,12 @@ async def click_to_load(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " - handles the GET request which loads contacts from the database. "
+                " – handles the GET request which loads contacts from the database. "
                 "The handler returns an instance of itself.",
             ),
             Item(
                 Code("render"),
-                f" - handles rendering of the table rows and the {Code("Load More")} "
+                f" – handles rendering of the table rows and the {Code("Load More")} "
                 "button. In order for everything to work properly, we render only "
                 f"the table's rows while wrapping them in the {Code("Blank")} "
                 "component. This component does not render any HTML element, it's just "

@@ -129,7 +129,7 @@ async def bulk_update(request: Request) -> Page:
         List(
             Item(
                 Code("post"),
-                " - handles the POST request which contains form data. Since we "
+                " – handles the POST request which contains form data. Since we "
                 f"used the {Code("create_rows")} method, it is possible to use a "
                 "parser to automatically convert the form data in a dictionary. "
                 "In fact, we are handling a list of people, so we use the "
@@ -139,13 +139,13 @@ async def bulk_update(request: Request) -> Page:
             ),
             Item(
                 Code("get"),
-                " - handles the GET request which fetches data about people from "
+                " – handles the GET request which fetches data about people from "
                 "the database, creates a list of dicts from that and returns the "
                 "table containing these people.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the table. The table is wrapped in a form "
+                " – handles rendering of the table. The table is wrapped in a form "
                 "so that it is possible to issue a POST request updating the list of "
                 "active or inactive people. The form is wrapping the table having the "
                 f"columns created according the the {Code("PersonAttrs")} "

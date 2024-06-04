@@ -70,7 +70,7 @@ def index(request: Request) -> HomePage:
             style={"font-size": SizeClamp(2.5, 3, 8)},
         ),
         Paragraph(
-            f"Build Interactive {b("Web Apps in Pure Python")} in Minutes",
+            f"Web Development in {b("Pure Python")} with {b("Type-Guided")} Components",
             style={"font-size": request.state.theme.headers.h4.size * 0.8},
         ),
         code_sample(request, 0),

@@ -136,13 +136,13 @@ async def click_to_edit(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " - handles the GET request which fetches information about the "
+                " – handles the GET request which fetches information about the "
                 f"contact from the database, and returns them as the {Code("Contact")} "
                 "component to be rendered as HTML.",
             ),
             Item(
                 Code("put"),
-                " - handles the PUT request which contains form data. Since we "
+                " – handles the PUT request which contains form data. Since we "
                 f"later use the {Code("create_rows")} method, it is possible to use a "
                 "parser to automatically convert the form data into a dictionary. "
                 "First, we check that we have the contact in our database, than "
@@ -152,7 +152,7 @@ async def click_to_edit(request: Request) -> Page:
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the contact data and a button to issue the "
+                " – handles rendering of the contact data and a button to issue the "
                 "HTMX swap operation replacing the content with an editable form.",
             ),
         ),
@@ -188,12 +188,12 @@ async def click_to_edit(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " - handles the GET request which renders the form containing the "
+                " – handles the GET request which renders the form containing the "
                 "contact data stored in the database.",
             ),
             Item(
                 Code("render"),
-                " - handles rendering of the contact form, a button to submit the "
+                " – handles rendering of the contact form, a button to submit the "
                 "form, and also a button to cancel the edit operation. We use the "
                 f"HTMX swap operation to replace the form with the {Code("Contact")} "
                 "component on submit or cancel.",

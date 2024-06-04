@@ -295,7 +295,7 @@ def components(request: Request) -> Page:
         ),
         List(
             Item(
-                f"{Code("HtmlAttrs")} - Global HTML attributes available in all "
+                f"{Code("HtmlAttrs")} – Global HTML attributes available in all "
                 "elements",
                 List(
                     Item(
@@ -305,11 +305,11 @@ def components(request: Request) -> Page:
                 ),
             ),
             Item(
-                f"{Code("EventAttrs")} - Event HTML attributes like "
+                f"{Code("EventAttrs")} – Event HTML attributes like "
                 f"{Code("on_click")}, {Code("on_key")}, and so on."
             ),
             Item(
-                f"{Code("HtmxAttrs")} - All {Link(
+                f"{Code("HtmxAttrs")} – All {Link(
                     "HTMX attributes", to="https://htmx.org/reference/"
                 )} available.",
                 List(
@@ -324,7 +324,7 @@ def components(request: Request) -> Page:
                 f"{Code("EventAttrs")}, and {Code("HtmxAttrs")}"
             ),
             Item(
-                f"{Code("[HtmlElementName]Attrs")} - e.g. {Code("ButtonAttrs")}, "
+                f"{Code("[HtmlElementName]Attrs")} – e.g. {Code("ButtonAttrs")}, "
                 f"{Code("TdAttrs")}, and so on."
             ),
         ),
@@ -426,30 +426,30 @@ def components(request: Request) -> Page:
             Item(
                 f"{Code("BaseElement")}",
                 List(
-                    Item(f"{Code("children")} - children of the component"),
-                    Item(f"{Code("attrs")} - a dictionary containing attributes"),
+                    Item(f"{Code("children")} – children of the component"),
+                    Item(f"{Code("attrs")} – a dictionary containing attributes"),
                     Item(
-                        f"{Code("to_html()")} - converts the component to an HTML "
+                        f"{Code("to_html()")} – converts the component to an HTML "
                         "document"
                     ),
                     Item(
-                        f"{Code("to_string()")} - converts the component to a string "
+                        f"{Code("to_string()")} – converts the component to a string "
                         "representation of the tree"
                     ),
                     Item(
-                        f"{Code("attrs_for(...)")} - filter attributes to return only "
+                        f"{Code("attrs_for(...)")} – filter attributes to return only "
                         "those valid for a given element or component"
                     ),
                     Item(
-                        f"{Code("has_attributes()")} - whether the component has any "
+                        f"{Code("has_attributes()")} – whether the component has any "
                         "attributes"
                     ),
                     Item(
-                        f"{Code("is_simple()")} - whether the component contains one "
+                        f"{Code("is_simple()")} – whether the component contains one "
                         "primitive child"
                     ),
                     Item(
-                        f"{Code("render()")} (*abstract method*) - render the component"
+                        f"{Code("render()")} (*abstract method*) – render the component"
                     ),
                 ),
             ),
@@ -457,40 +457,40 @@ def components(request: Request) -> Page:
         H2("Types and Helpers"),
         Paragraph(f"The {Code("ludic.types")} module contains many useful types:"),
         List(
-            Item(f"{Code("NoChildren")} - Makes a component accept no children"),
+            Item(f"{Code("NoChildren")} – Makes a component accept no children"),
             Item(
-                f"{Code("PrimitiveChildren")} - Makes a component accept only "
+                f"{Code("PrimitiveChildren")} – Makes a component accept only "
                 f"{Code("str")}, {Code("int")}, {Code("float")} or {Code("bool")}"
             ),
             Item(
-                f"{Code("ComplexChildren")} - Makes a component accept only "
+                f"{Code("ComplexChildren")} – Makes a component accept only "
                 "non-primitive types"
             ),
             Item(
-                f"{Code("AnyChildren")} - Makes a component accept any children types"
+                f"{Code("AnyChildren")} – Makes a component accept any children types"
             ),
-            Item(f"{Code("TAttrs")} - type variable for attributes"),
-            Item(f"{Code("TChildren")} - type variable for children of components"),
+            Item(f"{Code("TAttrs")} – type variable for attributes"),
+            Item(f"{Code("TChildren")} – type variable for children of components"),
             Item(
-                f"{Code("TChildrenArgs")} - type variable for children of strict "
+                f"{Code("TChildrenArgs")} – type variable for children of strict "
                 "components"
             ),
-            Item(f"{Code("Attrs")} - base for attributes"),
-            Item(f"{Code("BaseElement")} - base for elements"),
-            Item(f"{Code("Element")} - base for HTML elements"),
-            Item(f"{Code("ElementStrict")} - base for strict HTML elements"),
-            Item(f"{Code("Component")} - abstract class for components"),
-            Item(f"{Code("ComponentStrict")} - abstract class for strict components"),
+            Item(f"{Code("Attrs")} – base for attributes"),
+            Item(f"{Code("BaseElement")} – base for elements"),
+            Item(f"{Code("Element")} – base for HTML elements"),
+            Item(f"{Code("ElementStrict")} – base for strict HTML elements"),
+            Item(f"{Code("Component")} – abstract class for components"),
+            Item(f"{Code("ComponentStrict")} – abstract class for strict components"),
             Item(
-                f"{Code("Blank")} - represents a blank component which is not "
+                f"{Code("Blank")} – represents a blank component which is not "
                 f"rendered, only its children"
             ),
-            Item(f"{Code("Safe")} - marker for a safe string which is not escaped"),
+            Item(f"{Code("Safe")} – marker for a safe string which is not escaped"),
             Item(
-                f"{Code("JavaScript")} - a marker for javascript, subclasses "
+                f"{Code("JavaScript")} – a marker for javascript, subclasses "
                 f"{Code("Safe")}"
             ),
-            Item(f"{Code("GlobalStyles")} - type for CSS styles"),
+            Item(f"{Code("GlobalStyles")} – type for CSS styles"),
         ),
         request=request,
         active_item="components",

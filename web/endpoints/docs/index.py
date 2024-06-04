@@ -220,6 +220,25 @@ def index(request: Request) -> Page:
             ),
             ".",
         ),
+        List(
+            Item(
+                Link("GitHub Issues", to="https://github.com/paveldedik/ludic/issues"),
+                " – If you encounter a bug, please report it here.",
+            ),
+            Item(
+                Link(
+                    "GitHub Discussions",
+                    to="https://github.com/paveldedik/ludic/discussions",
+                ),
+                " – To request a new feature, this is the best place to initiate the "
+                "discussion.",
+            ),
+            Item(
+                Link("Discord", to="https://discord.gg/4Y5fSQUS"),
+                " – Join our Discord server for support, sharing ideas, and receiving "
+                "assistance.",
+            ),
+        ),
         request=request,
         active_item="docs:index",
         title="Ludic - Documentation",
