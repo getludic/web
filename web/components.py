@@ -10,7 +10,6 @@ from ludic.catalog.typography import Link
 from ludic.html import a, b, div, iframe, img, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
-from ludic.web.datastructures import URLPath
 
 from . import config
 
@@ -65,7 +64,7 @@ class Logo(Component[NoChildren, LogoAttrs]):
         return a(
             img(src=self.attrs["logo_url"], alt="Ludic Logo", style={"width": "8rem"}),
             href=self.attrs["home_url"],
-            style={"line-height": "0"},
+            style={"line-height": 0},
         )
 
 
@@ -83,8 +82,8 @@ class GitHubButton(Component[NoChildren, NoAttrs]):
             ),
             frameborder="0",
             scrolling="0",
-            width="140",
-            height="30",
+            width=140,
+            height=30,
             title="GitHub",
         )
 
@@ -339,7 +338,7 @@ class SearchResult(Component[NoChildren, SearchResultAttrs]):
 
 
 class EditOnGithubAttrs(Attrs):
-    base_url: URLPath
+    base_url: str
 
 
 class EditOnGithub(Component[AnyChildren, EditOnGithubAttrs]):

@@ -3,7 +3,7 @@ from typing import Self, override
 from ludic.catalog.buttons import ButtonPrimary
 from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.html import td
-from ludic.types import Attrs, Blank, Component, ComponentStrict
+from ludic.types import Attrs, Blank, Component, ComponentStrict, URLType
 from ludic.web import Endpoint, LudicApp
 from ludic.web.datastructures import QueryParams
 
@@ -22,7 +22,7 @@ class ContactsSliceAttrs(Attrs):
 
 
 class LoadMoreAttrs(Attrs):
-    url: str
+    url: URLType
 
 
 def load_contacts(page: int) -> list[ContactAttrs]:

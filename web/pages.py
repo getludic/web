@@ -87,7 +87,9 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 meta(property="og:url", content=config.HOME_URL),
                 meta(
                     property="og:image",
-                    content=self.attrs["request"].url_for("static", path="ludic.png"),
+                    content=str(
+                        self.attrs["request"].url_for("static", path="ludic.png")
+                    ),
                 ),
                 meta(name="twitter:card", content="summary_large_image"),
                 meta(
@@ -103,7 +105,9 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 ),
                 meta(
                     name="twitter:image",
-                    content=self.attrs["request"].url_for("static", path="ludic.png"),
+                    content=str(
+                        self.attrs["request"].url_for("static", path="ludic.png")
+                    ),
                 ),
                 link(
                     rel="icon",
@@ -111,9 +115,11 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                     .url_for("static", path="favicon.ico")
                     .path,
                 ),
-                link(rel="preconnect", href="https://fonts.googleapis.com"),
+                link(rel="preconnect", href="https://fonts.googleapis.com"),  # type: ignore
                 link(
-                    rel="preconnect", href="https://fonts.gstatic.com", crossorigin=True
+                    rel="preconnect",  # type: ignore
+                    href="https://fonts.gstatic.com",
+                    crossorigin=True,  # type: ignore
                 ),
                 link(
                     href="https://fonts.googleapis.com/css2?family=NTR&display=swap",
@@ -130,7 +136,7 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
 
 class PageAttrs(Attrs):
     request: Request
-    active_item: str
+    active_item: str | None
     title: NotRequired[str]
 
 

@@ -1,10 +1,11 @@
-from collections.abc import Callable
 from typing import override
 
-from ludic.attrs import GlobalAttrs
+from ludic.attrs import Attrs
+from ludic.catalog.buttons import ButtonSecondary
 from ludic.catalog.headers import H1
+from ludic.catalog.layouts import Cluster, Stack
 from ludic.catalog.typography import CodeBlock, Paragraph
-from ludic.html import b, div, style
+from ludic.html import b, style
 from ludic.styles.types import SizeClamp
 from ludic.types import Component
 from ludic.web import LudicApp, Request
@@ -16,7 +17,78 @@ from web.pages import HomePage
 app = LudicApp(debug=config.DEBUG)
 
 
-class CodeSample(Component[str, GlobalAttrs]):
+SAMPLES: list[str] = [
+    '''
+    from ludic.catalog.layouts import Box
+    from ludic.catalog.typography import Link
+    from ludic.web import LudicApp
+
+    app = LudicApp()
+
+    @app.get("/")
+    async def index() -> Box:
+        """Homepage endpoint greeting visitors."""
+        return Box(
+            f"Welcome to {Link("Ludic", to="/")}!",
+        )
+    ''',
+    '''
+    class LinkAttrs(Attrs):
+        to: str
+
+    class Link(Component[str, LinkAttrs]):
+        """Custom styled Link component."""
+
+        @override
+        def render(self) -> a:
+            return a(
+                *self.children,
+                href=self.attrs["to"],
+                style={"color": self.theme.colors.primary},
+            )
+    ''',
+    '''
+    @app.get("/counter/{num:int}")
+    def counter(num: int) -> Cluster:
+        """Simple counter endpoint."""
+        return Cluster(
+            ButtonDanger(
+                "Decrement",
+                hx_get=app.url_path_for("counter", num=num - 1),
+                hx_target="#counter",
+            ),
+            b(num, style={"font-size": "2em"}),
+            ButtonSuccess(
+                "Increment",
+                hx_get=app.url_path_for("counter", num=num + 1),
+                hx_target="#counter",
+            ),
+            id="counter",
+        )
+    ''',
+    '''
+    class SearchBar(Component[NoChildren, GlobalAttrs]):
+        """Custom search bar component."""
+        classes = ["search-bar"]
+        styles = style.use(lambda theme: {
+            ".search-bar input": {
+                "border": f"1px solid {theme.colors.light}",
+                "color": theme.colors.dark,
+            },
+        })
+
+        @override
+        def render(self) -> InputField:
+            return InputField(type="search", **self.attrs)
+    ''',
+]
+
+
+class CodeSampleAttrs(Attrs):
+    sample_url: str
+
+
+class CodeSample(Component[str, CodeSampleAttrs]):
     classes = ["code-sample"]
     styles = style.use(
         lambda theme: {
@@ -27,13 +99,12 @@ class CodeSample(Component[str, GlobalAttrs]):
                 "padding": theme.sizes.xl,
                 "border-radius": theme.rounding.more,
                 "border": f"1px solid {theme.colors.light.darken(2)}",
-                "margin": "auto",
+                "margin-inline": "auto",
             },
             ".code-sample": {
-                "display": "flex",  # type: ignore
-                "justify-content": "center",  # type: ignore
-                "min-height": "30rem",  # type: ignore
-                "view-transition-name": "slide-it",  # type: ignore
+                "display": "flex",
+                "justify-content": "center",
+                "view-transition-name": "slide-it",
             },
             "@keyframes fade-in": {"from": {"opacity": "0"}},
             "@keyframes fade-out": {"to": {"opacity": "0"}},
@@ -55,10 +126,19 @@ class CodeSample(Component[str, GlobalAttrs]):
     )
 
     @override
-    def render(self) -> div:
-        return div(
+    def render(self) -> Stack:
+        return Stack(
             CodeBlock(*self.children, language="python"),
-            **self.attrs,
+            Cluster(
+                ButtonSecondary(
+                    "Next Sample",
+                    hx_get=self.attrs["sample_url"],
+                    hx_target="#code-sample",
+                    hx_swap="outerHTML transition:true",
+                ),
+                classes=["justify-center"],
+            ),
+            id="code-sample",
         )
 
 
@@ -80,94 +160,13 @@ def index(request: Request) -> HomePage:
 
 @app.get("/code-samples/{id:int}")
 def code_sample(request: Request, id: int) -> CodeSample:
-    samples: list[Callable[[GlobalAttrs], CodeSample]] = [
-        lambda attributes: CodeSample(
-            '''
-            from ludic.catalog.layouts import Box
-            from ludic.catalog.typography import Link
-            from ludic.web import LudicApp
-
-            app = LudicApp()
-
-            @app.get("/")
-            async def index() -> Box:
-                """Homepage endpoint greeting visitors."""
-                return Box(
-                    f"Welcome to {Link("Ludic", to="/")}!",
-                )
-            ''',
-            **attributes,
-        ),
-        lambda attributes: CodeSample(
-            '''
-            class LinkAttrs(Attrs):
-                to: str
-
-            class Link(Component[str, LinkAttrs]):
-                """Custom styled Link component."""
-
-                @override
-                def render(self) -> a:
-                    return a(
-                        *self.children,
-                        href=self.attrs["to"],
-                        style={"color": self.theme.colors.primary},
-                    )
-            ''',
-            **attributes,
-        ),
-        lambda attributes: CodeSample(
-            '''
-            @app.get("/counter/{num:int}")
-            def counter(num: int) -> Cluster:
-                """Simple counter endpoint."""
-                return Cluster(
-                    ButtonDanger(
-                        "Decrement",
-                        hx_get=app.url_path_for("counter", num=num - 1),
-                        hx_target="#counter",
-                    ),
-                    b(num, style={"font-size": "2em"}),
-                    ButtonSuccess(
-                        "Increment",
-                        hx_get=app.url_path_for("counter", num=num + 1),
-                        hx_target="#counter",
-                    ),
-                    id="counter",
-                )
-            ''',
-            **attributes,
-        ),
-        lambda attributes: CodeSample(
-            '''
-            class SearchBar(Component[NoChildren, GlobalAttrs]):
-                """Custom search bar component."""
-                classes = ["search-bar"]
-                styles = style.use(lambda theme: {
-                    ".search-bar input": {
-                        "border": f"1px solid {theme.colors.light}",
-                        "color": theme.colors.dark,
-                    },
-                })
-
-                @override
-                def render(self) -> InputField:
-                    return InputField(type="search", **self.attrs)
-            ''',
-            **attributes,
-        ),
+    sample_url = request.url_for(
+        "code_sample", id=id + 1 if id < len(SAMPLES) - 1 else 0
+    ).path
+    samples: list[CodeSample] = [
+        CodeSample(sample, sample_url=sample_url) for sample in SAMPLES
     ]
-    attrs: GlobalAttrs = {
-        "hx_get": request.url_for(
-            "code_sample", id=id + 1 if id < len(samples) - 1 else 0
-        ).path,
-        "hx_trigger": "load delay:10s",
-        "hx_swap": "outerHTML transition:true",
-    }
-    try:
-        return samples[id](attrs)
-    except IndexError:
-        return samples[0](attrs)
+    return samples[id] if len(samples) > id else samples[0]
 
 
 @app.get("/favicon.ico")

@@ -164,7 +164,7 @@ def forms(request: Request) -> Page:
         Paragraph(
             f"We use the {Code("Cluster")} component to create a form with multiple "
             f"input fields and buttons. this component is described in the {Link(
-                "Layouts section", to=request.url_for("catalog:layouts"))}. "
+                "Layouts section", to=request.url_for("catalog:layouts").path)}. "
             "You can also have the input field and the button aligned horizontally "
             "using this layout component:"
         ),

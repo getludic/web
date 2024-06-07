@@ -20,12 +20,12 @@ class SampleHeader(Component[NoChildren, NoAttrs]):
     def render(self) -> Box:
         return Box(
             Cluster(
-                ButtonLink("Logo"),
+                ButtonLink("Logo", to="#"),
                 Cluster(
-                    ButtonLink("Item 1"),
-                    ButtonLink("Item 2"),
-                    ButtonLink("Item 3"),
-                    ButtonLink("Item 4", classes=["success"]),
+                    ButtonLink("Item 1", to="#"),
+                    ButtonLink("Item 2", to="#"),
+                    ButtonLink("Item 3", to="#"),
+                    ButtonLink("Item 4", to="#", classes=["success"]),
                 ),
                 classes=["justify-space-between"],
             ),

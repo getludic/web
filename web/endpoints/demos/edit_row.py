@@ -1,6 +1,6 @@
 from typing import Annotated, NotRequired, Self, override
 
-from ludic.attrs import Attrs, HtmxAttrs
+from ludic.attrs import Attrs, GlobalAttrs
 from ludic.catalog.buttons import (
     ButtonPrimary,
     ButtonSecondary,
@@ -133,6 +133,6 @@ class PeopleTable(Endpoint[PeopleAttrs]):
         return Table[TableHead, PersonRow](
             TableHead("Name", "Email", "Action"),
             *(PersonRow(**person) for person in self.attrs["people"]),
-            body_attrs=HtmxAttrs(hx_target="closest tr"),
+            body_attrs=GlobalAttrs(hx_target="closest tr"),
             classes=["text-align-center"],
         )

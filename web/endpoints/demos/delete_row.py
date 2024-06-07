@@ -1,6 +1,6 @@
 from typing import Self, override
 
-from ludic.attrs import Attrs, HtmxAttrs
+from ludic.attrs import Attrs, GlobalAttrs
 from ludic.catalog.buttons import ButtonDanger
 from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.web import Endpoint, LudicApp, Request
@@ -68,7 +68,7 @@ class PeopleTable(Endpoint[PeopleAttrs]):
         return Table[TableHead, PersonRow](
             TableHead("Name", "Email", "Active", ""),
             *(PersonRow(**person) for person in self.attrs["people"]),
-            body_attrs=HtmxAttrs(
+            body_attrs=GlobalAttrs(
                 hx_confirm="Are you sure?",
                 hx_target="closest tr",
                 hx_swap="outerHTML swap:1s",

@@ -18,7 +18,7 @@ from web.pages import Page
 
 def index(request: Request) -> Page:
     return Page(
-        LogoBig(logo_url=request.url_for("static", path="ludic.png")),
+        LogoBig(logo_url=str(request.url_for("static", path="ludic.png"))),
         Cluster(
             Badge(
                 url="https://github.com/paveldedik/ludic/actions",
@@ -161,7 +161,7 @@ def index(request: Request) -> Page:
 
             @app.get("/")
             def index(request: Request) -> Box:
-                return Box(Counter("0"))
+                return Box(Counter(0))
             """,
             language="python",
         ),
@@ -175,18 +175,18 @@ def index(request: Request) -> Page:
         ),
         CodeBlock(
             """
-            @app.get("/counter/{value}")
-            def Counter(value: str) -> Cluster:
+            @app.get("/counter/{value:int}")
+            def Counter(number: int) -> Cluster:
                 return Cluster(
                     ButtonDanger(
                         "Decrement",
-                        hx_get=app.url_path_for("Counter", value=int(value) - 1),
+                        hx_get=app.url_path_for("Counter", number=max(0, number - 1)),
                         hx_target="#counter",
                     ),
-                    b(value, style={"font-size": "2em"}),
+                    b(number, style={"font-size": "2em"}),
                     ButtonSuccess(
                         "Increment",
-                        hx_get=app.url_path_for("Counter", value=int(value) + 1),
+                        hx_get=app.url_path_for("Counter", number=number + 1),
                         hx_target="#counter",
                     ),
                     id="counter",
