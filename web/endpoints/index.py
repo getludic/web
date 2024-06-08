@@ -81,6 +81,23 @@ SAMPLES: list[str] = [
         def render(self) -> InputField:
             return InputField(type="search", **self.attrs)
     ''',
+    '''
+    class MyLayout(Component[AnyChildren, GlobalAttrs]):
+        """A simple layout for my website."""
+
+        @override
+        def render(self) -> WithSidebar:
+            return WithSidebar(
+                Center(*self.children, **self.attrs),
+                Sidebar(
+                    Cluster(
+                        Button("Menu Item 1"),
+                        Button("Menu Item 2"),
+                        Button("Menu Item 3"),
+                    ),
+                ),
+            )
+    ''',
 ]
 
 
