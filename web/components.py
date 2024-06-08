@@ -245,7 +245,11 @@ class Menu(Component[NoChildren, MenuAttrs]):
                         )
                     )
 
-        return Box(Navigation(*items, hx_boost=True))
+        return Box(
+            Navigation(
+                *items, hx_boost=True, hx_swap="innerHTML show:#main-content:top"
+            )
+        )
 
 
 class Footer(Component[NoChildren, NoAttrs]):
