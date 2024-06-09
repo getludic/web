@@ -273,4 +273,5 @@ class Counter(Endpoint[CounterAttrs]):
             ),
             id="counter",
             classes=["centered"],
+            hx_disabled_elt="#counter button",
         )

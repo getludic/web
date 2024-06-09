@@ -21,7 +21,7 @@ def buttons(request: Request) -> Page:
         H1("Buttons"),
         Paragraph(
             f"The module {Code("ludic.catalog.buttons")} contains the following "
-            "buttons (the name is the same):"
+            "buttons:"
         ),
         Box(
             Cluster(
@@ -69,6 +69,27 @@ def buttons(request: Request) -> Page:
             from ludic.catalog.buttons import ButtonLink
 
             ButtonLink("ButtonLink", to="/", classes=["warning"])
+            """,
+            language="python",
+        ),
+        Paragraph(f"You can disable a button using the {Code("disabled")} attribute:"),
+        Box(
+            Cluster(
+                Button("Button", disabled=True),
+                ButtonPrimary("ButtonPrimary", disabled=True),
+                ButtonSecondary("ButtonSecondary", disabled=True),
+                ButtonSuccess("ButtonSuccess", disabled=True),
+                ButtonInfo("ButtonInfo", disabled=True),
+                ButtonWarning("ButtonWarning", disabled=True),
+                ButtonDanger("ButtonDanger", disabled=True),
+                classes=["centered"],
+            ),
+        ),
+        CodeBlock(
+            """
+            from ludic.catalog.buttons import Button
+
+            Button("Button", disabled=True)
             """,
             language="python",
         ),

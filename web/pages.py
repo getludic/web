@@ -47,6 +47,12 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
             ("h1 > .code", "h2 > .code", "h3 > .code", "h4 > .code"): {
                 "font-size": "0.75em",
             },
+            # TODO: remove after new version of Ludic is released
+            (".btn:hover:disabled", ".btn:focus:disabled", ".btn:disabled"): {
+                "filter": "opacity(50%)",
+                "text-decoration": "none",
+                "cursor": "unset",
+            },
         }
     )
 
@@ -115,11 +121,11 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                     .url_for("static", path="favicon.ico")
                     .path,
                 ),
-                link(rel="preconnect", href="https://fonts.googleapis.com"),  # type: ignore
+                link(rel="preconnect", href="https://fonts.googleapis.com"),
                 link(
-                    rel="preconnect",  # type: ignore
+                    rel="preconnect",
                     href="https://fonts.gstatic.com",
-                    crossorigin=True,  # type: ignore
+                    crossorigin=True,
                 ),
                 link(
                     href="https://fonts.googleapis.com/css2?family=NTR&display=swap",
