@@ -195,6 +195,7 @@ class Menu(Component[NoChildren, MenuAttrs]):
         },
         "examples": {
             "index": "Components",
+            "complex_layout": "Complex Layout",
             "bulk_update": "Bulk Update",
             "click_to_edit": "Click to Edit",
             "click_to_load": "Click to Load",
@@ -232,6 +233,7 @@ class Menu(Component[NoChildren, MenuAttrs]):
                     to=request.url_for(f"{section}:index").path,
                     active_subsection=in_subsection,
                     classes=["section"],
+                    hx_swap="innerHTML show:none",
                 )
             )
             if in_subsection:
@@ -242,14 +244,11 @@ class Menu(Component[NoChildren, MenuAttrs]):
                             to=request.url_for(f"{section}:{item}").path,
                             active=active_subsection == item,
                             classes=["subsection"],
+                            hx_swap="innerHTML show:#main-content:top",
                         )
                     )
 
-        return Box(
-            Navigation(
-                *items, hx_boost=True, hx_swap="innerHTML show:#main-content:top"
-            )
-        )
+        return Box(Navigation(*items, hx_boost=True))
 
 
 class Footer(Component[NoChildren, NoAttrs]):

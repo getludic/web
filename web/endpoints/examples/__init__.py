@@ -4,6 +4,7 @@ from . import (
     bulk_update,
     click_to_edit,
     click_to_load,
+    complex_layout,
     delete_row,
     edit_row,
     index,
@@ -14,6 +15,7 @@ from . import (
 router = Router()
 
 router.add_route("/", index.index)
+router.add_route("/complex-layout", complex_layout.complex_layout)
 router.add_route("/bulk-update", bulk_update.bulk_update)
 router.add_route("/click-to-edit", click_to_edit.click_to_edit)
 router.add_route("/click-to-load", click_to_load.click_to_load)

@@ -144,9 +144,9 @@ def index(request: Request) -> Page:
             f"{Link("Reflex", to=(
                 "https://reflex.dev/docs/getting-started/introduction/"
                 "#an-example:-make-it-count")
-            )}:"
+            )} (although for natural numbers only):"
         ),
-        Box(Counter(value=0)),
+        Box(Counter(number=0)),
         Paragraph("The counter can be included on any page like here:"),
         CodeBlock(
             """
@@ -175,11 +175,12 @@ def index(request: Request) -> Page:
         ),
         CodeBlock(
             """
-            @app.get("/counter/{value:int}")
+            @app.get("/counter/{number:int}")
             def Counter(number: int) -> Cluster:
                 return Cluster(
                     ButtonDanger(
                         "Decrement",
+                        disabled=number <= 0
                         hx_get=app.url_path_for("Counter", number=max(0, number - 1)),
                         hx_target="#counter",
                     ),
@@ -246,32 +247,36 @@ def index(request: Request) -> Page:
 
 
 class CounterAttrs(Attrs):
-    value: int
+    number: int
 
 
 class Counter(Endpoint[CounterAttrs]):
     @classmethod
-    def get(cls, value: str) -> Self:
-        return cls(value=int(value))
+    def get(cls, number: int) -> Self:
+        return cls(number=number)
 
     @override
     def render(self) -> Cluster:
         return Cluster(
             ButtonDanger(
                 "Decrement",
-                hx_get=self.url_for("docs:Counter", value=self.attrs["value"] - 1),
+                disabled=self.attrs["number"] <= 0,
+                hx_get=self.url_for(
+                    "docs:Counter", number=max(0, self.attrs["number"] - 1)
+                ),
                 hx_target="#counter",
+                hx_disabled_elt="this",
             ),
             b(
-                self.attrs["value"],
+                self.attrs["number"],
                 style={"font-size": self.theme.fonts.size * 2},
             ),
             ButtonSuccess(
                 "Increment",
-                hx_get=self.url_for("docs:Counter", value=self.attrs["value"] + 1),
+                hx_get=self.url_for("docs:Counter", number=self.attrs["number"] + 1),
                 hx_target="#counter",
+                hx_disabled_elt="this",
             ),
             id="counter",
             classes=["centered"],
-            hx_disabled_elt="#counter button",
         )
