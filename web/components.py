@@ -384,7 +384,7 @@ class Quote(Component[str, QuoteAttrs]):
         lambda theme: {
             "blockquote.user-quote": {
                 "display": "flex",
-                "margin-inline": theme.sizes.xl,
+                "padding-inline": theme.sizes.xl,
             },
             "blockquote.user-quote:before": {
                 "color": theme.colors.light.darken(3),
@@ -393,7 +393,7 @@ class Quote(Component[str, QuoteAttrs]):
                 "font-family": theme.fonts.serif,
                 "line-height": 0,
                 "margin-inline-end": theme.sizes.xxs,
-                "margin-block-start": theme.sizes.xl * 1.3,
+                "margin-block-start": theme.sizes.xl * 1.4,
             },
         }
     )
