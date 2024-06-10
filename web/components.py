@@ -7,7 +7,7 @@ from ludic.catalog.forms import InputField
 from ludic.catalog.layouts import Box, Cluster, Stack, Switcher
 from ludic.catalog.navigation import Navigation, NavItem
 from ludic.catalog.typography import Link
-from ludic.html import a, b, div, iframe, img, style
+from ludic.html import a, b, blockquote, div, i, iframe, img, p, style
 from ludic.types import Component, NoChildren
 from ludic.web import Request
 
@@ -369,4 +369,40 @@ class EditOnGithub(Component[AnyChildren, EditOnGithubAttrs]):
         return div(
             ButtonLink("Edit", to=url, classes=["small"]),
             self.children[0],
+        )
+
+
+class QuoteAttrs(Attrs):
+    source: str
+
+
+class Quote(Component[str, QuoteAttrs]):
+    """Simple component rendering as the HTML ``blockquote`` element."""
+
+    classes = ["user-quote"]
+    styles = style.use(
+        lambda theme: {
+            "blockquote.user-quote": {
+                "display": "flex",
+                "margin-inline": theme.sizes.xl,
+            },
+            "blockquote.user-quote:before": {
+                "color": theme.colors.light.darken(3),
+                "content": "open-quote",
+                "font-size": theme.fonts.size * 8,
+                "font-family": theme.fonts.serif,
+                "line-height": 0,
+                "margin-inline-end": theme.sizes.xxs,
+                "margin-block-start": theme.sizes.xl * 1.3,
+            },
+        }
+    )
+
+    @override
+    def render(self) -> blockquote:
+        return blockquote(
+            div(
+                p(i('"', *self.children, '"')),
+                p(b(f"– {self.attrs["source"]}")),
+            ),
         )

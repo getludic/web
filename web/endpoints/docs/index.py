@@ -12,7 +12,7 @@ from ludic.html import b
 from ludic.types import Blank
 from ludic.web import Endpoint, Request
 
-from web.components import Badge, LogoBig
+from web.components import Badge, LogoBig, Quote
 from web.pages import Page
 
 
@@ -48,6 +48,10 @@ def index(request: Request) -> Page:
             classes=["small"],
         ),
         H1("Introduction"),
+        Quote(
+            "I've just composed my first PageLayout component " "and I have no words!",
+            source="Igor Davydenko",
+        ),
         Paragraph(
             "Ludic is a lightweight framework for building HTML pages with a component "
             f"approach similar to {Link("React", to="https://react.dev/")}. It is "
