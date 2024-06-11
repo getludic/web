@@ -13,8 +13,8 @@ def complex_layout(request: Request) -> Page:
         Paragraph(
             "You are free to combine layouts and components together as described in "
             f"the {Link("Layouts", to=request.url_for("catalog:layouts").path)} "
-            "section. The following is an example of a complex layout consisting of "
-            "multiple nested layouts mentioned in this tutorial."
+            "section. The following is an example of a more complex layout consisting "
+            "of multiple nested components using CSS utilities to tweak final design."
         ),
         Cluster(
             ButtonLink(

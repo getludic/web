@@ -148,9 +148,9 @@ def index(request: Request) -> Page:
             f"{Link("Reflex", to=(
                 "https://reflex.dev/docs/getting-started/introduction/"
                 "#an-example:-make-it-count")
-            )} (although for natural numbers only):"
+            )} (although only for natural numbers):"
         ),
-        Box(Counter(number=0)),
+        Box(Counter(number=1)),
         Paragraph("The counter can be included on any page like here:"),
         CodeBlock(
             """
@@ -165,7 +165,7 @@ def index(request: Request) -> Page:
 
             @app.get("/")
             def index(request: Request) -> Box:
-                return Box(Counter(0))
+                return Box(Counter(1))
             """,
             language="python",
         ),
