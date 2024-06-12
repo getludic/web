@@ -390,7 +390,7 @@ class Quote(Component[str, QuoteAttrs]):
                 "color": theme.colors.light.darken(3),
                 "content": "open-quote",
                 "font-size": theme.fonts.size * 8,
-                "font-family": theme.fonts.serif,
+                "font-family": theme.fonts.secondary,
                 "line-height": 0,
                 "margin-inline-end": theme.sizes.xxs,
                 "margin-block-start": theme.sizes.xl * 1.4,

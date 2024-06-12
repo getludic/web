@@ -150,7 +150,7 @@ def index(request: Request) -> Page:
                 "#an-example:-make-it-count")
             )} (although only for natural numbers):"
         ),
-        Box(Counter(number=1)),
+        Box(Counter(number=0)),
         Paragraph("The counter can be included on any page like here:"),
         CodeBlock(
             """
@@ -165,7 +165,7 @@ def index(request: Request) -> Page:
 
             @app.get("/")
             def index(request: Request) -> Box:
-                return Box(Counter(1))
+                return Box(Counter(0))
             """,
             language="python",
         ),
