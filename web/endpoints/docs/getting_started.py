@@ -127,9 +127,8 @@ def getting_started(request: Request) -> Page:
         h4(Code("components.py")),
         Paragraph(
             "Any component you want to use in your application should be registered "
-            f"here. For example, a registered here. For example, a {Code("Navigation")}"
-            " component and its attributes could be registered in the "
-            f"{Code("components.py")} file."
+            f"here. For example, a {Code("Navigation")} component and its attributes "
+            f"could be registered in the {Code("components.py")} file."
         ),
         h4(Code("main.py")),
         Paragraph(
