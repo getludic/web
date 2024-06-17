@@ -136,13 +136,13 @@ files = [
 
 [[package]]
 name = "ludic"
-version = "0.4.14"
+version = "0.4.15"
 description = "Lightweight framework for building dynamic HTML pages in pure Python."
 optional = false
 python-versions = ">=3.12"
 files = [
-    {file = "ludic-0.4.14-py3-none-any.whl", hash = "sha256:06cdcb74552bcaced0987108e27b984327758bea84d1896b14beb61ac445970a"},
-    {file = "ludic-0.4.14.tar.gz", hash = "sha256:939941ed6313de9f37a75cf57d1a8dcc8afa5f2d74c82f4a2b2612dfddfa9457"},
+    {file = "ludic-0.4.15-py3-none-any.whl", hash = "sha256:9a4a3b7b6cb05bff6c68e898acfb15627f0a467bdcda9007da63b15bc87fdbcc"},
+    {file = "ludic-0.4.15.tar.gz", hash = "sha256:e456a9f3f759d7e39d670d34078ab288bfd61bd679e9c79c91791b95aa259ac2"},
 ]
 
 [package.dependencies]
@@ -489,4 +489,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "eb41132aa35626df610f1dd0167e280679262ba7a60cda3ade156d21e5fe24bf"
+content-hash = "787e95df52b5d4f0c37447bc667b285ee3962c8d3f205efeaa450ca7f53f8782"
