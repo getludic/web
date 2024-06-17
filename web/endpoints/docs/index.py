@@ -12,6 +12,7 @@ from ludic.html import b
 from ludic.types import Blank
 from ludic.web import Endpoint, Request
 
+from web import config
 from web.components import Badge, LogoBig, Quote
 from web.pages import Page
 
@@ -49,7 +50,7 @@ def index(request: Request) -> Page:
         ),
         H1("Introduction"),
         Quote(
-            "I've just composed my first PageLayout component " "and I have no words!",
+            "I've just composed my first PageLayout component and I have no words!",
             source="Igor Davydenko",
         ),
         Paragraph(
@@ -213,7 +214,7 @@ def index(request: Request) -> Page:
                 "cookiecutter", to="https://github.com/cookiecutter/cookiecutter")} "
             "template to quickly create a new project:"
         ),
-        CodeBlock("cookiecutter gh:paveldedik/ludic-template"),
+        CodeBlock("cookiecutter gh:getludic/template"),
         H2("Contributing"),
         Paragraph(
             "Any contributions to the framework are warmly welcome! Your help will "
@@ -221,19 +222,19 @@ def index(request: Request) -> Page:
             "contribute, read the ",
             Link(
                 "contribution guide on GitHub",
-                to="https://github.com/paveldedik/ludic/blob/main/CONTRIBUTING.md",
+                to=f"{config.GITHUB_REPO_URL}/blob/main/CONTRIBUTING.md",
             ),
             ".",
         ),
         List(
             Item(
-                Link("GitHub Issues", to="https://github.com/paveldedik/ludic/issues"),
+                Link("GitHub Issues", to=f"{config.GITHUB_REPO_URL}/issues"),
                 " – If you encounter a bug, please report it here.",
             ),
             Item(
                 Link(
                     "GitHub Discussions",
-                    to="https://github.com/paveldedik/ludic/discussions",
+                    to=f"{config.GITHUB_REPO_URL}/discussions",
                 ),
                 " – To request a new feature, this is the best place to initiate the "
                 "discussion.",

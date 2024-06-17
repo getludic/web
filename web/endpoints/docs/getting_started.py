@@ -14,7 +14,7 @@ def getting_started(request: Request) -> Page:
             "The fastest way to get started with a Ludic project is to use the "
             f"{Link(
                "Cookiecutter template",
-               to="https://github.com/paveldedik/ludic-template")}. Follow the steps "
+               to="https://github.com/getludic/template")}. Follow the steps "
             "below to set up your project quickly."
         ),
         H2("Prerequisites"),
@@ -53,7 +53,7 @@ def getting_started(request: Request) -> Page:
                     "Use the Cookiecutter template to create a new Ludic project. "
                     "Run the following command in your terminal:"
                 ),
-                CodeBlock("cookiecutter gh:paveldedik/ludic-template"),
+                CodeBlock("cookiecutter gh:getludic/template"),
             ),
             Item(
                 b("Install Dependencies"),

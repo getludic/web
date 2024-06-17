@@ -260,7 +260,7 @@ class Footer(Component[NoChildren, NoAttrs]):
             f"Made with {b(Link("Ludic", to=config.GITHUB_REPO_URL))} "
             f"and {b(Link("HTMX", to="https://htmx.org"))} and 🐍 "
             f"• {b(Link("Discord", to="https://discord.gg/4Y5fSQUS"))} ",
-            f"• {b(Link("GitHub", to="https://github.com/paveldedik/ludic"))}",
+            f"• {b(Link("GitHub", to=config.GITHUB_REPO_URL))}",
         )
 
 
