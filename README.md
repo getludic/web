@@ -1,6 +1,6 @@
 # Ludic Web
 
-This is the homepage for [The Ludic Framework](https://github.com/paveldedik/ludic) written with Ludic.
+This is the homepage for [The Ludic Framework](https://github.com/getludic/ludic) written with Ludic.
 
 ## Running
 

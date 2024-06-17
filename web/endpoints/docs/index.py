@@ -22,13 +22,13 @@ def index(request: Request) -> Page:
         LogoBig(logo_url=str(request.url_for("static", path="ludic.png"))),
         Cluster(
             Badge(
-                url="https://github.com/paveldedik/ludic/actions",
-                img_url="https://github.com/paveldedik/ludic/actions/workflows/test.yaml/badge.svg",
+                url="https://github.com/getludic/ludic/actions",
+                img_url="https://github.com/getludic/ludic/actions/workflows/test.yaml/badge.svg",
                 title="Tests Status",
             ),
             Badge(
-                url="https://codecov.io/gh/paveldedik/ludic",
-                img_url="https://codecov.io/gh/paveldedik/ludic/graph/badge.svg?token=BBDNJWHMGX",
+                url="https://codecov.io/gh/getludic/ludic",
+                img_url="https://codecov.io/gh/getludic/ludic/graph/badge.svg?token=BBDNJWHMGX",
                 title="Code Coverage",
             ),
             Badge(
