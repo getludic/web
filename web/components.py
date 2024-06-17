@@ -74,7 +74,7 @@ class GitHubButton(Component[NoChildren, NoAttrs]):
         return iframe(
             src=(
                 "https://ghbtns.com/github-btn.html"
-                "?user=paveldedik"
+                "?user=getludic"
                 "&repo=ludic"
                 "&type=star"
                 "&count=true"
