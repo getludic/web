@@ -62,8 +62,8 @@ async def click_to_load(request: Request) -> Page:
             """
             from typing import Self, override
 
-            from ludic.base import Blank, Component
             from ludic.catalog.tables import Table, TableHead, TableRow
+            from ludic.components import Blank, Component
             from ludic.web import Endpoint, LudicApp
 
             from your_app.attrs import ContactAttrs, ContactsSliceAttrs
@@ -157,8 +157,8 @@ async def click_to_load(request: Request) -> Page:
             from typing import override
 
             from ludic.attrs import Attrs
-            from ludic.base import ComponentStrict
             from ludic.catalog.buttons import ButtonPrimary
+            from ludic.components import ComponentStrict
 
             class LoadMoreAttrs(Attrs):
                 url: str

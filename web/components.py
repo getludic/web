@@ -1,14 +1,14 @@
 from typing import override
 
+from ludic import Component
 from ludic.attrs import Attrs, GlobalAttrs, NoAttrs
-from ludic.base import AnyChildren
 from ludic.catalog.buttons import ButtonLink
 from ludic.catalog.forms import InputField
 from ludic.catalog.layouts import Box, Cluster, Stack, Switcher
 from ludic.catalog.navigation import Navigation, NavItem
 from ludic.catalog.typography import Link
 from ludic.html import a, b, blockquote, div, i, iframe, img, p, style
-from ludic.types import Component, NoChildren
+from ludic.types import AnyChildren, NoChildren
 from ludic.web import Request
 
 from . import config

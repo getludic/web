@@ -1,5 +1,6 @@
 from typing import NotRequired, override
 
+from ludic import Component
 from ludic.attrs import Attrs, GlobalAttrs
 from ludic.catalog.layouts import (
     Box,
@@ -11,7 +12,7 @@ from ludic.catalog.layouts import (
 )
 from ludic.catalog.pages import Body, Head, HtmlPage
 from ludic.html import link, meta, style
-from ludic.types import AnyChildren, Component
+from ludic.types import AnyChildren
 from ludic.web import Request
 
 from . import config

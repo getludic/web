@@ -1,13 +1,12 @@
 from typing import override
 
-from ludic.attrs import Attrs
+from ludic import Attrs, Component
 from ludic.catalog.buttons import ButtonSecondary
 from ludic.catalog.headers import H1
 from ludic.catalog.layouts import Cluster, Stack
 from ludic.catalog.typography import CodeBlock, Paragraph
 from ludic.html import b, style
 from ludic.styles.types import SizeClamp
-from ludic.types import Component
 from ludic.web import LudicApp, Request
 from starlette.responses import FileResponse
 

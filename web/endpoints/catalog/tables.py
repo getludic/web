@@ -98,8 +98,8 @@ def tables(request: Request) -> Page:
             """
             from typing import Annotated
 
+            from ludic.attrs import Attrs
             from ludic.catalog.tables import ColumnMeta, Table, create_rows
-            from ludic.types import Attrs
 
             class PersonAttrs(Attrs):
                 id: Annotated[int, ColumnMeta(label="ID")]
@@ -135,8 +135,8 @@ def tables(request: Request) -> Page:
             """
             from typing import Annotated
 
+            from ludic.attrs import Attrs
             from ludic.catalog.tables import ColumnMeta, Table, create_rows
-            from ludic.types import Attrs
 
             class ContactAttrs(Attrs):
                 id: Annotated[int, ColumnMeta(identifier=True)]

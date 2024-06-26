@@ -2,10 +2,10 @@ import math
 from collections.abc import Callable
 from typing import Any, Literal
 
+from ludic import Blank
 from ludic.base import BaseElement
 from ludic.catalog.headers import H1, H2, H3
 from ludic.catalog.utils import text_to_kebab
-from ludic.components import Blank
 from ludic.web import LudicApp, Request
 from ludic.web.datastructures import URLPath
 from starlette._utils import is_async_callable

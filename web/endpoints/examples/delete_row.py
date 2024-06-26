@@ -57,9 +57,9 @@ def delete_row(request: Request) -> Page:
             """
             from typing import override
 
-            from ludic.base import Component
             from ludic.catalog.tables import Table, TableRow
             from ludic.catalog.buttons import ButtonDanger
+            from ludic.components import Component
             from ludic.web import Endpoint, LudicApp
 
             from your_app.attrs import PersonAttrs
@@ -113,9 +113,9 @@ def delete_row(request: Request) -> Page:
             """
             from typing import override
 
-            from ludic.base import Component
             from ludic.catalog.tables import Table, TableRow
             from ludic.catalog.buttons import ButtonDanger
+            from ludic.components import Component
             from ludic.web import Endpoint, LudicApp
 
             from your_app.attrs import PeopleAttrs

@@ -1,5 +1,6 @@
 from typing import override
 
+from ludic import Component
 from ludic.attrs import GlobalAttrs, NoAttrs
 from ludic.catalog.buttons import ButtonLink
 from ludic.catalog.forms import InputField
@@ -7,7 +8,7 @@ from ludic.catalog.headers import H1, H2
 from ludic.catalog.layouts import Box, Cluster
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import style
-from ludic.types import Component, NoChildren
+from ludic.types import NoChildren
 from ludic.web import Request
 
 from web.pages import Page
@@ -80,8 +81,9 @@ async def index(request: Request) -> Page:
             """
             from typing import override
 
+            from ludic.attrs import Attrs
+            from ludic.components import Component
             from ludic.html import a
-            from ludic.types import Attrs, Component
 
             class LinkAttrs(Attrs):
                 to: str
@@ -113,7 +115,8 @@ async def index(request: Request) -> Page:
             from ludic.attrs import NoAttrs
             from ludic.catalog.buttons import ButtonLink
             from ludic.catalog.layouts import Box, Cluster
-            from ludic.types import Component, NoChildren
+            from ludic.components import Component
+            from ludic.types import NoChildren
 
             class Navigation(Component[NoChildren, NoAttrs]):
                 classes = ["sample-navigation"]
@@ -157,7 +160,8 @@ async def index(request: Request) -> Page:
             from ludic.attrs import GlobalAttrs
             from ludic.catalog.forms import InputField
             from ludic.html import style
-            from ludic.types import Component, NoChildren
+            from ludic.components import Component
+            from ludic.types import NoChildren
 
             class SearchBar(Component[NoChildren, GlobalAttrs]):
                 classes = ["search-bar"]

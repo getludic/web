@@ -62,7 +62,7 @@ def components(request: Request) -> Page:
         CodeBlock(
             """
             from typing import override
-            from ludic.types import Attrs, Component
+            from ludic import Attrs, Component
 
             class LinkAttrs(Attrs):
                 to: str
@@ -207,7 +207,7 @@ def components(request: Request) -> Page:
         CodeBlock(
             """
             from typing import NotRequired
-            from ludic.types import Attrs
+            from ludic.attrs import Attrs
 
             class PersonAttrs(Attrs):
                 id: str
@@ -236,7 +236,7 @@ def components(request: Request) -> Page:
         CodeBlock(
             """
             from typing import Required
-            from ludic.types import Attrs
+            from ludic.attrs import Attrs
 
             class PersonAttrs(Attrs, total=False):
                 id: Required[str]
@@ -264,7 +264,7 @@ def components(request: Request) -> Page:
         CodeBlock(
             """
             from ludic.html import TdAttrs
-            from ludic.types import Attrs
+            from ludic.attrs import Attrs
 
             class TableCellAttrs(TdAttrs):
                 is_numeric: bool
@@ -396,7 +396,7 @@ def components(request: Request) -> Page:
         b(f"The {Code("BaseElement.formatter")} Context Manager"),
         CodeBlock(
             """
-            from ludic.types import BaseElement
+            from ludic.base import BaseElement
 
             with BaseElement.formatter:
                 # you can do anything with f-strings here, no memory leak

@@ -1,7 +1,8 @@
 from typing import Self, override
 
+from ludic.attrs import Attrs
 from ludic.catalog.tables import Table, TableHead, TableRow
-from ludic.types import Attrs, Blank, Component
+from ludic.components import Blank, Component
 from ludic.web import Endpoint, LudicApp
 from ludic.web.datastructures import QueryParams
 

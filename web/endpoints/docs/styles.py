@@ -84,7 +84,7 @@ def styles(request: Request) -> Page:
 
             from ludic.attrs import ButtonAttrs
             from ludic.html import button
-            from ludic.types import ComponentStrict
+            from ludic.components import ComponentStrict
 
 
             class Button(ComponentStrict[str, ButtonAttrs]):
@@ -225,16 +225,18 @@ def styles(request: Request) -> Page:
         ),
         Paragraph(
             f"The first method is described in the {Link(
-                "getting started section",
-                to=request.url_for("docs:getting_started").path)} of the "
-            "documentation. Here is the second method: "
+                "catalog section",
+                to=f"{request.url_for("catalog:index").path}#htmlpage-component")} "
+            "of the documentation. Here is the second method: "
         ),
         CodeBlock(
             """
             from typing import override
 
+            from ludic.attrs import NoAttrs
             from ludic.html import html, head, body, style
-            from ludic.types import AnyChildren, Component, NoAttrs
+            from ludic.components import Component
+            from ludic.types import AnyChildren
 
 
             class Page(Component[AnyChildren, NoAttrs]):
@@ -421,8 +423,8 @@ def styles(request: Request) -> Page:
             from typing import override
 
             from ludic.attrs import ButtonAttrs
+            from ludic.components import Component
             from ludic.html import button, style
-            from ludic.types import Component
 
 
             class Button(Component[str, ButtonAttrs]):
@@ -464,8 +466,8 @@ def styles(request: Request) -> Page:
             """
             from ludic.attrs import GlobalAttrs
             from ludic.styles.themes import DarkTheme, LightTheme, set_default_theme
+            from ludic.components import Component
             from ludic.html import a, b, div, style
-            from ludic.types import Component
 
             dark = DarkTheme()
             light = LightTheme()

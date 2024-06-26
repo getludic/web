@@ -102,7 +102,8 @@ def index(request: Request) -> Page:
             from ludic.html import link, meta
             from ludic.catalog.pages import HtmlPage, Head, Body
             from ludic.catalog.layouts import Stack
-            from ludic.types import AnyChildren, Component
+            from ludic.components import Component
+            from ludic.types import AnyChildren
 
             class Page(Component[AnyChildren, NoAttrs]):
                 @override

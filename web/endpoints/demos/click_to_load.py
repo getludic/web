@@ -1,9 +1,11 @@
 from typing import Self, override
 
+from ludic.attrs import Attrs
 from ludic.catalog.buttons import ButtonPrimary
 from ludic.catalog.tables import Table, TableHead, TableRow
+from ludic.components import Blank, Component, ComponentStrict
 from ludic.html import td
-from ludic.types import Attrs, Blank, Component, ComponentStrict, URLType
+from ludic.types import URLType
 from ludic.web import Endpoint, LudicApp
 from ludic.web.datastructures import QueryParams
 

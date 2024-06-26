@@ -1,5 +1,6 @@
 from typing import Self, override
 
+from ludic import Blank
 from ludic.attrs import Attrs
 from ludic.catalog.buttons import ButtonDanger, ButtonSuccess
 from ludic.catalog.headers import H1, H2
@@ -9,7 +10,6 @@ from ludic.catalog.messages import MessageWarning, Title
 from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
-from ludic.types import Blank
 from ludic.web import Endpoint, Request
 
 from web import config

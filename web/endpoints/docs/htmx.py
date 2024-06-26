@@ -82,8 +82,10 @@ def htmx(request: Request) -> Page:
                     """
                     from typing import override
 
+                    from ludic.attrs import NoAttrs
                     from ludic.catalog.pages import HtmlPage, Head, Body
-                    from ludic.types import AnyChildren, Component, NoAttrs
+                    from ludic.components import Component
+                    from ludic.types import AnyChildren
 
 
                     class Page(Component[AnyChildren, NoAttrs]):
