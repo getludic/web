@@ -73,6 +73,25 @@ def htmx(request: Request) -> Page:
             """,
             language="html",
         ),
+        Paragraph(
+            f"Please note that HTMX uses a special attribute, {Code("hx-on*")}, which "
+            "cannot currently be type-checked. However, it can still be used in the "
+            "following way:"
+        ),
+        CodeBlock(
+            """
+            button(
+                "Get Info!",
+                hx_get="/info",
+                hx_on__before_request="alert('Alert!')",  # type: ignore[call-arg]
+            )
+            """,
+            language="python",
+        ),
+        Paragraph(
+            f"This would render the attribute as {Code("hx-on--before-request")}"
+            f"which is {Link("fine with htmx", to="https://htmx.org/attributes/hx-on/")}."
+        ),
         H2("Setting up an HTMX-Enabled Page"),
         NumberedList(
             Item(
