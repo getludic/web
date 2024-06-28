@@ -117,7 +117,12 @@ def index(request: Request) -> Page:
             ),
             TableRow(
                 "Backend framework",
-                Blank(Link("Starlette", to="https://www.starlette.io/"), "*"),
+                Blank(
+                    Link("Starlette", to="https://www.starlette.io/"),
+                    ", ",
+                    Link("Django", to="https://www.djangoproject.com/"),
+                    "*",
+                ),
                 Link("FastAPI", to="https://fastapi.tiangolo.com/"),
                 Link("FastAPI", to="https://fastapi.tiangolo.com/"),
             ),
@@ -138,9 +143,9 @@ def index(request: Request) -> Page:
             ),
         ),
         Paragraph(
-            "(*) HTMX as well as Starlette are optional dependencies for Ludic, it "
-            "does not enforce any frontend or backend frameworks. At it's core, Ludic "
-            "only generates HTML and allows registering CSS.",
+            "(*) HTMX as well as Starlette or Django are optional dependencies for "
+            "Ludic, it does not enforce any frontend or backend frameworks. At it's "
+            "core, Ludic only generates HTML and allows registering CSS.",
             style={"font-size": "0.8em"},
         ),
         H2("Quick Example"),
@@ -215,6 +220,15 @@ def index(request: Request) -> Page:
             "template to quickly create a new project:"
         ),
         CodeBlock("cookiecutter gh:getludic/template"),
+        H2("Integrations"),
+        Paragraph(
+            "Here is a list of integrations and a link to the guide on how to get "
+            "started:",
+        ),
+        List(
+            Item(Link("Starlette", to=f"{request.url_for("docs:web_framework")}")),
+            Item(Link("Django", to=f"{request.url_for("docs:integrations")}#django")),
+        ),
         H2("Contributing"),
         Paragraph(
             "Any contributions to the framework are warmly welcome! Your help will "

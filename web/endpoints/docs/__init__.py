@@ -1,6 +1,14 @@
 from ludic.web.routing import Router
 
-from . import components, getting_started, htmx, index, styles, web_framework
+from . import (
+    components,
+    getting_started,
+    htmx,
+    index,
+    integrations,
+    styles,
+    web_framework,
+)
 
 router = Router()
 
@@ -13,3 +21,4 @@ router.add_route("/htmx/example", htmx.htmx_example)
 router.add_route("/htmx/content", htmx.htmx_content)
 router.add_route("/styles", styles.styles)
 router.add_route("/web-framework", web_framework.web_framework)
+router.add_route("/integrations", integrations.integrations)

@@ -14,7 +14,7 @@ def htmx(request: Request) -> Page:
     return Page(
         H1("Using HTMX with Ludic"),
         Paragraph(
-            f"{Link('HTMX', to='https://htmx.org')} is a powerful library that "
+            f"{Link("HTMX", to="https://htmx.org")} is a powerful library that "
             "simplifies the creation of dynamic, interactive web pages. It lets you "
             "achieve the responsiveness of single-page applications without the "
             "complexity of writing extensive JavaScript code. HTMX works by extending "
