@@ -29,10 +29,30 @@ def integrations(request: Request) -> Page:
         H3("Installation"),
         Paragraph("First, you need to install Ludic. You can do this using pip:"),
         CodeBlock('pip install "ludic[django]"'),
+        H3("Middleware Configuration"),
+        Paragraph(
+            "To use Ludic with Django, you need to add the Ludic middleware to your "
+            "Django settings. This middleware helps manage the Ludic elements during "
+            "the request-response cycle, clean up cache, and so on.",
+        ),
+        NumberedList(
+            Item(f"Open your {Code("settings.py")} file."),
+            Item(f"Add {Code("LudicMiddleware")} to the {Code("MIDDLEWARE")} list:"),
+        ),
+        CodeBlock(
+            """
+            MIDDLEWARE = [
+                # other middlewares...
+                "ludic.contrib.django.LudicMiddleware",
+            ]
+            """,
+            language="python",
+        ),
         H3("Creating Views with Ludic"),
         Paragraph(
-            "Let's create a simple HTML page using Ludic in a Django view. "
-            f"Here is the content of the {Code("views.py")} file:"
+            "Let's create a simple HTML page using Ludic elements in a Django view. "
+            f"Here is the content of the {Code("views.py")} file rendering a valid "
+            "HTML page:"
         ),
         CodeBlock(
             """
@@ -61,10 +81,10 @@ def integrations(request: Request) -> Page:
         ),
         Paragraph(
             f"However, you are not limited to {Code("ludic.html")} module. You can "
-            f"build {Link("components", to=request.url_for("docs:components").path)} "
-            f"or use the ones available in the {Link("catalog",
-                to=request.url_for("catalog:index").path)}. Here is a simple view "
-            "using a page component:"
+            f"build your own {Link("components",
+                to=request.url_for("docs:components").path)} or use the ones available "
+            f"in the {Link("catalog", to=request.url_for("catalog:index").path)}. "
+            "Here is a simple example creating a page component and using it in a view:"
         ),
         CodeBlock(
             """
@@ -94,6 +114,7 @@ def integrations(request: Request) -> Page:
                         ),
                     )
 
+
             def index_with_components(request: HttpRequest) -> LudicResponse:
                 return LudicResponse(
                     MyPage(
@@ -112,30 +133,11 @@ def integrations(request: Request) -> Page:
             """,
             language="python",
         ),
-        H3("Middleware Configuration"),
-        Paragraph(
-            "To use Ludic with Django, you need to add the Ludic middleware to your "
-            "Django settings. This middleware helps manage the Ludic elements during "
-            "the request-response cycle, clean up cache, and so on.",
-        ),
-        NumberedList(
-            Item(f"Open your {Code("settings.py")} file."),
-            Item(f"Add {Code("LudicMiddleware")} to the {Code("MIDDLEWARE")} list:"),
-        ),
-        CodeBlock(
-            """
-            MIDDLEWARE = [
-                # other middlewares...
-                "ludic.contrib.django.LudicMiddleware",
-            ]
-            """,
-            language="python",
-        ),
         Message(
-            Title(b("Note about views")),
-            "If you keep the middleware in the last position, you can directly "
-            "return Ludic elements or components in your views, without wrapping "
-            f"them in the {Code("LudicResponse")} class.",
+            Title(b(f"Note about {Code("LudicResponse")}")),
+            f"If you keep the {Code("LudicMiddleware")} in the {Code("MIDDLEWARE")} "
+            "variable as the last, you can directly return Ludic components in your "
+            f"views, without wrapping them in the {Code("LudicResponse")} class.",
         ),
         request=request,
         active_item="integrations",
