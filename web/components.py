@@ -182,7 +182,7 @@ class Menu(Component[NoChildren, MenuAttrs]):
             "styles": "Styles and Themes",
             "htmx": "HTMX Support",
             "web_framework": "Web Framework",
-            "integrations": "Integrations",
+            "integrations": "Other Integrations",
         },
         "catalog": {
             "index": "Basics",

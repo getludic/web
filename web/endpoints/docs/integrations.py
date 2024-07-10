@@ -10,11 +10,13 @@ from web.pages import Page
 
 def integrations(request: Request) -> Page:
     return Page(
-        H1("Integrations"),
+        H1("Other Integrations"),
         Paragraph(
             "This guide will walk you through the process of integrating the Ludic "
-            "framework with other projects. Here is the list of currently supported "
-            "integrations:"
+            "framework with other projects (aside from Starlette integration, which "
+            f"is covered in the {Link("Web Framework",
+                to=request.url_for("docs:web_framework").path)} section of the "
+            "documentation). Here is the list of currently supported integrations:"
         ),
         List(
             Item(Link("Django", to="#django")),
