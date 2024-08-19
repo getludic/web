@@ -97,6 +97,22 @@ SAMPLES: list[str] = [
                 ),
             )
     ''',
+    """
+    from ludic.catalog.headers import H1
+    from ludic.catalog.typography import Code, Paragraph
+    from ludic.html import b
+
+    from .pages import Page
+
+    def index() -> Page:
+        return Page(
+            H1("HTML Page in Pure Python"),
+            Paragraph(
+                f"A sample on how to use {b("Ludic")} to build"
+                f"static {Code("HTML")} page in pure Python."
+            ),
+        )
+    """,
 ]
 
 

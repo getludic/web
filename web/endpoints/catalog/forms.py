@@ -3,6 +3,7 @@ from typing import Annotated
 from ludic.attrs import Attrs
 from ludic.catalog.buttons import ButtonSuccess
 from ludic.catalog.forms import (
+    ChoiceField,
     FieldMeta,
     Form,
     InputField,
@@ -122,6 +123,31 @@ def forms(request: Request) -> Page:
         Paragraph(
             "Similarly as for the input field, you can create the text area without "
             "the label."
+        ),
+        H2("Choices"),
+        Paragraph(
+            f"The {Code("ChoiceField")} component is a wrapper around the "
+            f"{Code("<input type='radio'>")} HTML element. It also generates a label "
+            "if not disabled. Here is what it looks like:"
+        ),
+        ChoiceField(
+            name="sample-choice-field",
+            label="Are you a vegetarian?",
+            choices=[("yes", "Yes"), ("no", "No")],
+            selected="no",
+        ),
+        CodeBlock(
+            """
+            from ludic.catalog.forms import ChoiceField
+
+            ChoiceField(
+                name="sample-choice-field",
+                label="Are you a vegetarian?",
+                choices=[("yes", "Yes"), ("no", "No")],
+                selected="no",
+            ),
+            """,
+            language="python",
         ),
         H2("Form"),
         Paragraph(

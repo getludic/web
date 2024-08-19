@@ -136,13 +136,13 @@ files = [
 
 [[package]]
 name = "ludic"
-version = "0.5.0"
+version = "0.5.2"
 description = "Lightweight framework for building dynamic HTML pages in pure Python."
 optional = false
 python-versions = ">=3.12"
 files = [
-    {file = "ludic-0.5.0-py3-none-any.whl", hash = "sha256:0259c8d9b4130d8fc80b56241a557f577c6f07bf1cc334e287f27a4187a3556f"},
-    {file = "ludic-0.5.0.tar.gz", hash = "sha256:0262ebd2eb11d7273ea08cdbc489d8e08d3814a9d1b8d6fcd0d69d216f269fd7"},
+    {file = "ludic-0.5.2-py3-none-any.whl", hash = "sha256:fc0a74d281391447cf5efd750a6141d15a6f56cf2c0b9ce27fd0f9e66752fd03"},
+    {file = "ludic-0.5.2.tar.gz", hash = "sha256:9c2edd977161adf6bff8278f308cc7c3b08bbf5ba2cd136ec29969c8bf33e9db"},
 ]
 
 [package.dependencies]
@@ -153,7 +153,8 @@ typeguard = {version = ">=4.1.5", optional = true, markers = "extra == \"full\""
 typing-extensions = ">=4.9.0"
 
 [package.extras]
-dev = ["mypy", "types-pygments"]
+dev = ["django-stubs", "mypy", "types-pygments"]
+django = ["django"]
 full = ["pygments", "python-multipart (>=0.0.9)", "starlette", "typeguard (>=4.1.5)"]
 test = ["httpx", "pytest", "pytest-cov"]
 
@@ -489,4 +490,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "fc4c195ed2ae9843b9bdb1d8d7cd4aa6614376dc5f6b345ec3c33d13eb8b6248"
+content-hash = "3e3a7e530b0912e314298cd75c836be7127074ac1bb7ed59b8c1e143f3c52cb9"

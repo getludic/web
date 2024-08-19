@@ -37,7 +37,7 @@ repos:
       - id: mypy
         args: ["--ignore-missing-imports"]
         additional_dependencies:
-          - ludic[full]>=0.5.0
+          - ludic[full]>=0.5.2
 
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v3.1.0
