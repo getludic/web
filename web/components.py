@@ -7,6 +7,7 @@ from ludic.catalog.forms import InputField
 from ludic.catalog.layouts import Box, Cluster, Stack, Switcher
 from ludic.catalog.navigation import Navigation, NavItem
 from ludic.catalog.typography import Link
+from ludic.components import Block
 from ludic.html import a, b, blockquote, div, i, iframe, img, p, style
 from ludic.types import AnyChildren, NoChildren
 from ludic.web import Request
@@ -150,7 +151,7 @@ class HomeHeader(Component[AnyChildren, HomeHeaderAttrs]):
         )
 
 
-class Div(div):
+class Div(Block):
     classes = ["showcase"]
     styles = style.use(
         lambda theme: {

@@ -1,4 +1,4 @@
-from ludic.catalog.headers import H1, H2, H3
+from ludic.catalog.headers import H1, H2, H3, H4
 from ludic.catalog.lists import Item, List, NumberedList
 from ludic.catalog.messages import Message, MessageWarning, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
@@ -455,7 +455,27 @@ def components(request: Request) -> Page:
             ),
         ),
         H2("Types and Helpers"),
-        Paragraph(f"The {Code("ludic.types")} module contains many useful types:"),
+        Paragraph(
+            "The following is a list of all the other parts that can be used to type "
+            "and build your application."
+        ),
+        H4(f"{Code("ludic.elements")}"),
+        List(
+            Item(f"{Code("Element")} – base for HTML elements"),
+            Item(f"{Code("ElementStrict")} – base for strict HTML elements"),
+            Item(
+                f"{Code("Blank")} – represents a blank component which is not "
+                f"rendered, only its children"
+            ),
+        ),
+        H4(f"{Code("ludic.components")}"),
+        List(
+            Item(f"{Code("Component")} – abstract class for components"),
+            Item(f"{Code("ComponentStrict")} – abstract class for strict components"),
+            Item(f"{Code("Block")} – component rendering as a div"),
+            Item(f"{Code("Inline")} – component rendering as a span"),
+        ),
+        H4(f"{Code("ludic.types")}"),
         List(
             Item(f"{Code("NoChildren")} – Makes a component accept no children"),
             Item(
@@ -476,21 +496,19 @@ def components(request: Request) -> Page:
                 "components"
             ),
             Item(f"{Code("Attrs")} – base for attributes"),
-            Item(f"{Code("BaseElement")} – base for elements"),
-            Item(f"{Code("Element")} – base for HTML elements"),
-            Item(f"{Code("ElementStrict")} – base for strict HTML elements"),
-            Item(f"{Code("Component")} – abstract class for components"),
-            Item(f"{Code("ComponentStrict")} – abstract class for strict components"),
-            Item(
-                f"{Code("Blank")} – represents a blank component which is not "
-                f"rendered, only its children"
-            ),
             Item(f"{Code("Safe")} – marker for a safe string which is not escaped"),
             Item(
                 f"{Code("JavaScript")} – a marker for javascript, subclasses "
                 f"{Code("Safe")}"
             ),
-            Item(f"{Code("GlobalStyles")} – type for CSS styles"),
+        ),
+        H4(f"{Code("ludic.styles")}"),
+        List(
+            Item(
+                f"{Code("GlobalStyles")} – type for HTML classes and their CSS "
+                "properties"
+            ),
+            Item(f"{Code("CSSProperties")} – type for CSS properties only"),
         ),
         request=request,
         active_item="components",
