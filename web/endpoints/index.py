@@ -204,3 +204,8 @@ def code_sample(request: Request, id: int) -> CodeSample:
 @app.get("/favicon.ico")
 def favicon() -> FileResponse:
     return FileResponse("static/favicon.ico")
+
+
+@app.get("/robots.txt")
+def robots() -> FileResponse:
+    return FileResponse("static/robots.txt")
