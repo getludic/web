@@ -32,9 +32,9 @@ def index(request: Request) -> Page:
                 title="Code Coverage",
             ),
             Badge(
-                url="https://www.python.org/downloads/release/python-312/",
-                img_url="https://img.shields.io/badge/python-3.12-blue.svg",
-                title="Python 3.12",
+                url="https://www.python.org/downloads/release/python-3130/",
+                img_url="https://img.shields.io/badge/Python-3.12%20%7C%203.13-blue.svg",
+                title="Python 3.12 and 3.13",
             ),
             Badge(
                 url="https://mypy-lang.org/",
