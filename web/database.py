@@ -26,9 +26,28 @@ class PersonData(Model):
 
 
 @dataclass
+class CarData(Model):
+    name: str
+    models: list[str]
+
+
+@dataclass
 class DB(Model):
     contacts: dict[str, ContactData]
     people: dict[str, PersonData]
+    cars: dict[str, CarData]
+
+    def find_all_cars_names(self) -> list[str]:
+        return [car.name for car in self.cars.values()]
+
+    def find_first_car(self) -> CarData:
+        return self.cars["1"]
+
+    def find_car_by_name(self, name: str | None) -> CarData | None:
+        for car in self.cars.values():
+            if car.name.lower() == name:
+                return car
+        return None
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict())
@@ -38,6 +57,7 @@ class DB(Model):
         return cls(
             contacts={k: ContactData(**v) for k, v in data.get("contacts", {}).items()},
             people={k: PersonData(**v) for k, v in data.get("people", {}).items()},
+            cars={k: CarData(**v) for k, v in data.get("cars", {}).items()},
         )
 
     @classmethod
@@ -85,5 +105,22 @@ def init_people() -> dict[str, PersonData]:
     }
 
 
+def init_cars() -> dict[str, CarData]:
+    return {
+        "1": CarData(
+            name="Audi",
+            models=["A1", "A4", "A6"],
+        ),
+        "2": CarData(
+            name="Toyota",
+            models=["Landcruiser", "Tacoma", "Yaris"],
+        ),
+        "3": CarData(
+            name="BMW",
+            models=["325i", "325ix", "X5"],
+        ),
+    }
+
+
 def init_db() -> DB:
-    return DB(contacts=init_contacts(), people=init_people())
+    return DB(contacts=init_contacts(), people=init_people(), cars=init_cars())

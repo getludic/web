@@ -6,7 +6,6 @@ from ludic.catalog.buttons import ButtonDanger, ButtonSuccess
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.layouts import Box, Cluster
 from ludic.catalog.lists import Item, List
-from ludic.catalog.messages import MessageWarning, Title
 from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
@@ -64,12 +63,6 @@ def index(request: Request) -> Page:
                 "Starlette", to="https://www.starlette.io/")} framework. It is built "
             "with the latest Python 3.12 features heavily incorporating typing."
         ),
-        MessageWarning(
-            Title("Experimental"),
-            "The framework is in a very early development/experimental stage. There "
-            "are a lot of half-functioning features at the moment. Contributions are "
-            "welcome to help out with the progress!",
-        ),
         H2("Features"),
         List(
             Item(
@@ -119,6 +112,8 @@ def index(request: Request) -> Page:
                 "Backend framework",
                 Blank(
                     Link("Starlette", to="https://www.starlette.io/"),
+                    ", ",
+                    Link("FastAPI", to="https://fastapi.tiangolo.com/"),
                     ", ",
                     Link("Django", to="https://www.djangoproject.com/"),
                     "*",
@@ -227,6 +222,7 @@ def index(request: Request) -> Page:
         ),
         List(
             Item(Link("Starlette", to=f"{request.url_for("docs:web_framework")}")),
+            Item(Link("FastAPI", to=f"{request.url_for("docs:integrations")}#fastapi")),
             Item(Link("Django", to=f"{request.url_for("docs:integrations")}#django")),
         ),
         H2("Contributing"),

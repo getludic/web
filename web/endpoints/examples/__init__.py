@@ -2,6 +2,7 @@ from ludic.web.routing import Router
 
 from . import (
     bulk_update,
+    cascading_selects,
     click_to_edit,
     click_to_load,
     complex_layout,
@@ -15,6 +16,7 @@ from . import (
 router = Router()
 
 router.add_route("/", index.index)
+router.add_route("/cascading-selects", cascading_selects.cascading_selects)
 router.add_route("/complex-layout", complex_layout.complex_layout)
 router.add_route("/bulk-update", bulk_update.bulk_update)
 router.add_route("/click-to-edit", click_to_edit.click_to_edit)

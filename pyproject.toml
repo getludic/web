@@ -12,7 +12,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-ludic = {extras = ["full"], version = "^0.5.2"}
+ludic = { extras = ["full", "fastapi"], version = "^0.5.9" }
 uvicorn = "^0.27.0"
 pystemmer = "^2.2.0.1"
 
@@ -40,7 +40,7 @@ select = [
     "UP",   # pyupgrade
     "T10",  # flake8-debugger
 ]
-ignore = ["B904", "S101", "D203", "D211", "D213", "UP040"]
+ignore = ["B904", "S101", "D203", "D211", "D213", "UP040", "B008"]
 fixable = ["ALL"]
 
 [tool.ruff.lint.isort]

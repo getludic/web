@@ -205,6 +205,7 @@ class Menu(Component[NoChildren, MenuAttrs]):
             "edit_row": "Edit Row",
             "infinite_scroll": "Infinite Scroll",
             "lazy_loading": "Lazy Loading",
+            "cascading_selects": "FastAPI Example",
         },
     }
 
