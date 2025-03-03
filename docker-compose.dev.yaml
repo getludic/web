@@ -3,7 +3,6 @@ services:
     build:
       context: .
       cache_from:
-        - ludic-web:build
         - ludic-web:${TAG:-latest}
     image: ludic-web:${TAG:-latest}
     restart: unless-stopped

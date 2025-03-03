@@ -21,7 +21,7 @@ async def cascading_selects(request: Request) -> Page:
             Item(
                 Link(
                     "Full Code at GitHub",
-                    to=f"{config.GITHUB_REPO_WEB_URL}/blob/main/web/endpoints/demos/cascading_selects.py",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/fastapi_example.py",
                 )
             ),
             Item(

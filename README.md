@@ -7,15 +7,15 @@ This is the homepage for [The Ludic Framework](https://github.com/getludic/ludic
 With docker:
 
 ```
-docker compose build
-docker compose up
+docker compose -f docker-compose.dev.yaml build
+docker compose -f docker-compose.dev.yaml up
 ```
 
-With Poetry:
+With UV:
 
 ```
-poetry install
-poetry run uvicorn --reload web.server:app
+uv sync
+uv run uvicorn --reload web.server:app
 ```
 
 In both cases, the app is running at `http://localhost:8000`.

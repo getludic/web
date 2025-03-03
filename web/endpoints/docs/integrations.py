@@ -5,6 +5,7 @@ from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
 from ludic.web import Request
 
+from web import config
 from web.pages import Page
 
 
@@ -34,8 +35,8 @@ def integrations(request: Request) -> Page:
         CodeBlock('pip install "ludic[fastapi]"', language="sh"),
         H3("Setup"),
         Paragraph(
-            f"Integrating Ludic with {Code("FastAPI")} is straightforward. Simply "
-            f"configure the {Code("LudicRoute")} route class:"
+            f"Integrating Ludic with {Code('FastAPI')} is straightforward. Simply "
+            f"configure the {Code('LudicRoute')} route class:"
         ),
         CodeBlock(
             """
@@ -119,7 +120,7 @@ def integrations(request: Request) -> Page:
             language="python",
         ),
         H3("Manual Response Handling"),
-        Paragraph(f"If you need more control, use {Code("LudicResponse")} explicitly:"),
+        Paragraph(f"If you need more control, use {Code('LudicResponse')} explicitly:"),
         CodeBlock(
             """
             from fastapi import FastAPI
@@ -138,6 +139,22 @@ def integrations(request: Request) -> Page:
                 )
             """,
             language="python",
+        ),
+        H3("Example"),
+        Paragraph("You can check a working FastAPI example:"),
+        List(
+            Item(
+                Link(
+                    "in the examples section",
+                    to=request.url_path_for("examples:cascading_selects"),
+                )
+            ),
+            Item(
+                Link(
+                    "source code on GitHub",
+                    to=f"{config.GITHUB_REPO_URL}/blob/main/examples/fastapi_example.py",
+                )
+            ),
         ),
         H2("Django", id="django"),
         Paragraph(
@@ -202,9 +219,9 @@ def integrations(request: Request) -> Page:
         Paragraph(
             f"However, you are not limited to {Code('ludic.html')} module. You can "
             f"build your own {
-                Link("components", to=request.url_for("docs:components").path)
+                Link('components', to=request.url_for('docs:components').path)
             } or use the ones available "
-            f"in the {Link("catalog", to=request.url_for("catalog:index").path)}. "
+            f"in the {Link('catalog', to=request.url_for('catalog:index').path)}. "
             "Here is a simple example creating a page component and using it in a view:"
         ),
         CodeBlock(
