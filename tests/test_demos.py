@@ -74,7 +74,7 @@ def test_delete_row() -> None:
     with TestClient(app) as client:
         assert client.get("/demos/delete-row/").status_code == 200
         assert client.get("/demos/delete-row/people/").status_code == 200
-        assert client.delete("/demos/delete-row/people/1").status_code == 200
+        assert client.delete("/demos/delete-row/people/1").status_code == 204
 
         response = client.delete("/demos/delete-row/people/123")
         assert response.status_code == 404
@@ -115,3 +115,13 @@ def test_infinite_scroll() -> None:
         assert client.get("/demos/infinite-scroll/").status_code == 200
         assert client.get("/demos/infinite-scroll/contacts/").status_code == 200
         assert client.get("/demos/infinite-scroll/contacts/?page=2").status_code == 200
+
+
+def test_cascading_selects() -> None:
+    with TestClient(app) as client:
+        assert client.get("/demos/cascading-selects/").status_code == 200
+        assert client.get("/demos/cascading-selects/models/").status_code == 404
+        assert (
+            client.get("/demos/cascading-selects/models/?manufacturer=audi").status_code
+            == 200
+        )
