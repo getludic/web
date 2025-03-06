@@ -92,53 +92,53 @@ def web_framework(request: Request) -> Page:
         List(
             Item(
                 Code("app.register_route"),
-                i('path: str, method: str = "GET"'),
+                i('(path: str, method: str = "GET")'),
                 " – decorator to register function based endpoint handler",
             ),
             Item(
                 Code("app.get"),
-                i("path: str, **kwargs: Any"),
+                i("(path: str, **kwargs: Any)"),
                 " – decorator to register function endpoint handling GET HTTP method",
             ),
             Item(
                 Code("app.post"),
-                i("path: str, **kwargs: Any"),
+                i("(path: str, **kwargs: Any)"),
                 " – decorator to register function endpoint handling POST HTTP method",
             ),
             Item(
                 Code("app.put"),
-                i("path: str, **kwargs: Any"),
+                i("(path: str, **kwargs: Any)"),
                 " – decorator to register function endpoint handling PUT HTTP method",
             ),
             Item(
                 Code("app.patch"),
-                i("path: str, **kwargs: Any"),
+                i("(path: str, **kwargs: Any)"),
                 " – decorator to register function endpoint handling PATCH HTTP method",
             ),
             Item(
                 Code("app.delete"),
-                i("path: str, **kwargs: Any"),
+                i("(path: str, **kwargs: Any)"),
                 " – decorator to register function endpoint handling DELETE HTTP ",
                 "method",
             ),
             Item(
                 Code("app.endpoint"),
-                i("path: str"),
+                i("(path: str)"),
                 " – decorator to register component based endpoint",
             ),
             Item(
                 Code("app.add_route"),
-                i("path: str, route: Callable[..., Any], method: str, **kwargs: Any"),
+                i("(path: str, route: Callable[..., Any], method: str, **kwargs: Any)"),
                 " – register any endpoint handler",
             ),
             Item(
                 Code("app.url_path_for"),
-                i("name: str, /, **path_params: Any"),
+                i("(name: str, /, **path_params: Any)"),
                 " – get URL path for endpoint of given name",
             ),
             Item(
                 Code("app.exception_handler"),
-                i("exc_class_or_status_code: int | type[Exception]"),
+                i("(exc_class_or_status_code: int | type[Exception])"),
                 " – register exception handler",
             ),
         ),

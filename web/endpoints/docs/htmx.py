@@ -39,7 +39,7 @@ def htmx(request: Request) -> Page:
                 " – specifies which element is replaced by the response",
             ),
             Item(
-                Code("hx-select "),
+                Code("hx-select"),
                 " – specifies which element from the response is replaces",
             ),
             Item(Code("hx-swap"), " – controls how content is swapped"),
