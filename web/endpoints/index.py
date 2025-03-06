@@ -132,6 +132,7 @@ class CodeSample(Component[str, CodeSampleAttrs]):
                 "border-radius": theme.rounding.more,
                 "border": f"1px solid {theme.colors.light.darken(2)}",
                 "margin-inline": "auto",
+                "font-size": theme.sizes.s,
             },
             ".code-sample": {
                 "display": "flex",

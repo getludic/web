@@ -48,12 +48,6 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
             ("h1 > .code", "h2 > .code", "h3 > .code", "h4 > .code"): {
                 "font-size": "0.75em",
             },
-            # TODO: remove after new version of Ludic is released
-            (".btn:hover:disabled", ".btn:focus:disabled", ".btn:disabled"): {
-                "filter": "opacity(50%)",
-                "text-decoration": "none",
-                "cursor": "unset",
-            },
         }
     )
 
