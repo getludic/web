@@ -11,6 +11,7 @@ GITHUB_REPO_URL = os.getenv(
 GITHUB_REPO_WEB_URL = os.getenv(
     "LUDIC_GITHUB_REPO_WEB_URL", "https://github.com/getludic/web"
 )
+DISCORD_INVITE_URL = os.getenv("DISCORD_INVITE_URL", "https://discord.gg/7nK4zAXAYC")
 
 HTMX_VERSION = os.getenv("LUDIC_HTMX_VERSION", "1.9.12")
 ENABLE_PROFILING = os.getenv("LUDIC_ENABLE_PROFILING", "0") == "1"

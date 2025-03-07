@@ -128,7 +128,7 @@ class CodeSample(Component[str, CodeSampleAttrs]):
                 "display": "inline-block",
                 "text-align": "left",
                 "max-width": "42rem",
-                "padding": theme.sizes.xl,
+                "padding": f"{theme.sizes.m} {theme.sizes.xl}",
                 "border-radius": theme.rounding.more,
                 "border": f"1px solid {theme.colors.light.darken(2)}",
                 "margin-inline": "auto",
@@ -161,7 +161,7 @@ class CodeSample(Component[str, CodeSampleAttrs]):
     @override
     def render(self) -> Stack:
         return Stack(
-            CodeBlock(*self.children, language="python"),
+            CodeBlock(*self.children, language="python", line_numbers=False),
             Cluster(
                 ButtonSecondary(
                     "Next Sample",

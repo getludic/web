@@ -2,8 +2,15 @@ from ludic.styles import themes
 from ludic.styles.types import Size, SizeClamp
 
 theme = themes.LightTheme(
-    measure=Size(120, "ch"),
-    fonts=themes.Fonts(size=Size(1.01, "em")),
+    measure=Size(110, "ch"),
+    fonts=themes.Fonts(
+        size=Size(1.01, "em"),
+        primary=(
+            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, '
+            '"Helvetica Neue", Arial, sans-serif'
+        ),
+        secondary="NTR, Arial, sans-serif",
+    ),
     headers=themes.Headers(
         h1=themes.Header(size=SizeClamp(2.2, 2, 3.6), anchor=False),
         h2=themes.Header(size=SizeClamp(1.8, 1.7, 3), anchor=True),

@@ -41,7 +41,7 @@ def index(request: Request) -> Page:
                 title="Checked with mypy",
             ),
             Badge(
-                url="https://discord.gg/7nK4zAXAYC",
+                url=config.DISCORD_INVITE_URL,
                 img_url="https://img.shields.io/badge/discord-ludic-black",
                 title="Discord Server",
             ),
