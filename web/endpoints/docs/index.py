@@ -212,9 +212,11 @@ def index(request: Request) -> Page:
         Paragraph(
             f"You can also use the {Link(
                 "cookiecutter", to="https://github.com/cookiecutter/cookiecutter")} "
-            "template to quickly create a new project:"
+            f"template to quickly create a new project, using {Link(
+                "UV", to="https://docs.astral.sh/uv/")} you can do that with only one "
+            "command:"
         ),
-        CodeBlock("cookiecutter gh:getludic/template"),
+        CodeBlock("uvx cookiecutter gh:getludic/template"),
         H2("Integrations"),
         Paragraph(
             "Here is a list of integrations and a link to the guide on how to get "

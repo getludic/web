@@ -18,41 +18,17 @@ def getting_started(request: Request) -> Page:
             "below to set up your project quickly."
         ),
         H2("Prerequisites"),
-        Paragraph(
-            "Before you begin, ensure you have the following installed on your machine:"
-        ),
-        List(
-            Item(Link("UV", to="https://docs.astral.sh/uv/")),
-            Item(
-                Link("Cookiecutter", to="https://cookiecutter.readthedocs.io"),
-                " (optional for generating a new project)",
-            ),
-        ),
+        Paragraph("Before you begin, ensure you have UV installed on your machine:"),
+        List(Item(Link("UV", to="https://docs.astral.sh/uv/"))),
         H2("Installation Steps"),
         NumberedList(
-            Item(
-                b("Install Cookiecutter"),
-                Paragraph(
-                    "If you don't have the Cookiecutter library installed, you can "
-                    "install it by running:"
-                ),
-                CodeBlock("pip install cookiecutter"),
-                Paragraph(
-                    "For more information, refer to the ",
-                    Link(
-                        "Cookiecutter documentation",
-                        to="https://cookiecutter.readthedocs.io",
-                    ),
-                    ".",
-                ),
-            ),
             Item(
                 b("Generate a Ludic Project"),
                 Paragraph(
                     "Use the Cookiecutter template to create a new Ludic project. "
                     "Run the following command in your terminal:"
                 ),
-                CodeBlock("cookiecutter gh:getludic/template"),
+                CodeBlock("uvx cookiecutter gh:getludic/template"),
             ),
             Item(
                 b("Install Dependencies"),
