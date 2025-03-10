@@ -1,5 +1,5 @@
 from ludic.catalog.headers import H1, H2
-from ludic.catalog.lists import Item, List, NumberedList
+from ludic.catalog.lists import Item, NumberedList
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, h4
 from ludic.web import Request
@@ -17,11 +17,19 @@ def getting_started(request: Request) -> Page:
                to="https://github.com/getludic/template")}. Follow the steps "
             "below to set up your project quickly."
         ),
-        H2("Prerequisites"),
-        Paragraph("Before you begin, ensure you have UV installed on your machine:"),
-        List(Item(Link("UV", to="https://docs.astral.sh/uv/"))),
         H2("Installation Steps"),
         NumberedList(
+            Item(
+                b("Install UV Package Manager"),
+                Paragraph(
+                    "If you don't have UV installed yet, check the official ",
+                    Link(
+                        "installation instructions",
+                        to="https://docs.astral.sh/uv/getting-started/installation/",
+                    ),
+                    ".",
+                ),
+            ),
             Item(
                 b("Generate a Ludic Project"),
                 Paragraph(

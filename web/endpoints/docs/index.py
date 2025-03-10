@@ -54,31 +54,33 @@ def index(request: Request) -> Page:
         ),
         Paragraph(
             "Ludic is a lightweight framework for building HTML pages with a component "
-            f"approach similar to {Link("React", to="https://react.dev/")}. It is "
-            f"built to be used together with {Link(
-                "htmx.org", to="https://htmx.org/")} so that developers don't need "
+            f"approach similar to {Link('React', to='https://react.dev/')}. It is "
+            f"built to be used together with {
+                Link('htmx.org', to='https://htmx.org/')
+            } so that developers don't need "
             "to write almost any JavaScript to create dynamic web services. Its "
             "potential can be leveraged together with its web framework which is a "
-            f"wrapper around the powerful {Link(
-                "Starlette", to="https://www.starlette.io/")} framework. It is built "
+            f"wrapper around the powerful {
+                Link('Starlette', to='https://www.starlette.io/')
+            } framework. It is built "
             "with the latest Python 3.12 features heavily incorporating typing."
         ),
         H2("Features"),
         List(
             Item(
-                f"Seamless {b("</> htmx")} integration for rapid web development "
-                f"in {b("pure Python")}"
+                f"Seamless {b('</> htmx')} integration for rapid web development "
+                f"in {b('pure Python')}"
             ),
-            Item(f"{b("Type-Guided components")} utilizing Python's typing system"),
+            Item(f"{b('Type-Guided components')} utilizing Python's typing system"),
             Item(
-                f"Uses the power of {b("Starlette")} and {b("Async")} for "
+                f"Uses the power of {b('Starlette')} and {b('Async')} for "
                 "high-performance web development"
             ),
             Item(f"Build HTML with the ease and power of Python {b('f-strings')}"),
-            Item(f"Add CSS styling to your components with {b("Themes")}"),
+            Item(f"Add CSS styling to your components with {b('Themes')}"),
             Item(
                 "Create simple, responsive layouts adopted from the "
-                f"{b("Every Layout Book")}"
+                f"{b('Every Layout Book')}"
             ),
         ),
         H2("Comparison"),
@@ -146,10 +148,15 @@ def index(request: Request) -> Page:
         H2("Quick Example"),
         Paragraph(
             "Here is a simple re-implementation of an example from "
-            f"{Link("Reflex", to=(
-                "https://reflex.dev/docs/getting-started/introduction/"
-                "#an-example:-make-it-count")
-            )} (although only for natural numbers):"
+            f"{
+                Link(
+                    'Reflex',
+                    to=(
+                        'https://reflex.dev/docs/getting-started/introduction/'
+                        '#an-example:-make-it-count'
+                    ),
+                )
+            } (although only for natural numbers):"
         ),
         Box(Counter(number=0)),
         Paragraph("The counter can be included on any page like here:"),
@@ -171,11 +178,11 @@ def index(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Note that the {Code("Box")} is just a component wrapping the buttons "
+            f"Note that the {Code('Box')} is just a component wrapping the buttons "
             f"and the number to make it nicely framed. You can read more about the "
-            f"{Code("Box")} in the {b(Link("Layouts", to=(
-                request.url_for("catalog:layouts").path))
-            )} section later. Anyway, the {Code("Counter")} component is the part "
+            f"{Code('Box')} in the {
+                b(Link('Layouts', to=(request.url_for('catalog:layouts').path)))
+            } section later. Anyway, the {Code('Counter')} component is the part "
             "that is more interesting: "
         ),
         CodeBlock(
@@ -203,29 +210,42 @@ def index(request: Request) -> Page:
         H2("Requirements"),
         Paragraph("Python 3.12+"),
         H2("Installation"),
+        Paragraph(
+            "The following command installs Ludic with Starlette as ASGI framework. "
+            f"If you want to use FastAPI or Django, check the {
+                Link(
+                    'Other Integrations guide',
+                    to=request.url_path_for("docs:web_framework"),
+                )
+            }:"
+        ),
         CodeBlock('pip install "ludic[full]"'),
         Paragraph(
-            "As similar for Starlette, you'll also want to install an "
-            f"{Link("ASGI", to="https://asgi.readthedocs.io/en/latest/")} server:"
-        ),
-        CodeBlock("pip install uvicorn"),
-        Paragraph(
-            f"You can also use the {Link(
-                "cookiecutter", to="https://github.com/cookiecutter/cookiecutter")} "
-            f"template to quickly create a new project, using {Link(
-                "UV", to="https://docs.astral.sh/uv/")} you can do that with only one "
+            f"You can also use the {
+                Link('cookiecutter', to='https://github.com/cookiecutter/cookiecutter')
+            } "
+            f"template to quickly create a new project, using {
+                Link('UV', to='https://docs.astral.sh/uv/')
+            } you can do that with only one "
             "command:"
         ),
         CodeBlock("uvx cookiecutter gh:getludic/template"),
+        Paragraph(
+            "For more information on how to get started, check the ",
+            Link(
+                "Getting Started guide", to=request.url_path_for("docs:getting_started")
+            ),
+            ".",
+        ),
         H2("Integrations"),
         Paragraph(
             "Here is a list of integrations and a link to the guide on how to get "
             "started:",
         ),
         List(
-            Item(Link("Starlette", to=f"{request.url_for("docs:web_framework")}")),
-            Item(Link("FastAPI", to=f"{request.url_for("docs:integrations")}#fastapi")),
-            Item(Link("Django", to=f"{request.url_for("docs:integrations")}#django")),
+            Link("Starlette", to=f"{request.url_path_for('docs:web_framework')}"),
+            Link("FastAPI", to=f"{request.url_path_for('docs:integrations')}#fastapi"),
+            Link("Django", to=f"{request.url_path_for('docs:integrations')}#django"),
         ),
         H2("Contributing"),
         Paragraph(
