@@ -22,8 +22,7 @@ def getting_started(request: Request) -> Page:
             "Before you begin, ensure you have the following installed on your machine:"
         ),
         List(
-            Item(Link("Python 3.12", to="https://www.python.org/")),
-            Item(Link("Poetry", to="https://python-poetry.org/")),
+            Item(Link("UV", to="https://docs.astral.sh/uv/")),
             Item(
                 Link("Cookiecutter", to="https://cookiecutter.readthedocs.io"),
                 " (optional for generating a new project)",
@@ -58,17 +57,17 @@ def getting_started(request: Request) -> Page:
             Item(
                 b("Install Dependencies"),
                 Paragraph(
-                    "Navigate to your project directory and install the required "
-                    "dependencies using Poetry:"
+                    "Navigate to the new project's directory and install the required "
+                    "dependencies using UV:"
                 ),
-                CodeBlock("poetry install"),
+                CodeBlock("uv sync --python 3.13"),
             ),
             Item(
                 b("Run the Project"),
                 Paragraph(
                     "Start your project using Uvicorn with the following command:"
                 ),
-                CodeBlock("poetry run uvicorn src.main:app --reload"),
+                CodeBlock("uv run uvicorn src.main:app --reload"),
             ),
             Item(
                 b("Access the Application"),
