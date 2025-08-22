@@ -9,6 +9,7 @@ from ludic.styles import themes
 from ludic.web import LudicApp, Request
 from ludic.web.routing import Mount
 from starlette.middleware import Middleware
+from starlette.middleware.gzip import GZipMiddleware
 from starlette.staticfiles import StaticFiles
 
 from . import config
@@ -16,12 +17,18 @@ from .endpoints import (
     catalog,
     demos,
     docs,
+    essential,
     examples,
     index,
     search,
     status,
 )
-from .middlewares import CookieStorageMiddleware, ProfileMiddleware
+from .middlewares import (
+    CookieStorageMiddleware,
+    PerformanceMiddleware,
+    ProfileMiddleware,
+    SecurityHeadersMiddleware,
+)
 from .pages import Page
 from .search import Index, build_index
 from .themes import theme
@@ -43,7 +50,12 @@ async def lifespan(app: LudicApp) -> AsyncIterator[State]:
     }
 
 
-middlewares = [Middleware(CookieStorageMiddleware)]
+middlewares = [
+    Middleware(SecurityHeadersMiddleware),
+    Middleware(GZipMiddleware, minimum_size=1000),
+    Middleware(PerformanceMiddleware),
+    Middleware(CookieStorageMiddleware),
+]
 if config.ENABLE_PROFILING:
     middlewares.append(Middleware(ProfileMiddleware))
 
@@ -53,6 +65,7 @@ app = LudicApp(
     lifespan=lifespan,
     routes=index.app.routes
     + search.app.routes
+    + essential.app.routes
     + [
         Mount("/demos", demos.router),
         Mount("/docs", docs.router, name="docs"),

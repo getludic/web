@@ -355,6 +355,61 @@ def components(request: Request) -> Page:
             """,
             language="python",
         ),
+        H3("Dataset Attributes"),
+        Paragraph(
+            f"Ludic supports HTML {Code("data-*")} attributes through the special "
+            f"{Code("dataset")} attribute. This feature allows you to add custom data "
+            "attributes to HTML elements in a type-safe way."
+        ),
+        CodeBlock(
+            """
+            from ludic.html import div
+
+            # Using dataset attribute
+            element = div("Content", dataset={"user-id": "123", "category": "primary"})
+
+            # Renders as:
+            # <div data-user-id="123" data-category="primary">Content</div>
+            """,
+            language="python",
+        ),
+        b("Key Features:"),
+        List(
+            Item(
+                f"{i("Automatic conversion")}: The {Code("dataset")} dictionary keys "
+                f"are automatically prefixed with {Code("data-")} in the HTML output."
+            ),
+            Item(
+                f"{i("Hyphen handling")}: Underscores in dataset keys are converted to "
+                f"hyphens in HTML: {Code("user_id")} becomes {Code("data-user-id")}."
+            ),
+            Item(
+                f"{i("Type safety")}: Values are automatically converted to strings "
+                "and properly escaped for HTML."
+            ),
+        ),
+        b("Common Use Cases:"),
+        List(
+            Item("JavaScript integration: storing data for client-side scripts"),
+            Item("CSS styling: using data attributes as selectors"),
+            Item("HTMX integration: passing data for dynamic behavior"),
+            Item("Testing: adding data attributes for test selectors"),
+        ),
+        CodeBlock(
+            """
+            # Example with HTMX
+            button(
+                "Delete Item",
+                hx_delete="/api/items",
+                dataset={"item-id": "456", "confirm": "Are you sure?"}
+            )
+            # <button
+            #   hx-delete="/api/items"
+            #   data-item-id="456"
+            #   data-confirm="Are you sure?">Delete Item</button>
+            """,
+            language="python",
+        ),
         H3("Using f-strings"),
         Paragraph(
             "In Ludic, f-strings offer a bit more readable way to construct component "

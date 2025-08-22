@@ -1,3 +1,6 @@
+import hashlib
+import time
+
 try:
     from pyinstrument import Profiler
     from pyinstrument.renderers.html import HTMLRenderer
@@ -74,3 +77,70 @@ class ProfileMiddleware(BaseHTTPMiddleware):
 
         # Proceed without profiling
         return await call_next(request)
+
+
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    """Add essential security headers to all responses"""
+
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
+        response = await call_next(request)
+
+        # Essential security headers
+        response.headers.update(
+            {
+                "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+                "Content-Security-Policy": (
+                    "default-src 'self'; "
+                    "script-src 'self' 'unsafe-inline' 'unsafe-eval' unpkg.com; "
+                    "style-src 'self' 'unsafe-inline' fonts.googleapis.com; "
+                    "font-src 'self' fonts.gstatic.com; "
+                    "img-src 'self' data: https: github.com; "
+                    "frame-src 'self' ghbtns.com; "
+                    "connect-src 'self'"
+                ),
+                "X-Content-Type-Options": "nosniff",
+                "X-Frame-Options": "DENY",
+                "X-XSS-Protection": "1; mode=block",
+                "Referrer-Policy": "strict-origin-when-cross-origin",
+                "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+            }
+        )
+
+        return response
+
+
+class PerformanceMiddleware(BaseHTTPMiddleware):
+    """Add performance optimizations including ETag support and monitoring"""
+
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
+        start_time = time.time()
+        response = await call_next(request)
+
+        # Add ETag for caching
+        if response.status_code == 200 and hasattr(response, "body"):
+            content = getattr(response, "body", b"")
+            if content:
+                etag = hashlib.sha256(content).hexdigest()[:16]
+                response.headers["ETag"] = f'"{etag}"'
+
+                # Check if client has current version
+                if_none_match = request.headers.get("If-None-Match")
+                if if_none_match == f'"{etag}"':
+                    response.status_code = 304
+                    response.headers["Content-Length"] = "0"
+
+        # Add cache control for static-like content
+        if request.url.path.startswith(("/static", "/catalog", "/docs")):
+            response.headers["Cache-Control"] = "public, max-age=3600"
+        else:
+            response.headers["Cache-Control"] = "public, max-age=300"
+
+        # Performance timing header for monitoring
+        duration = time.time() - start_time
+        response.headers["X-Response-Time"] = f"{duration:.3f}s"
+
+        return response

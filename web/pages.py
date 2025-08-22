@@ -1,3 +1,4 @@
+import json
 from typing import NotRequired, override
 
 from ludic import Component
@@ -11,7 +12,7 @@ from ludic.catalog.layouts import (
     WithSidebar,
 )
 from ludic.catalog.pages import Body, Head, HtmlPage
-from ludic.html import link, meta, style
+from ludic.html import link, meta, script, style
 from ludic.types import AnyChildren
 from ludic.web import Request
 
@@ -48,6 +49,29 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
             ("h1 > .code", "h2 > .code", "h3 > .code", "h4 > .code"): {
                 "font-size": "0.75em",
             },
+            "@media (max-width: 768px)": {
+                "button, .button": {
+                    "min-height": "44px",
+                    "min-width": "44px",
+                    "font-size": "1em",
+                },
+                ".code-block": {
+                    "overflow-x": "auto",
+                    "white-space": "pre-wrap",
+                    "font-size": "0.9em",
+                },
+                "h1": {
+                    "font-size": "2rem",
+                },
+                "h2": {
+                    "font-size": "1.5rem",
+                },
+                ".cluster": {
+                    "flex-direction": "column",
+                    "align-items": "center",
+                    "gap": "1rem",
+                },
+            },
         }
     )
 
@@ -60,16 +84,16 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 meta(
                     name="description",
                     content=(
-                        "Lightweight framework for building dynamic HTML pages in "
-                        "pure Python in minutes with a component approach similar to "
-                        "React and without template engines."
+                        "Type-safe HTML template engine for Python. Build dynamic web "
+                        "pages using Python components with a React-like approach, "
+                        "no template syntax required."
                     ),
                 ),
                 meta(
                     name="keywords",
                     content=(
-                        "ludic, framework, python, web development, htmx, html, "
-                        "css, javascript, components"
+                        "ludic, template engine, python, html components, type-safe, "
+                        "htmx, web development, react-like, no templates"
                     ),
                 ),
                 meta(name="author", content="Pavel Dedik"),
@@ -81,8 +105,8 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 meta(
                     property="og:description",
                     content=(
-                        "Lightweight framework for building dynamic HTML pages in "
-                        "pure Python in minutes."
+                        "Type-safe HTML template engine for Python. Build dynamic web "
+                        "pages using Python components with a React-like approach."
                     ),
                 ),
                 meta(property="og:url", content=config.HOME_URL),
@@ -100,8 +124,8 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 meta(
                     name="twitter:description",
                     content=(
-                        "Lightweight framework for building dynamic HTML pages in "
-                        "pure Python in minutes."
+                        "Type-safe HTML template engine for Python. Build dynamic web "
+                        "pages using Python components with a React-like approach."
                     ),
                 ),
                 meta(
@@ -125,6 +149,31 @@ class BasePage(Component[AnyChildren, BasePageAttrs]):
                 link(
                     href="https://fonts.googleapis.com/css2?family=NTR&display=swap",
                     rel="stylesheet",
+                ),
+                script(
+                    json.dumps(
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "SoftwareApplication",
+                            "name": "Ludic",
+                            "description": (
+                                "Type-safe HTML template engine for Python with "
+                                "React-like components"
+                            ),
+                            "applicationCategory": "WebApplication",
+                            "operatingSystem": "Cross-platform",
+                            "programmingLanguage": "Python",
+                            "url": "https://getludic.dev",
+                            "author": {"@type": "Person", "name": "Pavel Dedik"},
+                            "sameAs": ["https://github.com/getludic/ludic"],
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "0",
+                                "priceCurrency": "USD",
+                            },
+                        }
+                    ),
+                    type="application/ld+json",
                 ),
                 title=self.attrs.get("title", config.TITLE),
             ),

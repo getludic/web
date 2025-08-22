@@ -262,8 +262,9 @@ class Footer(Component[NoChildren, NoAttrs]):
         return Box(
             f"Made with {b(Link("Ludic", to=config.GITHUB_REPO_URL))} "
             f"and {b(Link("HTMX", to="https://htmx.org"))} and 🐍 "
-            f"• {b(Link("Discord", to=config.DISCORD_INVITE_URL))} ",
-            f"• {b(Link("GitHub", to=config.GITHUB_REPO_URL))}",
+            f"• {b(Link("Discord", to=config.DISCORD_INVITE_URL))} "
+            f"• {b(Link("GitHub", to=config.GITHUB_REPO_URL))} "
+            f"• Running on {b(Link("Leapcell", to="https://leapcell.io"))} "
         )
 
 

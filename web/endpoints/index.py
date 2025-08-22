@@ -1,7 +1,7 @@
 from typing import override
 
 from ludic import Attrs, Component
-from ludic.catalog.buttons import ButtonSecondary
+from ludic.catalog.buttons import ButtonLink, ButtonSecondary
 from ludic.catalog.headers import H1
 from ludic.catalog.layouts import Cluster, Stack
 from ludic.catalog.typography import CodeBlock, Paragraph
@@ -178,15 +178,35 @@ class CodeSample(Component[str, CodeSampleAttrs]):
 @app.get("/")
 def index(request: Request) -> HomePage:
     return HomePage(
-        H1(
-            "Ludic Framework",
-            style={"font-size": SizeClamp(2.5, 3, 8)},
+        Stack(
+            H1(
+                "Ludic Framework",
+                style={"font-size": SizeClamp(2.5, 3, 8)},
+                id="main-heading",
+            ),
+            Paragraph(
+                f"A {b("type-safe HTML template engine")} for Python. Build dynamic "
+                f"web pages using {b("Python components")} with a React-like approach "
+                f"- no template syntax required.",
+                style={"font-size": request.state.theme.headers.h4.size * 0.8},
+            ),
+            Cluster(
+                ButtonLink(
+                    "Get Started",
+                    to=request.url_for("docs:index").path,
+                    classes=["success", "large"],
+                ),
+                ButtonLink(
+                    "View Examples",
+                    to=request.url_for("examples:index").path,
+                    classes=["large"],
+                ),
+                classes=["justify-center"],
+                style={"gap": "1rem", "margin": "2rem 0"},
+            ),
+            code_sample(request, 0),
+            classes=["text-align-center", "large"],
         ),
-        Paragraph(
-            f"Web Development in {b("Pure Python")} with {b("Type-Guided")} Components",
-            style={"font-size": request.state.theme.headers.h4.size * 0.8},
-        ),
-        code_sample(request, 0),
         request=request,
     )
 
@@ -205,8 +225,3 @@ def code_sample(request: Request, id: int) -> CodeSample:
 @app.get("/favicon.ico")
 def favicon() -> FileResponse:
     return FileResponse("static/favicon.ico")
-
-
-@app.get("/robots.txt")
-def robots() -> FileResponse:
-    return FileResponse("static/robots.txt")
