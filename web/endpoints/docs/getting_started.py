@@ -44,7 +44,7 @@ def getting_started(request: Request) -> Page:
                     "Navigate to the new project's directory and install the required "
                     "dependencies using UV:"
                 ),
-                CodeBlock("uv sync --python 3.13"),
+                CodeBlock("uv sync --python 3.14"),
             ),
             Item(
                 b("Run the Project"),

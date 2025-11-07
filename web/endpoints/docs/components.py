@@ -410,12 +410,12 @@ def components(request: Request) -> Page:
             """,
             language="python",
         ),
-        H3("Using f-strings"),
+        H3("Using t-strings"),
         Paragraph(
-            "In Ludic, f-strings offer a bit more readable way to construct component "
+            "In Ludic, t-strings offer a bit more readable way to construct component "
             "content, especially if you need to do a lot of formatting with "
             f"{Code("<b>")}, {Code("<i>")}, and other elements for improving "
-            "typography. Let's modify the previous example using f-strings:"
+            "typography. Let's modify the previous example using t-strings:"
         ),
         CodeBlock(
             """
@@ -428,22 +428,22 @@ def components(request: Request) -> Page:
         ),
         b("Important Note: Memory Considerations"),
         Paragraph(
-            f"{i("Temporary Dictionaries")}: to make f-strings safely work, they "
+            f"{i("Temporary Dictionaries")}: to make t-strings safely work, they "
             "internally create temporary dictionaries to hold the component "
             "instances. To avoid memory leaks, these dictionaries need to be "
             "consumed by a component."
         ),
         Paragraph("There are two cases it can create hanging objects (memory leaks):"),
         NumberedList(
-            Item("Component initialization with the f-string fails."),
+            Item("Component initialization with the t-string fails."),
             Item(
-                "You store an f-string in a variable but don't pass it to a "
+                "You store a t-string in a variable but don't pass it to a "
                 "component."
             ),
         ),
         MessageWarning(
             Title("Possible memory leak"),
-            "The implementation of f-strings requires the creation of a temporary dict "
+            "The implementation of t-strings requires the creation of a temporary dict "
             "which can result in hanging objects in memory. To avoid memory leaks, "
             f"there is the {Code('BaseElement.formatter')} attribute which is a "
             "context manager clearing the temporary dict on exit.",
@@ -454,7 +454,7 @@ def components(request: Request) -> Page:
             from ludic.base import BaseElement
 
             with BaseElement.formatter:
-                # you can do anything with f-strings here, no memory leak
+                # you can do anything with t-strings here, no memory leak
                 # is created since formatter dict is cleared on exit
             """,
             language="python",
@@ -463,11 +463,11 @@ def components(request: Request) -> Page:
         Paragraph(
             "The Ludic Web Framework (built on Starlette) automatically wraps request "
             f"handlers with {Code("BaseElement.formatter")}, providing a safe "
-            "environment for f-strings.",
+            "environment for t-strings.",
         ),
         b("Key Takeaways"),
         Paragraph(
-            "While f-strings are convenient, exercise caution to prevent memory leaks. "
+            "While t-strings are convenient, exercise caution to prevent memory leaks. "
             "Use them within the provided safety mechanisms. In contexts like task "
             "queues or other web frameworks, you can use a similar mechanism of "
             "wrapping to achieve memory safety."
