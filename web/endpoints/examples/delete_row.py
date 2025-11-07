@@ -102,7 +102,7 @@ def delete_row(request: Request) -> Page:
                 Code("render"),
                 " – handles rendering of the table. Apart from the textual columns, "
                 "we also render an action button to delete a row which is hooked to "
-                f"the {Code("PersonRow.delete()")} method.",
+                f"the {Code('PersonRow.delete()')} method.",
             ),
         ),
         Paragraph(
@@ -156,14 +156,14 @@ def delete_row(request: Request) -> Page:
             Item(
                 Code("get"),
                 " – handles the GET request which returns an instance of the "
-                f"{Code("PeopleTable")} filled with a list of people fetched "
+                f"{Code('PeopleTable')} filled with a list of people fetched "
                 "from database.",
             ),
             Item(
                 Code("render"),
                 " – handles rendering of the table of people. We use a special "
-                f"{Code("body_attrs")} attribute to configure HTMX operations on "
-                f"the {Code("tbody")} element.",
+                f"{Code('body_attrs')} attribute to configure HTMX operations on "
+                f"the {Code('tbody')} element.",
             ),
         ),
         request=request,

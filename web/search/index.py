@@ -164,7 +164,7 @@ async def build_index(app: LudicApp) -> Index:
             if isinstance(child, H1 | H2):
                 data.append(
                     (
-                        f"{app.url_path_for(f"{mount_name}:{route_name}")}#{text_to_kebab(child.text)}",
+                        f"{app.url_path_for(f'{mount_name}:{route_name}')}#{text_to_kebab(child.text)}",
                         H3(child.text, anchor=False),
                         [],
                     )

@@ -31,9 +31,9 @@ def index(request: Request) -> Page:
                 title="Code Coverage",
             ),
             Badge(
-                url="https://www.python.org/downloads/release/python-3130/",
-                img_url="https://img.shields.io/badge/Python-3.12%20%7C%203.13-blue.svg",
-                title="Python 3.12 and 3.13",
+                url="https://www.python.org/downloads/release/python-3140/",
+                img_url="https://img.shields.io/badge/Python-3.14%2B-blue.svg",
+                title="Python 3.14+",
             ),
             Badge(
                 url="https://mypy-lang.org/",
@@ -63,7 +63,7 @@ def index(request: Request) -> Page:
             f"wrapper around the powerful {
                 Link('Starlette', to='https://www.starlette.io/')
             } framework. It is built "
-            "with the latest Python 3.12 features heavily incorporating typing."
+            "with the latest Python 3.14 features heavily incorporating typing."
         ),
         H2("Features"),
         List(
@@ -76,7 +76,7 @@ def index(request: Request) -> Page:
                 f"Uses the power of {b('Starlette')} and {b('Async')} for "
                 "high-performance web development"
             ),
-            Item(f"Build HTML with the ease and power of Python {b('f-strings')}"),
+            Item(f"Build HTML with the ease and power of Python {b('t-strings')}"),
             Item(f"Add CSS styling to your components with {b('Themes')}"),
             Item(
                 "Create simple, responsive layouts adopted from the "
@@ -208,14 +208,20 @@ def index(request: Request) -> Page:
             language="python",
         ),
         H2("Requirements"),
-        Paragraph("Python 3.12+"),
+        Paragraph("Python 3.14+"),
+        Paragraph(
+            f"{b('Note')}: Ludic 0.5.x supports Python 3.12+ with f-strings. "
+            "For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of "
+            "t-strings.",
+            style={"font-size": "0.9em", "color": "#666"},
+        ),
         H2("Installation"),
         Paragraph(
             "The following command installs Ludic with Starlette as ASGI framework. "
             f"If you want to use FastAPI or Django, check the {
                 Link(
                     'Other Integrations guide',
-                    to=request.url_path_for("docs:web_framework"),
+                    to=request.url_path_for('docs:web_framework'),
                 )
             }:"
         ),

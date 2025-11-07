@@ -17,7 +17,7 @@ def messages(request: Request) -> Page:
     return Page(
         H1("Messages"),
         Paragraph(
-            f"The module {Code("ludic.catalog.messages")} contains the following "
+            f"The module {Code('ludic.catalog.messages')} contains the following "
             "components:"
         ),
         Message(
@@ -70,7 +70,7 @@ def messages(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Note that you don't need to specify the {Code("Title")} component. "
+            f"Note that you don't need to specify the {Code('Title')} component. "
             "Here is how the message renders without the title:"
         ),
         Message(

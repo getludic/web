@@ -14,8 +14,9 @@ async def infinite_scroll(request: Request) -> Page:
         Paragraph(
             "The infinite scroll pattern provides a way to load content dynamically"
             "on user scrolling action. This example is almost identical the the "
-            f"{Link(
-                "Click To Load", to=request.url_for("examples:click_to_load").path)}. "
+            f"{
+                Link('Click To Load', to=request.url_for('examples:click_to_load').path)
+            }. "
         ),
         List(
             Item(
@@ -33,14 +34,14 @@ async def infinite_scroll(request: Request) -> Page:
         ),
         H2("Implementation"),
         Paragraph(
-            f"Check the {Link(
-                "Click To Load",
-                to=request.url_for("examples:click_to_load").path)} example. "
-            f"The only difference is the {Code("render()")} implementation with the "
-            f"introduction of the {Code("hx_trigger")} and {Code("hx_swap")} "
+            f"Check the {
+                Link('Click To Load', to=request.url_for('examples:click_to_load').path)
+            } example. "
+            f"The only difference is the {Code('render()')} implementation with the "
+            f"introduction of the {Code('hx_trigger')} and {Code('hx_swap')} "
             "attributes. In the Click To Load example, we used the "
-            f"{Code("LoadMoreButton")} to trigger the load action. Here is the "
-            f"updated {Code("render()")} method:"
+            f"{Code('LoadMoreButton')} to trigger the load action. Here is the "
+            f"updated {Code('render()')} method:"
         ),
         CodeBlock(
             """

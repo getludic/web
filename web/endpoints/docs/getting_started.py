@@ -12,10 +12,23 @@ def getting_started(request: Request) -> Page:
         H1("Getting Started"),
         Paragraph(
             "The fastest way to get started with a Ludic project is to use the "
-            f"{Link(
-               "Cookiecutter template",
-               to="https://github.com/getludic/template")}. Follow the steps "
+            f"{
+                Link('Cookiecutter template', to='https://github.com/getludic/template')
+            }. Follow the steps "
             "below to set up your project quickly."
+        ),
+        Paragraph(
+            f"{b('Note')}: This guide covers Ludic 1.0 which requires Python 3.14+ and "
+            "uses t-strings. If you're using Python 3.12 or 3.13, use Ludic 0.5.x with "
+            f"f-strings instead. Install with {Code('--python 3.13')} and use "
+            "f-strings in your code.",
+            style={
+                "font-size": "0.9em",
+                "color": "#666",
+                "padding": "1em",
+                "background": "#f5f5f5",
+                "border-radius": "4px",
+            },
         ),
         H2("Installation Steps"),
         NumberedList(
@@ -44,7 +57,7 @@ def getting_started(request: Request) -> Page:
                     "Navigate to the new project's directory and install the required "
                     "dependencies using UV:"
                 ),
-                CodeBlock("uv sync --python 3.13"),
+                CodeBlock("uv sync --python 3.14"),
             ),
             Item(
                 b("Run the Project"),
@@ -56,8 +69,9 @@ def getting_started(request: Request) -> Page:
             Item(
                 b("Access the Application"),
                 Paragraph(
-                    f"Open your browser and visit {Link(
-                        "http://localhost:8000", to="http://localhost:8000")} to "
+                    f"Open your browser and visit {
+                        Link('http://localhost:8000', to='http://localhost:8000')
+                    } to "
                     "see your running application."
                 ),
             ),
@@ -98,7 +112,7 @@ def getting_started(request: Request) -> Page:
         h4(Code("pages.py")),
         Paragraph(
             "The idea is to create a few pages (regular components) that render as "
-            f"valid HTML documents using the {Code("<html>")} root tag."
+            f"valid HTML documents using the {Code('<html>')} root tag."
         ),
         h4(Code("endpoints")),
         Paragraph(
@@ -110,13 +124,13 @@ def getting_started(request: Request) -> Page:
         h4(Code("components.py")),
         Paragraph(
             "Any component you want to use in your application should be registered "
-            f"here. For example, a {Code("Navigation")} component and its attributes "
-            f"could be registered in the {Code("components.py")} file."
+            f"here. For example, a {Code('Navigation')} component and its attributes "
+            f"could be registered in the {Code('components.py')} file."
         ),
         h4(Code("main.py")),
         Paragraph(
-            f"The module instantiates the {Code("LudicApp")} class and registers "
-            f"routes by importing the {Code("endpoints")} module."
+            f"The module instantiates the {Code('LudicApp')} class and registers "
+            f"routes by importing the {Code('endpoints')} module."
         ),
         H2("What's Next?"),
         Paragraph(

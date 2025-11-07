@@ -120,12 +120,12 @@ async def click_to_load(request: Request) -> Page:
         ),
         Paragraph(
             "First endpoint is function-based and is rendering the initial table "
-            f"of contacts. We use the {Code("ContactsSlice.get()")} method to load "
+            f"of contacts. We use the {Code('ContactsSlice.get()')} method to load "
             "the first page. It would probably be better to separate this loading "
             "to some handler function."
         ),
         Paragraph(
-            f"The {Code("ContactsSlice")} endpoint-based component is loading the "
+            f"The {Code('ContactsSlice')} endpoint-based component is loading the "
             "table rows and implements two methods:"
         ),
         List(
@@ -136,20 +136,20 @@ async def click_to_load(request: Request) -> Page:
             ),
             Item(
                 Code("render"),
-                f" – handles rendering of the table rows and the {Code("Load More")} "
+                f" – handles rendering of the table rows and the {Code('Load More')} "
                 "button. In order for everything to work properly, we render only "
-                f"the table's rows while wrapping them in the {Code("Blank")} "
+                f"the table's rows while wrapping them in the {Code('Blank')} "
                 "component. This component does not render any HTML element, it's just "
                 "a wrapper when we want to render a list of elements.",
             ),
         ),
         Paragraph(
-            f"Last, the {Code("ContactsTable")} class is a regular component that "
+            f"Last, the {Code('ContactsTable')} class is a regular component that "
             "renders the table's columns."
         ),
         Paragraph(
-            f"The last remaining piece is the {Code("LoadMoreButton")} component which "
-            f"triggers the {Code("GET")} request calling the {Code("ContactsSlice")} "
+            f"The last remaining piece is the {Code('LoadMoreButton')} component which "
+            f"triggers the {Code('GET')} request calling the {Code('ContactsSlice')} "
             "method to load more contact data:"
         ),
         CodeBlock(
@@ -178,9 +178,9 @@ async def click_to_load(request: Request) -> Page:
         ),
         Paragraph(
             "We use the HTMX swap operation to replace the button itself with a new "
-            f"slice of contacts rendered by the {Code("ContactsSlice")} endpoint. "
+            f"slice of contacts rendered by the {Code('ContactsSlice')} endpoint. "
             "That is, the next page of rows as well as the button itself running the "
-            f"HTMX operation. Since the {Code("ContactsSlice")} always bumps the "
+            f"HTMX operation. Since the {Code('ContactsSlice')} always bumps the "
             "button link's page, we get the next page of contacts on every click."
         ),
         request=request,

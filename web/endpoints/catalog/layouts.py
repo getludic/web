@@ -27,7 +27,7 @@ def layouts(request: Request) -> Page:
         H1("Layouts"),
         Paragraph(
             "Layouts create a flexible structure for your user interface. "
-            f"The layouts in this module are based on the {b("Every Layout Book")}. "
+            f"The layouts in this module are based on the {b('Every Layout Book')}. "
             "If you haven't read the book, go read it now: "
         ),
         List(Item(Link("Every Layout Book", to="https://every-layout.dev/"))),
@@ -37,7 +37,7 @@ def layouts(request: Request) -> Page:
             "The layouts can be combined together."
         ),
         Paragraph(
-            f"All layouts are located in the {Code("ludic.catalog.layouts")} module."
+            f"All layouts are located in the {Code('ludic.catalog.layouts')} module."
         ),
         Message(
             Title("Viewing this page on mobile devices"),
@@ -51,7 +51,7 @@ def layouts(request: Request) -> Page:
             "you can easily combine to create responsive, readable, and maintainable "
             "user interfaces. Instead of starting from scratch with basic HTML "
             "elements and manually writing CSS, you use these layouts as your "
-            f"{b("foundational building blocks")}. This approach allows you to compose "
+            f"{b('foundational building blocks')}. This approach allows you to compose "
             "and arrange them in various ways to design your desired user interface, "
             "making your code more organized and easier to manage."
         ),
@@ -59,7 +59,7 @@ def layouts(request: Request) -> Page:
         Paragraph(
             "When writing CSS, you might be tempted to apply e.g. specific spacing, "
             "colors, or font styles to an HTML element like a button. The idea of "
-            f"using the layout classes here is to define {b("context")} which "
+            f"using the layout classes here is to define {b('context')} which "
             "determines how an HTML element should be displayed. So for example, we "
             "might want to have a couple of buttons on one line, so we wrap them in "
             "a Cluster class which inserts a margin between all its children and puts "

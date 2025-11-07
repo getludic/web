@@ -35,7 +35,7 @@ async def click_to_edit(request: Request) -> Page:
         Paragraph(
             "Before we start implementing the endpoint rendering the HTML form, we "
             "also want to display the data of the customer. The task can be achieved "
-            f"by implementing the {Code("Contact")} endpoint which renders the data as "
+            f"by implementing the {Code('Contact')} endpoint which renders the data as "
             "a description list. The endpoint also requires the contact's attributes "
             "which we describe like this:"
         ),
@@ -57,9 +57,9 @@ async def click_to_edit(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"You may have noticed we used the {Code("Annotated")} marker. The reason "
+            f"You may have noticed we used the {Code('Annotated')} marker. The reason "
             "for that is that we want to automatically create a form based on this "
-            f"specification later. There is also the {Code("email_validator")} parser "
+            f"specification later. There is also the {Code('email_validator')} parser "
             "which can parse and validate email of the customer. The parser could be "
             "as simple as this:"
         ),
@@ -75,8 +75,8 @@ async def click_to_edit(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The {Code("contact")} endpoint handles rendering of the customer data "
-            f"as well as the {Code("GET")} and {Code("PUT")} HTTP methods:"
+            f"The {Code('contact')} endpoint handles rendering of the customer data "
+            f"as well as the {Code('GET')} and {Code('PUT')} HTTP methods:"
         ),
         CodeBlock(
             """
@@ -137,18 +137,18 @@ async def click_to_edit(request: Request) -> Page:
             Item(
                 Code("get"),
                 " – handles the GET request which fetches information about the "
-                f"contact from the database, and returns them as the {Code("Contact")} "
+                f"contact from the database, and returns them as the {Code('Contact')} "
                 "component to be rendered as HTML.",
             ),
             Item(
                 Code("put"),
                 " – handles the PUT request which contains form data. Since we "
-                f"later use the {Code("create_rows")} method, it is possible to use a "
+                f"later use the {Code('create_rows')} method, it is possible to use a "
                 "parser to automatically convert the form data into a dictionary. "
                 "First, we check that we have the contact in our database, than "
                 "we validate the data submitted by the user and update the contact in "
                 "our database, and finally, we return the updated contact as the "
-                f"{Code("Contact")} component.",
+                f"{Code('Contact')} component.",
             ),
             Item(
                 Code("render"),
@@ -156,7 +156,7 @@ async def click_to_edit(request: Request) -> Page:
                 "HTMX swap operation replacing the content with an editable form.",
             ),
         ),
-        Paragraph(f"The last remaining piece is the {Code("ContactForm")} component:"),
+        Paragraph(f"The last remaining piece is the {Code('ContactForm')} component:"),
         CodeBlock(
             """
             @app.endpoint("/contacts/{id}/form/")
@@ -195,7 +195,7 @@ async def click_to_edit(request: Request) -> Page:
                 Code("render"),
                 " – handles rendering of the contact form, a button to submit the "
                 "form, and also a button to cancel the edit operation. We use the "
-                f"HTMX swap operation to replace the form with the {Code("Contact")} "
+                f"HTMX swap operation to replace the form with the {Code('Contact')} "
                 "component on submit or cancel.",
             ),
         ),
