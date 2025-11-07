@@ -13,7 +13,7 @@ async def cascading_selects(request: Request) -> Page:
     return Page(
         H1("Cascading Selects (FastAPI)"),
         Paragraph(
-            f"The cascading selects example uses {b("FastAPI")} to implement two "
+            f"The cascading selects example uses {b('FastAPI')} to implement two "
             "selects. First one is a simple select of a car's manufacturer. Second "
             "select's values are based on the option chosen by the first one."
         ),

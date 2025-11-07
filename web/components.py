@@ -260,11 +260,11 @@ class Footer(Component[NoChildren, NoAttrs]):
     @override
     def render(self) -> Box:
         return Box(
-            f"Made with {b(Link("Ludic", to=config.GITHUB_REPO_URL))} "
-            f"and {b(Link("HTMX", to="https://htmx.org"))} and 🐍 "
-            f"• {b(Link("Discord", to=config.DISCORD_INVITE_URL))} "
-            f"• {b(Link("GitHub", to=config.GITHUB_REPO_URL))} "
-            f"• Running on {b(Link("Leapcell", to="https://leapcell.io"))} "
+            f"Made with {b(Link('Ludic', to=config.GITHUB_REPO_URL))} "
+            f"and {b(Link('HTMX', to='https://htmx.org'))} and 🐍 "
+            f"• {b(Link('Discord', to=config.DISCORD_INVITE_URL))} "
+            f"• {b(Link('GitHub', to=config.GITHUB_REPO_URL))} "
+            f"• Running on {b(Link('Leapcell', to='https://leapcell.io'))} "
         )
 
 
@@ -365,9 +365,9 @@ class EditOnGithub(Component[AnyChildren, EditOnGithubAttrs]):
     @override
     def render(self) -> div:
         file_path = (
-            f"{self.attrs["base_url"].replace("-", "_")}index.py"
+            f"{self.attrs['base_url'].replace('-', '_')}index.py"
             if self.attrs["base_url"].endswith("/")
-            else f"{self.attrs["base_url"].replace("-", "_")}.py"
+            else f"{self.attrs['base_url'].replace('-', '_')}.py"
         )
         url = f"{config.GITHUB_REPO_WEB_URL}/blob/main/web/endpoints{file_path}"
         return div(
@@ -407,6 +407,6 @@ class Quote(Component[str, QuoteAttrs]):
         return blockquote(
             div(
                 p(i('"', *self.children, '"')),
-                p(b(f"– {self.attrs["source"]}")),
+                p(b(f"– {self.attrs['source']}")),
             ),
         )

@@ -62,7 +62,7 @@ async def edit_row(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Now we create the {Code("PersonRow")} endpoint for displaying the "
+            f"Now we create the {Code('PersonRow')} endpoint for displaying the "
             "person's information in a row:"
         ),
         CodeBlock(
@@ -150,7 +150,7 @@ async def edit_row(request: Request) -> Page:
             Item(
                 Code("get"),
                 " – handles the GET request which returns an instance of the "
-                f"{Code("PeopleRow")} of the requested person.",
+                f"{Code('PeopleRow')} of the requested person.",
             ),
             Item(
                 Code("render"),
@@ -261,14 +261,14 @@ async def edit_row(request: Request) -> Page:
             Item(
                 Code("get"),
                 " – handles the GET request which returns an instance of the "
-                f"{Code("PeopleTable")} filled with a list of people fetched "
+                f"{Code('PeopleTable')} filled with a list of people fetched "
                 "from database.",
             ),
             Item(
                 Code("render"),
                 " – handles rendering of the table of people. We use a special "
-                f"{Code("body_attrs")} attribute to configure HTMX operations on "
-                f"the {Code("tbody")} element.",
+                f"{Code('body_attrs')} attribute to configure HTMX operations on "
+                f"the {Code('tbody')} element.",
             ),
         ),
         request=request,

@@ -75,7 +75,7 @@ async def index(request: Request) -> Page:
         H2("Link"),
         Paragraph(
             "A simple component simulating a link. The component only accepts one "
-            f"string child and a {Code("to")} attribute."
+            f"string child and a {Code('to')} attribute."
         ),
         CodeBlock(
             """
@@ -141,8 +141,12 @@ async def index(request: Request) -> Page:
         ),
         Paragraph(
             "Note that you need to use this navigation in the context of the "
-            f"{Link("HtmlPage",
-                    to=f"{request.url_path_for("catalog:index")}#htmlpage-component")} "
+            f"{
+                Link(
+                    'HtmlPage',
+                    to=f'{request.url_path_for("catalog:index")}#htmlpage-component',
+                )
+            } "
             "component, otherwise there won't be the necessary CSS loaded. Or you can "
             "define your own styles for the component."
         ),

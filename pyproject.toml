@@ -44,6 +44,9 @@ dev = [
 line-length = 88
 target-version = "py312"
 
+[tool.ruff.format]
+quote-style = "double"
+
 [tool.ruff.lint]
 select = [
     "E",    # flake8 rules

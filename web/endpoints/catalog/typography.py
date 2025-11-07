@@ -11,13 +11,14 @@ def typography(request: Request) -> Page:
     return Page(
         H1("Typography"),
         Paragraph(
-            f"The module {Code("ludic.catalog.typography")} contains the following "
+            f"The module {Code('ludic.catalog.typography')} contains the following "
             "components:"
         ),
         H4("Link"),
         Paragraph(
-            f"This text contains a {Link(
-                "link", to=str(request.url_for("catalog:index")))}.",
+            f"This text contains a {
+                Link('link', to=str(request.url_for('catalog:index')))
+            }.",
         ),
         CodeBlock(
             """
@@ -39,7 +40,7 @@ def typography(request: Request) -> Page:
             language="python",
         ),
         H4("Code"),
-        Paragraph(f"This text contains code: {Code("let mut x = 0;")}"),
+        Paragraph(f"This text contains code: {Code('let mut x = 0;')}"),
         CodeBlock(
             """
             from ludic.catalog.typography import Code
@@ -134,7 +135,7 @@ def typography(request: Request) -> Page:
         ),
         H2("Headers"),
         Paragraph(
-            f"The module {Code("ludic.catalog.headers")} contains components "
+            f"The module {Code('ludic.catalog.headers')} contains components "
             "rendering as HTML headers (h1-h4)."
         ),
         H1("H1", anchor=False),
@@ -153,7 +154,7 @@ def typography(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The module also contains the {Code("Anchor")} component, which can be "
+            f"The module also contains the {Code('Anchor')} component, which can be "
             "used to create an anchor link next to the header."
         ),
         H4("H4 With Anchor", anchor=Anchor("#", target="h4-with-anchor")),
@@ -167,7 +168,7 @@ def typography(request: Request) -> Page:
         ),
         Paragraph(
             "It is possible to generate the anchor automatically using the "
-            f"{Code("anchor=True")} attribute:"
+            f"{Code('anchor=True')} attribute:"
         ),
         H3("H3 With Anchor", anchor=True),
         CodeBlock(

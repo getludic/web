@@ -38,15 +38,15 @@ def tables(request: Request) -> Page:
     return Page(
         H1("Tables"),
         Paragraph(
-            f"These components located in {Code("ludic.catalog.tables")} are in an "
+            f"These components located in {Code('ludic.catalog.tables')} are in an "
             "experimental mode. There is the possibility to automatically create "
             "tables even containing form fields and actions from annotations, but "
             "it is far from production-ready."
         ),
         H2("Creating a Table"),
         Paragraph(
-            f"The {Code("Table")} component accepts a {Code("TableHead")} as the first "
-            f"item and any number of {Code("TableRow")} items."
+            f"The {Code('Table')} component accepts a {Code('TableHead')} as the first "
+            f"item and any number of {Code('TableRow')} items."
         ),
         Table(
             TableHead("First Name", "Last Name", "Age"),
@@ -91,7 +91,7 @@ def tables(request: Request) -> Page:
         ),
         H2("Generating Table Rows"),
         Paragraph(
-            f"The {Code("create_rows")} function can be used to generate rows in the "
+            f"The {Code('create_rows')} function can be used to generate rows in the "
             "table based on given specification. Here is an example:"
         ),
         CodeBlock(
@@ -125,7 +125,7 @@ def tables(request: Request) -> Page:
         Paragraph(
             "There is also an experimental support for tables containing form fields."
             "The way it works is that you wrap your table in a form and use the "
-            f"{Code("create_rows")} function to generate the rows. Here is an example:"
+            f"{Code('create_rows')} function to generate the rows. Here is an example:"
         ),
         Form(
             Table(*create_rows(contacts_attrs_list, spec=SampleContactAttrs)),
@@ -161,10 +161,12 @@ def tables(request: Request) -> Page:
         ),
         Paragraph(
             "The role of the identifier column is to be able to parse the form data "
-            f"using the {Code("ListParser")} function as documented in the {Link(
-                "Parsers section",
-                to=f"{request.url_for("docs:web_framework").path}#parsing-collections"
-            )} of the documentation."
+            f"using the {Code('ListParser')} function as documented in the {
+                Link(
+                    'Parsers section',
+                    to=f'{request.url_for("docs:web_framework").path}#parsing-collections',
+                )
+            } of the documentation."
         ),
         request=request,
         active_item="tables",

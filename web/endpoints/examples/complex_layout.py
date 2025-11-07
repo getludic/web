@@ -12,7 +12,7 @@ def complex_layout(request: Request) -> Page:
         H2("Layout Example"),
         Paragraph(
             "You are free to combine layouts and components together as described in "
-            f"the {Link("Layouts", to=request.url_for("catalog:layouts").path)} "
+            f"the {Link('Layouts', to=request.url_for('catalog:layouts').path)} "
             "section. The following is an example of a more complex layout consisting "
             "of multiple nested components using CSS utilities to tweak final design."
         ),

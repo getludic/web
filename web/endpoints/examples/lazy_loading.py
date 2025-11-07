@@ -30,7 +30,7 @@ async def lazy_loading(request: Request) -> Page:
         Paragraph(
             "The lazy loading functionality is super simple to implement "
             "in Ludic. You can create just two function-based endpoints "
-            f"and use the {Code("LazyLoader")} component from the catalog: "
+            f"and use the {Code('LazyLoader')} component from the catalog: "
         ),
         CodeBlock(
             """

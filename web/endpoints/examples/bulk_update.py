@@ -33,7 +33,7 @@ async def bulk_update(request: Request) -> Page:
         H2("Implementation"),
         Paragraph(
             "The first thing we need to do is create the table. For this task, we use "
-            f"a class-based endpoint called {Code("PeopleTable")} which will contain "
+            f"a class-based endpoint called {Code('PeopleTable')} which will contain "
             "the list of people. This list of people is going to be the endpoint's "
             "attributes, so we create them first:"
         ),
@@ -60,15 +60,15 @@ async def bulk_update(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Each field in the {Code("PersonAttrs")} definition is marked by the"
-            f"{Code("Annotated")} class containing the {Code("ColumnMeta")} "
+            f"Each field in the {Code('PersonAttrs')} definition is marked by the"
+            f"{Code('Annotated')} class containing the {Code('ColumnMeta')} "
             "marker. This marker helps generating the table using the "
-            f"{Code("create_rows")} function as we'll see bellow."
+            f"{Code('create_rows')} function as we'll see bellow."
         ),
         Paragraph(
             "Now we know what kind of data we need to store and what columns to "
             "create. Here is the endpoint implementation rendering the attributes "
-            f"as a table as well as handling the {Code("GET")} and {Code("POST")} "
+            f"as a table as well as handling the {Code('GET')} and {Code('POST')} "
             "HTTP methods:"
         ),
         CodeBlock(
@@ -102,8 +102,8 @@ async def bulk_update(request: Request) -> Page:
                             activations[active] += 1
 
                     return Toast(
-                        f"Activated {activations[True]}, "
-                        f"deactivated {activations[False]}"
+                        t"Activated {activations[True]}, "
+                        t"deactivated {activations[False]}"
                     )
 
                 @classmethod
@@ -130,11 +130,11 @@ async def bulk_update(request: Request) -> Page:
             Item(
                 Code("post"),
                 " – handles the POST request which contains form data. Since we "
-                f"used the {Code("create_rows")} method, it is possible to use a "
+                f"used the {Code('create_rows')} method, it is possible to use a "
                 "parser to automatically convert the form data in a dictionary. "
                 "In fact, we are handling a list of people, so we use the "
-                f"{Code("ListParser")}. Next, we update our database and return "
-                f"the number of activated and deactivated people as a {Code("Toast")} "
+                f"{Code('ListParser')}. Next, we update our database and return "
+                f"the number of activated and deactivated people as a {Code('Toast')} "
                 "component that we cover bellow.",
             ),
             Item(
@@ -148,15 +148,15 @@ async def bulk_update(request: Request) -> Page:
                 " – handles rendering of the table. The table is wrapped in a form "
                 "so that it is possible to issue a POST request updating the list of "
                 "active or inactive people. The form is wrapping the table having the "
-                f"columns created according the the {Code("PersonAttrs")} "
+                f"columns created according the the {Code('PersonAttrs')} "
                 "specification. We also need a button to submit the form and a "
-                f"{Code("Toast")} component which displays a message about activated "
+                f"{Code('Toast')} component which displays a message about activated "
                 "and deactivated people. The form is submitted via HTMX.",
             ),
         ),
         Paragraph(
-            f"Here is the implementation of the {Code("Toast")} component displaying "
-            f"the small message next to the {Code("Bulk Update")} button:"
+            f"Here is the implementation of the {Code('Toast')} component displaying "
+            f"the small message next to the {Code('Bulk Update')} button:"
         ),
         CodeBlock(
             """

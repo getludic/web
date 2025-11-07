@@ -211,7 +211,8 @@ def index(request: Request) -> Page:
         Paragraph("Python 3.14+"),
         Paragraph(
             f"{b('Note')}: Ludic 0.5.x supports Python 3.12+ with f-strings. "
-            "For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of t-strings.",
+            "For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of "
+            "t-strings.",
             style={"font-size": "0.9em", "color": "#666"},
         ),
         H2("Installation"),
@@ -220,7 +221,7 @@ def index(request: Request) -> Page:
             f"If you want to use FastAPI or Django, check the {
                 Link(
                     'Other Integrations guide',
-                    to=request.url_path_for("docs:web_framework"),
+                    to=request.url_path_for('docs:web_framework'),
                 )
             }:"
         ),

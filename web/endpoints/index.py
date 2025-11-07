@@ -28,7 +28,7 @@ SAMPLES: list[str] = [
     async def index() -> Box:
         """Homepage endpoint greeting visitors."""
         return Box(
-            f"Welcome to {Link("Ludic", to="/")}!",
+            t"Welcome to {Link("Ludic", to="/")}!",
         )
     ''',
     '''
@@ -108,8 +108,8 @@ SAMPLES: list[str] = [
         return Page(
             H1("HTML Page in Pure Python"),
             Paragraph(
-                f"A sample on how to use {b("Ludic")} to build"
-                f"static {Code("HTML")} page in pure Python."
+                t"A sample on how to use {b("Ludic")} to build"
+                t"static {Code("HTML")} page in pure Python."
             ),
         )
     """,
@@ -185,8 +185,8 @@ def index(request: Request) -> HomePage:
                 id="main-heading",
             ),
             Paragraph(
-                f"A {b("type-safe HTML template engine")} for Python. Build dynamic "
-                f"web pages using {b("Python components")} with a React-like approach "
+                f"A {b('type-safe HTML template engine')} for Python. Build dynamic "
+                f"web pages using {b('Python components')} with a React-like approach "
                 f"- no template syntax required.",
                 style={"font-size": request.state.theme.headers.h4.size * 0.8},
             ),
