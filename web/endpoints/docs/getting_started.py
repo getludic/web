@@ -17,6 +17,13 @@ def getting_started(request: Request) -> Page:
                to="https://github.com/getludic/template")}. Follow the steps "
             "below to set up your project quickly."
         ),
+        Paragraph(
+            f"{b('Note')}: This guide covers Ludic 1.0 which requires Python 3.14+ and "
+            "uses t-strings. If you're using Python 3.12 or 3.13, use Ludic 0.5.x with "
+            f"f-strings instead. Install with {Code('--python 3.13')} and use f-strings "
+            "in your code.",
+            style={"font-size": "0.9em", "color": "#666", "padding": "1em", "background": "#f5f5f5", "border-radius": "4px"},
+        ),
         H2("Installation Steps"),
         NumberedList(
             Item(

@@ -209,6 +209,11 @@ def index(request: Request) -> Page:
         ),
         H2("Requirements"),
         Paragraph("Python 3.14+"),
+        Paragraph(
+            f"{b('Note')}: Ludic 0.5.x supports Python 3.12+ with f-strings. "
+            "For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of t-strings.",
+            style={"font-size": "0.9em", "color": "#666"},
+        ),
         H2("Installation"),
         Paragraph(
             "The following command installs Ludic with Starlette as ASGI framework. "
