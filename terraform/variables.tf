@@ -39,3 +39,9 @@ variable "create_github_oidc_provider" {
   type        = bool
   default     = true
 }
+
+variable "domain_name" {
+  description = "Apex domain served by CloudFront. The www. variant is also added as an alias."
+  type        = string
+  default     = "getludic.dev"
+}

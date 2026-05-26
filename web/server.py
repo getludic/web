@@ -29,6 +29,7 @@ from .middlewares import (
     PerformanceMiddleware,
     ProfileMiddleware,
     SecurityHeadersMiddleware,
+    TrustForwardedHostMiddleware,
 )
 from .pages import Page
 from .search import Index, build_index
@@ -60,6 +61,9 @@ async def lifespan(app: LudicApp) -> AsyncIterator[State]:
 
 
 middlewares = [
+    # Must come first: rewrites Host/scheme from X-Forwarded-* so every
+    # downstream middleware and the app see the public URL, not the Lambda URL.
+    Middleware(TrustForwardedHostMiddleware),
     Middleware(SecurityHeadersMiddleware),
     Middleware(GZipMiddleware, minimum_size=1000),
     Middleware(PerformanceMiddleware),

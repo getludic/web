@@ -22,3 +22,19 @@ output "search_index_bucket" {
   description = "S3 bucket name for the prebuilt search index"
   value       = aws_s3_bucket.search_index.bucket
 }
+
+output "cloudfront_domain" {
+  description = "CloudFront distribution domain. Point your DNS CNAMEs here."
+  value       = aws_cloudfront_distribution.app.domain_name
+}
+
+output "acm_dns_validation_records" {
+  description = "CNAMEs to add at your DNS provider to validate the ACM certificate."
+  value = {
+    for dvo in aws_acm_certificate.app.domain_validation_options : dvo.domain_name => {
+      name  = dvo.resource_record_name
+      type  = dvo.resource_record_type
+      value = dvo.resource_record_value
+    }
+  }
+}

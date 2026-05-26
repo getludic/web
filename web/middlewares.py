@@ -10,8 +10,42 @@ except ImportError:
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
+from starlette.types import ASGIApp, Receive, Scope, Send
 
 from .database import DB, init_contacts, init_db, init_people
+
+
+class TrustForwardedHostMiddleware:
+    """Rewrite Host header and scheme from X-Forwarded-* before the app sees it.
+
+    Required when the app sits behind CloudFront → Lambda Function URL: the
+    Function URL only accepts requests whose Host header matches its own
+    hostname (SigV4 signing requires it), so CloudFront overwrites Host on
+    the way to origin. Without this middleware, `request.url_for(...)` and
+    any absolute URLs generated server-side would point at the raw Lambda
+    URL instead of the public domain.
+
+    Must be installed BEFORE any middleware that reads request.url.
+    """
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] in ("http", "websocket"):
+            headers: dict[bytes, bytes] = dict(scope["headers"])
+            forwarded_host = headers.get(b"x-forwarded-host")
+            forwarded_proto = headers.get(b"x-forwarded-proto")
+
+            if forwarded_host:
+                scope["headers"] = [
+                    (b"host", forwarded_host) if name == b"host" else (name, value)
+                    for name, value in scope["headers"]
+                ]
+            if forwarded_proto:
+                scope["scheme"] = forwarded_proto.decode("latin-1")
+
+        await self.app(scope, receive, send)
 
 
 class CookieStorageMiddleware(BaseHTTPMiddleware):
