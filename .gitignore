@@ -128,3 +128,35 @@ cython_debug/
 # IDEs
 .vscode
 .idea
+
+# Ruff
+.ruff_cache/
+
+# Terraform — never commit state, plans, lockfile, or tfvars (may hold secrets)
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.*.backup
+.terraform.lock.hcl
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+!example.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+tfplan
+*.tfplan
+
+# AWS / credentials
+.aws/
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db

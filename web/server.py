@@ -1,3 +1,4 @@
+import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import TypedDict
@@ -31,6 +32,7 @@ from .middlewares import (
 )
 from .pages import Page
 from .search import Index, build_index
+from .search.cache import load_from_s3
 from .themes import theme
 
 themes.set_default_theme(theme)
@@ -44,8 +46,15 @@ class State(TypedDict):
 @asynccontextmanager
 async def lifespan(app: LudicApp) -> AsyncIterator[State]:
     style.load(cache=True)
+
+    index: Index | None = None
+    if bucket := os.environ.get("INDEX_S3_BUCKET"):
+        index = load_from_s3(bucket)
+    if index is None:
+        index = await build_index(app)
+
     yield {
-        "index": await build_index(app),
+        "index": index,
         "theme": themes.get_default_theme(),
     }
 
