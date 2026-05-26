@@ -47,24 +47,13 @@ resource "aws_cloudfront_function" "forward_host" {
   EOT
 }
 
-resource "aws_cloudfront_origin_access_control" "lambda" {
-  name                              = "${var.app_name}-lambda-oac"
-  origin_access_control_origin_type = "lambda"
-  signing_behavior                  = "always"
-  signing_protocol                  = "sigv4"
-}
-
-# Permits CloudFront to invoke the Function URL on behalf of viewers.
-resource "aws_lambda_permission" "allow_cloudfront" {
-  statement_id           = "AllowCloudFrontInvokeFunctionUrl"
-  action                 = "lambda:InvokeFunctionUrl"
-  function_name          = aws_lambda_function.app.function_name
-  principal              = "cloudfront.amazonaws.com"
-  source_arn             = aws_cloudfront_distribution.app.arn
-  function_url_auth_type = "AWS_IAM"
-}
-
 # ── CloudFront distribution ───────────────────────────────────────────────────
+#
+# Note: Function URL is AuthType=NONE, so CloudFront does NOT SigV4-sign
+# origin requests (no OAC). OAC for Lambda Function URLs has a known
+# body-signing bug that breaks POST requests with InvalidSignatureException.
+# The Function URL is publicly addressable but lives on an obscure random
+# hostname; for this app (no sensitive data) that's acceptable.
 
 resource "aws_cloudfront_distribution" "app" {
   enabled         = true
@@ -75,9 +64,8 @@ resource "aws_cloudfront_distribution" "app" {
   comment         = var.app_name
 
   origin {
-    domain_name              = replace(replace(aws_lambda_function_url.app.function_url, "https://", ""), "/", "")
-    origin_id                = "lambda-url"
-    origin_access_control_id = aws_cloudfront_origin_access_control.lambda.id
+    domain_name = replace(replace(aws_lambda_function_url.app.function_url, "https://", ""), "/", "")
+    origin_id   = "lambda-url"
 
     custom_origin_config {
       http_port              = 80
