@@ -11,6 +11,7 @@ from ludic.web import LudicApp, Request
 from ludic.web.routing import Mount
 from starlette.middleware import Middleware
 from starlette.middleware.gzip import GZipMiddleware
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.staticfiles import StaticFiles
 
 from . import config
@@ -64,6 +65,10 @@ middlewares = [
     # Must come first: rewrites Host/scheme from X-Forwarded-* so every
     # downstream middleware and the app see the public URL, not the Lambda URL.
     Middleware(TrustForwardedHostMiddleware),
+    # Validates the (possibly rewritten) Host header against an allowlist.
+    # Defends against Host / X-Forwarded-Host poisoning of absolute URLs
+    # generated via `request.url_for(...)`.
+    Middleware(TrustedHostMiddleware, allowed_hosts=config.ALLOWED_HOSTS),
     Middleware(SecurityHeadersMiddleware),
     Middleware(GZipMiddleware, minimum_size=1000),
     Middleware(PerformanceMiddleware),

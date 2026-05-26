@@ -287,6 +287,55 @@ def web_framework(request: Request) -> Page:
             f"This method is available on the {Code('ludic.web.requests.Request')} "
             f"object. It generates and {Code('URLPath')} object for a given endpoint."
         ),
+        MessageWarning(
+            Title("Host header poisoning"),
+            Paragraph(
+                f"{Code('Request.url_for(...)')} returns an "
+                f"{i('absolute')} URL whose scheme and host are derived from the "
+                f"incoming request – ultimately from the HTTP {Code('Host')} header "
+                f"(and {Code('X-Forwarded-*')} headers when proxy headers are "
+                "trusted). If your app accepts requests with an untrusted "
+                f"{Code('Host')}, an attacker can poison every absolute URL you "
+                f"render – including {Code('hx-get')} / {Code('hx-post')} attributes, "
+                "links, redirects, and links sent in outbound messages – pointing "
+                "the browser at an attacker-controlled domain."
+            ),
+            Paragraph("Mitigations:"),
+            List(
+                Item(
+                    "Prefer ",
+                    Code("request.url_path_for(...)"),
+                    " – or ",
+                    Code("request.url_for(...).path"),
+                    " – for in-app links and HTMX attributes. Relative paths "
+                    "cannot be poisoned and are usually what you want anyway.",
+                ),
+                Item(
+                    "Install ",
+                    Code("starlette.middleware.trustedhost.TrustedHostMiddleware"),
+                    " with an explicit ",
+                    Code("allowed_hosts"),
+                    " list so the app rejects requests with a forged ",
+                    Code("Host"),
+                    " header before any handler runs.",
+                ),
+                Item(
+                    "Behind a reverse proxy or CDN, configure ",
+                    Code("ProxyHeadersMiddleware"),
+                    " (or an equivalent) with a trusted-proxy allowlist so ",
+                    Code("X-Forwarded-Host"),
+                    " / ",
+                    Code("X-Forwarded-Proto"),
+                    " are only honored from your own infrastructure.",
+                ),
+            ),
+            Paragraph(
+                "FastAPI users get the same exposure: the FastAPI integration "
+                f"wraps the incoming request as {Code('LudicRequest')}, so "
+                f"{Code('Request.url_for(...)')} is reachable from FastAPI "
+                "handlers and the same advice applies.",
+            ),
+        ),
         b(Code("Endpoint.url_for(endpoint: type[RoutedProtocol] | str, ...)")),
         Paragraph(
             "This method is available on a component-based endpoint. It has one small "
