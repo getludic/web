@@ -1,9 +1,8 @@
 from typing import Self, override
 
-from ludic import Blank
 from ludic.attrs import Attrs
 from ludic.catalog.buttons import ButtonDanger, ButtonSuccess
-from ludic.catalog.headers import H1, H2
+from ludic.catalog.headers import H1, H2, H3
 from ludic.catalog.layouts import Box, Cluster
 from ludic.catalog.lists import Item, List
 from ludic.catalog.tables import Table, TableHead, TableRow
@@ -53,97 +52,156 @@ def index(request: Request) -> Page:
             source="Igor Davydenko",
         ),
         Paragraph(
-            "Ludic is a lightweight framework for building HTML pages with a component "
-            f"approach similar to {Link('React', to='https://react.dev/')}. It is "
-            f"built to be used together with {
-                Link('htmx.org', to='https://htmx.org/')
-            } so that developers don't need "
-            "to write almost any JavaScript to create dynamic web services. Its "
-            "potential can be leveraged together with its web framework which is a "
-            f"wrapper around the powerful {
-                Link('Starlette', to='https://www.starlette.io/')
-            } framework. It is built "
-            "with the latest Python 3.14 features heavily incorporating typing."
+            "Ludic lets you write HTML as typed Python components. Your type checker "
+            "validates the markup, so wrong nesting, unknown attributes and missing "
+            "arguments are caught before a page ever renders. At its core Ludic only "
+            "renders HTML, so it fits into the web framework you already use, and it "
+            f"pairs naturally with {Link('htmx', to='https://htmx.org/')}."
+        ),
+        CodeBlock(
+            """
+            from typing import override
+
+            from ludic import Attrs, Component
+            from ludic.html import a, b, p
+
+
+            class LinkAttrs(Attrs):
+                to: str
+
+
+            class Link(Component[str, LinkAttrs]):
+                @override
+                def render(self) -> a:
+                    return a(*self.children, href=self.attrs["to"])
+
+
+            p(t"Hello {b('Stranger')}! Click {Link('here', to='/home')}.").to_html()
+            # <p>Hello <b>Stranger</b>! Click <a href="/home">here</a>.</p>
+            """,
+            language="python",
+        ),
+        Paragraph(
+            "Invalid markup is a type error. This is what ",
+            Link("mypy", to="https://mypy-lang.org/"),
+            " reports:",
+        ),
+        CodeBlock(
+            """
+            br("Hello, World!")
+            # error: Argument 1 to "br" has incompatible type "str"; expected "Never"
+
+            html(body())
+            # error: Argument 1 to "html" has incompatible type "body"; expected "head"
+
+            div("Test", href="test")
+            # error: Unexpected keyword argument "href" for "div"
+
+            Link("here", too="/home")
+            # error: Unexpected keyword argument "too" for "Link"; did you mean "to"?
+
+            Link(div("here"), to="/home")
+            # error: Argument 1 to "Link" has incompatible type "div"; expected "str"
+
+            Link("here")
+            # error: Missing named argument "to" for "Link"
+            """,
+            language="python",
         ),
         H2("Features"),
         List(
             Item(
-                f"Seamless {b('</> htmx')} integration for rapid web development "
-                f"in {b('pure Python')}"
+                f"{b('Type-guided HTML')}: every element knows which children and "
+                "attributes it allows"
             ),
-            Item(f"{b('Type-Guided components')} utilizing Python's typing system"),
             Item(
-                f"Uses the power of {b('Starlette')} and {b('Async')} for "
-                "high-performance web development"
+                f"{b('Components')} in pure Python, composed like in "
+                f"{Link('React', to='https://react.dev/')}"
             ),
-            Item(f"Build HTML with the ease and power of Python {b('t-strings')}"),
-            Item(f"Add CSS styling to your components with {b('Themes')}"),
             Item(
-                "Create simple, responsive layouts adopted from the "
-                f"{b('Every Layout Book')}"
+                f"Mix markup and text with Python 3.14 {b('t-strings')} "
+                "(template strings)"
+            ),
+            Item(
+                f"Text is {b('escaped by default')}, trusted markup is marked "
+                f"explicitly with {Code('Safe')}"
+            ),
+            Item(
+                f"Typed {b('</> htmx')} attributes, so dynamic pages need almost no "
+                "JavaScript"
+            ),
+            Item(
+                f"Works with {b('Starlette')}, {b('FastAPI')} and {b('Django')}, or "
+                "with no framework at all"
+            ),
+            Item(f"Typed CSS for your components with {b('Themes')}"),
+            Item(
+                f"Simple, responsive layouts adopted from the {b('Every Layout Book')}"
             ),
         ),
         H2("Comparison"),
-        Paragraph("Here is a table comparing Ludic to other similar tools:"),
+        Paragraph(
+            "Here is how Ludic compares to other ways of producing HTML in Python:"
+        ),
         Table(
             TableHead(
                 "Feature",
                 "Ludic",
-                "FastUI",
-                "Reflex",
+                Link("htpy", to="https://htpy.dev/"),
+                Link("FastHTML", to="https://fastht.ml/"),
+                Link("tdom", to="https://github.com/t-strings/tdom"),
+                Link("Jinja2", to="https://jinja.palletsprojects.com/"),
             ),
             TableRow(
-                "HTML rendering",
-                "Server Side",
-                "Client Side",
-                "Client Side",
+                "How you write HTML",
+                "Python calls and t-strings",
+                "Python calls, children in []",
+                "Python calls",
+                "HTML inside t-strings",
+                "Template files",
             ),
             TableRow(
-                "Uses a template engine",
+                "Children and attributes type-checked per element",
+                "Yes",
                 "No",
                 "No",
                 "No",
+                "No",
             ),
             TableRow(
-                "UI interactivity",
-                Blank(Link("</> htmx", to="https://htmx.org"), "*"),
-                Link("React", to="https://react.dev"),
-                Link("React", to="https://react.dev"),
+                "Web framework",
+                "Optional: Starlette, FastAPI, Django or none",
+                "Any",
+                "Its own, built on Starlette",
+                "Any",
+                "Any",
             ),
             TableRow(
-                "Backend framework",
-                Blank(
-                    Link("Starlette", to="https://www.starlette.io/"),
-                    ", ",
-                    Link("FastAPI", to="https://fastapi.tiangolo.com/"),
-                    ", ",
-                    Link("Django", to="https://www.djangoproject.com/"),
-                    "*",
-                ),
-                Link("FastAPI", to="https://fastapi.tiangolo.com/"),
-                Link("FastAPI", to="https://fastapi.tiangolo.com/"),
-            ),
-            TableRow(
-                "Client-Server Communication",
-                Link(
-                    "HTML + REST",
-                    to="https://htmx.org/essays/how-did-rest-come-to-mean-the-opposite-of-rest/",
-                ),
-                Link(
-                    "JSON + REST",
-                    to="https://github.com/pydantic/FastUI?tab=readme-ov-file#the-principle-long-version",
-                ),
-                Link(
-                    "WebSockets",
-                    to="https://reflex.dev/blog/2024-03-21-reflex-architecture/",
-                ),
+                "Python",
+                "3.14+ (3.12+ with 0.5.x)",
+                "3.10+",
+                "3.10+",
+                "3.14+",
+                "3.7+",
             ),
         ),
-        Paragraph(
-            "(*) HTMX as well as Starlette or Django are optional dependencies for "
-            "Ludic, it does not enforce any frontend or backend frameworks. At it's "
-            "core, Ludic only generates HTML and allows registering CSS.",
-            style={"font-size": "0.8em"},
+        Paragraph("The others are a better fit in some cases:"),
+        List(
+            Item(
+                f"{b('htpy')} supports older Python versions and needs no type "
+                "checker plugin."
+            ),
+            Item(
+                f"{b('FastHTML')} is a complete web framework rather than a library "
+                "you add to one."
+            ),
+            Item(
+                f"{b('tdom')} lets you write real HTML syntax instead of Python calls."
+            ),
+            Item(
+                f"{b('Jinja2')} keeps templates in files that people who do not write "
+                "Python can edit."
+            ),
         ),
         H2("Quick Example"),
         Paragraph(
@@ -216,12 +274,15 @@ def index(request: Request) -> Page:
             style={"font-size": "0.9em", "color": "#666"},
         ),
         H2("Installation"),
+        Paragraph("The core package renders HTML and has a single dependency:"),
+        CodeBlock("pip install ludic"),
         Paragraph(
-            "The following command installs Ludic with Starlette as ASGI framework. "
+            "The following command also installs the web framework built on "
+            "Starlette, form parsing and code highlighting. "
             f"If you want to use FastAPI or Django, check the {
                 Link(
                     'Other Integrations guide',
-                    to=request.url_path_for('docs:web_framework'),
+                    to=request.url_path_for('docs:integrations'),
                 )
             }:"
         ),
@@ -242,6 +303,19 @@ def index(request: Request) -> Page:
                 "Getting Started guide", to=request.url_path_for("docs:getting_started")
             ),
             ".",
+        ),
+        H3("Type Checking"),
+        Paragraph(
+            f"Elements from {Code('ludic.html')} are checked by plain type hints. "
+            "To also check the attributes of your own components, enable the mypy "
+            f"plugin in {Code('pyproject.toml')}:"
+        ),
+        CodeBlock(
+            """
+            [tool.mypy]
+            plugins = ["ludic.mypy_plugin"]
+            """,
+            language="toml",
         ),
         H2("Integrations"),
         Paragraph(
@@ -278,7 +352,7 @@ def index(request: Request) -> Page:
                 "discussion.",
             ),
             Item(
-                Link("Discord", to="https://discord.gg/4Y5fSQUS"),
+                Link("Discord", to=config.DISCORD_INVITE_URL),
                 " – Join our Discord server for support, sharing ideas, and receiving "
                 "assistance.",
             ),
