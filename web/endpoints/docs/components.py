@@ -1,5 +1,5 @@
 from ludic.catalog.headers import H1, H2, H3, H4
-from ludic.catalog.lists import Item, List, NumberedList
+from ludic.catalog.lists import Item, List
 from ludic.catalog.messages import Message, MessageWarning, Title
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, i
@@ -351,7 +351,7 @@ def components(request: Request) -> Page:
         CodeBlock(
             """
             p("<script>alert('Hello world')</script>").to_html()
-            '<p>&lt;script&gt;alert(&#x27;Hello world&#x27;)&lt;/script&gt;</p>'
+            "<p>&lt;script&gt;alert('Hello world')&lt;/script&gt;</p>"
             """,
             language="python",
         ),
@@ -419,57 +419,45 @@ def components(request: Request) -> Page:
         ),
         CodeBlock(
             """
-            p1 = p(f"click {Link("here", to="https://example.com")}")
+            p1 = p(t"click {Link("here", to="https://example.com")}")
             p2 = p("click ", Link("here", to="https://example.com"))
 
             assert p1 == p2  # Identical components
             """,
             language="python",
         ),
-        b("Important Note: Memory Considerations"),
         Paragraph(
-            f"{i('Temporary Dictionaries')}: to make t-strings safely work, they "
-            "internally create temporary dictionaries to hold the component "
-            "instances. To avoid memory leaks, these dictionaries need to be "
-            "consumed by a component."
+            "A t-string keeps its interpolated values as objects. Elements stay "
+            "elements, and any other value is escaped like a regular string:"
         ),
-        Paragraph("There are two cases it can create hanging objects (memory leaks):"),
-        NumberedList(
-            Item("Component initialization with the t-string fails."),
-            Item(
-                "You store a t-string in a variable but don't pass it to a component."
-            ),
-        ),
-        MessageWarning(
-            Title("Possible memory leak"),
-            "The implementation of t-strings requires the creation of a temporary dict "
-            "which can result in hanging objects in memory. To avoid memory leaks, "
-            f"there is the {Code('BaseElement.formatter')} attribute which is a "
-            "context manager clearing the temporary dict on exit.",
-        ),
-        b(f"The {Code('BaseElement.formatter')} Context Manager"),
         CodeBlock(
             """
-            from ludic.base import BaseElement
+            name = "<script>alert(1)</script>"
 
-            with BaseElement.formatter:
-                # you can do anything with t-strings here, no memory leak
-                # is created since formatter dict is cleared on exit
+            p(t"Hello {name}, welcome {b("back")}!").to_html()
+            '<p>Hello &lt;script&gt;alert(1)&lt;/script&gt;, welcome <b>back</b>!</p>'
             """,
             language="python",
         ),
-        b("Web Framework Request Handlers"),
-        Paragraph(
-            "The Ludic Web Framework (built on Starlette) automatically wraps request "
-            f"handlers with {Code('BaseElement.formatter')}, providing a safe "
-            "environment for t-strings.",
+        MessageWarning(
+            Title("Use t-strings, not f-strings"),
+            "An f-string turns an element into text before Ludic can see it, so the "
+            "markup ends up escaped on the page.",
         ),
-        b("Key Takeaways"),
-        Paragraph(
-            "While t-strings are convenient, exercise caution to prevent memory leaks. "
-            "Use them within the provided safety mechanisms. In contexts like task "
-            "queues or other web frameworks, you can use a similar mechanism of "
-            "wrapping to achieve memory safety."
+        CodeBlock(
+            """
+            p(f"click {b("here")}").to_html()
+            '<p>click &lt;b&gt;here&lt;/b&gt;</p>'
+            """,
+            language="python",
+        ),
+        Message(
+            Title("Ludic 0.5.x"),
+            "Ludic 0.5.x for Python 3.12 and 3.13 uses f-strings for the same "
+            "purpose. They keep the elements in a temporary dictionary, which is "
+            "cleared automatically in request handlers of the Ludic Web Framework. "
+            f"Anywhere else, wrap the code in {Code('with BaseElement.formatter:')} "
+            "to avoid leaking memory. None of this applies to t-strings.",
         ),
         H2("Available Methods"),
         Paragraph(
