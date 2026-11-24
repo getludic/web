@@ -13,6 +13,7 @@ from ludic.types import AnyChildren, NoChildren
 from ludic.web import Request
 
 from . import config
+from .navigation import SECTIONS
 
 
 class BadgeAttrs(Attrs):
@@ -170,45 +171,6 @@ class MenuAttrs(Attrs):
 
 
 class Menu(Component[NoChildren, MenuAttrs]):
-    SECTIONS = {
-        "docs": "Documentation",
-        "catalog": "Catalog",
-        "examples": "Examples",
-    }
-    SUBSECTIONS = {
-        "docs": {
-            "index": "Introduction",
-            "getting_started": "Getting Started",
-            "components": "Components",
-            "styles": "Styles and Themes",
-            "htmx": "HTMX Support",
-            "web_framework": "Web Framework",
-            "integrations": "Other Integrations",
-        },
-        "catalog": {
-            "index": "Basics",
-            "layouts": "Layouts",
-            "typography": "Typography",
-            "buttons": "Buttons",
-            "messages": "Messages",
-            "forms": "Forms",
-            "tables": "Tables",
-            "loaders": "Loaders",
-        },
-        "examples": {
-            "index": "Components",
-            "complex_layout": "Complex Layout",
-            "bulk_update": "Bulk Update",
-            "click_to_edit": "Click to Edit",
-            "click_to_load": "Click to Load",
-            "delete_row": "Delete Row",
-            "edit_row": "Edit Row",
-            "infinite_scroll": "Infinite Scroll",
-            "lazy_loading": "Lazy Loading",
-            "cascading_selects": "FastAPI Example",
-        },
-    }
-
     @override
     def render(self) -> Box:
         request = self.attrs["request"]
@@ -225,27 +187,28 @@ class Menu(Component[NoChildren, MenuAttrs]):
 
         items = []
 
-        for section, subsections in self.SUBSECTIONS.items():
+        for section in SECTIONS:
+            names = [page.name for page in section.pages]
             in_subsection = (
-                active_section is None or active_section == section
-            ) and active_subsection in subsections
+                active_section is None or active_section == section.name
+            ) and active_subsection in names
 
             items.append(
                 NavItem(
-                    self.SECTIONS[section],
-                    to=request.url_for(f"{section}:index").path,
+                    section.title,
+                    to=request.url_for(f"{section.name}:index").path,
                     active_subsection=in_subsection,
                     classes=["section"],
                     hx_swap="innerHTML show:none",
                 )
             )
             if in_subsection:
-                for item in subsections:
+                for page in section.pages:
                     items.append(
                         NavItem(
-                            subsections[item],
-                            to=request.url_for(f"{section}:{item}").path,
-                            active=active_subsection == item,
+                            page.title,
+                            to=request.url_for(f"{section.name}:{page.name}").path,
+                            active=active_subsection == page.name,
                             classes=["subsection"],
                             hx_swap="innerHTML show:#main-content:top",
                         )

@@ -243,7 +243,7 @@ def web_framework(request: Request) -> Page:
                         Pairs(items=self.attrs.items()),
                         ButtonPrimary(
                             "Click To Edit",
-                            hx_get=self.url_for(ContactForm),
+                            hx_get=self.url_for(ContactForm).path,
                         ),
                         hx_target="this",
                     )
@@ -261,8 +261,8 @@ def web_framework(request: Request) -> Page:
                     return Form(
                         # ... form fields definition here ...,
                         ButtonPrimary("Submit"),
-                        ButtonDanger("Cancel", hx_get=self.url_for(Contact)),
-                        hx_put=self.url_for(Contact),
+                        ButtonDanger("Cancel", hx_get=self.url_for(Contact).path),
+                        hx_put=self.url_for(Contact).path,
                         hx_target="this",
                     )
             """,
@@ -331,7 +331,7 @@ def web_framework(request: Request) -> Page:
             ),
             Paragraph(
                 t"FastAPI users get the same exposure: the FastAPI integration "
-                t"wraps the incoming request as {Code('LudicRequest')}, so "
+                t"wraps the incoming request in Ludic's {Code('Request')}, so "
                 t"{Code('Request.url_for(...)')} is reachable from FastAPI "
                 t"handlers and the same advice applies.",
             ),

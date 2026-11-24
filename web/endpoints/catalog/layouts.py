@@ -441,7 +441,7 @@ def layouts(request: Request) -> Page:
         Cluster(
             ButtonLink(
                 "Open Layout In New Tab",
-                to=str(request.url_for("complex_layout:index")),
+                to=request.url_for("complex_layout:index").path,
                 external=True,
                 classes=["large", "secondary"],
             ),

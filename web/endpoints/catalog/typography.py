@@ -17,7 +17,7 @@ def typography(request: Request) -> Page:
         H4("Link"),
         Paragraph(
             t"This text contains a {
-                Link('link', to=str(request.url_for('catalog:index')))
+                Link('link', to=request.url_for('catalog:index').path)
             }.",
         ),
         CodeBlock(

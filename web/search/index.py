@@ -1,3 +1,4 @@
+import importlib
 import math
 from collections.abc import Callable
 from typing import Any, Literal
@@ -10,7 +11,7 @@ from ludic.web import LudicApp, Request
 from ludic.web.datastructures import URLPath
 from starlette._utils import is_async_callable
 
-from web.endpoints import catalog, docs, examples
+from web.navigation import SECTIONS
 from web.pages import Page
 
 from .analysis import analyze
@@ -123,54 +124,36 @@ class _FakeRequest:
 
 
 async def build_index(app: LudicApp) -> Index:
-    endpoints = [
-        catalog.index.index,
-        catalog.typography.typography,
-        catalog.buttons.buttons,
-        catalog.messages.messages,
-        catalog.layouts.layouts,
-        catalog.loaders.loaders,
-        catalog.forms.forms,
-        catalog.tables.tables,
-        docs.index.index,
-        docs.components.components,
-        docs.getting_started.getting_started,
-        docs.htmx.htmx,
-        docs.styles.styles,
-        docs.web_framework.web_framework,
-        examples.index.index,
-        examples.bulk_update.bulk_update,
-        examples.click_to_load.click_to_load,
-        examples.delete_row.delete_row,
-        examples.edit_row.edit_row,
-        examples.infinite_scroll.infinite_scroll,
-        examples.lazy_loading.lazy_loading,
-    ]
     indexer = Index()
 
     data: list[tuple[str, BaseElement, list[BaseElement]]] = []
-    for endpoint in endpoints:
-        _, _, mount_name, route_name = endpoint.__module__.split(".")
+    for section in SECTIONS:
+        for page in section.pages:
+            module = importlib.import_module(
+                f"web.endpoints.{section.name}.{page.name}"
+            )
+            endpoint = getattr(module, page.name)
+            mount_name, route_name = section.name, page.name
 
-        if is_async_callable(endpoint):
-            response = await endpoint(_FakeRequest(app))  # type: ignore
-        else:
-            response = endpoint(_FakeRequest(app))  # type: ignore
+            if is_async_callable(endpoint):
+                response = await endpoint(_FakeRequest(app))
+            else:
+                response = endpoint(_FakeRequest(app))
 
-        if not isinstance(response, Page):
-            continue
+            if not isinstance(response, Page):
+                continue
 
-        for child in response.children:
-            if isinstance(child, H1 | H2):
-                data.append(
-                    (
-                        f"{app.url_path_for(f'{mount_name}:{route_name}')}#{text_to_kebab(child.text)}",
-                        H3(child.text, anchor=False),
-                        [],
+            for child in response.children:
+                if isinstance(child, H1 | H2):
+                    data.append(
+                        (
+                            f"{app.url_path_for(f'{mount_name}:{route_name}')}#{text_to_kebab(child.text)}",
+                            H3(child.text, anchor=False),
+                            [],
+                        )
                     )
-                )
-            elif data and isinstance(child, BaseElement):
-                data[-1][2].append(child)
+                elif data and isinstance(child, BaseElement):
+                    data[-1][2].append(child)
 
     for idx, (url, title, content) in enumerate(data):
         document = Document(id=idx, title=title, content=Blank(*content), url=url)

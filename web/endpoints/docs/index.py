@@ -17,7 +17,7 @@ from web.pages import Page
 
 def index(request: Request) -> Page:
     return Page(
-        LogoBig(logo_url=str(request.url_for("static", path="ludic.png"))),
+        LogoBig(logo_url=request.url_for("static", path="ludic.png").path),
         Cluster(
             Badge(
                 url="https://github.com/getludic/ludic/actions",
@@ -250,7 +250,7 @@ def index(request: Request) -> Page:
                 return Cluster(
                     ButtonDanger(
                         "Decrement",
-                        disabled=number <= 0
+                        disabled=number <= 0,
                         hx_get=app.url_path_for("Counter", number=max(0, number - 1)),
                         hx_target="#counter",
                     ),
@@ -380,7 +380,7 @@ class Counter(Endpoint[CounterAttrs]):
                 disabled=self.attrs["number"] <= 0,
                 hx_get=self.url_for(
                     "docs:Counter", number=max(0, self.attrs["number"] - 1)
-                ),
+                ).path,
                 hx_target="#counter",
                 hx_disabled_elt="this",
             ),
@@ -390,7 +390,9 @@ class Counter(Endpoint[CounterAttrs]):
             ),
             ButtonSuccess(
                 "Increment",
-                hx_get=self.url_for("docs:Counter", number=self.attrs["number"] + 1),
+                hx_get=self.url_for(
+                    "docs:Counter", number=self.attrs["number"] + 1
+                ).path,
                 hx_target="#counter",
                 hx_disabled_elt="this",
             ),

@@ -22,6 +22,7 @@ from .endpoints import (
     essential,
     examples,
     index,
+    llms,
     search,
     status,
 )
@@ -84,6 +85,7 @@ app = LudicApp(
     routes=index.app.routes
     + search.app.routes
     + essential.app.routes
+    + llms.app.routes
     + [
         Mount("/demos", demos.router),
         Mount("/docs", docs.router, name="docs"),

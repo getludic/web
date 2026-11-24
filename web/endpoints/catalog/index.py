@@ -161,7 +161,7 @@ def index(request: Request) -> Page:
             def index(request: Request) -> Page:
                 return Page(
                     H1("Hello, World!"),
-                    Button("Click Me", hx_get=request.url_for("clicked")),
+                    Button("Click Me", hx_get=request.url_for("clicked").path),
                 )
 
             @app.get("/clicked")

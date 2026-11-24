@@ -150,7 +150,7 @@ def htmx(request: Request) -> Page:
                         "This is a simple example with one button performing the "
                         "hx-swap operation."
                     ),
-                    button("Show Hidden Content", hx_get=request.url_for(content)),
+                    button("Show Hidden Content", hx_get=request.url_for(content).path),
                 )
 
             @app.get("/content")
@@ -237,7 +237,10 @@ def htmx_example(request: Request) -> Stack:
             t"{Code('hx-swap')} operation."
         ),
         Cluster(
-            Button("Show Hidden Content", hx_get=request.url_for("docs:htmx_content")),
+            Button(
+                "Show Hidden Content",
+                hx_get=request.url_for("docs:htmx_content").path,
+            ),
             classes=["centered"],
         ),
     )
