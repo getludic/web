@@ -56,7 +56,8 @@ jobs:
         uses: astral-sh/setup-uv@v8.1.0
 
       - name: Build and upload search index
-        run: uv run python scripts/build_search_index.py
+        # Match the Docker image: newer Pythons can't build the locked deps.
+        run: uv run --python 3.12 python scripts/build_search_index.py
 
       - name: Deploy to Lambda
         run: |
