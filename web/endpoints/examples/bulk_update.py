@@ -29,13 +29,13 @@ async def bulk_update(request: Request) -> Page:
             ),
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("bulk_update:index")),
+        LazyLoader(load_url=request.url_for("bulk_update:index").path),
         H2("Implementation"),
         Paragraph(
-            "The first thing we need to do is create the table. For this task, we use "
-            f"a class-based endpoint called {Code('PeopleTable')} which will contain "
-            "the list of people. This list of people is going to be the endpoint's "
-            "attributes, so we create them first:"
+            t"The first thing we need to do is create the table. For this task, we use "
+            t"a class-based endpoint called {Code('PeopleTable')} which will contain "
+            t"the list of people. This list of people is going to be the endpoint's "
+            t"attributes, so we create them first:"
         ),
         CodeBlock(
             """
@@ -60,16 +60,16 @@ async def bulk_update(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Each field in the {Code('PersonAttrs')} definition is marked by the"
-            f"{Code('Annotated')} class containing the {Code('ColumnMeta')} "
-            "marker. This marker helps generating the table using the "
-            f"{Code('create_rows')} function as we'll see bellow."
+            t"Each field in the {Code('PersonAttrs')} definition is marked by the"
+            t"{Code('Annotated')} class containing the {Code('ColumnMeta')} "
+            t"marker. This marker helps generating the table using the "
+            t"{Code('create_rows')} function as we'll see bellow."
         ),
         Paragraph(
-            "Now we know what kind of data we need to store and what columns to "
-            "create. Here is the endpoint implementation rendering the attributes "
-            f"as a table as well as handling the {Code('GET')} and {Code('POST')} "
-            "HTTP methods:"
+            t"Now we know what kind of data we need to store and what columns to "
+            t"create. Here is the endpoint implementation rendering the attributes "
+            t"as a table as well as handling the {Code('GET')} and {Code('POST')} "
+            t"HTTP methods:"
         ),
         CodeBlock(
             """
@@ -118,7 +118,7 @@ async def bulk_update(request: Request) -> Page:
                             ButtonPrimary("Bulk Update", type="submit"),
                             Toast(),
                         ),
-                        hx_post=self.url_for(PeopleTable),
+                        hx_post=self.url_for(PeopleTable).path,
                         hx_target=Toast.target,
                         hx_swap="outerHTML settle:3s",
                     )
@@ -129,13 +129,13 @@ async def bulk_update(request: Request) -> Page:
         List(
             Item(
                 Code("post"),
-                " – handles the POST request which contains form data. Since we "
-                f"used the {Code('create_rows')} method, it is possible to use a "
-                "parser to automatically convert the form data in a dictionary. "
-                "In fact, we are handling a list of people, so we use the "
-                f"{Code('ListParser')}. Next, we update our database and return "
-                f"the number of activated and deactivated people as a {Code('Toast')} "
-                "component that we cover bellow.",
+                t" – handles the POST request which contains form data. Since we "
+                t"used the {Code('create_rows')} method, it is possible to use a "
+                t"parser to automatically convert the form data in a dictionary. "
+                t"In fact, we are handling a list of people, so we use the "
+                t"{Code('ListParser')}. Next, we update our database and return "
+                t"the number of activated and deactivated people as a {Code('Toast')} "
+                t"component that we cover bellow.",
             ),
             Item(
                 Code("get"),
@@ -145,18 +145,18 @@ async def bulk_update(request: Request) -> Page:
             ),
             Item(
                 Code("render"),
-                " – handles rendering of the table. The table is wrapped in a form "
-                "so that it is possible to issue a POST request updating the list of "
-                "active or inactive people. The form is wrapping the table having the "
-                f"columns created according the the {Code('PersonAttrs')} "
-                "specification. We also need a button to submit the form and a "
-                f"{Code('Toast')} component which displays a message about activated "
-                "and deactivated people. The form is submitted via HTMX.",
+                t" – handles rendering of the table. The table is wrapped in a form "
+                t"so that it is possible to issue a POST request updating the list of "
+                t"active or inactive people. The form is wrapping the table having the "
+                t"columns created according the the {Code('PersonAttrs')} "
+                t"specification. We also need a button to submit the form and a "
+                t"{Code('Toast')} component which displays a message about activated "
+                t"and deactivated people. The form is submitted via HTMX.",
             ),
         ),
         Paragraph(
-            f"Here is the implementation of the {Code('Toast')} component displaying "
-            f"the small message next to the {Code('Bulk Update')} button:"
+            t"Here is the implementation of the {Code('Toast')} component displaying "
+            t"the small message next to the {Code('Bulk Update')} button:"
         ),
         CodeBlock(
             """

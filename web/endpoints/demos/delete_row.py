@@ -5,6 +5,7 @@ from ludic.catalog.buttons import ButtonDanger
 from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.web import Endpoint, LudicApp, Request
 from ludic.web.exceptions import NotFoundError
+from starlette.responses import Response
 
 from web.database import DB
 
@@ -23,19 +24,21 @@ class PeopleAttrs(Attrs):
 
 
 @app.get("/")
-def index(request: Request) -> "PeopleTable":
+def index(request: Request) -> PeopleTable:
     return PeopleTable.get(request)
 
 
 @app.endpoint("/people/{id}")
 class PersonRow(Endpoint[PersonAttrs]):
     @classmethod
-    def delete(cls, request: Request, id: str) -> None:
+    def delete(cls, request: Request, id: str) -> Response:
         db: DB = request.scope["db"]
         try:
             db.people.pop(id)
         except KeyError:
             raise NotFoundError("Person not found")
+        # An empty 200 replaces the row; htmx does not swap 204 responses.
+        return Response()
 
     @override
     def render(self) -> TableRow:
@@ -44,7 +47,7 @@ class PersonRow(Endpoint[PersonAttrs]):
             self.attrs["email"],
             "Active" if self.attrs["active"] else "Inactive",
             ButtonDanger(
-                "Delete", hx_delete=self.url_for(PersonRow), classes=["small"]
+                "Delete", hx_delete=self.url_for(PersonRow).path, classes=["small"]
             ),
         )
 

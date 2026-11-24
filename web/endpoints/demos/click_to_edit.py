@@ -67,7 +67,7 @@ class Contact(Endpoint[ContactAttrs]):
             Cluster(
                 ButtonSecondary(
                     "Click To Edit",
-                    hx_get=self.url_for(ContactForm),
+                    hx_get=self.url_for(ContactForm).path,
                 ),
             ),
             hx_target="this",
@@ -92,8 +92,8 @@ class ContactForm(Endpoint[ContactAttrs]):
             *create_fields(self.attrs, spec=ContactAttrs),
             Cluster(
                 ButtonPrimary("Submit"),
-                ButtonDanger("Cancel", hx_get=self.url_for(Contact)),
+                ButtonDanger("Cancel", hx_get=self.url_for(Contact).path),
             ),
-            hx_put=self.url_for(Contact),
+            hx_put=self.url_for(Contact).path,
             hx_target="this",
         )

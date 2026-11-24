@@ -260,11 +260,11 @@ class Footer(Component[NoChildren, NoAttrs]):
     @override
     def render(self) -> Box:
         return Box(
-            f"Made with {b(Link('Ludic', to=config.GITHUB_REPO_URL))} "
-            f"and {b(Link('HTMX', to='https://htmx.org'))} and 🐍 "
-            f"• {b(Link('Discord', to=config.DISCORD_INVITE_URL))} "
-            f"• {b(Link('GitHub', to=config.GITHUB_REPO_URL))} "
-            f"• Running on {b(Link('Leapcell', to='https://leapcell.io'))} "
+            t"Made with {b(Link('Ludic', to=config.GITHUB_REPO_URL))} "
+            t"and {b(Link('HTMX', to='https://htmx.org'))} and 🐍 "
+            t"• {b(Link('Discord', to=config.DISCORD_INVITE_URL))} "
+            t"• {b(Link('GitHub', to=config.GITHUB_REPO_URL))} "
+            t"• Running on {b(Link('Leapcell', to='https://leapcell.io'))} "
         )
 
 

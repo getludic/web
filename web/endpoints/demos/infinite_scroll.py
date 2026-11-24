@@ -32,7 +32,7 @@ def load_contacts(page: int) -> list[ContactAttrs]:
 
 
 @app.get("/")
-async def index() -> "ContactsTable":
+async def index() -> ContactsTable:
     return ContactsTable(await ContactsSlice.get(QueryParams(page=1)))
 
 
@@ -53,8 +53,8 @@ class ContactsSlice(Endpoint[ContactsSliceAttrs]):
             *(TableRow(*rows) for rows in init),
             TableRow(
                 *last,
-                hx_get=self.url_for(ContactsSlice).include_query_params(
-                    page=self.attrs["page"] + 1
+                hx_get=(
+                    f"{self.url_for(ContactsSlice).path}?page={self.attrs['page'] + 1}"
                 ),
                 hx_trigger="revealed",
                 hx_swap="afterend",

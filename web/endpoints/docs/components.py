@@ -19,45 +19,45 @@ def components(request: Request) -> Page:
         H2("Key Concepts"),
         List(
             Item(
-                f"{b('Components')}: a component is a reusable chunk of code that "
-                "defines a piece of your user interface. Think of it like a blueprint "
-                "for an HTML element, but more powerful."
+                t"{b('Components')}: a component is a reusable chunk of code that "
+                t"defines a piece of your user interface. Think of it like a blueprint "
+                t"for an HTML element, but more powerful."
             ),
             Item(
-                f"{b('Elements')}: these represent the individual HTML tags (like "
-                f"{Code('<a>')}, {Code('<div>')}, {Code('<h1>')}, etc.) that make up "
-                "the structure of your page."
+                t"{b('Elements')}: these represent the individual HTML tags (like "
+                t"{Code('<a>')}, {Code('<div>')}, {Code('<h1>')}, etc.) that make up "
+                t"the structure of your page."
             ),
             Item(
-                f"{b('Attributes')}: These help define the properties on your "
-                "components and elements. They let you modify things like a link's "
-                "destination, text color, or an element's size."
+                t"{b('Attributes')}: These help define the properties on your "
+                t"components and elements. They let you modify things like a link's "
+                t"destination, text color, or an element's size."
             ),
             Item(
-                f"{b('Hierarchy')}: Components can contain other components or "
-                "elements, creating a tree-like structure."
+                t"{b('Hierarchy')}: Components can contain other components or "
+                t"elements, creating a tree-like structure."
             ),
             Item(
-                f"{b('Types')}: A safety net to help you write correct code, "
-                "preventing errors just like making sure LEGO pieces fit together "
-                "properly."
+                t"{b('Types')}: A safety net to help you write correct code, "
+                t"preventing errors just like making sure LEGO pieces fit together "
+                t"properly."
             ),
         ),
         H2("Types of Components"),
         List(
             Item(
-                f"{b('Regular')}: These are flexible, letting you have multiple "
-                "children of any type."
+                t"{b('Regular')}: These are flexible, letting you have multiple "
+                t"children of any type."
             ),
             Item(
-                f"{b('Strict')}: Perfect for when you need precise control over the "
-                "structure of your component – like a table where you must have a head "
-                "and a body."
+                t"{b('Strict')}: Perfect for when you need precise control over the "
+                t"structure of your component – like a table where you must have a "
+                t"head and a body."
             ),
         ),
         H2("Regular Components"),
         Paragraph(
-            f"Let's break down a simplified version of the {Code('Link')} component:"
+            t"Let's break down a simplified version of the {Code('Link')} component:"
         ),
         CodeBlock(
             """
@@ -80,28 +80,28 @@ def components(request: Request) -> Page:
         ),
         List(
             Item(
-                f"{i('HTML Rendering')}: This component renders as the following HTML "
-                f"element:",
+                t"{i('HTML Rendering')}: This component renders as the following HTML "
+                t"element:",
                 List(Item(Code('<a href="..." style="color:#abc">...</a>'))),
             ),
             Item(
-                f"{i('Type Hints')}: {Code('Component[str, LinkAttrs]')} provides type "
-                f"safety:",
+                t"{i('Type Hints')}: {Code('Component[str, LinkAttrs]')} provides type "
+                t"safety:",
                 List(
                     Item(
-                        f"{i('str')}: Enforces that all children of the component "
-                        "must be strings"
+                        t"{i('str')}: Enforces that all children of the component "
+                        t"must be strings"
                     ),
                     Item(
-                        f"{i('LinkAttrs')}: Ensures the required to attribute is "
-                        "present"
+                        t"{i('LinkAttrs')}: Ensures the required to attribute is "
+                        t"present"
                     ),
                 ),
             ),
             Item(
-                f"{i('Attributes')}: {Code('LinkAttrs')} inherits from "
-                f"{Code('Attrs')}, which is a {Code('TypedDict')} "
-                f"(a dictionary with defined types for its keys)",
+                t"{i('Attributes')}: {Code('LinkAttrs')} inherits from "
+                t"{Code('Attrs')}, which is a {Code('TypedDict')} "
+                t"(a dictionary with defined types for its keys)",
             ),
         ),
         Paragraph("The component would be instantiated like this:"),
@@ -112,17 +112,17 @@ def components(request: Request) -> Page:
         ),
         H3("Multiple Children"),
         Paragraph(
-            "The current definition doesn't strictly enforce a single child. "
-            "This means you could technically pass multiple strings "
-            f"({Code('Link("a", "b")')}). To create a stricter component, inherit "
-            f"from {Code('ComponentStrict')}: This subclass of Component allows for "
-            "finer control over children. More about this in the next section."
+            t"The current definition doesn't strictly enforce a single child. "
+            t"This means you could technically pass multiple strings "
+            t"({Code('Link("a", "b")')}). To create a stricter component, inherit "
+            t"from {Code('ComponentStrict')}: This subclass of Component allows for "
+            t"finer control over children. More about this in the next section."
         ),
         H2("Strict Components"),
         Paragraph(
-            "Strict components offer more precise control over the types and "
-            "structures of their children compared to regular components. Let's "
-            f"illustrate this with a simplified {Code('Table')} component:"
+            t"Strict components offer more precise control over the types and "
+            t"structures of their children compared to regular components. Let's "
+            t"illustrate this with a simplified {Code('Table')} component:"
         ),
         CodeBlock(
             """
@@ -153,29 +153,29 @@ def components(request: Request) -> Page:
         b("Explanation"),
         List(
             Item(
-                f"{i('Strictness')}: The {Code('ComponentStrict')} class allows you to "
-                "enforce the exact types and order of children."
+                t"{i('Strictness')}: The {Code('ComponentStrict')} class allows you to "
+                t"enforce the exact types and order of children."
             ),
             Item(
-                f"{i('Table Structure')}:",
+                t"{i('Table Structure')}:",
                 List(
                     Item(
-                        f"{Code('Table')}: Expects precisely two children: a "
-                        f"{Code('TableHead')} followed by a {Code('TableBody')}."
+                        t"{Code('Table')}: Expects precisely two children: a "
+                        t"{Code('TableHead')} followed by a {Code('TableBody')}."
                     ),
                     Item(
-                        f"{Code('TableHead')}: Accepts only a single {Code('tr')} "
-                        "(table row) element as its child."
+                        t"{Code('TableHead')}: Accepts only a single {Code('tr')} "
+                        t"(table row) element as its child."
                     ),
                     Item(
-                        f"{Code('TableBody')}: Accepts a variable number of "
-                        f"{Code('tr')} elements as children."
+                        t"{Code('TableBody')}: Accepts a variable number of "
+                        t"{Code('tr')} elements as children."
                     ),
                 ),
             ),
             Item(
-                f"{i('Type Hints')}: The {Code('*tuple[tr, ...]')} syntax indicates "
-                f"that {Code('TableBody')} accepts zero or more tr elements."
+                t"{i('Type Hints')}: The {Code('*tuple[tr, ...]')} syntax indicates "
+                t"that {Code('TableBody')} accepts zero or more tr elements."
             ),
         ),
         b("Valid Usage (Passes Type Checking)"),
@@ -191,18 +191,18 @@ def components(request: Request) -> Page:
         b("Key Benefits"),
         List(
             Item(
-                f"{i('Enforce Structure')}: Prevent incorrect usage that could break "
-                "your component's layout or functionality."
+                t"{i('Enforce Structure')}: Prevent incorrect usage that could break "
+                t"your component's layout or functionality."
             ),
             Item(
-                f"{i('Type Safety')}: Static type checkers ensure you're building "
-                "valid component hierarchies."
+                t"{i('Type Safety')}: Static type checkers ensure you're building "
+                t"valid component hierarchies."
             ),
         ),
         H2("Attributes"),
         Paragraph(
-            "To ensure type safety and clarity, define your component attributes using "
-            f"a subclass of the {Code('Attrs')} class. Here's how:"
+            t"To ensure type safety and clarity, define your component attributes "
+            t"using a subclass of the {Code('Attrs')} class. Here's how:"
         ),
         CodeBlock(
             """
@@ -216,22 +216,22 @@ def components(request: Request) -> Page:
             """,
             language="python",
         ),
-        b(f"Understanding {Code('Attrs')} and {Code('TypedDict')}"),
+        b(t"Understanding {Code('Attrs')} and {Code('TypedDict')}"),
         List(
             Item(
-                f"The {Code('Attrs')} class is built upon Python's {Code('TypedDict')} "
-                f"concept (see {
+                t"The {Code('Attrs')} class is built upon Python's {Code('TypedDict')} "
+                t"concept (see {
                     Link('PEP-589', to='https://peps.python.org/pep-0589/')
                 }) for details). This provides type hints for dictionary-like data "
-                "structures."
+                t"structures."
             ),
         ),
         H3("Controlling Required Attributes"),
         Paragraph(
-            "In the above case, all attributes except for {Code('is_active')} are "
-            "required. If you want to make all attributes NOT required by default, "
-            f"you can pass the {Code('total=False')} keyword argument to the class "
-            "definition:"
+            t"In the above case, all attributes except for {{Code('is_active')}} are "
+            t"required. If you want to make all attributes NOT required by default, "
+            t"you can pass the {Code('total=False')} keyword argument to the class "
+            t"definition:"
         ),
         CodeBlock(
             """
@@ -246,20 +246,20 @@ def components(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"In this case, all attributes are optional except for the {Code('id')} "
-            "attribute."
+            t"In this case, all attributes are optional except for the {Code('id')} "
+            t"attribute."
         ),
         Message(
             Title(
-                f"The {Code('Attrs')} declaration is an information for type checkers"
+                t"The {Code('Attrs')} declaration is an information for type checkers"
             ),
-            f"The {Code('Attrs')} class just provides typing information for static "
-            "type checkers. Your code will work even if you pass key-word arguments to "
-            "components without declaring them first.",
+            t"The {Code('Attrs')} class just provides typing information for static "
+            t"type checkers. Your code will work even if you pass key-word arguments "
+            t"to components without declaring them first.",
         ),
         Paragraph(
-            "All attributes can also subclass from other classes, for example, you can "
-            f"extend the attributes for the {Code('<button>')} HTML element:"
+            t"All attributes can also subclass from other classes, for example, you "
+            t"can extend the attributes for the {Code('<button>')} HTML element:"
         ),
         CodeBlock(
             """
@@ -272,8 +272,8 @@ def components(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"When implementing the component's {Code('render()')} method, you might "
-            f"find the {Code('attrs_for(...)')} helper useful too:"
+            t"When implementing the component's {Code('render()')} method, you might "
+            t"find the {Code('attrs_for(...)')} helper useful too:"
         ),
         CodeBlock(
             """
@@ -285,60 +285,60 @@ def components(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The method passes only the attributes registered for the {Code('<td>')} "
-            "element."
+            t"The method passes only the attributes registered for the {Code('<td>')} "
+            t"element."
         ),
         H3("Pre-defined Attributes"),
         Paragraph(
-            f"The {Code('ludic.attrs')} module contains many attribute definitions "
-            "that you can reuse in your components, here are the most used ones:"
+            t"The {Code('ludic.attrs')} module contains many attribute definitions "
+            t"that you can reuse in your components, here are the most used ones:"
         ),
         List(
             Item(
-                f"{Code('HtmlAttrs')} – Global HTML attributes available in all "
-                "elements",
+                t"{Code('HtmlAttrs')} – Global HTML attributes available in all "
+                t"elements",
                 List(
                     Item(
-                        f"The {Code('class')} and {Code('for')} attributes have the "
-                        f"aliases {Code('class_')} and {Code('for_')}"
+                        t"The {Code('class')} and {Code('for')} attributes have the "
+                        t"aliases {Code('class_')} and {Code('for_')}"
                     )
                 ),
             ),
             Item(
-                f"{Code('EventAttrs')} – Event HTML attributes like "
-                f"{Code('on_click')}, {Code('on_key')}, and so on."
+                t"{Code('EventAttrs')} – Event HTML attributes like "
+                t"{Code('on_click')}, {Code('on_key')}, and so on."
             ),
             Item(
-                f"{Code('HtmxAttrs')} – All {
+                t"{Code('HtmxAttrs')} – All {
                     Link('HTMX attributes', to='https://htmx.org/reference/')
                 } available.",
                 List(
                     Item(
-                        "All HTMX attributes have aliases with an underscore, e.g. "
-                        f"{Code('hx_target')}"
+                        t"All HTMX attributes have aliases with an underscore, e.g. "
+                        t"{Code('hx_target')}"
                     )
                 ),
             ),
             Item(
-                f"{Code('GlobalAttrs')} subclasses {Code('HtmlAttrs')}, "
-                f"{Code('EventAttrs')}, and {Code('HtmxAttrs')}"
+                t"{Code('GlobalAttrs')} subclasses {Code('HtmlAttrs')}, "
+                t"{Code('EventAttrs')}, and {Code('HtmxAttrs')}"
             ),
             Item(
-                f"{Code('[HtmlElementName]Attrs')} – e.g. {Code('ButtonAttrs')}, "
-                f"{Code('TdAttrs')}, and so on."
+                t"{Code('[HtmlElementName]Attrs')} – e.g. {Code('ButtonAttrs')}, "
+                t"{Code('TdAttrs')}, and so on."
             ),
         ),
         H2("HTML Elements"),
         Paragraph(
-            f"All available HTML elements can be found in the {Code('ludic.html')} "
-            f"module. The corresponding attributes are located in the {
+            t"All available HTML elements can be found in the {Code('ludic.html')} "
+            t"module. The corresponding attributes are located in the {
                 Code('ludic.attrs')
             } module."
         ),
         H3("Rendering"),
         Paragraph(
-            "To check how an element or component instance renders in HTML, you can "
-            f"use the {Code('.to_html()')} method:"
+            t"To check how an element or component instance renders in HTML, you can "
+            t"use the {Code('.to_html()')} method:"
         ),
         CodeBlock(
             """
@@ -357,9 +357,9 @@ def components(request: Request) -> Page:
         ),
         H3("Dataset Attributes"),
         Paragraph(
-            f"Ludic supports HTML {Code('data-*')} attributes through the special "
-            f"{Code('dataset')} attribute. This feature allows you to add custom data "
-            "attributes to HTML elements in a type-safe way."
+            t"Ludic supports HTML {Code('data-*')} attributes through the special "
+            t"{Code('dataset')} attribute. This feature allows you to add custom data "
+            t"attributes to HTML elements in a type-safe way."
         ),
         CodeBlock(
             """
@@ -376,16 +376,16 @@ def components(request: Request) -> Page:
         b("Key Features:"),
         List(
             Item(
-                f"{i('Automatic conversion')}: The {Code('dataset')} dictionary keys "
-                f"are automatically prefixed with {Code('data-')} in the HTML output."
+                t"{i('Automatic conversion')}: The {Code('dataset')} dictionary keys "
+                t"are automatically prefixed with {Code('data-')} in the HTML output."
             ),
             Item(
-                f"{i('Hyphen handling')}: Underscores in dataset keys are converted to "
-                f"hyphens in HTML: {Code('user_id')} becomes {Code('data-user-id')}."
+                t"{i('Hyphen handling')}: Underscores in dataset keys are converted to "
+                t"hyphens in HTML: {Code('user_id')} becomes {Code('data-user-id')}."
             ),
             Item(
-                f"{i('Type safety')}: Values are automatically converted to strings "
-                "and properly escaped for HTML."
+                t"{i('Type safety')}: Values are automatically converted to strings "
+                t"and properly escaped for HTML."
             ),
         ),
         b("Common Use Cases:"),
@@ -412,10 +412,10 @@ def components(request: Request) -> Page:
         ),
         H3("Using t-strings"),
         Paragraph(
-            "In Ludic, t-strings offer a bit more readable way to construct component "
-            "content, especially if you need to do a lot of formatting with "
-            f"{Code('<b>')}, {Code('<i>')}, and other elements for improving "
-            "typography. Let's modify the previous example using t-strings:"
+            t"In Ludic, t-strings offer a bit more readable way to construct component "
+            t"content, especially if you need to do a lot of formatting with "
+            t"{Code('<b>')}, {Code('<i>')}, and other elements for improving "
+            t"typography. Let's modify the previous example using t-strings:"
         ),
         CodeBlock(
             """
@@ -453,45 +453,45 @@ def components(request: Request) -> Page:
         ),
         Message(
             Title("Ludic 0.5.x"),
-            "Ludic 0.5.x for Python 3.12 and 3.13 uses f-strings for the same "
-            "purpose. They keep the elements in a temporary dictionary, which is "
-            "cleared automatically in request handlers of the Ludic Web Framework. "
-            f"Anywhere else, wrap the code in {Code('with BaseElement.formatter:')} "
-            "to avoid leaking memory. None of this applies to t-strings.",
+            t"Ludic 0.5.x for Python 3.12 and 3.13 uses f-strings for the same "
+            t"purpose. They keep the elements in a temporary dictionary, which is "
+            t"cleared automatically in request handlers of the Ludic Web Framework. "
+            t"Anywhere else, wrap the code in {Code('with BaseElement.formatter:')} "
+            t"to avoid leaking memory. None of this applies to t-strings.",
         ),
         H2("Available Methods"),
         Paragraph(
-            "All components (and elements too) inherit the following properties and "
-            f"methods from the {Code('BaseElement')} class:"
+            t"All components (and elements too) inherit the following properties and "
+            t"methods from the {Code('BaseElement')} class:"
         ),
         List(
             Item(
-                f"{Code('BaseElement')}",
+                t"{Code('BaseElement')}",
                 List(
-                    Item(f"{Code('children')} – children of the component"),
-                    Item(f"{Code('attrs')} – a dictionary containing attributes"),
+                    Item(t"{Code('children')} – children of the component"),
+                    Item(t"{Code('attrs')} – a dictionary containing attributes"),
                     Item(
-                        f"{Code('to_html()')} – converts the component to an HTML "
-                        "document"
+                        t"{Code('to_html()')} – converts the component to an HTML "
+                        t"document"
                     ),
                     Item(
-                        f"{Code('to_string()')} – converts the component to a string "
-                        "representation of the tree"
+                        t"{Code('to_string()')} – converts the component to a string "
+                        t"representation of the tree"
                     ),
                     Item(
-                        f"{Code('attrs_for(...)')} – filter attributes to return only "
-                        "those valid for a given element or component"
+                        t"{Code('attrs_for(...)')} – filter attributes to return only "
+                        t"those valid for a given element or component"
                     ),
                     Item(
-                        f"{Code('has_attributes()')} – whether the component has any "
-                        "attributes"
+                        t"{Code('has_attributes()')} – whether the component has any "
+                        t"attributes"
                     ),
                     Item(
-                        f"{Code('is_simple()')} – whether the component contains one "
-                        "primitive child"
+                        t"{Code('is_simple()')} – whether the component contains one "
+                        t"primitive child"
                     ),
                     Item(
-                        f"{Code('render()')} (*abstract method*) – render the component"
+                        t"{Code('render()')} (*abstract method*) – render the component"
                     ),
                 ),
             ),
@@ -501,56 +501,56 @@ def components(request: Request) -> Page:
             "The following is a list of all the other parts that can be used to type "
             "and build your application."
         ),
-        H4(f"{Code('ludic.elements')}"),
+        H4(t"{Code('ludic.elements')}"),  # type: ignore[arg-type]
         List(
-            Item(f"{Code('Element')} – base for HTML elements"),
-            Item(f"{Code('ElementStrict')} – base for strict HTML elements"),
+            Item(t"{Code('Element')} – base for HTML elements"),
+            Item(t"{Code('ElementStrict')} – base for strict HTML elements"),
             Item(
-                f"{Code('Blank')} – represents a blank component which is not "
-                f"rendered, only its children"
+                t"{Code('Blank')} – represents a blank component which is not "
+                t"rendered, only its children"
             ),
         ),
-        H4(f"{Code('ludic.components')}"),
+        H4(t"{Code('ludic.components')}"),  # type: ignore[arg-type]
         List(
-            Item(f"{Code('Component')} – abstract class for components"),
-            Item(f"{Code('ComponentStrict')} – abstract class for strict components"),
-            Item(f"{Code('Block')} – component rendering as a div"),
-            Item(f"{Code('Inline')} – component rendering as a span"),
+            Item(t"{Code('Component')} – abstract class for components"),
+            Item(t"{Code('ComponentStrict')} – abstract class for strict components"),
+            Item(t"{Code('Block')} – component rendering as a div"),
+            Item(t"{Code('Inline')} – component rendering as a span"),
         ),
-        H4(f"{Code('ludic.types')}"),
+        H4(t"{Code('ludic.types')}"),  # type: ignore[arg-type]
         List(
-            Item(f"{Code('NoChildren')} – Makes a component accept no children"),
+            Item(t"{Code('NoChildren')} – Makes a component accept no children"),
             Item(
-                f"{Code('PrimitiveChildren')} – Makes a component accept only "
-                f"{Code('str')}, {Code('int')}, {Code('float')} or {Code('bool')}"
+                t"{Code('PrimitiveChildren')} – Makes a component accept only "
+                t"{Code('str')}, {Code('int')}, {Code('float')} or {Code('bool')}"
             ),
             Item(
-                f"{Code('ComplexChildren')} – Makes a component accept only "
-                "non-primitive types"
+                t"{Code('ComplexChildren')} – Makes a component accept only "
+                t"non-primitive types"
             ),
             Item(
-                f"{Code('AnyChildren')} – Makes a component accept any children types"
+                t"{Code('AnyChildren')} – Makes a component accept any children types"
             ),
-            Item(f"{Code('TAttrs')} – type variable for attributes"),
-            Item(f"{Code('TChildren')} – type variable for children of components"),
+            Item(t"{Code('TAttrs')} – type variable for attributes"),
+            Item(t"{Code('TChildren')} – type variable for children of components"),
             Item(
-                f"{Code('TChildrenArgs')} – type variable for children of strict "
-                "components"
+                t"{Code('TChildrenArgs')} – type variable for children of strict "
+                t"components"
             ),
-            Item(f"{Code('Attrs')} – base for attributes"),
-            Item(f"{Code('Safe')} – marker for a safe string which is not escaped"),
+            Item(t"{Code('Attrs')} – base for attributes"),
+            Item(t"{Code('Safe')} – marker for a safe string which is not escaped"),
             Item(
-                f"{Code('JavaScript')} – a marker for javascript, subclasses "
-                f"{Code('Safe')}"
+                t"{Code('JavaScript')} – a marker for javascript, subclasses "
+                t"{Code('Safe')}"
             ),
         ),
-        H4(f"{Code('ludic.styles')}"),
+        H4(t"{Code('ludic.styles')}"),  # type: ignore[arg-type]
         List(
             Item(
-                f"{Code('GlobalStyles')} – type for HTML classes and their CSS "
-                "properties"
+                t"{Code('GlobalStyles')} – type for HTML classes and their CSS "
+                t"properties"
             ),
-            Item(f"{Code('CSSProperties')} – type for CSS properties only"),
+            Item(t"{Code('CSSProperties')} – type for CSS properties only"),
         ),
         request=request,
         active_item="components",

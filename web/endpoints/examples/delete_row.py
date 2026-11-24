@@ -29,7 +29,7 @@ def delete_row(request: Request) -> Page:
             ),
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("delete_row:index")),
+        LazyLoader(load_url=request.url_for("delete_row:index").path),
         H2("Implementation"),
         Paragraph(
             "Since we want to display people as rows in a table, we can create a "
@@ -61,6 +61,8 @@ def delete_row(request: Request) -> Page:
             from ludic.catalog.buttons import ButtonDanger
             from ludic.components import Component
             from ludic.web import Endpoint, LudicApp
+            from ludic.web.exceptions import NotFoundError
+            from starlette.responses import Response
 
             from your_app.attrs import PersonAttrs
             from your_app.database import db
@@ -70,11 +72,12 @@ def delete_row(request: Request) -> Page:
             @app.endpoint("/people/{id}")
             class PersonRow(Endpoint[PersonAttrs]):
                 @classmethod
-                def delete(cls, id: str) -> None:
+                def delete(cls, id: str) -> Response:
                     try:
                         db.people.pop(id)
                     except KeyError:
                         raise NotFoundError("Person not found")
+                    return Response()
 
                 @override
                 def render(self) -> TableRow:
@@ -84,7 +87,7 @@ def delete_row(request: Request) -> Page:
                         "Active" if self.attrs["active"] else "Inactive",
                         ButtonDanger(
                             "Delete",
-                            hx_delete=self.url_for(PersonRow),
+                            hx_delete=self.url_for(PersonRow).path,
                             classes=["small"]
                         ),
                     )
@@ -95,14 +98,17 @@ def delete_row(request: Request) -> Page:
         List(
             Item(
                 Code("delete"),
-                " – handles the DELETE request which removes a person from the "
-                "database. We don't need to return anything in this case.",
+                t" – handles the DELETE request which removes a person from the "
+                t"database. It returns an empty {Code('200')} response, which tells "
+                t"htmx to replace the row with nothing. Returning {Code('None')} "
+                t"would send {Code('204 No Content')}, and htmx does not swap "
+                t"anything on a 204.",
             ),
             Item(
                 Code("render"),
-                " – handles rendering of the table. Apart from the textual columns, "
-                "we also render an action button to delete a row which is hooked to "
-                f"the {Code('PersonRow.delete()')} method.",
+                t" – handles rendering of the table. Apart from the textual columns, "
+                t"we also render an action button to delete a row which is hooked to "
+                t"the {Code('PersonRow.delete()')} method.",
             ),
         ),
         Paragraph(
@@ -155,15 +161,15 @@ def delete_row(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " – handles the GET request which returns an instance of the "
-                f"{Code('PeopleTable')} filled with a list of people fetched "
-                "from database.",
+                t" – handles the GET request which returns an instance of the "
+                t"{Code('PeopleTable')} filled with a list of people fetched "
+                t"from database.",
             ),
             Item(
                 Code("render"),
-                " – handles rendering of the table of people. We use a special "
-                f"{Code('body_attrs')} attribute to configure HTMX operations on "
-                f"the {Code('tbody')} element.",
+                t" – handles rendering of the table of people. We use a special "
+                t"{Code('body_attrs')} attribute to configure HTMX operations on "
+                t"the {Code('tbody')} element.",
             ),
         ),
         request=request,

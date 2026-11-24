@@ -26,9 +26,9 @@ def layouts(request: Request) -> Page:
     return Page(
         H1("Layouts"),
         Paragraph(
-            "Layouts create a flexible structure for your user interface. "
-            f"The layouts in this module are based on the {b('Every Layout Book')}. "
-            "If you haven't read the book, go read it now: "
+            t"Layouts create a flexible structure for your user interface. "
+            t"The layouts in this module are based on the {b('Every Layout Book')}. "
+            t"If you haven't read the book, go read it now: "
         ),
         List(Item(Link("Every Layout Book", to="https://every-layout.dev/"))),
         Paragraph(
@@ -37,7 +37,7 @@ def layouts(request: Request) -> Page:
             "The layouts can be combined together."
         ),
         Paragraph(
-            f"All layouts are located in the {Code('ludic.catalog.layouts')} module."
+            t"All layouts are located in the {Code('ludic.catalog.layouts')} module."
         ),
         Message(
             Title("Viewing this page on mobile devices"),
@@ -47,25 +47,25 @@ def layouts(request: Request) -> Page:
         ),
         H2("Ideology"),
         Paragraph(
-            "In this module, layouts are designed as simple, reusable components that "
-            "you can easily combine to create responsive, readable, and maintainable "
-            "user interfaces. Instead of starting from scratch with basic HTML "
-            "elements and manually writing CSS, you use these layouts as your "
-            f"{b('foundational building blocks')}. This approach allows you to compose "
-            "and arrange them in various ways to design your desired user interface, "
-            "making your code more organized and easier to manage."
+            t"In this module, layouts are designed as simple, reusable components that "
+            t"you can easily combine to create responsive, readable, and maintainable "
+            t"user interfaces. Instead of starting from scratch with basic HTML "
+            t"elements and manually writing CSS, you use these layouts as your "
+            t"{b('foundational building blocks')}. This approach allows you to compose "
+            t"and arrange them in various ways to design your desired user interface, "
+            t"making your code more organized and easier to manage."
         ),
         b("A New Way of Thinking About Design"),
         Paragraph(
-            "When writing CSS, you might be tempted to apply e.g. specific spacing, "
-            "colors, or font styles to an HTML element like a button. The idea of "
-            f"using the layout classes here is to define {b('context')} which "
-            "determines how an HTML element should be displayed. So for example, we "
-            "might want to have a couple of buttons on one line, so we wrap them in "
-            "a Cluster class which inserts a margin between all its children and puts "
-            "them on one line. In another context, we want to widen a button so that "
-            "it uses all available space and is displayed like a block element. In "
-            "that case we use the Stack class."
+            t"When writing CSS, you might be tempted to apply e.g. specific spacing, "
+            t"colors, or font styles to an HTML element like a button. The idea of "
+            t"using the layout classes here is to define {b('context')} which "
+            t"determines how an HTML element should be displayed. So for example, we "
+            t"might want to have a couple of buttons on one line, so we wrap them in "
+            t"a Cluster class which inserts a margin between all its children and puts "
+            t"them on one line. In another context, we want to widen a button so that "
+            t"it uses all available space and is displayed like a block element. In "
+            t"that case we use the Stack class."
         ),
         Paragraph("To illustrate this concept, here is a button wrapped in a Cluster:"),
         Cluster(Button("In a Cluster"), Button("In a Cluster")),

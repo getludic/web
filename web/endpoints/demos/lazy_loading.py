@@ -10,7 +10,7 @@ app = LudicApp()
 
 @app.get("/")
 async def index(request: Request) -> LazyLoader:
-    return LazyLoader(load_url=request.url_for(load_content, seconds=2))
+    return LazyLoader(load_url=request.url_for(load_content, seconds=2).path)
 
 
 @app.get("/load/{seconds:int}")

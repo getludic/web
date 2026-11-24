@@ -56,7 +56,7 @@ class CookieStorageMiddleware(BaseHTTPMiddleware):
     ) -> Response:
         try:
             db = DB.from_json(request.cookies[self.COOKIE_STORAGE_KEY])
-        except (KeyError, TypeError):
+        except KeyError, TypeError:
             db = init_db()
 
         if not db.people:

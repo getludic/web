@@ -25,12 +25,12 @@ async def lazy_loading(request: Request) -> Page:
             Item(Link("Source at htmx.org", to="https://htmx.org/examples/lazy-load/")),
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("lazy_loading:index")),
+        LazyLoader(load_url=request.url_for("lazy_loading:index").path),
         H2("Implementation"),
         Paragraph(
-            "The lazy loading functionality is super simple to implement "
-            "in Ludic. You can create just two function-based endpoints "
-            f"and use the {Code('LazyLoader')} component from the catalog: "
+            t"The lazy loading functionality is super simple to implement "
+            t"in Ludic. You can create just two function-based endpoints "
+            t"and use the {Code('LazyLoader')} component from the catalog: "
         ),
         CodeBlock(
             """
@@ -43,7 +43,7 @@ async def lazy_loading(request: Request) -> Page:
 
             @app.get("/")
             async def index(request: Request) -> LazyLoader:
-                return LazyLoader(load_url=request.url_for(load_content))
+                return LazyLoader(load_url=request.url_for(load_content).path)
 
             @app.get("/load/")
             async def load_content() -> Box:

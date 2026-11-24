@@ -11,15 +11,15 @@ def complex_layout(request: Request) -> Page:
     return Page(
         H2("Layout Example"),
         Paragraph(
-            "You are free to combine layouts and components together as described in "
-            f"the {Link('Layouts', to=request.url_for('catalog:layouts').path)} "
-            "section. The following is an example of a more complex layout consisting "
-            "of multiple nested components using CSS utilities to tweak final design."
+            t"You are free to combine layouts and components together as described in "
+            t"the {Link('Layouts', to=request.url_for('catalog:layouts').path)} "
+            t"section. The following is an example of a more complex layout consisting "
+            t"of multiple nested components using CSS utilities to tweak final design."
         ),
         Cluster(
             ButtonLink(
                 "Open Layout In New Tab",
-                to=str(request.url_for("complex_layout:index")),
+                to=request.url_for("complex_layout:index").path,
                 external=True,
                 classes=["large", "secondary"],
             ),

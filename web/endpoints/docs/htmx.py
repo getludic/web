@@ -14,17 +14,17 @@ def htmx(request: Request) -> Page:
     return Page(
         H1("Using HTMX with Ludic"),
         Paragraph(
-            f"{Link('HTMX', to='https://htmx.org')} is a powerful library that "
-            "simplifies the creation of dynamic, interactive web pages. It lets you "
-            "achieve the responsiveness of single-page applications without the "
-            "complexity of writing extensive JavaScript code. HTMX works by extending "
-            "standard HTML with special attributes that control how elements interact "
-            "with the server."
+            t"{Link('HTMX', to='https://htmx.org')} is a powerful library that "
+            t"simplifies the creation of dynamic, interactive web pages. It lets you "
+            t"achieve the responsiveness of single-page applications without the "
+            t"complexity of writing extensive JavaScript code. HTMX works by extending "
+            t"standard HTML with special attributes that control how elements interact "
+            t"with the server."
         ),
         Paragraph(
-            "The most typical example is when you want to fetch content from a server "
-            "on a button click event and append or replace content on your page with "
-            f"the response. You can examine a similar example {
+            t"The most typical example is when you want to fetch content from a server "
+            t"on a button click event and append or replace content on your page with "
+            t"the response. You can examine a similar example {
                 Link('bellow', to='#sample-swap-operation')
             }."
         ),
@@ -48,15 +48,15 @@ def htmx(request: Request) -> Page:
         ),
         Message(
             Title("HTMX Attributes Reference"),
-            f"Check all the available attributes in the {
+            t"Check all the available attributes in the {
                 Link('HTMX documentation', to='https://htmx.org/reference/')
             }.",
         ),
         H2("HTMX Integration in Ludic"),
         Paragraph(
-            f"The {Code('ludic.html')} module seamlessly supports HTMX attributes, "
-            "making it easy to add dynamic functionality to your pages. Let's see "
-            "a simple example:"
+            t"The {Code('ludic.html')} module seamlessly supports HTMX attributes, "
+            t"making it easy to add dynamic functionality to your pages. Let's see "
+            t"a simple example:"
         ),
         CodeBlock(
             """
@@ -76,9 +76,9 @@ def htmx(request: Request) -> Page:
             language="html",
         ),
         Paragraph(
-            f"Please note that HTMX uses a special attribute, {Code('hx-on*')}, which "
-            "cannot currently be type-checked. However, it can still be used in the "
-            "following way:"
+            t"Please note that HTMX uses a special attribute, {Code('hx-on*')}, which "
+            t"cannot currently be type-checked. However, it can still be used in the "
+            t"following way:"
         ),
         CodeBlock(
             """
@@ -91,14 +91,14 @@ def htmx(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"This would render the attribute as {Code('hx-on--before-request')}"
-            f"which is {Link('fine with htmx', to='https://htmx.org/attributes/hx-on/')}."
+            t"This would render the attribute as {Code('hx-on--before-request')}"
+            t"which is {Link('fine with htmx', to='https://htmx.org/attributes/hx-on/')}."
         ),
         H2("Setting up an HTMX-Enabled Page"),
         NumberedList(
             Item(
-                f"{b('Include the HTMX library')}: Add the HTMX script to your base "
-                "HTML component",
+                t"{b('Include the HTMX library')}: Add the HTMX script to your base "
+                t"HTML component",
                 CodeBlock(
                     """
                     from typing import override
@@ -114,23 +114,23 @@ def htmx(request: Request) -> Page:
                         def render(self) -> HtmlPage:
                             return HtmlPage(
                                 Head(title="My App"),
-                                Body(*self.children, htmx_version="1.9.10"),
+                                Body(*self.children, htmx_version="2.0.11"),
                             )
                     """,
                     language="python",
                 ),
             ),
             Item(
-                f"{b(f'Use the {Code("Page")} component')}: Employ the Page component "
-                "as the foundation for your HTML documents to ensure they load the "
-                "necessary HTMX script."
+                t"{b(t'Use the {Code("Page")} component')}: Employ the Page component "
+                t"as the foundation for your HTML documents to ensure they load the "
+                t"necessary HTMX script."
             ),
         ),
         MessageWarning(
-            Title(f"Default {Code('hx-swap')} Operation"),
-            f"The default HTMX swap operation is set to {Code('outerHTML')} in all "
-            f"pages based on the {Code('HtmlPage')} component. This is different "
-            f"than HTMX default which is {Code('innerHTML')}.",
+            Title(t"Default {Code('hx-swap')} Operation"),
+            t"The default HTMX swap operation is set to {Code('outerHTML')} in all "
+            t"pages based on the {Code('HtmlPage')} component. This is different "
+            t"than HTMX default which is {Code('innerHTML')}.",
         ),
         H2("Sample Swap Operation"),
         Paragraph("Let's illustrate how to create a dynamic page with HTMX and Ludic:"),
@@ -164,18 +164,18 @@ def htmx(request: Request) -> Page:
         H3("Explanation"),
         List(
             Item(
-                f"{b('Button Behavior')}: Clicking the button triggers an HTTP GET "
-                f"request to {Code('/content')}. The response replaces the original "
-                f"button with the content returned from the {Code('/content')} "
-                "endpoint."
+                t"{b('Button Behavior')}: Clicking the button triggers an HTTP GET "
+                t"request to {Code('/content')}. The response replaces the original "
+                t"button with the content returned from the {Code('/content')} "
+                t"endpoint."
             ),
             Item(
-                f"{b('Web Framework')}: Ludic acts as a web framework (built on "
-                f"{Link('Starlette', to='https://www.starlette.io/')}), empowering you "
-                f"to define endpoints and handle requests. Explore the {
+                t"{b('Web Framework')}: Ludic acts as a web framework (built on "
+                t"{Link('Starlette', to='https://www.starlette.io/')}), empowering you "
+                t"to define endpoints and handle requests. Explore the {
                     Link('Web Framework', to=request.url_for('docs:web_framework').path)
                 } "
-                "section of the documentation for in-depth information."
+                t"section of the documentation for in-depth information."
             ),
         ),
         H2("Headers"),
@@ -197,15 +197,15 @@ def htmx(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"You can also change the return type of your endpoint with {
+            t"You can also change the return type of your endpoint with {
                 Code('tuple[div, types.Headers]')
             } which allows arbitrary headers, not just "
-            "HTMX-specific ones."
+            t"HTMX-specific ones."
         ),
         H2("Rendering JavaScript"),
         Paragraph(
-            "In some cases, HTMX components require some JavaScript code. For that "
-            f"purpose, there is the {Code('ludic.types.JavaScript')} class:"
+            t"In some cases, HTMX components require some JavaScript code. For that "
+            t"purpose, there is the {Code('ludic.types.JavaScript')} class:"
         ),
         CodeBlock(
             """
@@ -233,8 +233,8 @@ def htmx(request: Request) -> Page:
 def htmx_example(request: Request) -> Stack:
     return Stack(
         Paragraph(
-            "This is a simple example with one button performing the "
-            f"{Code('hx-swap')} operation."
+            t"This is a simple example with one button performing the "
+            t"{Code('hx-swap')} operation."
         ),
         Cluster(
             Button("Show Hidden Content", hx_get=request.url_for("docs:htmx_content")),

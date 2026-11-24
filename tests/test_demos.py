@@ -74,7 +74,9 @@ def test_delete_row() -> None:
     with TestClient(app) as client:
         assert client.get("/demos/delete-row/").status_code == 200
         assert client.get("/demos/delete-row/people/").status_code == 200
-        assert client.delete("/demos/delete-row/people/1").status_code == 204
+        response = client.delete("/demos/delete-row/people/1")
+        assert response.status_code == 200
+        assert response.text == ""
 
         response = client.delete("/demos/delete-row/people/123")
         assert response.status_code == 404

@@ -11,12 +11,12 @@ def typography(request: Request) -> Page:
     return Page(
         H1("Typography"),
         Paragraph(
-            f"The module {Code('ludic.catalog.typography')} contains the following "
-            "components:"
+            t"The module {Code('ludic.catalog.typography')} contains the following "
+            t"components:"
         ),
         H4("Link"),
         Paragraph(
-            f"This text contains a {
+            t"This text contains a {
                 Link('link', to=str(request.url_for('catalog:index')))
             }.",
         ),
@@ -40,7 +40,7 @@ def typography(request: Request) -> Page:
             language="python",
         ),
         H4("Code"),
-        Paragraph(f"This text contains code: {Code('let mut x = 0;')}"),
+        Paragraph(t"This text contains code: {Code('let mut x = 0;')}"),
         CodeBlock(
             """
             from ludic.catalog.typography import Code
@@ -135,8 +135,8 @@ def typography(request: Request) -> Page:
         ),
         H2("Headers"),
         Paragraph(
-            f"The module {Code('ludic.catalog.headers')} contains components "
-            "rendering as HTML headers (h1-h4)."
+            t"The module {Code('ludic.catalog.headers')} contains components "
+            t"rendering as HTML headers (h1-h4)."
         ),
         H1("H1", anchor=False),
         H2("H2", anchor=False),
@@ -154,8 +154,8 @@ def typography(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The module also contains the {Code('Anchor')} component, which can be "
-            "used to create an anchor link next to the header."
+            t"The module also contains the {Code('Anchor')} component, which can be "
+            t"used to create an anchor link next to the header."
         ),
         H4("H4 With Anchor", anchor=Anchor("#", target="h4-with-anchor")),
         CodeBlock(
@@ -167,8 +167,8 @@ def typography(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            "It is possible to generate the anchor automatically using the "
-            f"{Code('anchor=True')} attribute:"
+            t"It is possible to generate the anchor automatically using the "
+            t"{Code('anchor=True')} attribute:"
         ),
         H3("H3 With Anchor", anchor=True),
         CodeBlock(

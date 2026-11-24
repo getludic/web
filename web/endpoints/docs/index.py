@@ -52,11 +52,11 @@ def index(request: Request) -> Page:
             source="Igor Davydenko",
         ),
         Paragraph(
-            "Ludic lets you write HTML as typed Python components. Your type checker "
-            "validates the markup, so wrong nesting, unknown attributes and missing "
-            "arguments are caught before a page ever renders. At its core Ludic only "
-            "renders HTML, so it fits into the web framework you already use, and it "
-            f"pairs naturally with {Link('htmx', to='https://htmx.org/')}."
+            t"Ludic lets you write HTML as typed Python components. Your type checker "
+            t"validates the markup, so wrong nesting, unknown attributes and missing "
+            t"arguments are caught before a page ever renders. At its core Ludic only "
+            t"renders HTML, so it fits into the web framework you already use, and it "
+            t"pairs naturally with {Link('htmx', to='https://htmx.org/')}."
         ),
         CodeBlock(
             """
@@ -111,32 +111,32 @@ def index(request: Request) -> Page:
         H2("Features"),
         List(
             Item(
-                f"{b('Type-guided HTML')}: every element knows which children and "
-                "attributes it allows"
+                t"{b('Type-guided HTML')}: every element knows which children and "
+                t"attributes it allows"
             ),
             Item(
-                f"{b('Components')} in pure Python, composed like in "
-                f"{Link('React', to='https://react.dev/')}"
+                t"{b('Components')} in pure Python, composed like in "
+                t"{Link('React', to='https://react.dev/')}"
             ),
             Item(
-                f"Mix markup and text with Python 3.14 {b('t-strings')} "
-                "(template strings)"
+                t"Mix markup and text with Python 3.14 {b('t-strings')} "
+                t"(template strings)"
             ),
             Item(
-                f"Text is {b('escaped by default')}, trusted markup is marked "
-                f"explicitly with {Code('Safe')}"
+                t"Text is {b('escaped by default')}, trusted markup is marked "
+                t"explicitly with {Code('Safe')}"
             ),
             Item(
-                f"Typed {b('</> htmx')} attributes, so dynamic pages need almost no "
-                "JavaScript"
+                t"Typed {b('</> htmx')} attributes, so dynamic pages need almost no "
+                t"JavaScript"
             ),
             Item(
-                f"Works with {b('Starlette')}, {b('FastAPI')} and {b('Django')}, or "
-                "with no framework at all"
+                t"Works with {b('Starlette')}, {b('FastAPI')} and {b('Django')}, or "
+                t"with no framework at all"
             ),
-            Item(f"Typed CSS for your components with {b('Themes')}"),
+            Item(t"Typed CSS for your components with {b('Themes')}"),
             Item(
-                f"Simple, responsive layouts adopted from the {b('Every Layout Book')}"
+                t"Simple, responsive layouts adopted from the {b('Every Layout Book')}"
             ),
         ),
         H2("Comparison"),
@@ -188,25 +188,25 @@ def index(request: Request) -> Page:
         Paragraph("The others are a better fit in some cases:"),
         List(
             Item(
-                f"{b('htpy')} supports older Python versions and needs no type "
-                "checker plugin."
+                t"{b('htpy')} supports older Python versions and needs no type "
+                t"checker plugin."
             ),
             Item(
-                f"{b('FastHTML')} is a complete web framework rather than a library "
-                "you add to one."
+                t"{b('FastHTML')} is a complete web framework rather than a library "
+                t"you add to one."
             ),
             Item(
-                f"{b('tdom')} lets you write real HTML syntax instead of Python calls."
+                t"{b('tdom')} lets you write real HTML syntax instead of Python calls."
             ),
             Item(
-                f"{b('Jinja2')} keeps templates in files that people who do not write "
-                "Python can edit."
+                t"{b('Jinja2')} keeps templates in files that people who do not write "
+                t"Python can edit."
             ),
         ),
         H2("Quick Example"),
         Paragraph(
-            "Here is a simple re-implementation of an example from "
-            f"{
+            t"Here is a simple re-implementation of an example from "
+            t"{
                 Link(
                     'Reflex',
                     to=(
@@ -236,12 +236,12 @@ def index(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Note that the {Code('Box')} is just a component wrapping the buttons "
-            f"and the number to make it nicely framed. You can read more about the "
-            f"{Code('Box')} in the {
+            t"Note that the {Code('Box')} is just a component wrapping the buttons "
+            t"and the number to make it nicely framed. You can read more about the "
+            t"{Code('Box')} in the {
                 b(Link('Layouts', to=(request.url_for('catalog:layouts').path)))
             } section later. Anyway, the {Code('Counter')} component is the part "
-            "that is more interesting: "
+            t"that is more interesting: "
         ),
         CodeBlock(
             """
@@ -268,18 +268,18 @@ def index(request: Request) -> Page:
         H2("Requirements"),
         Paragraph("Python 3.14+"),
         Paragraph(
-            f"{b('Note')}: Ludic 0.5.x supports Python 3.12+ with f-strings. "
-            "For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of "
-            "t-strings.",
+            t"{b('Note')}: Ludic 0.5.x supports Python 3.12+ with f-strings. "
+            t"For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of "
+            t"t-strings.",
             style={"font-size": "0.9em", "color": "#666"},
         ),
         H2("Installation"),
         Paragraph("The core package renders HTML and has a single dependency:"),
         CodeBlock("pip install ludic"),
         Paragraph(
-            "The following command also installs the web framework built on "
-            "Starlette, form parsing and code highlighting. "
-            f"If you want to use FastAPI or Django, check the {
+            t"The following command also installs the web framework built on "
+            t"Starlette, form parsing and code highlighting. "
+            t"If you want to use FastAPI or Django, check the {
                 Link(
                     'Other Integrations guide',
                     to=request.url_path_for('docs:integrations'),
@@ -288,13 +288,13 @@ def index(request: Request) -> Page:
         ),
         CodeBlock('pip install "ludic[full]"'),
         Paragraph(
-            f"You can also use the {
+            t"You can also use the {
                 Link('cookiecutter', to='https://github.com/cookiecutter/cookiecutter')
             } "
-            f"template to quickly create a new project, using {
+            t"template to quickly create a new project, using {
                 Link('UV', to='https://docs.astral.sh/uv/')
             } you can do that with only one "
-            "command:"
+            t"command:"
         ),
         CodeBlock("uvx cookiecutter gh:getludic/template"),
         Paragraph(
@@ -306,9 +306,9 @@ def index(request: Request) -> Page:
         ),
         H3("Type Checking"),
         Paragraph(
-            f"Elements from {Code('ludic.html')} are checked by plain type hints. "
-            "To also check the attributes of your own components, enable the mypy "
-            f"plugin in {Code('pyproject.toml')}:"
+            t"Elements from {Code('ludic.html')} are checked by plain type hints. "
+            t"To also check the attributes of your own components, enable the mypy "
+            t"plugin in {Code('pyproject.toml')}:"
         ),
         CodeBlock(
             """

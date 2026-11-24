@@ -13,12 +13,12 @@ def integrations(request: Request) -> Page:
     return Page(
         H1("Other Integrations"),
         Paragraph(
-            "This guide will walk you through the process of integrating the Ludic "
-            "framework with other projects (aside from Starlette integration, which "
-            f"is covered in the {
+            t"This guide will walk you through the process of integrating the Ludic "
+            t"framework with other projects (aside from Starlette integration, which "
+            t"is covered in the {
                 Link('Web Framework', to=request.url_for('docs:web_framework').path)
             } section of the "
-            "documentation). Here is the list of currently supported integrations:"
+            t"documentation). Here is the list of currently supported integrations:"
         ),
         List(
             Item(Link("FastAPI", to="#fastapi")),
@@ -35,8 +35,8 @@ def integrations(request: Request) -> Page:
         CodeBlock('pip install "ludic[fastapi]"', language="sh"),
         H3("Setup"),
         Paragraph(
-            f"Integrating Ludic with {Code('FastAPI')} is straightforward. Simply "
-            f"configure the {Code('LudicRoute')} route class:"
+            t"Integrating Ludic with {Code('FastAPI')} is straightforward. Simply "
+            t"configure the {Code('LudicRoute')} route class:"
         ),
         CodeBlock(
             """
@@ -66,7 +66,7 @@ def integrations(request: Request) -> Page:
                     body(
                         div(
                             h1("My Homepage"),
-                            p(f"Hello {b('World!')}"),
+                            p(t"Hello {b('World!')}"),
                             id="container",
                         )
                     )
@@ -100,7 +100,7 @@ def integrations(request: Request) -> Page:
                                 Stack(*self.children, **self.attrs),
                                 style={"padding-block": "xxl"},
                             ),
-                            htmx_version="2.0.0",
+                            htmx_version="2.0.11",
                         ),
                     )
 
@@ -110,17 +110,17 @@ def integrations(request: Request) -> Page:
                 return MyPage(
                     H1("Demo Using The Catalog"),
                     Paragraph(
-                        "This page is using components from "
-                        f"{Link('Ludic framework.', to='https://getludic.dev')}"
+                        t"This page is using components from "
+                        t"{Link('Ludic framework.', to='https://getludic.dev')}"
                     ),
-                    Paragraph(f"Here is the content of {Code('request.query_params')}"),
+                    Paragraph(t"Here is the content of {Code('request.query_params')}"),
                     CodeBlock(json.dumps(query_params, indent=4), language="json"),
                 )
             """,
             language="python",
         ),
         H3("Manual Response Handling"),
-        Paragraph(f"If you need more control, use {Code('LudicResponse')} explicitly:"),
+        Paragraph(t"If you need more control, use {Code('LudicResponse')} explicitly:"),
         CodeBlock(
             """
             from fastapi import FastAPI
@@ -173,8 +173,8 @@ def integrations(request: Request) -> Page:
             "the request-response cycle, clean up cache, and so on.",
         ),
         NumberedList(
-            Item(f"Open your {Code('settings.py')} file."),
-            Item(f"Add {Code('LudicMiddleware')} to the {Code('MIDDLEWARE')} list:"),
+            Item(t"Open your {Code('settings.py')} file."),
+            Item(t"Add {Code('LudicMiddleware')} to the {Code('MIDDLEWARE')} list:"),
         ),
         CodeBlock(
             """
@@ -187,9 +187,9 @@ def integrations(request: Request) -> Page:
         ),
         H3("Creating Views with Ludic"),
         Paragraph(
-            "Let's create a simple HTML page using Ludic elements in a Django view. "
-            f"Here is the content of the {Code('views.py')} file rendering a valid "
-            "HTML page:"
+            t"Let's create a simple HTML page using Ludic elements in a Django view. "
+            t"Here is the content of the {Code('views.py')} file rendering a valid "
+            t"HTML page:"
         ),
         CodeBlock(
             """
@@ -207,7 +207,7 @@ def integrations(request: Request) -> Page:
                         body(
                             div(
                                 h1("My Homepage"),
-                                p(f"Hello {b("World!")}"),
+                                p(t"Hello {b("World!")}"),
                                 id="container",
                             )
                         )
@@ -217,12 +217,13 @@ def integrations(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"However, you are not limited to {Code('ludic.html')} module. You can "
-            f"build your own {
+            t"However, you are not limited to {Code('ludic.html')} module. You can "
+            t"build your own {
                 Link('components', to=request.url_for('docs:components').path)
             } or use the ones available "
-            f"in the {Link('catalog', to=request.url_for('catalog:index').path)}. "
-            "Here is a simple example creating a page component and using it in a view:"
+            t"in the {Link('catalog', to=request.url_for('catalog:index').path)}. "
+            t"Here is a simple example creating a page component and using it in a "
+            t"view:"
         ),
         CodeBlock(
             """
@@ -248,7 +249,7 @@ def integrations(request: Request) -> Page:
                                 Stack(*self.children, **self.attrs),
                                 style={"padding-block": self.theme.sizes.xxl},
                             ),
-                            htmx_version="2.0.0",
+                            htmx_version="2.0.11",
                         ),
                     )
 
@@ -258,10 +259,10 @@ def integrations(request: Request) -> Page:
                     MyPage(
                         H1("Demo Using The Catalog"),
                         Paragraph(
-                            "This page is using components from "
-                            f"{Link("Ludic framework.", to="https://getludic.dev")}"
+                            t"This page is using components from "
+                            t"{Link("Ludic framework.", to="https://getludic.dev")}"
                         ),
-                        Paragraph(f"Here is the content of {Code("request.GET")}:"),
+                        Paragraph(t"Here is the content of {Code("request.GET")}:"),
                         CodeBlock(
                             json.dumps(request.GET.dict(), indent=4),
                             language="json",
@@ -272,10 +273,10 @@ def integrations(request: Request) -> Page:
             language="python",
         ),
         Message(
-            Title(b(f"Note about {Code('LudicResponse')}")),
-            f"If you keep the {Code('LudicMiddleware')} in the {Code('MIDDLEWARE')} "
-            "variable as the last, you can directly return Ludic components in your "
-            f"views, without wrapping them in the {Code('LudicResponse')} class.",
+            Title(b(t"Note about {Code('LudicResponse')}")),
+            t"If you keep the {Code('LudicMiddleware')} in the {Code('MIDDLEWARE')} "
+            t"variable as the last, you can directly return Ludic components in your "
+            t"views, without wrapping them in the {Code('LudicResponse')} class.",
         ),
         request=request,
         active_item="integrations",

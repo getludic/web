@@ -12,16 +12,16 @@ def web_framework(request: Request) -> Page:
     return Page(
         H1("Web Framework"),
         Paragraph(
-            f"The Ludic library provides wrappers around {
+            t"The Ludic library provides wrappers around {
                 Link('Starlette', to='https://www.starlette.io/')
             } framework to make it "
-            "easy to write asynchronous web applications based on HTMX and "
-            "Ludic Components."
+            t"easy to write asynchronous web applications based on HTMX and "
+            t"Ludic Components."
         ),
         Paragraph(
-            f"Ludic includes an application class {Code('LudicApp')} that tight "
-            "together all other functionality. Here is how you can create an instance "
-            "of the class:"
+            t"Ludic includes an application class {Code('LudicApp')} that tight "
+            t"together all other functionality. Here is how you can create an instance "
+            t"of the class:"
         ),
         CodeBlock(
             """
@@ -32,13 +32,13 @@ def web_framework(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The {Code('LudicApp')} class supports the same parameters as the "
-            f"{Code('Starlette')} class from the {i('Starlette')} framework."
+            t"The {Code('LudicApp')} class supports the same parameters as the "
+            t"{Code('Starlette')} class from the {i('Starlette')} framework."
         ),
         H2("Routing"),
         Paragraph(
-            f"To register handlers in your app, you can use the {Code('routes')} "
-            f"arguments of the {Code('LudicApp')} class like this:"
+            t"To register handlers in your app, you can use the {Code('routes')} "
+            t"arguments of the {Code('LudicApp')} class like this:"
         ),
         CodeBlock(
             """
@@ -85,7 +85,7 @@ def web_framework(request: Request) -> Page:
         Paragraph("Creates an application instance."),
         H4("Parameters"),
         Paragraph(
-            f"The list of parameters can be found in the {
+            t"The list of parameters can be found in the {
                 Link(
                     'Starlette documentation',
                     to='https://www.starlette.io/applications/#instantiating-the-application',
@@ -154,8 +154,8 @@ def web_framework(request: Request) -> Page:
         ),
         H3("Function-Based"),
         Paragraph(
-            "These are functions returning Ludic components, a tuple or the "
-            f"{Link("Starlette's Response class", to='https://www.starlette.io/responses/')}."
+            t"These are functions returning Ludic components, a tuple or the "
+            t"{Link("Starlette's Response class", to='https://www.starlette.io/responses/')}."
         ),
         Paragraph("Here are some examples of function handlers registered in Ludic:"),
         CodeBlock(
@@ -191,12 +191,12 @@ def web_framework(request: Request) -> Page:
         ),
         H3("Component-Based"),
         Paragraph(
-            "While it is possible to use function-based handlers everywhere, in the "
-            "case of HTMX-based web applications, we want to also create a lot of "
-            "endpoints rendering only sole form elements, tables, and so on. We don't "
-            f"need to always return the whole HTML document in {Code('<html>')} tag. "
-            "We could use function-based handlers for that, however, it is often "
-            "better to think of endpoints as just another components."
+            t"While it is possible to use function-based handlers everywhere, in the "
+            t"case of HTMX-based web applications, we want to also create a lot of "
+            t"endpoints rendering only sole form elements, tables, and so on. We don't "
+            t"need to always return the whole HTML document in {Code('<html>')} tag. "
+            t"We could use function-based handlers for that, however, it is often "
+            t"better to think of endpoints as just another components."
         ),
         Paragraph(
             "Component-based endpoints can only have one generic argument which is "
@@ -269,9 +269,9 @@ def web_framework(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            "One benefit of this approach is that you can create components that "
-            "generate the URL path for other component-based endpoints with the "
-            f"{Code('url_for')} method. More about that in the next section."
+            t"One benefit of this approach is that you can create components that "
+            t"generate the URL path for other component-based endpoints with the "
+            t"{Code('url_for')} method. More about that in the next section."
         ),
         H3("Reverse URL Lookups"),
         Paragraph(
@@ -284,21 +284,21 @@ def web_framework(request: Request) -> Page:
         ),
         b(Code("Request.url_for(endpoint: Callable[..., Any] | str, ...)")),
         Paragraph(
-            f"This method is available on the {Code('ludic.web.requests.Request')} "
-            f"object. It generates and {Code('URLPath')} object for a given endpoint."
+            t"This method is available on the {Code('ludic.web.requests.Request')} "
+            t"object. It generates and {Code('URLPath')} object for a given endpoint."
         ),
         MessageWarning(
             Title("Host header poisoning"),
             Paragraph(
-                f"{Code('Request.url_for(...)')} returns an "
-                f"{i('absolute')} URL whose scheme and host are derived from the "
-                f"incoming request – ultimately from the HTTP {Code('Host')} header "
-                f"(and {Code('X-Forwarded-*')} headers when proxy headers are "
-                "trusted). If your app accepts requests with an untrusted "
-                f"{Code('Host')}, an attacker can poison every absolute URL you "
-                f"render – including {Code('hx-get')} / {Code('hx-post')} attributes, "
-                "links, redirects, and links sent in outbound messages – pointing "
-                "the browser at an attacker-controlled domain."
+                t"{Code('Request.url_for(...)')} returns an "
+                t"{i('absolute')} URL whose scheme and host are derived from the "
+                t"incoming request – ultimately from the HTTP {Code('Host')} header "
+                t"(and {Code('X-Forwarded-*')} headers when proxy headers are "
+                t"trusted). If your app accepts requests with an untrusted "
+                t"{Code('Host')}, an attacker can poison every absolute URL you "
+                t"render – including {Code('hx-get')} / {Code('hx-post')} attributes, "
+                t"links, redirects, and links sent in outbound messages – pointing "
+                t"the browser at an attacker-controlled domain."
             ),
             Paragraph("Mitigations:"),
             List(
@@ -330,44 +330,44 @@ def web_framework(request: Request) -> Page:
                 ),
             ),
             Paragraph(
-                "FastAPI users get the same exposure: the FastAPI integration "
-                f"wraps the incoming request as {Code('LudicRequest')}, so "
-                f"{Code('Request.url_for(...)')} is reachable from FastAPI "
-                "handlers and the same advice applies.",
+                t"FastAPI users get the same exposure: the FastAPI integration "
+                t"wraps the incoming request as {Code('LudicRequest')}, so "
+                t"{Code('Request.url_for(...)')} is reachable from FastAPI "
+                t"handlers and the same advice applies.",
             ),
         ),
         b(Code("Endpoint.url_for(endpoint: type[RoutedProtocol] | str, ...)")),
         Paragraph(
-            "This method is available on a component-based endpoint. It has one small "
-            f"advantage over the {Code('request')}'s method – if the destination "
-            "component defines the same attributes, the path parameters are "
-            "automatically extracted so you don't need to pass them via key-word "
-            "arguments. Here are examples:"
+            t"This method is available on a component-based endpoint. It has one small "
+            t"advantage over the {Code('request')}'s method – if the destination "
+            t"component defines the same attributes, the path parameters are "
+            t"automatically extracted so you don't need to pass them via key-word "
+            t"arguments. Here are examples:"
         ),
         List(
             Item(
-                f"{Code('ContactForm(...).url_for(Contact)')}"
-                f" – Even though the {Code('ContactForm')} endpoint requires the "
-                f"{Code('id')} path parameter, it is automatically extracted from "
-                f"{Code('ContactForm(...).attrs')} since the {Code('ContactForm')} and "
-                f"{Code('Contact')} share the same attributes – {Code('ContactAttrs')}."
+                t"{Code('ContactForm(...).url_for(Contact)')}"
+                t" – Even though the {Code('ContactForm')} endpoint requires the "
+                t"{Code('id')} path parameter, it is automatically extracted from "
+                t"{Code('ContactForm(...).attrs')} since the {Code('ContactForm')} and "
+                t"{Code('Contact')} share the same attributes – {Code('ContactAttrs')}."
             ),
             Item(
-                "If these attribute types are not equal, you need to specify the URL "
-                "path parameter explicitly, e.g. "
-                f"{Code('ContactForm(...).url_for(Foo, id=self.attrs["foo_id"])')}.",
+                t"If these attribute types are not equal, you need to specify the URL "
+                t"path parameter explicitly, e.g. "
+                t"{Code('ContactForm(...).url_for(Foo, id=self.attrs["foo_id"])')}.",
             ),
             Item(
-                f"If the first argument to {Code('url_for')} is the name of the "
-                "endpoint, you need to always specify the URL path parameters "
-                "explicitly."
+                t"If the first argument to {Code('url_for')} is the name of the "
+                t"endpoint, you need to always specify the URL path parameters "
+                t"explicitly."
             ),
         ),
         H3("Handler Responses"),
         Paragraph(
-            "Your handler is not required to return only a valid element or component, "
-            "you can also modify headers, status code, or return a "
-            f"{Code('JSONResponse')}:"
+            t"Your handler is not required to return only a valid element or "
+            t"component, you can also modify headers, status code, or return a "
+            t"{Code('JSONResponse')}:"
         ),
         CodeBlock(
             """
@@ -400,7 +400,7 @@ def web_framework(request: Request) -> Page:
             ),
             Item(
                 Code("starlette.responses.Response"),
-                f" – valid Starlette {Code('Response')} object",
+                t" – valid Starlette {Code('Response')} object",
             ),
         ),
         H3("Handler Arguments"),
@@ -416,8 +416,8 @@ def web_framework(request: Request) -> Page:
             ),
             Item(
                 Code("request: Request"),
-                f" the Ludic's slightly modified {Code('ludic.web.requests.Request')} ",
-                f"class based on {Link("Starlette's one", to='https://www.starlette.io/requests/')}",
+                t" the Ludic's slightly modified {Code('ludic.web.requests.Request')} ",
+                t"class based on {Link("Starlette's one", to='https://www.starlette.io/requests/')}",
             ),
             Item(
                 Code("params: QueryParams"),
@@ -441,9 +441,9 @@ def web_framework(request: Request) -> Page:
             "future.",
         ),
         Paragraph(
-            f"The {Code('ludic.parsers')} module contains helpers for parsing "
-            f"{Code('FormData')}. The way it works is that you define {Code('Attrs')} "
-            f"class with {Code('Annotated')} arguments like here:"
+            t"The {Code('ludic.parsers')} module contains helpers for parsing "
+            t"{Code('FormData')}. The way it works is that you define {Code('Attrs')} "
+            t"class with {Code('Annotated')} arguments like here:"
         ),
         CodeBlock(
             """
@@ -455,10 +455,10 @@ def web_framework(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Now you can use the {Code('Parser')} class to annotate arguments of your "
-            "handler. The parser will attempt to parse form data if any "
-            f"{Code('Callable')} is found in the metadata argument of "
-            f"{Code('Annotated')}:"
+            t"Now you can use the {Code('Parser')} class to annotate arguments of your "
+            t"handler. The parser will attempt to parse form data if any "
+            t"{Code('Callable')} is found in the metadata argument of "
+            t"{Code('Annotated')}:"
         ),
         CodeBlock(
             """
@@ -473,21 +473,21 @@ def web_framework(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The {Code('Parser.validate()')} uses {
+            t"The {Code('Parser.validate()')} uses {
                 Link('typeguard', to='https://typeguard.readthedocs.io/')
             } to validate the "
-            "form data. If the validation fails, the method raises "
-            f"{Code('ludic.parsers.ValidationError')} if the request's form data are "
-            f"not valid. If unhandled, this results in {Code('403')} status code."
+            t"form data. If the validation fails, the method raises "
+            t"{Code('ludic.parsers.ValidationError')} if the request's form data are "
+            t"not valid. If unhandled, this results in {Code('403')} status code."
         ),
         H3("Parsing Collections"),
         Paragraph(
-            f"You can also use the {Code('ListParser')} class to parse a list of data. "
-            f"It parses form data in a way similar to the {Code('Parser')} class, "
-            "however, it expects the form data to have the identifier column as key. "
-            "For example, we want to parse a first and last name columns from a list "
-            f"of people, here are the example form data the {Code('ListParser')} is "
-            "able to handle:"
+            t"You can also use the {Code('ListParser')} class to parse a list of data. "
+            t"It parses form data in a way similar to the {Code('Parser')} class, "
+            t"however, it expects the form data to have the identifier column as key. "
+            t"For example, we want to parse a first and last name columns from a list "
+            t"of people, here are the example form data the {Code('ListParser')} is "
+            t"able to handle:"
         ),
         CodeBlock(
             """
@@ -508,8 +508,8 @@ def web_framework(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"This is how you could use the {Code('ListParser')} to parse a list of "
-            "this kind of data from your view:"
+            t"This is how you could use the {Code('ListParser')} to parse a list of "
+            t"this kind of data from your view:"
         ),
         CodeBlock(
             """
@@ -524,9 +524,9 @@ def web_framework(request: Request) -> Page:
         ),
         H2("Error Handlers"),
         Paragraph(
-            "You can use error handlers for custom pages for non-ok HTTP status codes. "
-            f"You can register a handler with the {Code('app.exception_handler')} "
-            "decorator:"
+            t"You can use error handlers for custom pages for non-ok HTTP status "
+            t"codes. You can register a handler with the "
+            t"{Code('app.exception_handler')} decorator:"
         ),
         CodeBlock(
             """
@@ -551,8 +551,8 @@ def web_framework(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Optionally, you can use the {Code('request: Request')} and "
-            f"{Code('exc: Exception')} arguments for the handler:"
+            t"Optionally, you can use the {Code('request: Request')} and "
+            t"{Code('exc: Exception')} arguments for the handler:"
         ),
         CodeBlock(
             """
@@ -563,65 +563,66 @@ def web_framework(request: Request) -> Page:
         ),
         H2("Exceptions"),
         Paragraph(
-            f"The {Code('ludic.web.exceptions')} contains a lot of useful exceptions "
-            "that can be raised in your views and caught in your custom error handlers:"
+            t"The {Code('ludic.web.exceptions')} contains a lot of useful exceptions "
+            t"that can be raised in your views and caught in your custom error "
+            t"handlers:"
         ),
         List(
             Item(
                 Code("ClientError(HTTPException)"),
-                f" – default status code {Code('400')}",
+                t" – default status code {Code('400')}",
             ),
             Item(
                 Code("BadRequestError(ClientError)"),
-                f" – default status code {Code('400')}",
+                t" – default status code {Code('400')}",
             ),
             Item(
                 Code("UnauthorizedError(ClientError)"),
-                f" – default status code {Code('401')}",
+                t" – default status code {Code('401')}",
             ),
             Item(
                 Code("PaymentRequiredError(ClientError)"),
-                f" – default status code {Code('402')}",
+                t" – default status code {Code('402')}",
             ),
             Item(
                 Code("ForbiddenError(ClientError)"),
-                f" – default status code {Code('403')}",
+                t" – default status code {Code('403')}",
             ),
             Item(
                 Code("NotFoundError(ClientError)"),
-                f" – default status code {Code('404')}",
+                t" – default status code {Code('404')}",
             ),
             Item(
                 Code("MethodNotAllowedError(ClientError)"),
-                f" – default status code {Code('405')}",
+                t" – default status code {Code('405')}",
             ),
             Item(
                 Code("TooManyRequestsError(ClientError)"),
-                f" – default status code {Code('429')}",
+                t" – default status code {Code('429')}",
             ),
             Item(
                 Code("ServerError(HTTPException)"),
-                f" – default status code {Code('500')}",
+                t" – default status code {Code('500')}",
             ),
             Item(
                 Code("InternalServerError(ServerError)"),
-                f" – default status code {Code('500')}",
+                t" – default status code {Code('500')}",
             ),
             Item(
                 Code("NotImplementedError(ServerError)"),
-                f" – default status code {Code('501')}",
+                t" – default status code {Code('501')}",
             ),
             Item(
                 Code("BadGatewayError(ServerError)"),
-                f" – default status code {Code('502')}",
+                t" – default status code {Code('502')}",
             ),
             Item(
                 Code("ServiceUnavailableError(ServerError)"),
-                f" – default status code {Code('503')}",
+                t" – default status code {Code('503')}",
             ),
             Item(
                 Code("GatewayTimeoutError(ServerError)"),
-                f" – default status code {Code('504')}",
+                t" – default status code {Code('504')}",
             ),
         ),
         H2("WebSockets"),
@@ -632,9 +633,9 @@ def web_framework(request: Request) -> Page:
         ),
         H2("Testing"),
         Paragraph(
-            "Testing Ludic Web Apps is the same as testing Starlette apps which use a "
-            f"{Code('TestClient')} class exposing the same interface as {Code('httpx')}"
-            f" library. Read more about testing in the {
+            t"Testing Ludic Web Apps is the same as testing Starlette apps which use a "
+            t"{Code('TestClient')} class exposing the same interface as {Code('httpx')}"
+            t" library. Read more about testing in the {
                 Link(
                     'Starlette documentation', to='https://www.starlette.io/testclient/'
                 )

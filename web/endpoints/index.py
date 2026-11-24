@@ -185,9 +185,9 @@ def index(request: Request) -> HomePage:
                 id="main-heading",
             ),
             Paragraph(
-                f"A {b('type-safe HTML template engine')} for Python. Build dynamic "
-                f"web pages using {b('Python components')} with a React-like approach "
-                f"- no template syntax required.",
+                t"A {b('type-safe HTML template engine')} for Python. Build dynamic "
+                t"web pages using {b('Python components')} with a React-like approach "
+                t"- no template syntax required.",
                 style={"font-size": request.state.theme.headers.h4.size * 0.8},
             ),
             Cluster(

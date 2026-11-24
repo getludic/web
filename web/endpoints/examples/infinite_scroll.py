@@ -12,9 +12,9 @@ async def infinite_scroll(request: Request) -> Page:
     return Page(
         H1("Infinite Scroll"),
         Paragraph(
-            "The infinite scroll pattern provides a way to load content dynamically"
-            "on user scrolling action. This example is almost identical the the "
-            f"{
+            t"The infinite scroll pattern provides a way to load content dynamically"
+            t"on user scrolling action. This example is almost identical the the "
+            t"{
                 Link('Click To Load', to=request.url_for('examples:click_to_load').path)
             }. "
         ),
@@ -34,14 +34,14 @@ async def infinite_scroll(request: Request) -> Page:
         ),
         H2("Implementation"),
         Paragraph(
-            f"Check the {
+            t"Check the {
                 Link('Click To Load', to=request.url_for('examples:click_to_load').path)
             } example. "
-            f"The only difference is the {Code('render()')} implementation with the "
-            f"introduction of the {Code('hx_trigger')} and {Code('hx_swap')} "
-            "attributes. In the Click To Load example, we used the "
-            f"{Code('LoadMoreButton')} to trigger the load action. Here is the "
-            f"updated {Code('render()')} method:"
+            t"The only difference is the {Code('render()')} implementation with the "
+            t"introduction of the {Code('hx_trigger')} and {Code('hx_swap')} "
+            t"attributes. In the Click To Load example, we used the "
+            t"{Code('LoadMoreButton')} to trigger the load action. Here is the "
+            t"updated {Code('render()')} method:"
         ),
         CodeBlock(
             """
@@ -59,8 +59,9 @@ async def infinite_scroll(request: Request) -> Page:
                         *(TableRow(*rows) for rows in init),
                         TableRow(
                             *last,
-                            hx_get=self.url_for(ContactsSlice).include_query_params(
-                                page=self.attrs["page"] + 1
+                            hx_get=(
+                                f"{self.url_for(ContactsSlice).path}"
+                                f"?page={self.attrs['page'] + 1}"
                             ),
                             hx_trigger="revealed",
                             hx_swap="afterend",
@@ -70,7 +71,7 @@ async def infinite_scroll(request: Request) -> Page:
             language="python",
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("infinite_scroll:index")),
+        LazyLoader(load_url=request.url_for("infinite_scroll:index").path),
         request=request,
         active_item="infinite_scroll",
         title="Ludic - Infinite Scroll",

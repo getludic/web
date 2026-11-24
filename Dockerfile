@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 # AWS Lambda Web Adapter: proxies Lambda invocations to the local HTTP server.
 # No-op outside Lambda, so the same image runs locally and in Docker Compose.
@@ -13,8 +13,7 @@ WORKDIR /app
 
 COPY pyproject.toml uv.lock .
 
-# Install the locked dependency set (ludic 0.5.x breaks against the latest
-# starlette, so we must honor uv.lock rather than re-resolving).
+# Install the locked dependency set, so the image runs exactly what was tested.
 RUN mkdir web && \
     touch web/__init__.py && \
     touch README.md && \
