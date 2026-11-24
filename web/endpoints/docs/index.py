@@ -5,19 +5,19 @@ from ludic.catalog.buttons import ButtonDanger, ButtonSuccess
 from ludic.catalog.headers import H1, H2, H3
 from ludic.catalog.layouts import Box, Cluster
 from ludic.catalog.lists import Item, List
+from ludic.catalog.messages import MessageInfo
 from ludic.catalog.tables import Table, TableHead, TableRow
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b
 from ludic.web import Endpoint, Request
 
 from web import config
-from web.components import Badge, LogoBig, Quote
+from web.components import Badge, Quote
 from web.pages import Page
 
 
 def index(request: Request) -> Page:
     return Page(
-        LogoBig(logo_url=request.url_for("static", path="ludic.png").path),
         Cluster(
             Badge(
                 url="https://github.com/getludic/ludic/actions",
@@ -267,11 +267,10 @@ def index(request: Request) -> Page:
         ),
         H2("Requirements"),
         Paragraph("Python 3.14+"),
-        Paragraph(
+        MessageInfo(
             t"{b('Note')}: Ludic 0.5.x supports Python 3.12+ with f-strings. "
             t"For Python 3.12 or 3.13, use Ludic 0.5.x and f-strings instead of "
             t"t-strings.",
-            style={"font-size": "0.9em", "color": "#666"},
         ),
         H2("Installation"),
         Paragraph("The core package renders HTML and has a single dependency:"),

@@ -1,3 +1,5 @@
+import re
+
 from starlette.testclient import TestClient
 
 from web.navigation import SECTIONS
@@ -92,3 +94,51 @@ def test_sitemap_lists_every_page() -> None:
             for page in section.pages:
                 path = app.url_path_for(f"{section.name}:{page.name}")
                 assert f"<loc>https://getludic.dev{path}</loc>" in sitemap
+
+
+def test_table_of_contents_links_to_existing_headings() -> None:
+    with TestClient(app) as client:
+        for section in SECTIONS:
+            for page in section.pages:
+                path = app.url_path_for(f"{section.name}:{page.name}")
+                html = client.get(path).text
+                toc = html.split('class="table-of-contents"', 1)[1].split("</nav>")[0]
+                targets = re.findall(r'href="#([^"]+)"', toc)
+                for target in targets:
+                    assert f'id="{target}"' in html, (path, target)
+
+
+def test_every_page_links_its_markdown_version() -> None:
+    with TestClient(app) as client:
+        for section in SECTIONS:
+            for page in section.pages:
+                path = app.url_path_for(f"{section.name}:{page.name}")
+                html = client.get(path).text
+                markdown = f"{path}index.md" if path.endswith("/") else f"{path}.md"
+                assert (
+                    f'<link rel="alternate" type="text/markdown" href="{markdown}">'
+                ) in html
+                assert f'href="{markdown}">View as Markdown</a>' in html
+
+
+def test_pages_have_light_and_dark_styles() -> None:
+    with TestClient(app) as client:
+        html = client.get("/docs/").text
+        assert html.count("<style") == 3  # fonts, light theme, dark theme
+        assert 'media="(prefers-color-scheme: dark)" id="ludic-dark-styles"' in html
+        assert "html { color-scheme: light; }" in html
+        assert "html { color-scheme: dark; }" in html
+        assert 'class="color-scheme-toggle"' in html
+
+
+def test_homepage_sections() -> None:
+    with TestClient(app) as client:
+        html = client.get("/").text
+        assert "Typed HTML components in" in html
+        assert 'id="frameworks"' in html
+        assert html.count('class="tab-input"') == 4
+        assert 'id="counter"' in html
+        assert "Built for coding agents" in html
+        assert 'href="/llms.txt"' in html
+        assert "&lt;p&gt;Hello" not in html.split("<pre")[0]
+        assert client.get("/code-samples/0").status_code == 404

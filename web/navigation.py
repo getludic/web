@@ -181,6 +181,27 @@ SECTIONS: tuple[Section, ...] = (
 )
 
 
+def markdown_path(path: str) -> str:
+    """The path of the Markdown version of the page at the given path."""
+    return f"{path}index.md" if path.endswith("/") else f"{path}.md"
+
+
+def get_page(active_item: str | None) -> tuple[Section, PageInfo] | None:
+    """Find a page by its route name, e.g. ``docs:getting_started``.
+
+    A name without the section, e.g. ``getting_started``, works too when only
+    one section has a page with that name.
+    """
+    section_name, _, page_name = (active_item or "").rpartition(":")
+    found = [
+        (section, page)
+        for section in SECTIONS
+        for page in section.pages
+        if page.name == page_name and section_name in ("", section.name)
+    ]
+    return found[0] if len(found) == 1 else None
+
+
 def get_section(name: str) -> Section:
     for section in SECTIONS:
         if section.name == name:

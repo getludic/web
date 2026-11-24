@@ -35,7 +35,7 @@ def styles(request: Request) -> Page:
             Item(t"The {Code('styles')} Class Property"),
             Item(t"The {Code('style')} HTML Element"),
         ),
-        H3(t"The {Code('style')} HTML Attribute"),  # type: ignore[arg-type]
+        H3(t"The {Code('style')} HTML Attribute"),
         Paragraph(
             t"You can directly embed styles within an HTML element using the "
             t"{Code('style')} attribute. Here's an example:"
@@ -72,7 +72,7 @@ def styles(request: Request) -> Page:
             """form(..., style={"background-color": theme.colors.white})""",
             language="python",
         ),
-        H3(t"The {Code('styles')} Class Property"),  # type: ignore[arg-type]
+        H3(t"The {Code('styles')} Class Property"),
         Paragraph(
             t"Define CSS properties within your component using the {Code('styles')} "
             t"class property. Example:"
@@ -293,7 +293,7 @@ def styles(request: Request) -> Page:
                 )
             }."
         ),
-        H3(t"The {Code('style')} HTML Element"),  # type: ignore[arg-type]
+        H3(t"The {Code('style')} HTML Element"),
         Paragraph(
             t"You can also directly embed styles within a {Code('Page')} component "
             t"using the {Code('style')} element. Here's an example:"

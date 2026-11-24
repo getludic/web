@@ -501,7 +501,7 @@ def components(request: Request) -> Page:
             "The following is a list of all the other parts that can be used to type "
             "and build your application."
         ),
-        H4(t"{Code('ludic.elements')}"),  # type: ignore[arg-type]
+        H4(t"{Code('ludic.elements')}"),
         List(
             Item(t"{Code('Element')} – base for HTML elements"),
             Item(t"{Code('ElementStrict')} – base for strict HTML elements"),
@@ -510,14 +510,14 @@ def components(request: Request) -> Page:
                 t"rendered, only its children"
             ),
         ),
-        H4(t"{Code('ludic.components')}"),  # type: ignore[arg-type]
+        H4(t"{Code('ludic.components')}"),
         List(
             Item(t"{Code('Component')} – abstract class for components"),
             Item(t"{Code('ComponentStrict')} – abstract class for strict components"),
             Item(t"{Code('Block')} – component rendering as a div"),
             Item(t"{Code('Inline')} – component rendering as a span"),
         ),
-        H4(t"{Code('ludic.types')}"),  # type: ignore[arg-type]
+        H4(t"{Code('ludic.types')}"),
         List(
             Item(t"{Code('NoChildren')} – Makes a component accept no children"),
             Item(
@@ -544,7 +544,7 @@ def components(request: Request) -> Page:
                 t"{Code('Safe')}"
             ),
         ),
-        H4(t"{Code('ludic.styles')}"),  # type: ignore[arg-type]
+        H4(t"{Code('ludic.styles')}"),
         List(
             Item(
                 t"{Code('GlobalStyles')} – type for HTML classes and their CSS "

@@ -1,5 +1,6 @@
 from ludic.catalog.headers import H1, H2
 from ludic.catalog.lists import Item, NumberedList
+from ludic.catalog.messages import MessageInfo
 from ludic.catalog.typography import Code, CodeBlock, Link, Paragraph
 from ludic.html import b, h4
 from ludic.web import Request
@@ -17,18 +18,11 @@ def getting_started(request: Request) -> Page:
             }. Follow the steps "
             t"below to set up your project quickly."
         ),
-        Paragraph(
+        MessageInfo(
             t"{b('Note')}: This guide covers Ludic 1.0 which requires Python 3.14+ and "
             t"uses t-strings. If you're using Python 3.12 or 3.13, use Ludic 0.5.x "
             t"with f-strings instead. Install with {Code('--python 3.13')} and use "
             t"f-strings in your code.",
-            style={
-                "font-size": "0.9em",
-                "color": "#666",
-                "padding": "1em",
-                "background": "#f5f5f5",
-                "border-radius": "4px",
-            },
         ),
         H2("Installation Steps"),
         NumberedList(

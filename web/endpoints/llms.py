@@ -14,7 +14,7 @@ from starlette.responses import PlainTextResponse
 
 from web import config
 from web.markdown import to_markdown
-from web.navigation import SECTIONS, PageInfo, Section
+from web.navigation import SECTIONS, PageInfo, Section, markdown_path
 from web.pages import Page
 
 app = LudicApp()
@@ -75,10 +75,6 @@ RESOURCES = (
 
 def html_path(request: Request, section: Section, page: PageInfo) -> str:
     return request.url_path_for(f"{section.name}:{page.name}")
-
-
-def markdown_path(path: str) -> str:
-    return f"{path}index.md" if path.endswith("/") else f"{path}.md"
 
 
 async def render_page(request: Request, section: Section, page: PageInfo) -> Page:

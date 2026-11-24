@@ -39,6 +39,7 @@ def search_docs(
                 H2(f"Search results for “{query}”", anchor=False),
                 *search_results,
                 id="main-content",
+                classes=["search-results"],
             ),
             {"HX-Replace-Url": str(current_url.replace_query_params(search=query))},
         )
