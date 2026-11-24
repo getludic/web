@@ -22,6 +22,7 @@ from .endpoints import (
     essential,
     examples,
     index,
+    llms,
     search,
     status,
 )
@@ -35,9 +36,9 @@ from .middlewares import (
 from .pages import Page
 from .search import Index, build_index
 from .search.cache import load_from_s3
-from .themes import theme
+from .themes import dark_theme, light_theme
 
-themes.set_default_theme(theme)
+themes.set_default_theme(light_theme)
 
 
 class State(TypedDict):
@@ -47,7 +48,9 @@ class State(TypedDict):
 
 @asynccontextmanager
 async def lifespan(app: LudicApp) -> AsyncIterator[State]:
-    style.load(cache=True)
+    # Render the styles of both themes once, Head reuses them from the cache.
+    style.load(cache=True, theme=light_theme)
+    style.load(cache=True, theme=dark_theme)
 
     index: Index | None = None
     if bucket := os.environ.get("INDEX_S3_BUCKET"):
@@ -84,6 +87,7 @@ app = LudicApp(
     routes=index.app.routes
     + search.app.routes
     + essential.app.routes
+    + llms.app.routes
     + [
         Mount("/demos", demos.router),
         Mount("/docs", docs.router, name="docs"),

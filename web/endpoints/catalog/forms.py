@@ -29,16 +29,16 @@ def forms(request: Request) -> Page:
     return Page(
         H1("Forms"),
         Paragraph(
-            f"These components located in {Code('ludic.catalog.forms')} are in an "
-            "experimental mode. There is the possibility to automatically create form "
-            f"{Link('fields from annotations', to='#generating-form-fields')}, but it "
-            "is far from production-ready."
+            t"These components located in {Code('ludic.catalog.forms')} are in an "
+            t"experimental mode. There is the possibility to automatically create form "
+            t"{Link('fields from annotations', to='#generating-form-fields')}, but it "
+            t"is far from production-ready."
         ),
         H2("Input Field"),
         Paragraph(
-            f"The {Code('InputField')} component is the most basic form field. It "
-            f"is a wrapper around the {Code('input')} HTML element which also "
-            "generates a label if not disabled. Here is what it looks like:"
+            t"The {Code('InputField')} component is the most basic form field. It "
+            t"is a wrapper around the {Code('input')} HTML element which also "
+            t"generates a label if not disabled. Here is what it looks like:"
         ),
         InputField(
             name="sample-input-field",
@@ -58,8 +58,8 @@ def forms(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            "You can also create the input field without the label by not passing "
-            f"the {Code('label')} attribute:"
+            t"You can also create the input field without the label by not passing "
+            t"the {Code('label')} attribute:"
         ),
         InputField(name="sample-input-field"),
         CodeBlock(
@@ -74,9 +74,9 @@ def forms(request: Request) -> Page:
         ),
         H2("Select Field"),
         Paragraph(
-            f"The {Code('SelectField')} component is a wrapper around the "
-            f"{Code('select')} HTML element. It also generates a label if not "
-            "disabled. Here is what it looks like:"
+            t"The {Code('SelectField')} component is a wrapper around the "
+            t"{Code('select')} HTML element. It also generates a label if not "
+            t"disabled. Here is what it looks like:"
         ),
         SelectField(
             Option("Option 1"),
@@ -101,9 +101,9 @@ def forms(request: Request) -> Page:
         ),
         H2("Text Area"),
         Paragraph(
-            f"The {Code('TextAreaField')} component is a wrapper around the "
-            f"{Code('textarea')} HTML element. It also generates a label if not "
-            "disabled. Here is what it looks like:"
+            t"The {Code('TextAreaField')} component is a wrapper around the "
+            t"{Code('textarea')} HTML element. It also generates a label if not "
+            t"disabled. Here is what it looks like:"
         ),
         TextAreaField(
             name="sample-text-area",
@@ -126,9 +126,9 @@ def forms(request: Request) -> Page:
         ),
         H2("Choices"),
         Paragraph(
-            f"The {Code('ChoiceField')} component is a wrapper around the "
-            f"{Code("<input type='radio'>")} HTML element. It also generates a label "
-            "if not disabled. Here is what it looks like:"
+            t"The {Code('ChoiceField')} component is a wrapper around the "
+            t"{Code("<input type='radio'>")} HTML element. It also generates a label "
+            t"if not disabled. Here is what it looks like:"
         ),
         ChoiceField(
             name="sample-choice-field",
@@ -151,8 +151,8 @@ def forms(request: Request) -> Page:
         ),
         H2("Form"),
         Paragraph(
-            f"The {Code('Form')} component is a wrapper around the {Code('form')} "
-            "HTML element. Here is a sample form:"
+            t"The {Code('Form')} component is a wrapper around the {Code('form')} "
+            t"HTML element. Here is a sample form:"
         ),
         Form(
             InputField(
@@ -188,12 +188,12 @@ def forms(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"We use the {Code('Cluster')} component to create a form with multiple "
-            f"input fields and buttons. this component is described in the {
+            t"We use the {Code('Cluster')} component to create a form with multiple "
+            t"input fields and buttons. this component is described in the {
                 Link('Layouts section', to=request.url_for('catalog:layouts').path)
             }. "
-            "You can also have the input field and the button aligned horizontally "
-            "using this layout component:"
+            t"You can also have the input field and the button aligned horizontally "
+            t"using this layout component:"
         ),
         Form(
             Cluster(
@@ -228,9 +228,9 @@ def forms(request: Request) -> Page:
         ),
         H2("Generating Form Fields"),
         Paragraph(
-            "In some cases, the attributes of a component or class-based endpoint "
-            "can be used to create form fields automatically using the "
-            f"{Code('create_fields')} function. Here is an example:"
+            t"In some cases, the attributes of a component or class-based endpoint "
+            t"can be used to create form fields automatically using the "
+            t"{Code('create_fields')} function. Here is an example:"
         ),
         Form(
             *create_fields(
@@ -254,9 +254,9 @@ def forms(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The {Code('create_fields')} function generates form fields from "
-            "annotations. It generates only fields that are annotated with the "
-            f"{Code('FieldMeta')} dataclass, which looks like this:"
+            t"The {Code('create_fields')} function generates form fields from "
+            t"annotations. It generates only fields that are annotated with the "
+            t"{Code('FieldMeta')} dataclass, which looks like this:"
         ),
         CodeBlock(
             """
@@ -271,8 +271,8 @@ def forms(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The {Code('parser')} attribute validates and parses the field. Here is "
-            "how you would use it:"
+            t"The {Code('parser')} attribute validates and parses the field. Here is "
+            t"how you would use it:"
         ),
         CodeBlock(
             """
@@ -297,8 +297,8 @@ def forms(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Fields created with the {Code('create_fields')} function can be than "
-            f"extracted from submitted form data using the {
+            t"Fields created with the {Code('create_fields')} function can be than "
+            t"extracted from submitted form data using the {
                 Link(
                     'Parser class',
                     to=f'{request.url_for("docs:web_framework").path}#parsers',

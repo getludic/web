@@ -30,7 +30,7 @@ async def click_to_load(request: Request) -> Page:
             ),
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("click_to_load:index")),
+        LazyLoader(load_url=request.url_for("click_to_load:index").path),
         H2("Implementation"),
         Paragraph(
             "First, we define the contact's attributes and also attributes of an "
@@ -94,10 +94,9 @@ async def click_to_load(request: Request) -> Page:
                         TableRow(
                             td(
                                 LoadMoreButton(
-                                    url=self.url_for(
-                                        ContactsSlice
-                                    ).include_query_params(
-                                        page=next_page
+                                    url=(
+                                        f"{self.url_for(ContactsSlice).path}"
+                                        f"?page={next_page}"
                                     ),
                                 ),
                                 colspan=3,
@@ -119,14 +118,14 @@ async def click_to_load(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            "First endpoint is function-based and is rendering the initial table "
-            f"of contacts. We use the {Code('ContactsSlice.get()')} method to load "
-            "the first page. It would probably be better to separate this loading "
-            "to some handler function."
+            t"First endpoint is function-based and is rendering the initial table "
+            t"of contacts. We use the {Code('ContactsSlice.get()')} method to load "
+            t"the first page. It would probably be better to separate this loading "
+            t"to some handler function."
         ),
         Paragraph(
-            f"The {Code('ContactsSlice')} endpoint-based component is loading the "
-            "table rows and implements two methods:"
+            t"The {Code('ContactsSlice')} endpoint-based component is loading the "
+            t"table rows and implements two methods:"
         ),
         List(
             Item(
@@ -136,21 +135,21 @@ async def click_to_load(request: Request) -> Page:
             ),
             Item(
                 Code("render"),
-                f" – handles rendering of the table rows and the {Code('Load More')} "
-                "button. In order for everything to work properly, we render only "
-                f"the table's rows while wrapping them in the {Code('Blank')} "
-                "component. This component does not render any HTML element, it's just "
-                "a wrapper when we want to render a list of elements.",
+                t" – handles rendering of the table rows and the {Code('Load More')} "
+                t"button. In order for everything to work properly, we render only "
+                t"the table's rows while wrapping them in the {Code('Blank')} "
+                t"component. This component does not render any HTML element, it's "
+                t"just a wrapper when we want to render a list of elements.",
             ),
         ),
         Paragraph(
-            f"Last, the {Code('ContactsTable')} class is a regular component that "
-            "renders the table's columns."
+            t"Last, the {Code('ContactsTable')} class is a regular component that "
+            t"renders the table's columns."
         ),
         Paragraph(
-            f"The last remaining piece is the {Code('LoadMoreButton')} component which "
-            f"triggers the {Code('GET')} request calling the {Code('ContactsSlice')} "
-            "method to load more contact data:"
+            t"The last remaining piece is the {Code('LoadMoreButton')} component which "
+            t"triggers the {Code('GET')} request calling the {Code('ContactsSlice')} "
+            t"method to load more contact data:"
         ),
         CodeBlock(
             """
@@ -177,11 +176,11 @@ async def click_to_load(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            "We use the HTMX swap operation to replace the button itself with a new "
-            f"slice of contacts rendered by the {Code('ContactsSlice')} endpoint. "
-            "That is, the next page of rows as well as the button itself running the "
-            f"HTMX operation. Since the {Code('ContactsSlice')} always bumps the "
-            "button link's page, we get the next page of contacts on every click."
+            t"We use the HTMX swap operation to replace the button itself with a new "
+            t"slice of contacts rendered by the {Code('ContactsSlice')} endpoint. "
+            t"That is, the next page of rows as well as the button itself running the "
+            t"HTMX operation. Since the {Code('ContactsSlice')} always bumps the "
+            t"button link's page, we get the next page of contacts on every click."
         ),
         request=request,
         active_item="click_to_load",

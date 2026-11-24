@@ -13,9 +13,9 @@ async def cascading_selects(request: Request) -> Page:
     return Page(
         H1("Cascading Selects (FastAPI)"),
         Paragraph(
-            f"The cascading selects example uses {b('FastAPI')} to implement two "
-            "selects. First one is a simple select of a car's manufacturer. Second "
-            "select's values are based on the option chosen by the first one."
+            t"The cascading selects example uses {b('FastAPI')} to implement two "
+            t"selects. First one is a simple select of a car's manufacturer. Second "
+            t"select's values are based on the option chosen by the first one."
         ),
         List(
             Item(
@@ -29,11 +29,11 @@ async def cascading_selects(request: Request) -> Page:
             ),
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("cascading_selects:index")),
+        LazyLoader(load_url=request.url_for("cascading_selects:index").path),
         H2("Implementation"),
         Paragraph(
-            "In this example, we are using FastAPI instead of Starlette. So we need to "
-            f"install ludic with the {Code('fastapi')} extra:"
+            t"In this example, we are using FastAPI instead of Starlette. So we need "
+            t"to install ludic with the {Code('fastapi')} extra:"
         ),
         CodeBlock(
             """
@@ -126,7 +126,7 @@ async def cascading_selects(request: Request) -> Page:
                 return Stack(
                     CarSelect(
                         *db.find_all_cars_names(),
-                        hx_get=request.url_for(models),
+                        hx_get=request.url_for(models).path,
                         hx_target="#models",
                     ),
                     CarModelsSelect(*db.find_first_car().models),

@@ -13,7 +13,7 @@ GITHUB_REPO_WEB_URL = os.getenv(
 )
 DISCORD_INVITE_URL = os.getenv("DISCORD_INVITE_URL", "https://discord.gg/7nK4zAXAYC")
 
-HTMX_VERSION = os.getenv("LUDIC_HTMX_VERSION", "1.9.12")
+HTMX_VERSION = os.getenv("LUDIC_HTMX_VERSION", "2.0.11")
 ENABLE_PROFILING = os.getenv("LUDIC_ENABLE_PROFILING", "0") == "1"
 
 # Hosts the app will respond to. Anything else gets a 400 from

@@ -49,7 +49,7 @@ def index(request: Request, db: Database = Depends(get_db)) -> Stack:
     return Stack(
         CarSelect(
             *db.find_all_cars_names(),
-            hx_get=request.url_for(models),
+            hx_get=request.url_for(models).path,
             hx_target="#models",
         ),
         CarModelsSelect(*db.find_first_car().models),

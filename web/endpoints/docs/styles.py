@@ -31,14 +31,14 @@ def styles(request: Request) -> Page:
             "your application:"
         ),
         NumberedList(
-            Item(f"The {Code('style')} HTML Attribute"),
-            Item(f"The {Code('styles')} Class Property"),
-            Item(f"The {Code('style')} HTML Element"),
+            Item(t"The {Code('style')} HTML Attribute"),
+            Item(t"The {Code('styles')} Class Property"),
+            Item(t"The {Code('style')} HTML Element"),
         ),
-        H3(f"The {Code('style')} HTML Attribute"),
+        H3(t"The {Code('style')} HTML Attribute"),
         Paragraph(
-            "You can directly embed styles within an HTML element using the "
-            f"{Code('style')} attribute. Here's an example:"
+            t"You can directly embed styles within an HTML element using the "
+            t"{Code('style')} attribute. Here's an example:"
         ),
         CodeBlock(
             """
@@ -51,9 +51,9 @@ def styles(request: Request) -> Page:
         ),
         List(
             Item(
-                f"The {Code('CSSProperties')} class is a {Code('TypedDict')} for "
-                "convenience since type checkers can highlight unknown or incorrect "
-                "usage."
+                t"The {Code('CSSProperties')} class is a {Code('TypedDict')} for "
+                t"convenience since type checkers can highlight unknown or incorrect "
+                t"usage."
             ),
             Item(
                 "You can also use a regular Python dictionary, which might be better "
@@ -65,17 +65,17 @@ def styles(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            "Note that you probably want to specify the color using a theme as you can "
-            f"read more about {Link('bellow', to='#themes')}."
+            t"Note that you probably want to specify the color using a theme as you "
+            t"can read more about {Link('bellow', to='#themes')}."
         ),
         CodeBlock(
             """form(..., style={"background-color": theme.colors.white})""",
             language="python",
         ),
-        H3(f"The {Code('styles')} Class Property"),
+        H3(t"The {Code('styles')} Class Property"),
         Paragraph(
-            f"Define CSS properties within your component using the {Code('styles')} "
-            "class property. Example:"
+            t"Define CSS properties within your component using the {Code('styles')} "
+            t"class property. Example:"
         ),
         CodeBlock(
             """
@@ -102,16 +102,16 @@ def styles(request: Request) -> Page:
             language="python",
         ),
         Message(
-            Title(f"Notice the {Code('classes')} attribute"),
-            f"The {Code('classes')} attribute contains the list of classes that will ",
+            Title(t"Notice the {Code('classes')} attribute"),
+            t"The {Code('classes')} attribute contains the list of classes that will ",
             "be applied to the component when rendered (they will be appended if ",
-            f"there are any other classes specified by the {Code('class_')} ",
+            t"there are any other classes specified by the {Code('class_')} ",
             "attribute).",
         ),
         Paragraph(
-            "In this case, you need to make sure you collect and render the styles. "
-            f"See {Link('Collecting The Styles', to='#collecting-the-styles')} and "
-            f"{
+            t"In this case, you need to make sure you collect and render the styles. "
+            t"See {Link('Collecting The Styles', to='#collecting-the-styles')} and "
+            t"{
                 Link(
                     'Integration In a Page Component',
                     to='#integration-in-a-page-component',
@@ -119,9 +119,9 @@ def styles(request: Request) -> Page:
             }."
         ),
         Paragraph(
-            "It is also possible to nest styles similar to how you would nest them in "
-            "SCSS. The only problem is that you might get typing errors if you are "
-            f"using {Code('mypy')} or {Code('pyright')}:"
+            t"It is also possible to nest styles similar to how you would nest them in "
+            t"SCSS. The only problem is that you might get typing errors if you are "
+            t"using {Code('mypy')} or {Code('pyright')}:"
         ),
         CodeBlock(
             """
@@ -140,8 +140,8 @@ def styles(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Again, you probably want to use {i('themes')} to assign colors "
-            f"(we'll talk about {i('themes')} later):"
+            t"Again, you probably want to use {i('themes')} to assign colors "
+            t"(we'll talk about {i('themes')} later):"
         ),
         CodeBlock(
             """
@@ -164,8 +164,8 @@ def styles(request: Request) -> Page:
             Item(
                 Paragraph(
                     b("Load Styles: "),
-                    f"Use the {Code('style.load()')} method to gather styles from all ",
-                    f"components in your project. This generates a {Code('<style>')} ",
+                    t"Use the {Code('style.load()')} method to gather styles from all ",
+                    t"components in your project. This generates a {Code('<style>')} ",
                     "element:",
                 ),
                 CodeBlock(
@@ -177,7 +177,7 @@ def styles(request: Request) -> Page:
                     language="python",
                 ),
                 Paragraph(
-                    f"The {Code('styles')} variable now renders as a {Code('<style>')}",
+                    t"The {Code('styles')} variable now renders as a {Code('<style>')}",
                     " element with the content similar to this:",
                 ),
                 CodeBlock(
@@ -189,14 +189,14 @@ def styles(request: Request) -> Page:
                     language="html",
                 ),
                 Paragraph(
-                    f"You can also pass {Code('styles.load(cache=True)')} to cache "
-                    "the styles"
+                    t"You can also pass {Code('styles.load(cache=True)')} to cache "
+                    t"the styles"
                 ),
             ),
             Item(
                 Paragraph(
                     b("Targeted Loading: "),
-                    f"For more control, use {Code('style.from_components(...)')} to ",
+                    t"For more control, use {Code('style.from_components(...)')} to ",
                     "load styles from specific components:",
                 ),
                 CodeBlock(
@@ -218,22 +218,22 @@ def styles(request: Request) -> Page:
         ),
         NumberedList(
             Item(
-                f"Use the {Code('ludic.catalog.pages.HtmlPage')} component which loads "
-                "the styles automatically."
+                t"Use the {Code('ludic.catalog.pages.HtmlPage')} component which loads "
+                t"the styles automatically."
             ),
             Item(
-                f"Create a new {i('Page')} component and use the "
-                f"{Code('style.load()')} method manually."
+                t"Create a new {i('Page')} component and use the "
+                t"{Code('style.load()')} method manually."
             ),
         ),
         Paragraph(
-            f"The first method is described in the {
+            t"The first method is described in the {
                 Link(
                     'catalog section',
                     to=f'{request.url_for("catalog:index").path}#htmlpage-component',
                 )
             } "
-            "of the documentation. Here is the second method: "
+            t"of the documentation. Here is the second method: "
         ),
         CodeBlock(
             """
@@ -261,12 +261,12 @@ def styles(request: Request) -> Page:
         ),
         H4("Caching The Styles"),
         Paragraph(
-            f"As mentioned before, passing {Code('cache=True')} to {Code('style.load')}"
-            " caches loaded elements' styles during the first render. The problem is "
-            "that the first request to your application renders the styles without the "
-            "cache, so the response is a bit slower. If you want to cache the styles "
-            "before your component even renders for the first time, you can use the "
-            f"{Code('lifespan')} argument of the {Code('LudicApp')} class:"
+            t"As mentioned before, passing {Code('cache=True')} to {Code('style.load')}"
+            t" caches loaded elements' styles during the first render. The problem is "
+            t"that the first request to your application renders the styles without "
+            t"the cache, so the response is a bit slower. If you want to cache the "
+            t"styles before your component even renders for the first time, you can "
+            t"use the {Code('lifespan')} argument of the {Code('LudicApp')} class:"
         ),
         CodeBlock(
             """
@@ -287,16 +287,16 @@ def styles(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"You can read more about {Code('Lifespan')} in {
+            t"You can read more about {Code('Lifespan')} in {
                 Link(
                     "Starlette's documentation", to='https://www.starlette.io/lifespan/'
                 )
             }."
         ),
-        H3(f"The {Code('style')} HTML Element"),
+        H3(t"The {Code('style')} HTML Element"),
         Paragraph(
-            f"You can also directly embed styles within a {Code('Page')} component "
-            f"using the {Code('style')} element. Here's an example:"
+            t"You can also directly embed styles within a {Code('Page')} component "
+            t"using the {Code('style')} element. Here's an example:"
         ),
         CodeBlock(
             """
@@ -359,13 +359,13 @@ def styles(request: Request) -> Page:
             Item(
                 b("Accessing the Theme: "),
                 "Components can access the current theme through a special ",
-                f"{Code('theme')} attribute. This gives you direct access to your ",
+                t"{Code('theme')} attribute. This gives you direct access to your ",
                 "theme's values.",
             ),
             Item(
                 b("Switching Theme: "),
                 "Components can switch to a different theme by passing the component",
-                f"to the {Code('theme.use()')} method. You can also switch theme ",
+                t"to the {Code('theme.use()')} method. You can also switch theme ",
                 "globally.",
             ),
         ),
@@ -373,7 +373,7 @@ def styles(request: Request) -> Page:
         Paragraph("You have two options how to create a new theme:"),
         NumberedList(
             Item(
-                f"subclass {Code('Theme')} base class and define the theme's attributes"
+                t"subclass {Code('Theme')} base class and define the theme's attributes"
             ),
             Item("instantiate an existing theme and override its attributes"),
         ),
@@ -420,10 +420,10 @@ def styles(request: Request) -> Page:
         H3("Accessing The Theme"),
         Paragraph("There are two ways to access the theme:"),
         NumberedList(
-            Item(f"use the component's {Code('theme')} attribute"),
+            Item(t"use the component's {Code('theme')} attribute"),
             Item(
-                f"call {Code('style.use(lambda theme: { ... })')} on the component's "
-                f"{Code('styles')} class attribute"
+                t"call {Code('style.use(lambda theme: { ... })')} on the component's "
+                t"{Code('styles')} class attribute"
             ),
         ),
         Paragraph("Here is an example combining both approaches:"),
@@ -460,14 +460,14 @@ def styles(request: Request) -> Page:
         Paragraph("You can switch the theme globally or for a specific component:"),
         NumberedList(
             Item(
-                f"use the {Code('theme.use()')} method to switch theme in a component"
+                t"use the {Code('theme.use()')} method to switch theme in a component"
             ),
             Item(
-                f"use the {Code('set_default_theme()')} method to switch theme globally"
+                t"use the {Code('set_default_theme()')} method to switch theme globally"
             ),
             Item(
-                f"use the {Code('style.load()')} to render styles from loaded "
-                "components with a different theme"
+                t"use the {Code('style.load()')} to render styles from loaded "
+                t"components with a different theme"
             ),
         ),
         Paragraph("Here are some examples:"),

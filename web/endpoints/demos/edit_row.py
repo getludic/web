@@ -30,7 +30,7 @@ class PeopleAttrs(Attrs):
 
 
 @app.get("/")
-async def index(request: Request) -> "PeopleTable":
+async def index(request: Request) -> PeopleTable:
     return await PeopleTable.get(request)
 
 
@@ -78,7 +78,7 @@ class PersonRow(Endpoint[PersonAttrs]):
             self.attrs["email"],
             ButtonPrimary(
                 "Edit",
-                hx_get=self.url_for(PersonForm),
+                hx_get=self.url_for(PersonForm).path,
                 hx_trigger="edit",
                 on_click=self.on_click_script,
                 classes=["small"],
@@ -106,12 +106,12 @@ class PersonForm(Endpoint[PersonAttrs]):
             Cluster(
                 ButtonSecondary(
                     "Cancel",
-                    hx_get=self.url_for(PersonRow),
+                    hx_get=self.url_for(PersonRow).path,
                     classes=["small"],
                 ),
                 ButtonSuccess(
                     "Save",
-                    hx_put=self.url_for(PersonRow),
+                    hx_put=self.url_for(PersonRow).path,
                     hx_include="closest tr",
                     classes=["small"],
                 ),

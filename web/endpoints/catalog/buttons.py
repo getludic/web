@@ -20,8 +20,8 @@ def buttons(request: Request) -> Page:
     return Page(
         H1("Buttons"),
         Paragraph(
-            f"The module {Code('ludic.catalog.buttons')} contains the following "
-            "buttons:"
+            t"The module {Code('ludic.catalog.buttons')} contains the following "
+            t"buttons:"
         ),
         Box(
             Cluster(
@@ -61,8 +61,8 @@ def buttons(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"The {Code('ButtonLink')} component can be styled like any other "
-            f"button using the {Code('classes')} attribute:"
+            t"The {Code('ButtonLink')} component can be styled like any other "
+            t"button using the {Code('classes')} attribute:"
         ),
         CodeBlock(
             """
@@ -72,7 +72,7 @@ def buttons(request: Request) -> Page:
             """,
             language="python",
         ),
-        Paragraph(f"You can disable a button using the {Code('disabled')} attribute:"),
+        Paragraph(t"You can disable a button using the {Code('disabled')} attribute:"),
         Box(
             Cluster(
                 Button("Button", disabled=True),
@@ -95,8 +95,8 @@ def buttons(request: Request) -> Page:
         ),
         H2("Button Sizes"),
         Paragraph(
-            "You can also change the size of the button appending the "
-            f"{Code('small')} or {Code('large')} class:"
+            t"You can also change the size of the button appending the "
+            t"{Code('small')} or {Code('large')} class:"
         ),
         Box(
             Cluster(

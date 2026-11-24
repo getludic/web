@@ -54,7 +54,7 @@ class Toast(Inline):
 
 
 @app.get("/")
-async def index(request: Request) -> "PeopleTable":
+async def index(request: Request) -> PeopleTable:
     return await PeopleTable.get(request)
 
 
@@ -88,7 +88,7 @@ class PeopleTable(Endpoint[PeopleAttrs]):
                 ButtonPrimary("Bulk Update", type="submit"),
                 Toast(),
             ),
-            hx_post=self.url_for(PeopleTable),
+            hx_post=self.url_for(PeopleTable).path,
             hx_target=Toast.target,
             hx_swap="outerHTML settle:3s",
         )

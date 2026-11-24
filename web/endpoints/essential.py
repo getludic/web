@@ -1,9 +1,12 @@
 """Essential pages like robots.txt and sitemap.xml"""
 
-from ludic.web import LudicApp
+from html import escape
+
+from ludic.web import LudicApp, Request
 from starlette.responses import PlainTextResponse, Response
 
 from .. import config
+from ..navigation import SECTIONS
 
 app = LudicApp()
 
@@ -23,41 +26,23 @@ Crawl-delay: 1
 
 
 @app.get("/sitemap.xml")
-async def sitemap_xml() -> Response:
+async def sitemap_xml(request: Request) -> Response:
     """Generate XML sitemap for search engines"""
-    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>{config.HOME_URL}/</loc>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>{config.HOME_URL}/docs</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>{config.HOME_URL}/docs/getting-started</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>{config.HOME_URL}/catalog</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>{config.HOME_URL}/demos</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>{config.HOME_URL}/examples</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-</urlset>"""
+    paths = ["/"] + [
+        request.url_path_for(f"{section.name}:{page.name}")
+        for section in SECTIONS
+        for page in section.pages
+    ]
+    urls = "".join(
+        f"    <url><loc>{escape(config.HOME_URL + path)}</loc></url>\n"
+        for path in paths
+    )
+    sitemap_content = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}"
+        "</urlset>\n"
+    )
 
     return Response(
         content=sitemap_content,

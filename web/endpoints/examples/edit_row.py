@@ -26,7 +26,7 @@ async def edit_row(request: Request) -> Page:
             Item(Link("Source at htmx.org", to="https://htmx.org/examples/edit-row/")),
         ),
         H2("Demo"),
-        LazyLoader(load_url=request.url_for("edit_row:index")),
+        LazyLoader(load_url=request.url_for("edit_row:index").path),
         H2("Implementation"),
         Paragraph("In this example, we'll be creating three class-based endpoints:"),
         NumberedList(
@@ -62,8 +62,8 @@ async def edit_row(request: Request) -> Page:
             language="python",
         ),
         Paragraph(
-            f"Now we create the {Code('PersonRow')} endpoint for displaying the "
-            "person's information in a row:"
+            t"Now we create the {Code('PersonRow')} endpoint for displaying the "
+            t"person's information in a row:"
         ),
         CodeBlock(
             """
@@ -122,7 +122,7 @@ async def edit_row(request: Request) -> Page:
                         self.attrs["email"],
                         ButtonPrimary(
                             "Edit",
-                            hx_get=self.url_for(PersonForm),
+                            hx_get=self.url_for(PersonForm).path,
                             hx_trigger="edit",
                             on_click=self.on_click_script,
                             classes=["small"],
@@ -149,8 +149,8 @@ async def edit_row(request: Request) -> Page:
             ),
             Item(
                 Code("get"),
-                " – handles the GET request which returns an instance of the "
-                f"{Code('PeopleRow')} of the requested person.",
+                t" – handles the GET request which returns an instance of the "
+                t"{Code('PeopleRow')} of the requested person.",
             ),
             Item(
                 Code("render"),
@@ -193,12 +193,12 @@ async def edit_row(request: Request) -> Page:
                         Cluster(
                             ButtonSecondary(
                                 "Cancel",
-                                hx_get=self.url_for(PersonRow),
+                                hx_get=self.url_for(PersonRow).path,
                                 classes=["small"],
                             ),
                             ButtonSuccess(
                                 "Save",
-                                hx_put=self.url_for(PersonRow),
+                                hx_put=self.url_for(PersonRow).path,
                                 hx_include="closest tr",
                                 classes=["small"],
                             ),
@@ -260,15 +260,15 @@ async def edit_row(request: Request) -> Page:
         List(
             Item(
                 Code("get"),
-                " – handles the GET request which returns an instance of the "
-                f"{Code('PeopleTable')} filled with a list of people fetched "
-                "from database.",
+                t" – handles the GET request which returns an instance of the "
+                t"{Code('PeopleTable')} filled with a list of people fetched "
+                t"from database.",
             ),
             Item(
                 Code("render"),
-                " – handles rendering of the table of people. We use a special "
-                f"{Code('body_attrs')} attribute to configure HTMX operations on "
-                f"the {Code('tbody')} element.",
+                t" – handles rendering of the table of people. We use a special "
+                t"{Code('body_attrs')} attribute to configure HTMX operations on "
+                t"the {Code('tbody')} element.",
             ),
         ),
         request=request,

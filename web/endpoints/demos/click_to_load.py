@@ -51,7 +51,7 @@ class LoadMoreButton(ComponentStrict[LoadMoreAttrs]):
 
 
 @app.get("/")
-async def index() -> "ContactsTable":
+async def index() -> ContactsTable:
     return ContactsTable(await ContactsSlice.get(QueryParams(page=1)))
 
 
@@ -73,9 +73,7 @@ class ContactsSlice(Endpoint[ContactsSliceAttrs]):
             TableRow(
                 td(
                     LoadMoreButton(
-                        url=self.url_for(ContactsSlice).include_query_params(
-                            page=next_page
-                        ),
+                        url=f"{self.url_for(ContactsSlice).path}?page={next_page}",
                     ),
                     colspan=3,
                 ),
