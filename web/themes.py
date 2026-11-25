@@ -5,13 +5,26 @@ twice, once with each theme, and the dark styles apply when the visitor's
 system is in dark mode or when they pick it with the toggle in the header.
 
 Code blocks are highlighted with inline colors, which cannot follow the theme,
-so they are dark in both themes.
+so they are dark in both themes, colored by ``CodeStyle``.
 """
 
 from dataclasses import dataclass, field
 
 from ludic.styles import themes
 from ludic.styles.types import Color, ColorRange, Size, SizeClamp
+from pygments.style import Style
+from pygments.token import (
+    Comment,
+    Error,
+    Generic,
+    Keyword,
+    Name,
+    Number,
+    Operator,
+    Punctuation,
+    String,
+    Token,
+)
 
 FONT_SANS = (
     'Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, '
@@ -44,7 +57,54 @@ LAYOUTS = themes.Layouts(
 
 ROUNDING = themes.Rounding(less=Size(0.375), normal=Size(0.5), more=Size(0.75))
 
-CODE_STYLE = "github-dark"
+CODE_TEXT = "#e6edf3"
+CODE_MUTED = "#94a3b8"
+CODE_COMMENT = "#7d8590"
+CODE_KEYWORD = "#c4b5fd"
+CODE_STRING = "#5eead4"
+CODE_FUNCTION = "#93c5fd"
+CODE_BUILTIN = "#7dd3fc"
+CODE_CONSTANT = "#fdba74"
+CODE_CLASS = "#fcd34d"
+
+
+class CodeStyle(Style):
+    """Syntax colors for the dark code blocks, matching the teal of the site.
+
+    Module names stay in the text color, so an import line reads as two
+    keywords around plain names.
+    """
+
+    name = "ludic-web"
+    styles = {
+        Token: CODE_TEXT,
+        Comment: f"italic {CODE_COMMENT}",
+        Keyword: CODE_KEYWORD,
+        Keyword.Constant: CODE_CONSTANT,
+        Operator: CODE_MUTED,
+        Operator.Word: CODE_KEYWORD,
+        Punctuation: CODE_MUTED,
+        Name: CODE_TEXT,
+        Name.Builtin: CODE_BUILTIN,
+        Name.Builtin.Pseudo: "#fda4af",
+        Name.Function: CODE_FUNCTION,
+        Name.Class: CODE_CLASS,
+        Name.Decorator: CODE_CLASS,
+        Name.Exception: CODE_CLASS,
+        Name.Tag: CODE_BUILTIN,
+        Name.Attribute: CODE_CLASS,
+        String: CODE_STRING,
+        String.Affix: CODE_KEYWORD,
+        String.Doc: f"italic {CODE_COMMENT}",
+        String.Interpol: CODE_CONSTANT,
+        String.Escape: CODE_CONSTANT,
+        Number: CODE_CONSTANT,
+        Generic.Prompt: CODE_COMMENT,
+        Generic.Output: CODE_MUTED,
+        Generic.Inserted: "#86efac",
+        Generic.Deleted: "#fca5a5",
+        Error: "#f87171",
+    }
 
 
 @dataclass
@@ -72,12 +132,12 @@ class LudicWebLight(themes.LightTheme):
     )
     code: themes.CodeBlock = field(
         default_factory=lambda: themes.CodeBlock(
-            color=Color("#e6edf3"),
+            color=Color(CODE_TEXT),
             background_color=Color("#0d1117"),
             line_number_color=Color("#7d8590"),
             line_numbers=False,
             font_size=Size(0.875),
-            style=CODE_STYLE,
+            style=CodeStyle,
         )
     )
 
@@ -107,12 +167,12 @@ class LudicWebDark(themes.DarkTheme):
     )
     code: themes.CodeBlock = field(
         default_factory=lambda: themes.CodeBlock(
-            color=Color("#e6edf3"),
+            color=Color(CODE_TEXT),
             background_color=Color("#131c2b"),
             line_number_color=Color("#7d8590"),
             line_numbers=False,
             font_size=Size(0.875),
-            style=CODE_STYLE,
+            style=CodeStyle,
         )
     )
 
