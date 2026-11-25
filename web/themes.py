@@ -107,6 +107,10 @@ class CodeStyle(Style):
     }
 
 
+LIGHT_PRIMARY = ColorRange(["#0b5f59", "#0f766e", "#ccfbf1"])
+DARK_PRIMARY = ColorRange(["#5eead4", "#2dd4bf", "#134e4a"])
+
+
 @dataclass
 class LudicWebLight(themes.LightTheme):
     name: str = "ludic-web-light"
@@ -118,7 +122,7 @@ class LudicWebLight(themes.LightTheme):
     rounding: themes.Rounding = field(default_factory=lambda: ROUNDING)
     colors: themes.Colors = field(
         default_factory=lambda: themes.Colors(
-            primary=ColorRange(["#0b5f59", "#0f766e", "#ccfbf1"]),
+            primary=LIGHT_PRIMARY,
             secondary=ColorRange(["#1e293b", "#334155", "#e2e8f0"]),
             success=ColorRange(["#14532d", "#15803d", "#dcfce7"]),
             info=ColorRange(["#0c4a6e", "#0369a1", "#e0f2fe"]),
@@ -140,6 +144,12 @@ class LudicWebLight(themes.LightTheme):
             style=CodeStyle,
         )
     )
+    # Default buttons get a tint of the primary color, like the demo boxes.
+    buttons: themes.Buttons = field(
+        default_factory=lambda: themes.Buttons(
+            color=LIGHT_PRIMARY.darken(1), background_color=LIGHT_PRIMARY.lighten(1)
+        )
+    )
 
 
 @dataclass
@@ -153,7 +163,7 @@ class LudicWebDark(themes.DarkTheme):
     rounding: themes.Rounding = field(default_factory=lambda: ROUNDING)
     colors: themes.Colors = field(
         default_factory=lambda: themes.Colors(
-            primary=ColorRange(["#5eead4", "#2dd4bf", "#134e4a"]),
+            primary=DARK_PRIMARY,
             secondary=ColorRange(["#e2e8f0", "#94a3b8", "#1e293b"]),
             success=ColorRange(["#86efac", "#4ade80", "#14532d"]),
             info=ColorRange(["#7dd3fc", "#38bdf8", "#0c4a6e"]),
@@ -173,6 +183,12 @@ class LudicWebDark(themes.DarkTheme):
             line_numbers=False,
             font_size=Size(0.875),
             style=CodeStyle,
+        )
+    )
+    # Default buttons get a tint of the primary color, like the demo boxes.
+    buttons: themes.Buttons = field(
+        default_factory=lambda: themes.Buttons(
+            color=DARK_PRIMARY.darken(1), background_color=DARK_PRIMARY.lighten(1)
         )
     )
 

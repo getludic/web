@@ -33,7 +33,7 @@ repos:
       - id: mypy
         args: ["--ignore-missing-imports"]
         additional_dependencies:
-          - ludic[full,fastapi]>=1.1.1
+          - ludic[full,fastapi]>=1.1.2
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.105.0
