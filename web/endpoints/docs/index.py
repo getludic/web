@@ -316,6 +316,10 @@ def index(request: Request) -> Page:
             """,
             language="toml",
         ),
+        Paragraph(
+            "mypy supports t-strings since version 2.0. Older versions report "
+            "every t-string as an error."
+        ),
         H2("Integrations"),
         Paragraph(
             "Here is a list of integrations and a link to the guide on how to get "
