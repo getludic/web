@@ -35,7 +35,8 @@ RULES = (
     "`p(t\"Hello {b('World')}!\")`. Use f-strings only in projects on Ludic 0.5.x "
     "(Python 3.12 and 3.13), which renders elements inside f-strings.",
     'Set `plugins = ["ludic.mypy_plugin"]` for mypy and run mypy after changes. '
-    "Only mypy with the plugin checks the attributes passed to components.",
+    "Only mypy with the plugin checks the attributes passed to components. Use "
+    "mypy 2.0 or newer: older versions report every t-string as an error.",
     "Text children are escaped. Wrap only trusted HTML in `Safe`, never user input.",
     "The HTTP methods of an `Endpoint` (`get`, `post`, `put`, ...) are "
     "classmethods that usually return `Self`; `render()` builds the HTML.",
@@ -44,7 +45,8 @@ RULES = (
     "Use `request.url_path_for(...)` or the `.path` of `url_for(...)` in links and "
     "`hx_*` attributes, so a forged Host header cannot change them.",
     "Prefer the catalog (`ludic.catalog.pages`, `layouts`, `forms`, `tables`) to "
-    "building pages from raw `div` elements.",
+    "raw elements such as `div`, `form` or `table`, and restyle it through the "
+    "theme (`ludic.styles.themes`) rather than with CSS.",
 )
 
 RESOURCES = (
