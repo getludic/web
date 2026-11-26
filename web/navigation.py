@@ -50,9 +50,16 @@ SECTIONS: tuple[Section, ...] = (
             ),
             PageInfo(
                 "styles",
-                "Styles and Themes",
-                "Component styles, the style element and attribute, loading and "
-                "caching CSS, and themes.",
+                "Styles",
+                "Component styles, the style element and attribute, and loading "
+                "and caching CSS.",
+            ),
+            PageInfo(
+                "themes",
+                "Themes",
+                "Create and apply a theme, dark mode, every theme setting (colors, "
+                "fonts, headers, layouts, code blocks, buttons), and the Color and "
+                "Size helpers.",
             ),
             PageInfo(
                 "htmx",

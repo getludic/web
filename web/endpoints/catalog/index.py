@@ -24,8 +24,11 @@ def index(request: Request) -> Page:
             t"Each item in the catalog is a reusable component that generates HTML "
             t"code and registers its own CSS styles.. The registered CSS are loaded "
             t"using the {Code('style.load()')} method, as detailed in the "
-            t"{Link('Styles and Themes', to=request.url_path_for('docs:styles'))} "
-            t"section of the documentation."
+            t"{Link('Styles', to=request.url_path_for('docs:styles'))} "
+            t"section of the documentation. To change the colors, fonts and sizes "
+            t"of the components, change the "
+            t"{Link('theme', to=request.url_path_for('docs:themes'))} rather than "
+            t"their CSS."
         ),
         Paragraph(
             t"The catalog components are like {b('Lego pieces')} you can assemble "
